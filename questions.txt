@@ -1,0 +1,7 @@
+Questions
+
+1. What is a good way to transfer data between two different applications?
+2. With your knowledge and experience, what insights will you be able to contribute to the project?
+3. What advice would you give to students who are new to collaborating on large projects?
+4. If you were to use this product, what sort of features would you want it to have?
+5. What user groups would you see this product benefitting?
