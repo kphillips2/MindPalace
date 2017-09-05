@@ -21,3 +21,5 @@ CPSC_03 CEDE meeting questions
 18. Does our advisor have more experience in or a preference for Unity versus Unreal Engine?
 19. Are there any costs to putting our project onto the Vive distribution network (Steam Store?)
 20. Given that are focus group will be smaller, and therefore not statistically relevant, how seriously should we take their advice.
+
+Top 5: 2,5,6,11,17
