@@ -1,6 +1,38 @@
-Wednesday 9/6 -> Meet & Greet on Herack Lawn @3:10 PM
+TODO:
+  Wednesday 9/6 -> Meet & Greet at Cataldo @3:10 PM
+    - Dress professionally
+    - Bring questions and something to take notes!
 
 How our project can turn out:
   Successful: on time, within budget, varification (built to specs and built correctly)/ validation (useful)
   Challenged: late, over budget, only partially useful
   Failed: not useful, not adopted, cancelled
+Things that help:
+  1. Executive management support
+  2. User involvement**
+  3. Pinning down scope for optimization
+  4. Skilled resources
+  5. Project management expertise**
+  6. Clear business objectives
+  7. Don't be a jerk!
+  8. Having the right tools/ infastructure
+  etc...
+  **Particularly important for SD
+  
+The Quality Triangle (scope, cost, and time affect the quality of the product)
+  - We have fixed time, 9 months! Fixed cost, no more teammates!
+  - If we want to increase quality, decrease scope
+Q: What's the minimal set of features we need for Mind Palace?
+
+Development Processes (or Lifecycles)
+  - Lays out the main steps/phases for creating the product/ how you sequence those phases
+Q: What are the main steps/phases in a development process?
+  - Development/ Documentation
+  - Testing
+  - Deployment/ Release
+  - Requirements/ Research
+  - Feedback
+  - Design
+  - Maintenence
+The Standard Student Model (called "Big Bang," "Code and Fix," or "Code Like Hell")
+  - Specification -> Code and Fix (Development) -> Release
