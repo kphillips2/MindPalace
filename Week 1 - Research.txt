@@ -1,0 +1,18 @@
+Example Code for Vive using Unity:
+
+* Virtual Reality Toolkit - provides many common solutions such as pointer interactions, moving in place, two hand manipulation of objects, etc.(https://www.assetstore.unity3d.com/en/#!/content/64131)
+
+* VR Samples - four example mini-games. Designed for the Oculus, but a lot of the concepts in it can supposedly be applied to the Vive (https://www.assetstore.unity3d.com/en/#!/content/51519)
+
+* Teleportation System - may be able to give us a better idea of how we can allow the user to move around in large virtual areas (https://github.com/Flafla2/Vive-Teleporter)
+
+* BLARP! - physics game build for the Vive, gives an example of a project that someone has made (https://github.com/cabbibo/BallGamne)
+
+
+Example Code for Vive using UE4:
+
+* Unreal Engine's VR Template - provides features such as teleportation and object grabbing, some information about it can be found here: http://www.tomlooman.com/vrtemplate/
+
+* User-made VR Templates - several users have made their own VR templates which generally have the same things as the official VR template + some additional features. An example of one is here: https://github.com/ProteusVR/SteamVR_Template
+
+* NOTE: Since UE allows for using Blueprints, some sources will be providing code that is entirely in Blueprints, as opposed to C++
