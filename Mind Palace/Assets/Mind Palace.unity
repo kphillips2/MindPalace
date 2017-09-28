@@ -2298,6 +2298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f69118075050354582e12a60b9ff625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arch: {fileID: 4698888163664870, guid: c7d346709237efa46a27464b29e1facd, type: 2}
+  monkey: {fileID: 4078926819757440, guid: b1ba1447a18963d40b40b046ead7a0e3, type: 2}
 --- !u!4 &1777140508
 Transform:
   m_ObjectHideFlags: 0
