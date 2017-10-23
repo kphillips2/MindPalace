@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 130
+  controlID: 34
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 10
+  controlID: 35
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -334,10 +334,10 @@ MonoBehaviour:
   m_LastProjectPath: C:\Users\Katie\Documents\GitHub\MindPalace\Mind Palace
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 39}
+    scrollPos: {x: 0, y: 51}
     m_SelectedIDs: 3c2a0000
     m_LastClickedID: 10812
-    m_ExpandedIDs: 000000003c2a00006e2b0000c22d000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000003c2a00006e2b0000c22d00006030000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -392,8 +392,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300009c2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,10 +480,10 @@ MonoBehaviour:
     width: 301
     height: 419
   m_TreeViewState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0a060000
-    m_LastClickedID: 0
-    m_ExpandedIDs: e4f8ffffa0fbffff00000000fa320000
+    scrollPos: {x: 0, y: 126}
+    m_SelectedIDs: 1efaffff
+    m_LastClickedID: -1506
+    m_ExpandedIDs: e4f8ffff5afaffff5efaffff98fbffff9efbffffa0fbffff00000000fa320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -533,14 +533,14 @@ MonoBehaviour:
     width: 918
     height: 419
   m_SceneLighting: 1
-  lastFramingTime: 919.8041819950813
+  lastFramingTime: 714.0271097781914
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.0308249, y: 2.72788, z: -0.11562061}
+    m_Target: {x: -5.4935694, y: 2.7857363, z: -3.3461611}
     speed: 2
-    m_Value: {x: 0.0308249, y: 2.72788, z: -0.11562061}
+    m_Value: {x: -5.4935694, y: 2.7857363, z: -3.3461611}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -563,9 +563,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.022870367, y: -0.51472855, z: -0.013737501, w: -0.85693806}
+    m_Target: {x: -0.019751707, y: -0.9419011, z: -0.056281436, w: 0.33055213}
     speed: 2
-    m_Value: {x: -0.022870367, y: 0.51472855, z: 0.013737501, w: 0.85693806}
+    m_Value: {x: -0.019751707, y: -0.9419011, z: -0.056281436, w: 0.33055213}
   m_Size:
     m_Target: 2.9891915
     speed: 2
