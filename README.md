@@ -4,12 +4,12 @@ Guidelines and help when using git.
 
 ## Adding new sofware
 
-Keep all new software on a separate branch so that master is always releasable. Also, always pull before continuing work on a shared branch.
+Keep all new software on a separate branch so that master is always releasable.
+Also, always pull before continuing work on a shared branch.
 
 ### Creating a branch
 
 Branch names are in slug case.
-A 
 
 -> using git command line instructions
 ```
