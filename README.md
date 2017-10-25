@@ -14,6 +14,7 @@ Branch names are in slug case.
 -> using git command line instructions
 ```
 git branch [branch-name]
+git checkout -b [branch-name]
 ```
 
 -> directly from the repository
@@ -28,6 +29,7 @@ To restore stashed changes use ``git stash apply``.
 To see any local changes to the current branch use ``git diff``.
 
 -> using git command line instructions
+
 ```
 git checkout [branch-name]
 ```
@@ -42,4 +44,4 @@ Once tested branches can be merged into master by creating a pull request.
 
 ![](https://raw.githubusercontent.com/kphillips2/MindPalace/master/pull_request.png)
 
-A pull request should be reviewed.
+A pull request should be reviewed before getting merged.
