@@ -38,4 +38,8 @@ git checkout [branch-name]
 
 ### Merging branches
 
-Once reviewed/tested branches can be merged with master so that master always contains all finished tasks. This should be done from the repository.
+Once tested branches can be merged into master by creating a pull request.
+
+![](https://raw.githubusercontent.com/kphillips2/MindPalace/master/pull_request.png)
+
+A pull request should be reviewed.
