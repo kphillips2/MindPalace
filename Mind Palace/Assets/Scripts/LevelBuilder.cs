@@ -13,11 +13,19 @@ public class LevelBuilder : MonoBehaviour {
         roomBuilder = room.GetComponent<RoomBuilder>();
         currentRoom = Instantiate(
             room,
-            new Vector3(0,0,20),
+            new Vector3(0, 0, 20),
             Quaternion.Euler(0, 0, 0)
         ) as GameObject;
         roomBuilder.addDoors(new Vector3(0, 0, 20));
         roomBuilder.addWalls(new Vector3(0, 0, 20));
+
+        currentRoom = Instantiate(
+            room,
+            new Vector3(-20, 0, 0),
+            Quaternion.Euler(0, 0, 0)
+        ) as GameObject;
+        roomBuilder.addDoors(new Vector3(-20, 0, 0));
+        roomBuilder.addWalls(new Vector3(-20, 0, 0));
     }
 	
 	// Update is called once per frame

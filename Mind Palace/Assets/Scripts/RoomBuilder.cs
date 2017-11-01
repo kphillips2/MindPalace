@@ -11,9 +11,6 @@ public class RoomBuilder : MonoBehaviour {
 	
     // Use this for initialization
 	void Start (){
-        Vector3 roomCentre = new Vector3(0, 0, 0);
-        addDoors(roomCentre);
-        addWalls(roomCentre);
     }
 
     public void addDoors(Vector3 centre){
@@ -30,9 +27,4 @@ public class RoomBuilder : MonoBehaviour {
             Quaternion.Euler(0, 90, 0)
         ) as GameObject;
     }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
