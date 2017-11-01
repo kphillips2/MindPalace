@@ -7,28 +7,26 @@ public class RoomBuilder : MonoBehaviour {
     public GameObject filledWall;
     public GameObject doorWall;
 
-    private GameObject[] components;
-    private Vector3 roomCentre;
-
-	// Use this for initialization
+    private GameObject component;
+	
+    // Use this for initialization
 	void Start (){
-        components = new GameObject[5];
-        roomCentre = new Vector3(0, 0, 0);
-        addDoors();
-        addWall();
-	}
+        Vector3 roomCentre = new Vector3(0, 0, 0);
+        addDoors(roomCentre);
+        addWalls(roomCentre);
+    }
 
-    private void addDoors(){
-        components[1] = Instantiate(
+    public void addDoors(Vector3 centre){
+        component = Instantiate(
             doorWall,
-            roomCentre,
+            centre,
             Quaternion.Euler(0,-90,0)
         ) as GameObject;
     }
-	private void addWall(){
-        components[1] = Instantiate(
+	public void addWalls(Vector3 centre){
+        component = Instantiate(
             filledWall,
-            roomCentre,
+            centre,
             Quaternion.Euler(0, 90, 0)
         ) as GameObject;
     }

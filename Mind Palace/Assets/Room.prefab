@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65845386638164036}
   - component: {fileID: 23907452549701104}
   m_Layer: 0
-  m_Name: FillWall
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4639399383716478}
-  - component: {fileID: 114047961030603038}
   m_Layer: 0
   m_Name: DoorWall
   m_TagString: Untagged
@@ -524,20 +523,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114047961030603038
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1527320351006630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d65b29fb8c845e4dbc5d81df2cb9387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  longSide: {fileID: 1456454968259782}
-  doorTop: {fileID: 1589448732916984}
-  shortSide: {fileID: 1699600781720638}
 --- !u!114 &114112453422656828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -550,5 +535,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1257508024848568}
-  fillWall: {fileID: 1057450046319580}
+  filledWall: {fileID: 1583753875703550}
   doorWall: {fileID: 1527320351006630}
