@@ -217,13 +217,23 @@
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FileReader.cs" />
     <Compile Include="Assets\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Scripts\pauseListener.cs" />
     <Compile Include="Assets\Scripts\pauseMenuButtons.cs" />
+=======
+    <Compile Include="Assets\Scripts\BetterController.cs" />
+>>>>>>> 33f957e35f44f98f7c0089cec9dc22b910c390e1
     <Compile Include="Assets\Scripts\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
