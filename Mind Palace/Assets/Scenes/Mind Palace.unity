@@ -2434,13 +2434,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1213473110}
   - component: {fileID: 1213473111}
-  - component: {fileID: 1213473112}
   - component: {fileID: 1213473113}
+  - component: {fileID: 1213473118}
+  - component: {fileID: 1213473112}
   - component: {fileID: 1213473117}
   - component: {fileID: 1213473114}
   - component: {fileID: 1213473115}
   - component: {fileID: 1213473116}
-  - component: {fileID: 1213473118}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -2491,7 +2491,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 685279413}
   settingsMenu: {fileID: 420192828}
   pointer: {fileID: 1213473117}
-  poin: {fileID: 0}
+  poin: {fileID: 1213473114}
   cameraRigTransform: {fileID: 1742819396}
 --- !u!114 &1213473113
 MonoBehaviour:
@@ -2634,7 +2634,7 @@ MonoBehaviour:
   pointerRenderer: {fileID: 1213473114}
   activationButton: 0
   holdButtonToActivate: 0
-  activateOnEnable: 0
+  activateOnEnable: 1
   activationDelay: 0
   selectionButton: 3
   selectOnPress: 0
@@ -4011,12 +4011,12 @@ Prefab:
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 478
+      value: 574
       objectReference: {fileID: 0}
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 266
+      value: 267.5
       objectReference: {fileID: 0}
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
@@ -4451,12 +4451,12 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 397
+      value: 493
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 196
+      value: 197.5
       objectReference: {fileID: 0}
     - target: {fileID: 224000012484682510, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
@@ -4680,9 +4680,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1972010005}
   - component: {fileID: 1972010006}
+  - component: {fileID: 1972010009}
   - component: {fileID: 1972010007}
   - component: {fileID: 1972010008}
-  - component: {fileID: 1972010009}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged

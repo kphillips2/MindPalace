@@ -19,14 +19,15 @@ public class pauseListener : MonoBehaviour {
     public VRTK_StraightPointerRenderer poin; //TBD
     public Transform cameraRigTransform; //camera rig
 
+    private SteamVR_TrackedController controller;
     private Vector3 viewDir;
     private float height = 1.5f;
     private float distance = 5.0f;
-    private SteamVR_TrackedController controller;
     private bool paused = false;
 
     //adds listener to menu button
-    void OnEnable () {
+    void Start()
+    {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
     }
@@ -35,6 +36,7 @@ public class pauseListener : MonoBehaviour {
     private void MenuPress(object sender, ClickedEventArgs e)
     {
         paused = pauseMenu.activeSelf;
+        print(paused);
         paused = !paused;
         pauseMenu.SetActive(paused);
         settingsMenu.SetActive(false);
