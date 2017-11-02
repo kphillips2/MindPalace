@@ -222,9 +222,11 @@
     <Compile Include="Assets\FileReader.cs" />
     <Compile Include="Assets\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
-    <Compile Include="Assets\Scripts\BetterController.cs" />
+    <Compile Include="Assets\Scripts\pauseListener.cs" />
+    <Compile Include="Assets\Scripts\pauseMenuButtons.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
+    <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
