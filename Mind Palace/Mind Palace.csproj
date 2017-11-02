@@ -233,7 +233,11 @@
     <Compile Include="Assets\Scripts\pauseMenuButtons.cs" />
 =======
     <Compile Include="Assets\Scripts\BetterController.cs" />
+<<<<<<< HEAD
 >>>>>>> 33f957e35f44f98f7c0089cec9dc22b910c390e1
+=======
+    <Compile Include="Assets\Scripts\LevelBuilder.cs" />
+>>>>>>> f6dc74037a8bc588de1e4225fbe895e8e6d1cd99
     <Compile Include="Assets\Scripts\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
