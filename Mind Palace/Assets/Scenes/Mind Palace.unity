@@ -3520,7 +3520,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4987814046104048, guid: 1dbed8af8f2e04044916a9f094df6750, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10.44
+      value: 4.66
       objectReference: {fileID: 0}
     - target: {fileID: 4987814046104048, guid: 1dbed8af8f2e04044916a9f094df6750, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4681,6 +4681,8 @@ GameObject:
   - component: {fileID: 1972010005}
   - component: {fileID: 1972010006}
   - component: {fileID: 1972010007}
+  - component: {fileID: 1972010008}
+  - component: {fileID: 1972010009}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: Untagged
@@ -4729,6 +4731,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraRigTransform: {fileID: 1742819396}
+--- !u!114 &1972010008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1972010004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4591c702579831947a1fa8f014bbf19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 685279413}
+  settingsMenu: {fileID: 420192828}
+  pointer: {fileID: 1213473117}
+  poin: {fileID: 1213473114}
+  cameraRigTransform: {fileID: 1742819396}
+--- !u!114 &1972010009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1972010004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7346a42905a29b347b1f492e8ad7b49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerIndex: 0
+  triggerPressed: 0
+  steamPressed: 0
+  menuPressed: 0
+  padPressed: 0
+  padTouched: 0
+  gripped: 0
 --- !u!1 &1996066957
 GameObject:
   m_ObjectHideFlags: 0
