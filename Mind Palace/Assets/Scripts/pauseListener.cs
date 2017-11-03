@@ -15,8 +15,7 @@ public class pauseListener : MonoBehaviour {
    
     public GameObject pauseMenu; //pause canvas
     public GameObject settingsMenu; //settings canvas
-    public VRTK_Pointer pointer; //TBD
-    public VRTK_StraightPointerRenderer poin; //TBD
+    public VRTK_Pointer pointer; //laser pointer
     public Transform cameraRigTransform; //camera rig
 
     private SteamVR_TrackedController controller;
@@ -30,16 +29,18 @@ public class pauseListener : MonoBehaviour {
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
+        
     }
 
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
-        paused = pauseMenu.activeSelf;
+        paused = (pauseMenu.activeSelf || settingsMenu.activeSelf);
         print(paused);
         paused = !paused;
         pauseMenu.SetActive(paused);
         settingsMenu.SetActive(false);
+        pointer.pointerRenderer.enabled = paused;
     }
 	
     //Moves and rotates the settings canvas
@@ -66,5 +67,12 @@ public class pauseListener : MonoBehaviour {
     public void ToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void toStart()
+    {
+        height = cameraRigTransform.position.y;
+        cameraRigTransform.position = new Vector3(0, height, 0);
+        MenuPress(new object(),new ClickedEventArgs());
     }
 }
