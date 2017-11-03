@@ -1,5 +1,4 @@
 sceneSetups:
-- path: C:/Users/Max Baker/Desktop/Senior project/Official - Copy/MindPalace/Mind
-    Palace/Assets/Scenes/Mind Palace.unity
+- path: Assets/Scenes/Mind Palace.unity
   isLoaded: 1
   isActive: 1

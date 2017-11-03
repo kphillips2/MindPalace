@@ -223,8 +223,8 @@
     <Compile Include="Assets\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
+    <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
-    <Compile Include="Assets\Scripts\pauseMenuButtons.cs" />
     <Compile Include="Assets\Scripts\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />

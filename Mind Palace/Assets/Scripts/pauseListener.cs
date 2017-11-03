@@ -40,9 +40,6 @@ public class pauseListener : MonoBehaviour {
         paused = !paused;
         pauseMenu.SetActive(paused);
         settingsMenu.SetActive(false);
-        viewDir = SteamVR_Render.Top().GetRay().direction;
-        pauseMenu.transform.position = cameraRigTransform.position + distance*new Vector3(viewDir.normalized.x, height/distance,viewDir.normalized.z);
-        pauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x,0,viewDir.z));
     }
 	
     //Moves and rotates the settings canvas
