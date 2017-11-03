@@ -73,7 +73,6 @@ public class pauseListener : MonoBehaviour {
     {
         height = cameraRigTransform.position.y;
         cameraRigTransform.position = new Vector3(0, height, 0);
-        cameraRigTransform.rotation = new Quaternion(0, 0, 0, 1);
         MenuPress(new object(),new ClickedEventArgs());
     }
 }
