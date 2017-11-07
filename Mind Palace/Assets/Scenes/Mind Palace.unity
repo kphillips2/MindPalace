@@ -273,10 +273,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4462057902611944, guid: 142101f5e8f14324e8dd3ef0b759199d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 142101f5e8f14324e8dd3ef0b759199d, type: 2}
   m_IsPrefabParent: 0
@@ -2690,7 +2686,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 685279413}
   settingsMenu: {fileID: 420192828}
   pointer: {fileID: 1213473117}
-  poin: {fileID: 1213473114}
   cameraRigTransform: {fileID: 1742819396}
 --- !u!114 &1213473113
 MonoBehaviour:
@@ -4213,12 +4208,12 @@ Prefab:
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 574
+      value: 459
       objectReference: {fileID: 0}
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 267.5
+      value: 202
       objectReference: {fileID: 0}
     - target: {fileID: 224000013127654674, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
@@ -4653,12 +4648,12 @@ Prefab:
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 493
+      value: 378
       objectReference: {fileID: 0}
     - target: {fileID: 224000012623161658, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 197.5
+      value: 132
       objectReference: {fileID: 0}
     - target: {fileID: 224000012484682510, guid: d46cf6b1ad9d84a48ae7548a2a6b41b3,
         type: 2}
@@ -4949,7 +4944,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 685279413}
   settingsMenu: {fileID: 420192828}
   pointer: {fileID: 1213473117}
-  poin: {fileID: 1213473114}
   cameraRigTransform: {fileID: 1742819396}
 --- !u!114 &1972010009
 MonoBehaviour:
