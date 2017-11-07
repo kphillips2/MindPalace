@@ -4,45 +4,43 @@ using UnityEngine;
 
 public class RoomBuilder : MonoBehaviour {
 	public GameObject floor;
-	public GameObject filledWall;
 	public GameObject doorWall;
+	public GameObject filledWall;
 
 	private GameObject component;
 
 	// Use this for initialization
 	void Start (){
-		doorWall.SetActive(false);
-		filledWall.SetActive(false);
+		doorWall.SetActive (false);
+		filledWall.SetActive (false);
 	}
 
 	// input: Vector3 for the center of the room
-	//        byte array for the state of each wall
-	public void addWalls(Vector3 roomCentre, int[] input){
-		// Wall Locations are the indices of input
+	//        int array for the state of each wall
+	public void addWalls(Vector3 roomCentre, int[] doorStates){
+		// door numbers correspond with indices of doorStates
+		//   ----0----
+		//  |         |
+		//  |         |
+		//  3         1
+		//  |         |
+		//  |         |
+		//   ----2----
 
-		//       0
-		//    --------
-		//   |        |
-		// 3 |        |
-		//   |        | 1
-		//   |        |
-		//    --------
-		//       2
+		// states correspond with values of doorStates
+		// 0 = door inactive
+		// 1 = door active
 
-		// wall with door is 1
-		// wall without door is 2
-
-		for(int k=0;k<4;k++)
-			switch(input[k]){
-				case 0:
-					break;
-				case 1:
-					addDoor(roomCentre, k*90);
-					break;
-				default:
-					addWall(roomCentre, (k-1)*90);
-					break;
-			}
+		for(int k=0;k<4;k++) switch(doorStates[k]){
+		case 0:
+			addWall(roomCentre, (k-1)*90);
+			break;
+		case 1:
+			addDoor(roomCentre, k*90);
+			break;
+		default:
+			break;
+		}
 	}
 
 	// input: angle representing which side to put the wall on
@@ -53,6 +51,7 @@ public class RoomBuilder : MonoBehaviour {
 			roomCentre,
 			Quaternion.Euler(0, angle, 0)
 		) as GameObject;
+		component.SetActive(true);
 	}
 	// input: angle representing which side to put the wall on
 	//        -90 degrees is wall location 0
@@ -62,6 +61,7 @@ public class RoomBuilder : MonoBehaviour {
 			roomCentre,
 			Quaternion.Euler(0, angle, 0)
 		) as GameObject;
+		component.SetActive(true);
 	}
 
 	// Update is called once per frame
