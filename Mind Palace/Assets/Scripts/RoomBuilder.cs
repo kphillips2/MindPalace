@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// A 10 X 10 square room
 public class RoomBuilder : MonoBehaviour {
 	public GameObject floor;
 	public GameObject doorWall;
@@ -16,13 +17,23 @@ public class RoomBuilder : MonoBehaviour {
 	}
 
 	// input: Vector3 for the center of the room
+	public void addFloor(Vector3 roomCentre){
+		Vector3 centre = roomCentre + new Vector3 (0, -0.125f, 0);
+		component = Instantiate (
+			floor,
+			centre,
+			Quaternion.Euler (0, 0, 0)
+		) as GameObject;
+	}
+	// input: Vector3 for the center of the room
 	//        int array for the state of each wall
 	public void addWalls(Vector3 roomCentre, int[] doorStates){
 		// door numbers correspond with indices of doorStates
+		// (->) is the start direction
 		//   ----0----
 		//  |         |
 		//  |         |
-		//  3         1
+		//  3   ->    1
 		//  |         |
 		//  |         |
 		//   ----2----
@@ -44,28 +55,23 @@ public class RoomBuilder : MonoBehaviour {
 	}
 
 	// input: angle representing which side to put the wall on
-	//        0 degrees is wall location 0
+	//        0 degrees is door location 0
 	private void addDoor(Vector3 roomCentre, int angle){
 		component = Instantiate(
 			doorWall,
 			roomCentre,
-			Quaternion.Euler(0, angle, 0)
+			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
-		component.SetActive(true);
+		component.SetActive (true);
 	}
 	// input: angle representing which side to put the wall on
-	//        -90 degrees is wall location 0
+	//        -90 degrees is door location 0
 	private void addWall(Vector3 roomCentre, int angle){
 		component = Instantiate(
 			filledWall,
 			roomCentre,
-			Quaternion.Euler(0, angle, 0)
+			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
-		component.SetActive(true);
-	}
-
-	// Update is called once per frame
-	void Update () {
-
+		component.SetActive (true);
 	}
 }
