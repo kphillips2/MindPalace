@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/RedDemo.unity
+=======
+- path: Assets/Scenes/MainMenu.unity
+>>>>>>> b9d0bca60d9048e24b31e6d0746c93108d9fb06b
   isLoaded: 1
   isActive: 1
