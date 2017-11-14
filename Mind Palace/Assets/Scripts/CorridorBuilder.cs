@@ -61,9 +61,9 @@ public class CorridorBuilder : MonoBehaviour {
 		int[] zeros = {0,0,0};
 
 		int[] topWall = {
-			doorStates[0],
+			doorStates[2],
 			doorStates[1],
-			doorStates[2]
+			doorStates[0]
 		};
 		if(checkEqual(topWall, zeros))
 			addFilledWall(corridorCentre, 0);
@@ -131,14 +131,6 @@ public class CorridorBuilder : MonoBehaviour {
 			component.SetActive (true);
 			built = true;
 		}
-
-		if (angle == 180)
-			centre += new Vector3 (0, 0, 2.375f);
-		else
-			centre += new Vector3(0, 0, -2.375f);
-		if (rotation == 90)
-			doorWall.GetComponent<WallBuilder>().addWalls(centre, doorStates, rotation, 0, 1);
-		else
-			doorWall.GetComponent<WallBuilder>().addWalls(centre, doorStates, rotation, 1, 0);
+		doorWall.GetComponent<WallBuilder>().addWalls(centre, doorStates, rotation+angle);
 	}
 }
