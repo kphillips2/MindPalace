@@ -219,7 +219,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Prefabs\Downloaded Packs\Laterns and candles\scripts\CameraFacing.cs" />
+    <Compile Include="Assets\Prefabs\Downloaded Packs\Laterns and candles\scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
+    <Compile Include="Assets\Scripts\CorridorBuilder.cs" />
     <Compile Include="Assets\Scripts\FileReader.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
+    <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
@@ -587,6 +591,9 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
+    <None Include="Assets\Prefabs\Downloaded Packs\Food Pack\Shaders\Food.shader" />
+    <None Include="Assets\Prefabs\Downloaded Packs\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Resources\test.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
