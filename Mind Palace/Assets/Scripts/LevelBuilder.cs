@@ -15,38 +15,45 @@ public class LevelBuilder : MonoBehaviour {
 		roomBuilder = room.GetComponent<RoomBuilder>();
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
 
-		int[] walls = {1, 1, 1, 0};
+		int[] roomDoors = {1, 1, 1, 0};
 		Vector3 centre = new Vector3(0, 0, 0);
 		roomBuilder.addWalls(
 			centre,
-			walls
+			roomDoors
 		);
+		//adds roof to starting room
+		roomBuilder.addFloor (centre + new Vector3 (0,5.25f,0));
 
-		walls = new int[]{0, 0, 1, 0};
+		roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(0, 0, 10);
-		addRoom(centre, walls);
+		addRoom(centre, roomDoors);
 
-		walls = new int[]{1, 0, 0, 0};
+		roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(0, 0, -10);
-		addRoom(centre, walls);
+		addRoom(centre, roomDoors);
 
-		walls = new int[]{1, 0, 0, 0};
+		roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(20, 0, -7.5f);
-		addRoom(centre, walls);
+		addRoom(centre, roomDoors);
 
-		walls = new int[]{0, 0, 1, 0};
+		roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(30, 0, 7.5f);
-		addRoom(centre, walls);
+		addRoom(centre, roomDoors);
 
-		int[] other = {0, 1, 1, 0, 0, 1, 0, 1};
+		int[] corridorDoors = {
+			0, 1, 1,	//top wall
+			0,			//right end wall
+			0, 1, 0,	//bottom wall
+			1			//left end wall
+		};
 		centre = new Vector3 (20, 0, 0);
 		corridorBuilder.addWalls (
-			centre, other, 0
+			centre, corridorDoors, 0
 		);
 
-		other = new int[]{0, 0, 0, 1, 0, 0, 1, 0};
+		corridorDoors = new int[]{0, 0, 0, 1, 0, 0, 1, 0};
 		centre = new Vector3 (20, 0, 17.5f);
-		addCorridor (centre, other, 90);
+		addCorridor (centre, corridorDoors, 90);
 	}
 
 	private void addRoom(Vector3 roomCentre, int[] doorStates){
@@ -67,6 +74,7 @@ public class LevelBuilder : MonoBehaviour {
 			angle
 		);
 	}
+
 
 	// Update is called once per frame
 	void Update () {

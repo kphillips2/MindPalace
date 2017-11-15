@@ -535,5 +535,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1257508024848568}
-  filledWall: {fileID: 1583753875703550}
   doorWall: {fileID: 1527320351006630}
+  filledWall: {fileID: 1583753875703550}
