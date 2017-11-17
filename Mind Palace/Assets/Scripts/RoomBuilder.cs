@@ -5,7 +5,8 @@ using UnityEngine;
 // A 10 X 10 square room
 public class RoomBuilder : MonoBehaviour {
 	public GameObject floor;
-	public GameObject doorWall;
+    public GameObject roof;
+    public GameObject doorWall;
 	public GameObject filledWall;
 
 	private GameObject component;
@@ -44,9 +45,18 @@ public class RoomBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 	}
-	// input: Vector3 for the center of the room
-	//        int array for the state of each wall
-	public void addWalls(Vector3 roomCentre, int[] doorStates){
+    // input: Vector3 for the center of the room
+    public void addRoof(Vector3 roomCentre)
+    {
+        component = Instantiate(
+            roof,
+            roomCentre,
+            Quaternion.Euler(0, 0, 0)
+        ) as GameObject;
+    }
+    // input: Vector3 for the center of the room
+    //        int array for the state of each wall
+    public void addWalls(Vector3 roomCentre, int[] doorStates){
 		// door numbers correspond with indices of doorStates
 		// (->) is the start direction
 		//   ----0----

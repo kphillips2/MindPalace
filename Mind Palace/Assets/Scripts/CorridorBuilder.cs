@@ -5,7 +5,8 @@ using UnityEngine;
 // A 5 X 30 rectangular corridor
 public class CorridorBuilder : MonoBehaviour {
 	public GameObject floor;
-	public GameObject doorWall;
+    public GameObject roof;
+    public GameObject doorWall;
 	public GameObject filledWall;
 	public GameObject wallEnd;
 	public GameObject doorEnd;
@@ -33,10 +34,21 @@ public class CorridorBuilder : MonoBehaviour {
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
 	}
-	// input: Vector3 for the center of the corridor
-	//        int array for the state of each wall
-	//		  0 degrees creates the floor horizontally
-	public void addWalls(Vector3 corridorCentre, int[] doorStates, int angle){
+    // input: Vector3 for the center of the corridor
+    //		  0 degrees creates the roof horizontally
+    public void addRoof(Vector3 corridorCentre, int angle)
+    {
+        Vector3 centre = corridorCentre + new Vector3(0, -0.125f, 0);
+        component = Instantiate(
+            roof,
+            centre,
+            Quaternion.Euler(0, angle, 0)
+        ) as GameObject;
+    }
+    // input: Vector3 for the center of the corridor
+    //        int array for the state of each wall
+    //		  0 degrees creates the floor horizontally
+    public void addWalls(Vector3 corridorCentre, int[] doorStates, int angle){
 		// door numbers correspond with indices of doorStates
 		// (->) is the start direction without rotation
 		//   -----0-----1-----2-----

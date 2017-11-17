@@ -21,26 +21,46 @@ public class LevelBuilder : MonoBehaviour {
 			centre,
 			roomDoors
 		);
-		//adds roof to starting room
-		roomBuilder.addFloor (centre + new Vector3 (0,5.25f,0));
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
 
-		roomDoors = new int[]{0, 0, 1, 0};
+        roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(0, 0, 10);
 		addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
 
-		roomDoors = new int[]{1, 0, 0, 0};
+        roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(0, 0, -10);
 		addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
 
-		roomDoors = new int[]{1, 0, 0, 0};
+        roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(20, 0, -7.5f);
 		addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
 
-		roomDoors = new int[]{0, 0, 1, 0};
+        roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(30, 0, 7.5f);
 		addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
 
-		int[] corridorDoors = {
+        roomDoors = new int[] { 0, 1, 0, 0 };
+        centre = new Vector3(12.5f, 0, 17.5f);
+        addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
+
+        roomDoors = new int[] { 0, 0, 1, 0 };
+        centre = new Vector3(20, 0, 37.5f);
+        addRoom(centre, roomDoors);
+        //adds roof to starting room
+        roomBuilder.addRoof(centre);
+
+        int[] corridorDoors = {
 			0, 1, 1,	//top wall
 			0,			//right end wall
 			0, 1, 0,	//bottom wall
@@ -51,9 +71,10 @@ public class LevelBuilder : MonoBehaviour {
 			centre, corridorDoors, 0
 		);
 
-		corridorDoors = new int[]{0, 0, 0, 1, 0, 0, 1, 0};
+		corridorDoors = new int[]{0, 0, 0, 1, 0, 1, 0, 1};
 		centre = new Vector3 (20, 0, 17.5f);
 		addCorridor (centre, corridorDoors, 90);
+        corridorBuilder.addRoof(centre, 90);
 	}
 
 	private void addRoom(Vector3 roomCentre, int[] doorStates){
