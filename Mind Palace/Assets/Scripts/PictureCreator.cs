@@ -8,10 +8,12 @@ public class PictureCreator : MonoBehaviour {
 
 	void Start ()
     {
+        /**
         placePicture("Assets/Resources/seadragon.jpg", 180f, new Vector3(-4.045f, 2.6f, -3.11f));
         placePicture("Assets/Resources/owl.jpg", 90f, new Vector3(2.135f, 2.577f, -4.7f));
         placePicture("Assets/Resources/treepic.jpg", 0f, new Vector3(4.02f, 2.577f, 1.72f));
         placePicture("Assets/Resources/tamarin.jpg", -90f, new Vector3(2.41f, 2.577f, 3.72f));
+    */
     }
 
     //Loads jpg from given file path and places it at the given position in the scene. Will be
