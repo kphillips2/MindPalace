@@ -15,6 +15,16 @@ public class RoomBuilder : MonoBehaviour {
 		doorWall.SetActive (false);
 		filledWall.SetActive (false);
 	}
+	// returns the vectors for each inside corner
+	public Vector3[,] getInsideCorners(Vector3 roomCentre){
+		Vector3[,] corners = new Vector3[4,4];
+		corners [0,0] = roomCentre + new Vector3 (4.75f, 0, 4.75f);
+		corners [1,0] = roomCentre + new Vector3 (4.75f, 0, -4.75f);
+		corners [2,0] = roomCentre + new Vector3 (-4.75f, 0, -4.75f);
+		corners [3,0] = roomCentre + new Vector3 (-4.75f, 0, 4.75f);
+
+		return corners;
+	}
 
 	// input: Vector3 for the center of the room
 	public void addFloor(Vector3 roomCentre){
