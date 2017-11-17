@@ -222,6 +222,7 @@
     <Compile Include="Assets\FileReader.cs" />
     <Compile Include="Assets\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
+    <Compile Include="Assets\Scripts\buttonStuff.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
@@ -585,9 +586,11 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseDefines.cs" />
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseHeadset.cs" />
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
+    <Compile Include="Assets\WavySprite\Scripts\WavySprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\test.txt" />
+    <None Include="Assets\SimpleSky\ReadMe.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
@@ -604,6 +607,8 @@
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\UIOverlay.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\Unlit_TransparentColor.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\VRTK_OutlineBasic.shader" />
+    <None Include="Assets\WavySprite\Shaders\WavySprite.shader" />
+    <None Include="Assets\WavySprite\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
