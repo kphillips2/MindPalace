@@ -22,16 +22,6 @@ public class CorridorBuilder : MonoBehaviour {
 		wallEnd.SetActive (false);
 		doorEnd.SetActive (false);
 	}
-	// returns the vectors for each inside corner
-	public Vector3[] getInsideCorners(Vector3 roomCentre){
-		Vector3[] corners = new Vector3[4];
-		corners [0] = roomCentre + new Vector3 (4.75,0,4.75);
-		corners [1] = roomCentre + new Vector3 (-4.75,0,4.75);
-		corners [2] = roomCentre + new Vector3 (4.75,0,-4.75);
-		corners [3] = roomCentre + new Vector3 (-4.75,0,-4.75);
-
-		return corners;
-	}
 
 	// input: Vector3 for the center of the corridor
 	//		  0 degrees creates the floor horizontally
