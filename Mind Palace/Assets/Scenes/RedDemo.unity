@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1965,7 +1965,7 @@ Transform:
   - {fileID: 1294312128}
   - {fileID: 587598378}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381435098
 GameObject:
@@ -3559,11 +3559,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4576477647807488, guid: 4f88a5998a55f4a4897b9945329f182f, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4924318732114182, guid: 4f88a5998a55f4a4897b9945329f182f, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4314321805561268, guid: 4f88a5998a55f4a4897b9945329f182f, type: 2}
       propertyPath: m_RootOrder
@@ -5437,7 +5437,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4589005292330406, guid: 2f63cba2666d700439d7c74e216f95f6, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114112453422656828, guid: 2f63cba2666d700439d7c74e216f95f6,
         type: 2}
