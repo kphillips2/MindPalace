@@ -228,11 +228,13 @@
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
     <Compile Include="Assets\Scripts\PictureCreator.cs" />
+    <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
     <Compile Include="Assets\Scripts\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
+    <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
