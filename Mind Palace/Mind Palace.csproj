@@ -223,6 +223,7 @@
     <Compile Include="Assets\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
+    <Compile Include="Assets\Scripts\FrameRate.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
