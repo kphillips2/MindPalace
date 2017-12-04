@@ -10,7 +10,6 @@ public class LevelBuilder : MonoBehaviour {
 	private RoomBuilder roomBuilder;
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
-    private Vector3[,] cornersDoors;
 
 	// Use this for initialization
 	void Start () {
@@ -18,63 +17,55 @@ public class LevelBuilder : MonoBehaviour {
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
 
-
         int[] roomDoors = {1, 1, 1, 0};
 		Vector3 centre = new Vector3(0, 0, 0);
+		roomBuilder.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
+		roomBuilder.addFloor (centre);
+		roomBuilder.addRoof (centre);
 		roomBuilder.addWalls(
 			centre,
 			roomDoors
 		);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(0, 0, 10);
 		addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(0, 0, -10);
 		addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[]{1, 0, 0, 0};
 		centre = new Vector3(20, 0, -7.5f);
 		addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(30, 0, 7.5f);
 		addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[] { 0, 1, 0, 0 };
         centre = new Vector3(12.5f, 0, 17.5f);
         addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
         roomDoors = new int[] { 0, 0, 1, 0 };
         centre = new Vector3(20, 0, 37.5f);
         addRoom(centre, roomDoors);
-        //adds roof to starting room
-        roomBuilder.addRoof(centre);
         //add pictures
         hangPictures(centre, roomDoors);
 
@@ -92,13 +83,16 @@ public class LevelBuilder : MonoBehaviour {
 		corridorDoors = new int[]{0, 0, 0, 1, 0, 1, 0, 1};
 		centre = new Vector3 (20, 0, 17.5f);
 		addCorridor (centre, corridorDoors, 90);
-        corridorBuilder.addRoof(centre, 90);
-
-        
 	}
 
 	private void addRoom(Vector3 roomCentre, int[] doorStates){
+		roomBuilder.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
 		roomBuilder.addFloor (roomCentre);
+		roomBuilder.addRoof (roomCentre);
 		roomBuilder.addWalls (
 			roomCentre,
 			doorStates
@@ -106,6 +100,10 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	private void addCorridor(Vector3 roomCentre, int[] doorStates, int angle){
 		corridorBuilder.addFloor (
+			roomCentre,
+			angle
+		);
+		corridorBuilder.addRoof (
 			roomCentre,
 			angle
 		);

@@ -15,6 +15,8 @@ public class CorridorBuilder : MonoBehaviour {
 	private bool built;
 	private int rotation;
 
+	private Material wallTexture;
+
 	// Use this for initialization
 	void Start (){
 		built = false;
@@ -22,6 +24,7 @@ public class CorridorBuilder : MonoBehaviour {
 		filledWall.SetActive (false);
 		wallEnd.SetActive (false);
 		doorEnd.SetActive (false);
+		wallTexture = Resources.Load ("Materials/leather", typeof(Material)) as Material;
 	}
 
 	// input: Vector3 for the center of the corridor
@@ -33,15 +36,15 @@ public class CorridorBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
+		component.GetComponent<Renderer> ().material = wallTexture;
 	}
     // input: Vector3 for the center of the corridor
     //		  0 degrees creates the roof horizontally
     public void addRoof(Vector3 corridorCentre, int angle)
     {
-        Vector3 centre = corridorCentre + new Vector3(0, -0.125f, 0);
         component = Instantiate(
             roof,
-            centre,
+			corridorCentre,
             Quaternion.Euler(0, angle, 0)
         ) as GameObject;
     }

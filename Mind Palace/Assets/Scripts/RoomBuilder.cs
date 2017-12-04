@@ -10,12 +10,25 @@ public class RoomBuilder : MonoBehaviour {
 	public GameObject filledWall;
 
 	private GameObject component;
+	private Renderer[] materials;
+
+	private Material floorMat;
+	private Material roofMat;
+	private Material wallMat;
 
 	// Use this for initialization
 	void Start (){
+		floor.SetActive (false);
+		roof.SetActive (false);
 		doorWall.SetActive (false);
 		filledWall.SetActive (false);
 	}
+	public void setMaterials (string floorName, string roofName, string wallName){
+		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
+		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
+		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
+	}
+
 	// returns the vectors for each inside corner
 	public Vector3[,] getInsideCorners(Vector3 roomCentre, int[] doorStates){
 		Vector3[,] corners = new Vector3[4,2];
@@ -35,7 +48,6 @@ public class RoomBuilder : MonoBehaviour {
 
 		return corners;
 	}
-
 	// input: Vector3 for the center of the room
 	public void addFloor(Vector3 roomCentre){
 		Vector3 centre = roomCentre + new Vector3 (0, -0.125f, 0);
@@ -44,6 +56,8 @@ public class RoomBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
+		component.GetComponent<Renderer> ().material = floorMat;
+		component.SetActive (true);
 	}
     // input: Vector3 for the center of the room
     public void addRoof(Vector3 roomCentre)
@@ -53,6 +67,8 @@ public class RoomBuilder : MonoBehaviour {
             roomCentre,
             Quaternion.Euler(0, 0, 0)
         ) as GameObject;
+		component.GetComponentInChildren<Renderer> ().material = roofMat;
+		component.SetActive (true);
     }
     // input: Vector3 for the center of the room
     //        int array for the state of each wall
@@ -91,6 +107,9 @@ public class RoomBuilder : MonoBehaviour {
 			roomCentre,
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
+		materials = component.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer renderer in materials)
+			renderer.material = wallMat;
 		component.SetActive (true);
 	}
 	// input: angle representing which side to put the wall on
@@ -101,6 +120,9 @@ public class RoomBuilder : MonoBehaviour {
 			roomCentre,
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
+		materials = component.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer renderer in materials)
+			renderer.material = wallMat;
 		component.SetActive (true);
 	}
 }

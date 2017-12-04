@@ -33,6 +33,7 @@ public class TouchpadMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		print (1 / Time.deltaTime);
         device = SteamVR_Controller.Input((int)trackedObj.index);
         if (device.GetAxis().x != 0 || device.GetAxis().y != 0)
         {
