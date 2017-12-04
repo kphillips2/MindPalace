@@ -23,6 +23,7 @@ public class RoomBuilder : MonoBehaviour {
 		doorWall.SetActive (false);
 		filledWall.SetActive (false);
 	}
+	// input: three strings which represent the materials for the room
 	public void setMaterials (string floorName, string roofName, string wallName){
 		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
 		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
@@ -120,9 +121,7 @@ public class RoomBuilder : MonoBehaviour {
 			roomCentre,
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
-		materials = component.GetComponentsInChildren<Renderer> ();
-		foreach (Renderer renderer in materials)
-			renderer.material = wallMat;
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 }

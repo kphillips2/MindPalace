@@ -76,6 +76,17 @@ public class LevelBuilder : MonoBehaviour {
 			1			//left end wall
 		};
 		centre = new Vector3 (20, 0, 0);
+		corridorBuilder.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
+		corridorBuilder.addFloor (
+			centre, 0
+		);
+		corridorBuilder.addRoof (
+			centre, 0
+		);
 		corridorBuilder.addWalls (
 			centre, corridorDoors, 0
 		);
@@ -99,6 +110,11 @@ public class LevelBuilder : MonoBehaviour {
 		);
 	}
 	private void addCorridor(Vector3 roomCentre, int[] doorStates, int angle){
+		corridorBuilder.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
 		corridorBuilder.addFloor (
 			roomCentre,
 			angle

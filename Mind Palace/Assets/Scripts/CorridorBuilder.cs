@@ -12,19 +12,31 @@ public class CorridorBuilder : MonoBehaviour {
 	public GameObject doorEnd;
 
 	private GameObject component;
+	private Renderer[] materials;
+	private WallBuilder wallBuilder;
 	private bool built;
 	private int rotation;
 
-	private Material wallTexture;
+	private Material floorMat;
+	private Material roofMat;
+	private Material wallMat;
 
 	// Use this for initialization
 	void Start (){
+		wallBuilder = doorWall.GetComponent<WallBuilder>();
 		built = false;
+		floor.SetActive (false);
+		roof.SetActive (false);
 		doorWall.SetActive (false);
 		filledWall.SetActive (false);
 		wallEnd.SetActive (false);
 		doorEnd.SetActive (false);
-		wallTexture = Resources.Load ("Materials/leather", typeof(Material)) as Material;
+	}
+	// input: three strings which represent the materials for the room
+	public void setMaterials (string floorName, string roofName, string wallName){
+		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
+		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
+		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 	}
 
 	// input: Vector3 for the center of the corridor
@@ -36,7 +48,8 @@ public class CorridorBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, angle, 0)
 		) as GameObject;
-		component.GetComponent<Renderer> ().material = wallTexture;
+		component.GetComponent<Renderer> ().material = floorMat;
+		component.SetActive (true);
 	}
     // input: Vector3 for the center of the corridor
     //		  0 degrees creates the roof horizontally
@@ -47,6 +60,8 @@ public class CorridorBuilder : MonoBehaviour {
 			corridorCentre,
             Quaternion.Euler(0, angle, 0)
         ) as GameObject;
+		component.GetComponentInChildren<Renderer> ().material = roofMat;
+		component.SetActive (true);
     }
     // input: Vector3 for the center of the corridor
     //        int array for the state of each wall
@@ -112,6 +127,7 @@ public class CorridorBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, angle+rotation, 0)
 		) as GameObject;
+		textureChildren ();
 		component.SetActive (true);
 	}
 	// input: angle representing which side to put the wall on
@@ -122,6 +138,7 @@ public class CorridorBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, angle+rotation, 0)
 		) as GameObject;
+		textureChildren ();
 		component.SetActive (true);
 	}
 	// input: angle representing which side to put the wall on
@@ -132,6 +149,7 @@ public class CorridorBuilder : MonoBehaviour {
 			centre,
 			Quaternion.Euler (0, angle+rotation, 0)
 		) as GameObject;
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// input: angle representing which side to put the wall on
@@ -146,6 +164,14 @@ public class CorridorBuilder : MonoBehaviour {
 			component.SetActive (true);
 			built = true;
 		}
-		doorWall.GetComponent<WallBuilder>().addWalls(centre, doorStates, rotation+angle);
+		wallBuilder.setMaterial (wallMat);
+		wallBuilder.addWalls (centre, doorStates, rotation+angle);
+	}
+	// finds the childern in the current component
+	//   sets their material all to wallMat
+	private void textureChildren(){
+		materials = component.GetComponentsInChildren<Renderer> ();
+		foreach (Renderer renderer in materials)
+			renderer.material = wallMat;
 	}
 }

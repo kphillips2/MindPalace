@@ -12,6 +12,7 @@ public class WallBuilder : MonoBehaviour {
 
 	private GameObject component;
 	private int rotation;
+	private Material wallMat;
 
 	// Use this for initialization
 	void Start (){
@@ -21,6 +22,10 @@ public class WallBuilder : MonoBehaviour {
 		sideToSide.SetActive (false);
 		middleToEnd.SetActive (false);
 		sideToOpposite.SetActive (false);
+	}
+	// input: the material for the wall
+	public void setMaterial(Material material){
+		wallMat = material;
 	}
 
 	// input: Vector3 for the center of the wall
@@ -67,6 +72,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 
 		wallCentre += new Vector3 (-2.875f * wallSide, 2, 0);
@@ -76,6 +82,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// input: wallSide represents 1 for right, -1 for left
@@ -87,6 +94,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// input: wallSide represents 1 for right, -1 for left
@@ -98,6 +106,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// input: wallSide represents 1 for right, -1 for left
@@ -111,6 +120,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// input: wallSide represents 1 for right, -1 for left
@@ -126,6 +136,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler(0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// puts a door on left and right side but not middle
@@ -140,6 +151,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler(0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// puts a door only in the middle
@@ -154,6 +166,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler(0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 	// puts a door in all three locations
@@ -170,6 +183,7 @@ public class WallBuilder : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.transform.RotateAround (roomCentre, Vector3.up, rotation);
+		component.GetComponentInChildren<Renderer> ().material = wallMat;
 		component.SetActive (true);
 	}
 }
