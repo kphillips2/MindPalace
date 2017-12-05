@@ -59,6 +59,11 @@ public class LevelBuilder : MonoBehaviour {
 
 		corridorDoors = new int[]{0, 0, 0, 1, 0, 1, 0, 1};
 		centre = new Vector3 (20, 0, 17.5f);
+		corridorBuilder.setMaterials (
+			"Bricks1", // floor material
+			"Wood Texture 05", // roof material
+			"Wood texture 06"  // wall material
+		);
 		addCorridor (centre, corridorDoors, 90);
 	}
 
@@ -81,6 +86,12 @@ public class LevelBuilder : MonoBehaviour {
 		//add pictures
 		hangPictures(centre, roomDoors);
 
+		roomBuilder.setMaterials (
+			"Bricks1", // floor material
+			"Wood Texture 05", // roof material
+			"Wood texture 06"  // wall material
+		);
+
 		roomDoors = new int[]{0, 0, 1, 0};
 		centre = new Vector3(30, 0, 7.5f);
 		addRoom(centre, roomDoors);
@@ -100,11 +111,6 @@ public class LevelBuilder : MonoBehaviour {
 		hangPictures(centre, roomDoors);
 	}
 	private void addRoom(Vector3 roomCentre, int[] doorStates){
-		roomBuilder.setMaterials (
-			"Wood Texture 06", // floor material
-			"Wood Texture 15", // roof material
-			"Wood texture 12"  // wall material
-		);
 		roomBuilder.addFloor (roomCentre);
 		roomBuilder.addRoof (roomCentre);
 		roomBuilder.addWalls (
@@ -113,11 +119,6 @@ public class LevelBuilder : MonoBehaviour {
 		);
 	}
 	private void addCorridor(Vector3 roomCentre, int[] doorStates, int angle){
-		corridorBuilder.setMaterials (
-			"Wood Texture 06", // floor material
-			"Wood Texture 15", // roof material
-			"Wood texture 12"  // wall material
-		);
 		corridorBuilder.addFloor (
 			roomCentre,
 			angle
