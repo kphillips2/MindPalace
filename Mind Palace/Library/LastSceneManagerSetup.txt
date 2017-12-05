@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/RedDemo.unity
-=======
 - path: Assets/Scenes/OrangeDemo.unity
->>>>>>> master
   isLoaded: 1
   isActive: 1
