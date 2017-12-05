@@ -29,7 +29,8 @@ public class pauseListener : MonoBehaviour {
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        
+        pointer.pointerRenderer.enabled = false;
+
     }
 
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user

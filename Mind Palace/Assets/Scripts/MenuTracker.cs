@@ -8,7 +8,7 @@ public class MenuTracker : MonoBehaviour {
 
     private Vector3 viewDir;
     private float height = 1.5f;
-    private float distance = 5.0f;
+    private float distance = 3f;
 
     // Use this for initialization
     void Start () {
