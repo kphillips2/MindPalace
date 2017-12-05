@@ -235,6 +235,8 @@
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />
+    <Compile Include="Assets\Scripts\WavySprite.cs" />
+    <Compile Include="Assets\Scripts\WavySpriteEditor.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
@@ -591,13 +593,13 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseDefines.cs" />
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseHeadset.cs" />
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
-    <Compile Include="Assets\WavySprite\Scripts\WavySprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
+    <None Include="Assets\Meshes\WavySprite.shader" />
+    <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
     <None Include="Assets\Prefabs\Downloaded Packs\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
     <None Include="Assets\Resources\test.txt" />
-    <None Include="Assets\SimpleSky\ReadMe.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
@@ -614,8 +616,6 @@
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\UIOverlay.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\Unlit_TransparentColor.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\VRTK_OutlineBasic.shader" />
-    <None Include="Assets\WavySprite\Shaders\WavySprite.shader" />
-    <None Include="Assets\WavySprite\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
