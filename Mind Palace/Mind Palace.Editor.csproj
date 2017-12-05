@@ -292,6 +292,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
+    <None Include="Assets\Meshes\WavySprite.shader" />
+    <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
     <None Include="Assets\Prefabs\Downloaded Packs\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
     <None Include="Assets\Resources\test.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
