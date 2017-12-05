@@ -11,7 +11,7 @@ public class startPalace : MonoBehaviour {
 
     public void startGame()
     {
-        SceneManager.LoadScene("Mind Palace");
+        SceneManager.LoadScene("OrangeDemo");
     }
 	
 }

@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mind Palace.unity
     guid: c3013e827cb7519489e017d602ebcb65
+  - enabled: 1
+    path: Assets/Scenes/OrangeDemo.unity
+    guid: 1288d97161f3a8b47b0a4846ab2cbad9
