@@ -1,7 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Mind Palace/Assets/Fonts.meta
 guid: 95a138558ccdc1b4fb35b912a5090fa6
 folderAsset: yes
 timeCreated: 1512441286
+=======
+<<<<<<< HEAD
+guid: cc9dc3e191efcd64ea2e5f499429b72d
+folderAsset: yes
+timeCreated: 1510044604
+=======
+guid: 1e843fa7c7824394eaee4675cf6fcb57
+folderAsset: yes
+timeCreated: 1510039355
+>>>>>>> b9d0bca60d9048e24b31e6d0746c93108d9fb06b
+>>>>>>> master:Mind Palace/Assets/Prefabs.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
