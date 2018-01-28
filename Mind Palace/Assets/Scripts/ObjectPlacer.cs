@@ -36,9 +36,17 @@ public class ObjectPlacer : MonoBehaviour {
         fireplace, flowerTable, fridge, guitar, headboard, lionStatue, oven, plant, 
         sink, soccerBall, table, toilet, tv;
 
-	//Adds objects to scene on start. In future, these values will be retrieved from
-    //the loci files
-	void Start () {
+    //Adds objects to scene on start.
+    void Start() {
+        SaveLoad.load();
+        Loci.current = SaveLoad.savedLocis[0];
+        foreach(float[] item in Loci.current.objects)
+        {
+            createPrefab((int)item[0], item[1], item[2], item[3]);
+        }
+        /*
+        Loci.current = new Loci("saveTest");
+        
         createPrefab(0, -3.468538f, -12.47951f, 0f); //Bed
         createPrefab(1, 4.15f, 8.72f, -90f); //Book cases
         createPrefab(1, 4.15f, 10.43f, -90f);
@@ -75,6 +83,7 @@ public class ObjectPlacer : MonoBehaviour {
         createPrefab(17, 20.4941f, -7.77f, 90f); //Table
         createPrefab(18, 34.13f, 7.88f, -90f); //Toilet
         createPrefab(19, 3.937f, -9.35f, -90f); //TV
+        SaveLoad.save();*/
     }
 
     //Creates a prefab where num is the number that is associated with the prefab,
