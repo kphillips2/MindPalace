@@ -39,31 +39,48 @@ public class RoomCreator : MonoBehaviour {
 		if (doorStates [0] != 0)
 			cut (frontWall, doorStates [0]);
 		if (doorStates [1] != 0)
-			cut (rightWall, doorStates [1]);
+			cut (rightWall, -1*doorStates [1]);
 		if (doorStates [2] != 0)
 			cut (rearWall, doorStates [2]);
 		if (doorStates [3] != 0)
-			cut (leftWall, doorStates [3]);
+			cut (leftWall, -1*doorStates [3]);
 	}
 
 	private void cut(GameObject input, int state){
 		Destroy (input.GetComponent<MeshCollider> ());
 		Mesh mesh = input.transform.GetComponent<MeshFilter> ().mesh;
-		int[] oldTriangles = mesh.triangles;
-		int[] newTriangles = new int[mesh.triangles.Length];
+		Vector3[] cur = mesh.vertices;
+		Vector3[] nxt = new Vector3[mesh.vertices.Length];
+		Vector3 centre = floor.transform.position;
 
-		int i = 0, j = 0;
-		while (j < mesh.triangles.Length) {
-			if (j > 20 || j < 10) {
-				newTriangles [i++] = oldTriangles [j++];
-				newTriangles [i++] = oldTriangles [j++];
-				newTriangles [i++] = oldTriangles [j++];
+		double dist = 0;
+		for (int k = 0; k < mesh.vertices.Length; k++)
+			if (cur [k].y < 5) {
+				// wall is parallel to z axis
+				if (state > 0)
+					dist = Mathf.Abs(cur [k].z - centre.z);
+				// wall is parallel to x axis
+				else
+					dist = Mathf.Abs(cur [k].x - centre.x);
+				if (dist >= 2.5)
+					nxt [k] = cur [k];
 			} else {
-				j += 3;
+				// add any vertex above the door
+				nxt [k] = cur [k];
 			}
-		}
 
-		input.transform.GetComponent<MeshFilter> ().mesh.triangles = newTriangles;
+		//int i = 0, j = 0;
+		//while (j < mesh.triangles.Length) {
+		//	if (j > 20 || j < 10) {
+		//		newTriangles [i++] = oldTriangles [j++];
+		//		newTriangles [i++] = oldTriangles [j++];
+		//		newTriangles [i++] = oldTriangles [j++];
+		//	} else {
+		//		j += 3;
+		//	}
+		//}
+
+		input.transform.GetComponent<MeshFilter> ().mesh.vertices = nxt;
 		input.AddComponent<MeshCollider> ();
 	}
 	
