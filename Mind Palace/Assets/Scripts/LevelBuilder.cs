@@ -11,14 +11,42 @@ public class LevelBuilder : MonoBehaviour {
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
 
+    // Test loading the first saved Loci in the list
+    public void loadTest()
+    {
+        SaveLoad.load();
+        Loci.current = SaveLoad.savedLocis[0];
+        ObjectPlacer op = new ObjectPlacer();
+        foreach (float[] item in Loci.current.objects)
+        {
+            op.createPrefab((int)item[0], item[1], item[2], item[3]);
+        }
+
+        foreach (Room r in Loci.current.rooms)
+        {
+            roomBuilder.setMaterials(r.materials[0], r.materials[1], r.materials[2]);
+            addRoom(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
+            hangPictures(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
+        }
+
+        foreach (Corridor c in Loci.current.corridors)
+        {
+            corridorBuilder.setMaterials(c.materials[0], c.materials[1], c.materials[2]);
+            addCorridor(new Vector3(c.centre[0], c.centre[1], c.centre[2]), c.corrDoors, c.angle);
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 		roomBuilder = room.GetComponent<RoomBuilder>();
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
 
+        loadTest();
+        /*
         int[] roomDoors = {1, 1, 1, 0};
 		Vector3 centre = new Vector3(0, 0, 0);
+
 		roomBuilder.setMaterials (
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
@@ -34,7 +62,7 @@ public class LevelBuilder : MonoBehaviour {
         hangPictures(centre, roomDoors);
 
 		addRooms ();
-
+        
         int[] corridorDoors = {
 			0, 1, 1,	//top wall
 			0,			//right end wall
@@ -64,8 +92,8 @@ public class LevelBuilder : MonoBehaviour {
 			"Wood Texture 05", // roof material
 			"Wood texture 06"  // wall material
 		);
-		addCorridor (centre, corridorDoors, 90);
-	}
+		addCorridor (centre, corridorDoors, 90);*/
+    }
 
 	private void addRooms(){
 		int[] roomDoors = new int[]{0, 0, 1, 0};

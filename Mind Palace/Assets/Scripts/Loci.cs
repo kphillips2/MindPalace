@@ -8,9 +8,13 @@ public class Loci {
 
     public string name;
     public List<float[]> objects;
+    public List<Room> rooms;
+    public List<Corridor> corridors;
 
     public Loci (string name) {
         this.name = name;
         objects = new List<float[]>();
+        rooms = new List<Room>();
+        corridors = new List<Corridor>();
     }
 }

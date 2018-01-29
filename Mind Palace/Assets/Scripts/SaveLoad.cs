@@ -103,7 +103,7 @@ public static class SaveLoad {
             }
             
             // Save the object using its corresponding prefab value, x-coordinate, z-coordinate, and y-rotation
-            float[] f = { val, go.transform.position.x, go.transform.position.z, go.transform.eulerAngles.y };
+            float[] f = new float[]{ val, go.transform.position.x, go.transform.position.z, go.transform.eulerAngles.y };
             Loci.current.objects.Add(f); //Add to list of objects in current save
         }
     }
