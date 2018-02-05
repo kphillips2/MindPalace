@@ -4,20 +4,24 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public static class SaveLoad {
-    public static List<Loci> savedLocis = new List<Loci>();
+// Class for saving and loading palaces (Loci)
 
-    // Save current Loci to list of saved Loci
+public static class SaveLoad {
+    public static Loci currentLoci; //The current save file being loaded/edited/viewed
+    public static List<Loci> savedLocis = new List<Loci>(); //List of save files
+
+    // Adds the current Loci to the list of savedLocis and saves it to file. Should be called after editing a palace and
+    // all new information about the Loci (except object info) has been added to the currentLoci attribute
     public static void save() {
         saveObjects();
-        savedLocis.Add(Loci.current);
+        savedLocis.Add(currentLoci);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create("Assets/SaveFile/saveFile.gd");
         bf.Serialize(file, SaveLoad.savedLocis);
         file.Close();
     }
 
-    // Load list of saved Loci
+    // Fills the savedLocis list with the Loci objects that were saved in the save file
     public static void load() {
         if (File.Exists("Assets/SaveFile/saveFile.gd")) {
             BinaryFormatter bf = new BinaryFormatter();
@@ -30,7 +34,7 @@ public static class SaveLoad {
     // Saves all of the prefab objects in the scene to the current Loci
     private static void saveObjects() {
         //Reset the list of objects for the Loci
-        Loci.current.objects = new List<float[]>();
+        currentLoci.clearObjects();
 
         //Retrieves all of the GameObjects in the scene
         foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
@@ -104,7 +108,7 @@ public static class SaveLoad {
             
             // Save the object using its corresponding prefab value, x-coordinate, z-coordinate, and y-rotation
             float[] f = new float[]{ val, go.transform.position.x, go.transform.position.z, go.transform.eulerAngles.y };
-            Loci.current.objects.Add(f); //Add to list of objects in current save
+            currentLoci.addObject(f); //Add to list of objects in current save
         }
     }
 }
