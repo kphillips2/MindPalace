@@ -234,9 +234,11 @@
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\RoomBuilder.cs" />
+    <Compile Include="Assets\Scripts\RoomCreator.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveTester.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
+    <Compile Include="Assets\Scripts\SnapToGround.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
