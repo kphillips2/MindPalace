@@ -187,9 +187,6 @@ public class LevelBuilder : MonoBehaviour {
 		);
 	}
 
-    /**
-     * Will later use wallSpaceFinder and PictureSpacePlacer 
-     */
     private void hangPictures(Vector3 centre, int[] roomDoors)
     {
         string[] imageRes = { "Assets/Resources/treepic.jpg" , "Assets/Resources/tamarin.jpg", "Assets/Resources/seadragon.jpg",
