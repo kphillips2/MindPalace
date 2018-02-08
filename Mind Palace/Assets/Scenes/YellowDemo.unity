@@ -9156,6 +9156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
   corridor: {fileID: 307889338}
+  space: {fileID: 1395163538}
 --- !u!4 &1824866098
 Transform:
   m_ObjectHideFlags: 0

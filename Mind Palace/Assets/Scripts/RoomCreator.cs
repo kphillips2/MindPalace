@@ -38,7 +38,6 @@ public class RoomCreator : MonoBehaviour {
 		// 1 = door left justify
 		// 2 = door centre
 		// 3 = door right justify
-		print("test: "+doorStates);
 		print("Door states : "+doorStates[0]+", "+doorStates[1]+", "+doorStates[2]+", "+doorStates[3]);
 		if (doorStates [0] != 0)
 			cut (frontWall, doorStates [0]);
@@ -71,13 +70,34 @@ public class RoomCreator : MonoBehaviour {
 		Vector3 pE = p0 + new Vector3 (0, -2 * input.y, 0);
 		Vector3 pF = p1 + new Vector3 (0, -2 * input.y, 0);
 	}
-
 	private void cut(GameObject input, int state){
 		Destroy (input.GetComponent<MeshCollider> ());
 		Mesh mesh = input.transform.GetComponent<MeshFilter> ().mesh;
 		int[] triangles = mesh.triangles;
-		//for (int k = 0; k < mesh.vertices.Length; k++)
-		//Vector3[] vertices = mesh.vertices;
+		Vector3[] vertices = mesh.vertices;
+
+		string test = "triangle: ";
+		//for (int k = 0; k < triangles.Length; k += 3)
+		//	print (test + vertices [triangles [k]] + ", " + vertices [triangles [k + 1]] + ", " + vertices [triangles [k + 2]]);
+
+		Vector3 a, b, c;
+		Vector3 scale = input.transform.localScale;
+		Vector3 translation = input.transform.position;
+		print ("scale: " + scale+", translation: "+translation);
+		for (int k = 0; k < triangles.Length; k += 3) {
+			a = vertices [triangles [k]];
+			b = vertices [triangles [k + 1]];
+			c = vertices [triangles [k + 2]];
+			a.Scale (scale);
+			b.Scale (scale);
+			c.Scale (scale);
+			a += translation;
+			b += translation;
+			c += translation;
+		
+			print(test+a+", "+b+", "+c);
+		}
+
 		//Vector3 v;
 		//
 		//double dist = 0;
