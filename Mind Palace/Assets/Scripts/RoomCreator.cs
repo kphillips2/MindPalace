@@ -49,6 +49,7 @@ public class RoomCreator : MonoBehaviour {
 		switch (state) {
 		case 1:
 			cutDoor (input, new Vector3 (-3, -2.5f, 0.125f));
+			break;
 		case 2:
 			cutDoor (input, new Vector3 (0, -2.5f, 0.125f));
 			break;
@@ -98,14 +99,14 @@ public class RoomCreator : MonoBehaviour {
 	private void cutDoor(GameObject input, Vector3 doorLoc){
 		Destroy (input.GetComponent<MeshCollider> ());
 		Mesh mesh = input.transform.GetComponent<MeshFilter> ().mesh;
-		//int[] triangles = mesh.triangles;
+		int[] triangles = mesh.triangles;
 		//Vector3[] vertices = mesh.vertices;
 
-		Vector3[] vertices = compileVertices (input.transform.localPosition, doorLoc);
+		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLoc);
 
-		//Vector3[] current = getTriangleVertices (input);
-		//List<int> newTriangles = new List<int> ();
-		//
+		Vector3[] current = getTriangleVertices (input);
+		List<int> newTriangles = new List<int> ();
+		
 		//string test = "triangle: ";
 		//Vector3 s1, s2, N;
 		//for (int k = 0; k < triangles.Length; k += 3) {
@@ -191,7 +192,34 @@ public class RoomCreator : MonoBehaviour {
 		////	}
 		////}
 		//
-		//mesh.triangles = newTriangles.ToArray();
+		newTriangles.Add (1);
+		newTriangles.Add (11);
+		newTriangles.Add (3);
+
+		//newTriangles.Add (9);
+		//newTriangles.Add (5);
+		//newTriangles.Add (3);
+		//
+		//newTriangles.Add (11);
+		//newTriangles.Add (9);
+		//newTriangles.Add (3);
+		//
+		//newTriangles.Add (1);
+		//newTriangles.Add (11);
+		//newTriangles.Add (3);
+		//
+		//newTriangles.Add (1);
+		//newTriangles.Add (15);
+		//newTriangles.Add (11);
+		//
+		//newTriangles.Add (15);
+		//newTriangles.Add (13);
+		//newTriangles.Add (11);
+
+		for (int k = 0; k < 16; k += 2)
+			print (vertices [k] + ", " + vertices [k + 1]);
+		mesh.vertices = vertices.ToArray();
+		mesh.triangles = newTriangles.ToArray ();
 		input.AddComponent<MeshCollider> ();
 	}
 	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3 doorLoc){
