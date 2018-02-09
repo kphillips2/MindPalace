@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Temporary script for testing the save feature
+
 public class SaveTester : MonoBehaviour {
 
     void Start() {
         //performSaveTest();
     }
 
-    // Create a save file to test
+    // Creates a test Loci and saves it, called "saveTest". Commenting-out the loadTest() line in the Start function of
+    // LevelBuilder.cs and running this function will reset the save file so that it only contains this Loci.
     void performSaveTest () {
-        Loci.current = new Loci("saveTest");
+        SaveLoad.currentLoci = new Loci("saveTest"); //Make a new Loci
 
+        // Place objects in the scene which will be saved when the save() function is called
         ObjectPlacer op = new ObjectPlacer();
         op.createPrefab(0, -3.468538f, -12.47951f, 0f); //Bed
         op.createPrefab(1, 4.15f, 8.72f, -90f); //Book cases
@@ -50,47 +54,48 @@ public class SaveTester : MonoBehaviour {
         op.createPrefab(18, 34.13f, 7.88f, -90f); //Toilet
         op.createPrefab(19, 3.937f, -9.35f, -90f); //TV
 
+        // Add rooms and corridors to the current Loci
         int[] doors = new int[] { 1, 1, 1, 0 };
         float[] centre = new float[] { 0, 0, 0 };
         string[] materials = new string[] { "Wood Texture 06", "Wood Texture 15", "Wood texture 12" };
         Room r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 0, 0, 10 };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
         doors = new int[] { 1, 0, 0, 0 };
         centre = new float[] { 0, 0, -10 };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
         centre = new float[] { 20, 0, -7.5f };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
 
         doors = new int[] { 0, 1, 1, 0, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 0 };
         Corridor c = new Corridor(doors, centre, materials, 0);
-        Loci.current.corridors.Add(c);
+        SaveLoad.currentLoci.addCorridor(c);
 
         materials = new string[] { "Bricks1", "Wood Texture 05", "Wood texture 06" };
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 30, 0, 7.5f };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
         doors = new int[] { 0, 1, 0, 0 };
         centre = new float[] { 12.5f, 0, 17.5f };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 20, 0, 37.5f };
         r = new Room(doors, centre, materials);
-        Loci.current.rooms.Add(r);
+        SaveLoad.currentLoci.addRoom(r);
 
         doors = new int[] { 0, 0, 0, 1, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 17.5f };
         c = new Corridor(doors, centre, materials, 90);
-        Loci.current.corridors.Add(c);
+        SaveLoad.currentLoci.addCorridor(c);
 
-        SaveLoad.save();
+        SaveLoad.save(); // Save the current Loci to file
     }
 }

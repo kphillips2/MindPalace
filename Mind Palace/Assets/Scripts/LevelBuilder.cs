@@ -11,28 +11,52 @@ public class LevelBuilder : MonoBehaviour {
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
 
-    // Test loading the first saved Loci in the list
+    // Test loading the first saved Loci in the list of saved Loci files
     public void loadTest()
     {
-        SaveLoad.load();
-        Loci.current = SaveLoad.savedLocis[0];
+        SaveLoad.load(); // Loads save file
+        SaveLoad.currentLoci = SaveLoad.savedLocis[0]; // Sets first saved Loci to be the one being viewed
+
+        // Place objects
         ObjectPlacer op = new ObjectPlacer();
-        foreach (float[] item in Loci.current.objects)
+        foreach (float[] item in SaveLoad.currentLoci.getObjects())
         {
-            op.createPrefab((int)item[0], item[1], item[2], item[3]);
+            try
+            {
+                op.createPrefab((int)item[0], item[1], item[2], item[3]);
+            }
+            catch { Debug.Log("Error: Object could not be generated due to missing values"); }
         }
 
-        foreach (Room r in Loci.current.rooms)
+        // Create rooms
+        foreach (Room r in SaveLoad.currentLoci.getRooms())
         {
-            roomBuilder.setMaterials(r.materials[0], r.materials[1], r.materials[2]);
-            addRoom(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
-            hangPictures(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
+            string[] m = r.getMaterials();
+            float[] ce = r.getCentre();
+            int[] d = r.getRoomDoors();
+
+            try
+            {
+                roomBuilder.setMaterials(m[0], m[1], m[2]);
+                addRoom(new Vector3(ce[0], ce[1], ce[2]), d);
+                hangPictures(new Vector3(ce[0], ce[1], ce[2]), d);
+            }
+            catch { Debug.Log("Error: Room could not be generated due to missing values"); }
         }
 
-        foreach (Corridor c in Loci.current.corridors)
+        // Create corridors
+        foreach (Corridor c in SaveLoad.currentLoci.getCorridors())
         {
-            corridorBuilder.setMaterials(c.materials[0], c.materials[1], c.materials[2]);
-            addCorridor(new Vector3(c.centre[0], c.centre[1], c.centre[2]), c.corrDoors, c.angle);
+            string[] m = c.getMaterials();
+            float[] ce = c.getCentre();
+            int[] d = c.getCorrDoors();
+
+            try
+            {
+                corridorBuilder.setMaterials(m[0], m[1], m[2]);
+                addCorridor(new Vector3(ce[0], ce[1], ce[2]), d, c.getAngle());
+            }
+            catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
         }
     }
 
@@ -42,7 +66,8 @@ public class LevelBuilder : MonoBehaviour {
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
 
-        loadTest();
+        loadTest(); 
+
         /*
         int[] roomDoors = {1, 1, 1, 0};
 		Vector3 centre = new Vector3(0, 0, 0);
