@@ -11,30 +11,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
 
-    // Test loading the first saved Loci in the list
-    public void loadTest()
-    {
-        SaveLoad.load();
-        Loci.current = SaveLoad.savedLocis[0];
-        ObjectPlacer op = new ObjectPlacer();
-        foreach (float[] item in Loci.current.objects)
-        {
-            op.createPrefab((int)item[0], item[1], item[2], item[3]);
-        }
 
-        foreach (Room r in Loci.current.rooms)
-        {
-            roomBuilder.setMaterials(r.materials[0], r.materials[1], r.materials[2]);
-            addRoom(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
-            hangPictures(new Vector3(r.centre[0], r.centre[1], r.centre[2]), r.roomDoors);
-        }
-
-        foreach (Corridor c in Loci.current.corridors)
-        {
-            corridorBuilder.setMaterials(c.materials[0], c.materials[1], c.materials[2]);
-            addCorridor(new Vector3(c.centre[0], c.centre[1], c.centre[2]), c.corrDoors, c.angle);
-        }
-    }
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +20,7 @@ public class LevelEditorBuilder : MonoBehaviour {
         pictureCreator = new PictureCreator();
 
         
-        int[] roomDoors = {0, 0, 0, 0};
+        int[] roomDoors = {1, 1, 1, 1};
 		Vector3 centre = new Vector3(0, 0, 0);
 
 		roomBuilder.setMaterials (
@@ -53,10 +30,14 @@ public class LevelEditorBuilder : MonoBehaviour {
 		);
 		roomBuilder.addFloor (centre);
 		roomBuilder.addRoof (centre);
+        /*
 		roomBuilder.addWalls(
 			centre,
 			roomDoors
 		);
+        */
+
+
         /*
         //add pictures
         hangPictures(centre, roomDoors);

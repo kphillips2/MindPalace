@@ -226,7 +226,6 @@
     <Compile Include="Assets\Scripts\FileReader.cs" />
     <Compile Include="Assets\Scripts\FrameRate.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
-    <Compile Include="Assets\Scripts\LevelEditorAddButton.cs" />
     <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
     <Compile Include="Assets\Scripts\Loci.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
@@ -242,6 +241,7 @@
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\SnapToGround.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
+    <Compile Include="Assets\Scripts\subMenuButtons.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />
