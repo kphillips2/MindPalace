@@ -11,59 +11,6 @@ public class LevelEditorBuilder : MonoBehaviour {
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
 
-<<<<<<< HEAD
-
-=======
-    // Test loading the first saved Loci in the list of saved Loci files
-    public void loadTest()
-    {
-        SaveLoad.load(); // Loads save file
-        SaveLoad.currentLoci = SaveLoad.savedLocis[0]; // Sets first saved Loci to be the one being viewed
-
-        // Place objects
-        ObjectPlacer op = new ObjectPlacer();
-        foreach (float[] item in SaveLoad.currentLoci.getObjects())
-        {
-            try
-            {
-                op.createPrefab((int)item[0], item[1], item[2], item[3]);
-            }
-            catch { Debug.Log("Error: Object could not be generated due to missing values"); }
-        }
-
-        // Create rooms
-        foreach (Room r in SaveLoad.currentLoci.getRooms())
-        {
-            string[] m = r.getMaterials();
-            float[] ce = r.getCentre();
-            int[] d = r.getRoomDoors();
-
-            try
-            {
-                roomBuilder.setMaterials(m[0], m[1], m[2]);
-                addRoom(new Vector3(ce[0], ce[1], ce[2]), d);
-                hangPictures(new Vector3(ce[0], ce[1], ce[2]), d);
-            }
-            catch { Debug.Log("Error: Room could not be generated due to missing values"); }
-        }
-
-        // Create corridors
-        foreach (Corridor c in SaveLoad.currentLoci.getCorridors())
-        {
-            string[] m = c.getMaterials();
-            float[] ce = c.getCentre();
-            int[] d = c.getCorrDoors();
-
-            try
-            {
-                corridorBuilder.setMaterials(m[0], m[1], m[2]);
-                addCorridor(new Vector3(ce[0], ce[1], ce[2]), d, c.getAngle());
-            }
-            catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
-        }
-    }
->>>>>>> c4cf9895d58a4da23ab74df09e7b94c81230f5fa
-
     // Use this for initialization
     void Start () {
 		roomBuilder = room.GetComponent<RoomBuilder>();
