@@ -8,7 +8,6 @@ public class RoomBuilder : MonoBehaviour {
     public GameObject roof;
     public GameObject doorWall;
 	public GameObject filledWall;
-    public GameObject EditorButtons;
 
 	private GameObject component;
 	private Renderer[] materials;
@@ -62,21 +61,6 @@ public class RoomBuilder : MonoBehaviour {
 		component.SetActive (true);
 	}
     // input: Vector3 for the center of the room
-    public void addPlusSigns(Vector3 roomCentre)
-    {
-        component = Instantiate(
-            EditorButtons,
-            roomCentre,
-            Quaternion.Euler(0, 0, 0)
-        ) as GameObject;
-        Canvas[] PlusSigns = component.GetComponentsInChildren<Canvas>();
-        for (int i = 0; i < PlusSigns.Length; i++)
-        {
-            PlusSigns[i].GetComponent<subMenuButtons>().currentRoomCenter = roomCentre;
-        }
-        print(PlusSigns.Length);
-        component.SetActive(true);
-    }
     public void addRoof(Vector3 roomCentre)
     {
         component = Instantiate(

@@ -1344,6 +1344,11 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &330461054 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1934403023785170, guid: 4f88a5998a55f4a4897b9945329f182f,
+    type: 2}
+  m_PrefabInternal: {fileID: 350377495}
 --- !u!1 &337588406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,8 +2303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff82e02830ac6204bb54aad92f90e110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  cameraRigTransform: {fileID: 0}
+  menu: {fileID: 591038257}
+  cameraRigTransform: {fileID: 788248190}
 --- !u!114 &591038259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4801,7 +4806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce1d113ad3f8d042aab1069491b7b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 15
+  rate: 45
 --- !u!4 &1095289759
 Transform:
   m_ObjectHideFlags: 0
@@ -5220,9 +5225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d4b77999c32cc4792fcf16acaac808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 1095193490665554, guid: 2f63cba2666d700439d7c74e216f95f6, type: 2}
-  corridor: {fileID: 1934403023785170, guid: 4f88a5998a55f4a4897b9945329f182f, type: 2}
-  space: {fileID: 0}
+  room: {fileID: 2044987631}
+  corridor: {fileID: 330461054}
 --- !u!4 &1160805898
 Transform:
   m_ObjectHideFlags: 0
@@ -6554,9 +6558,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa08146f23983534e847c69489ae5fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRigTransform: {fileID: 0}
-  pauseMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
+  cameraRigTransform: {fileID: 788248190}
+  pauseMenu: {fileID: 591038263}
+  settingsMenu: {fileID: 1662820635}
 --- !u!114 &1498531847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6582,10 +6586,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4591c702579831947a1fa8f014bbf19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
-  pointer: {fileID: 0}
-  cameraRigTransform: {fileID: 0}
+  pauseMenu: {fileID: 591038257}
+  settingsMenu: {fileID: 1662820629}
+  pointer: {fileID: 1498531850}
+  cameraRigTransform: {fileID: 1397570946}
 --- !u!114 &1498531849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7572,8 +7576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff82e02830ac6204bb54aad92f90e110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  cameraRigTransform: {fileID: 0}
+  menu: {fileID: 1662820629}
+  cameraRigTransform: {fileID: 788248190}
 --- !u!114 &1662820631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7860,8 +7864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa08146f23983534e847c69489ae5fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRigTransform: {fileID: 0}
-  pauseMenu: {fileID: 0}
+  cameraRigTransform: {fileID: 788248190}
+  pauseMenu: {fileID: 591038263}
   settingsMenu: {fileID: 0}
 --- !u!114 &1676643870
 MonoBehaviour:
@@ -7888,10 +7892,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4591c702579831947a1fa8f014bbf19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
-  pointer: {fileID: 0}
-  cameraRigTransform: {fileID: 0}
+  pauseMenu: {fileID: 591038257}
+  settingsMenu: {fileID: 1662820629}
+  pointer: {fileID: 1498531850}
+  cameraRigTransform: {fileID: 1397570946}
 --- !u!114 &1676643872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10149,6 +10153,11 @@ MonoBehaviour:
     fallbackTypeName: VRTK.SDK_FallbackController
     typeName: VRTK.SDK_SteamVRController
     descriptionIndex: 0
+--- !u!1 &2044987631 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1095193490665554, guid: 2f63cba2666d700439d7c74e216f95f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 488282638}
 --- !u!1 &2093015516
 GameObject:
   m_ObjectHideFlags: 0

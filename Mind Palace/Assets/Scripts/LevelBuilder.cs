@@ -5,13 +5,11 @@ using UnityEngine;
 public class LevelBuilder : MonoBehaviour {
 	public GameObject room;
 	public GameObject corridor;
-	public GameObject space;
 
 	private GameObject currentRoom;
 	private RoomBuilder roomBuilder;
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
-	private RoomCreator roomCreator;
 
     // Test loading the first saved Loci in the list of saved Loci files
     public void loadTest()
@@ -67,10 +65,6 @@ public class LevelBuilder : MonoBehaviour {
 		roomBuilder = room.GetComponent<RoomBuilder>();
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
-		roomCreator = space.GetComponent<RoomCreator>();
-
-		int[] roomDoors = {2, 2, 2, 2};
-		roomCreator.addDoors (roomDoors);
 
         loadTest(); 
 
@@ -193,9 +187,6 @@ public class LevelBuilder : MonoBehaviour {
 		);
 	}
 
-    /**
-     * Will later use wallSpaceFinder and PictureSpacePlacer 
-     */
     private void hangPictures(Vector3 centre, int[] roomDoors)
     {
         string[] imageRes = { "Assets/Resources/treepic.jpg" , "Assets/Resources/tamarin.jpg", "Assets/Resources/seadragon.jpg",

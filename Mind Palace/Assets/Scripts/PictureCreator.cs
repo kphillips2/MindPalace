@@ -120,14 +120,4 @@ public class PictureCreator : MonoBehaviour {
         }
         return texture;
     }
-
-    //Creates a Sprite and loads the object at the given file path into it
-    //Returns the created Sprite (can be used for setting button images)
-    public static Sprite LoadNewSprite(string filePath, float pixelsPerUnit = 100.0f)
-    {
-        Sprite newSprite = new Sprite();
-        Texture2D spriteTexture = LoadImg(filePath);
-        newSprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0), pixelsPerUnit);
-        return newSprite;
-    }
 }
