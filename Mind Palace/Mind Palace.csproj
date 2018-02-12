@@ -225,6 +225,8 @@
     <Compile Include="Assets\Scripts\CorridorBuilder.cs" />
     <Compile Include="Assets\Scripts\FileReader.cs" />
     <Compile Include="Assets\Scripts\FrameRate.cs" />
+    <Compile Include="Assets\Scripts\ImageMenu.cs" />
+    <Compile Include="Assets\Scripts\ImageMenuText.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
     <Compile Include="Assets\Scripts\LevelEditorAddButton.cs" />
     <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
