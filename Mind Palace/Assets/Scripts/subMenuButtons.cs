@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class subMenuButtons : MonoBehaviour {
     public GameObject room;
-    private Vector3 roomCentre;
+    public Vector3 currentRoomCenter;
+    private Vector3 newRoomCentre;
     private RoomBuilder roomBuilder;
     public GameObject ClickedOn;
-    public GameObject Room;
+    public GameObject RoomButton;
     public GameObject Window;
     public GameObject Picture;
 
@@ -24,14 +25,14 @@ public class subMenuButtons : MonoBehaviour {
     public void ShowMoreOptions()
     {
         ClickedOn.SetActive(false);
-        Room.SetActive(true);
+        RoomButton.SetActive(true);
         Window.SetActive(true);
         Picture.SetActive(true);
     }
     public void HideAll()
     {
         ClickedOn.SetActive(false);
-        Room.SetActive(false);
+        RoomButton.SetActive(false);
         Window.SetActive(false);
         Picture.SetActive(false);
     }
@@ -41,57 +42,57 @@ public class subMenuButtons : MonoBehaviour {
         Vector3 buttonCenter = this.transform.position;
         print(buttonCenter.x + "=X");
         print(buttonCenter.z + "=Z");
-        if (buttonCenter.x>=4.6f + room.transform.position.x)
+        if (buttonCenter.x>=4.6f + currentRoomCenter.x)
         {
-            if (buttonCenter.z == 0f + room.transform.position.z)
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(10, 0, 0);
+                newRoomCentre = new Vector3(10, 0, 0);
             }
-            else if (buttonCenter.z > 0f + room.transform.position.z)
+            else if (buttonCenter.z > 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(10, 0, 3);
-            } else if (buttonCenter.z < 0f + room.transform.position.z)
+                newRoomCentre = new Vector3(10, 0, 3);
+            } else if (buttonCenter.z < 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(10, 0, -3);
-            }
-        }
-        else if (buttonCenter.x <= -4.6f+ room.transform.position.x)
-        {
-            if (buttonCenter.z == 0f + room.transform.position.z)
-            {
-                roomCentre = new Vector3(-10, 0, 0);
-            }else if (buttonCenter.z > 0f + room.transform.position.z)
-            {
-                roomCentre = new Vector3(-10, 0, 3);
-            }else if (buttonCenter.z < 0f + room.transform.position.z)
-            {
-                roomCentre = new Vector3(-10, 0, -3);
+                newRoomCentre = new Vector3(10, 0, -3);
             }
         }
-        else if (buttonCenter.z >= 4.6f+ room.transform.position.z)
+        else if (buttonCenter.x <= -4.6f+ currentRoomCenter.x)
         {
-            if (buttonCenter.x == 0f + room.transform.position.x)
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(0, 0, 10);
-            }else if (buttonCenter.x > 0f + room.transform.position.x)
+                newRoomCentre = new Vector3(-10, 0, 0);
+            }else if (buttonCenter.z > 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(3, 0, 10);
-            }else if (buttonCenter.x < 0f + room.transform.position.x)
+                newRoomCentre = new Vector3(-10, 0, 3);
+            }else if (buttonCenter.z < 0f + currentRoomCenter.z)
             {
-                roomCentre = new Vector3(-3, 0, 10);
+                newRoomCentre = new Vector3(-10, 0, -3);
             }
         }
-        else if (buttonCenter.z <= -4.6f+ room.transform.position.z)
+        else if (buttonCenter.z >= 4.6f+ currentRoomCenter.z)
         {
-            if (buttonCenter.x == 0f + room.transform.position.x)
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
             {
-                roomCentre = new Vector3(0, 0, -10);
-            }else if (buttonCenter.x > 0f + room.transform.position.x)
+                newRoomCentre = new Vector3(0, 0, 10);
+            }else if (buttonCenter.x > 0f + currentRoomCenter.x)
             {
-                roomCentre = new Vector3(3, 0, -10);
-            }else if (buttonCenter.x < 0f + room.transform.position.x)
+                newRoomCentre = new Vector3(3, 0, 10);
+            }else if (buttonCenter.x < 0f + currentRoomCenter.x)
             {
-                roomCentre = new Vector3(-3, 0, -10);
+                newRoomCentre = new Vector3(-3, 0, 10);
+            }
+        }
+        else if (buttonCenter.z <= -4.6f+ currentRoomCenter.z)
+        {
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            {
+                newRoomCentre = new Vector3(0, 0, -10);
+            }else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            {
+                newRoomCentre = new Vector3(3, 0, -10);
+            }else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            {
+                newRoomCentre = new Vector3(-3, 0, -10);
             }
         }
         else
@@ -105,16 +106,17 @@ public class subMenuButtons : MonoBehaviour {
             "Wood texture 12"  // wall material
         );
         int[] roomDoors = new int[] { 1, 1, 1, 1 };
-        buildRoom(roomCentre+room.transform.position, roomDoors);
+        buildRoom(newRoomCentre + currentRoomCenter, roomDoors);
         HideAll();
 
     }
-    private void buildRoom(Vector3 roomCentre, int[] doorStates)
+    private void buildRoom(Vector3 newRoomCentre, int[] doorStates)
     {
-        roomBuilder.addFloor(roomCentre);
-        roomBuilder.addRoof(roomCentre);
+        roomBuilder.addFloor(newRoomCentre);
+        roomBuilder.addRoof(newRoomCentre);
+        roomBuilder.addPlusSigns(newRoomCentre);
         roomBuilder.addWalls(
-            roomCentre,
+            newRoomCentre,
             doorStates
         );
     }

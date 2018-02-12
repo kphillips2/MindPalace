@@ -1627,8 +1627,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 797681852}
-  Room: {fileID: 188459939}
+  RoomButton: {fileID: 188459939}
   Window: {fileID: 61500059}
   Picture: {fileID: 420027997}
 --- !u!1 &145744577
@@ -2512,6 +2513,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0949c314b6b35144c9db56e3102c1b32, type: 2}
+    - target: {fileID: 114112453422656828, guid: 2f63cba2666d700439d7c74e216f95f6,
+        type: 2}
+      propertyPath: EditorButtons
+      value: 
+      objectReference: {fileID: 850851256}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f63cba2666d700439d7c74e216f95f6, type: 2}
   m_IsPrefabParent: 0
@@ -2947,8 +2953,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 303060768}
-  Room: {fileID: 118039621}
+  RoomButton: {fileID: 118039621}
   Window: {fileID: 336671981}
   Picture: {fileID: 2056294285}
 --- !u!1 &334005030
@@ -7173,8 +7180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1107433279}
-  Room: {fileID: 904241173}
+  RoomButton: {fileID: 904241173}
   Window: {fileID: 777988167}
   Picture: {fileID: 2145420322}
 --- !u!1 &809167007
@@ -8191,8 +8199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 796331836}
-  Room: {fileID: 500212893}
+  RoomButton: {fileID: 500212893}
   Window: {fileID: 145744577}
   Picture: {fileID: 444869822}
 --- !u!1 &923279695
@@ -8483,7 +8492,7 @@ MonoBehaviour:
   customRaycast: {fileID: 0}
   layersToIgnore:
     serializedVersion: 2
-    m_Bits: 36
+    m_Bits: 0
   pointerOriginSmoothingSettings:
     smoothsPosition: 0
     maxAllowedPerFrameDistanceDifference: 0.003
@@ -8932,8 +8941,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 342638548}
-  Room: {fileID: 1464397708}
+  RoomButton: {fileID: 1464397708}
   Window: {fileID: 1989719288}
   Picture: {fileID: 759800159}
 --- !u!1 &1028543323
@@ -12834,8 +12844,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 422908303}
-  Room: {fileID: 2088140396}
+  RoomButton: {fileID: 2088140396}
   Window: {fileID: 1124953927}
   Picture: {fileID: 1159347218}
 --- !u!1 &1533240191
@@ -13552,8 +13563,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1695681387}
-  Room: {fileID: 1032500153}
+  RoomButton: {fileID: 1032500153}
   Window: {fileID: 1082167866}
   Picture: {fileID: 1166686188}
 --- !u!1 &1575546940
@@ -15410,8 +15422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 334005030}
-  Room: {fileID: 1943898306}
+  RoomButton: {fileID: 1943898306}
   Window: {fileID: 313693328}
   Picture: {fileID: 1614187095}
 --- !u!1 &1794519632
@@ -16345,8 +16358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1701721400}
-  Room: {fileID: 1381218280}
+  RoomButton: {fileID: 1381218280}
   Window: {fileID: 1702689257}
   Picture: {fileID: 458059363}
 --- !u!1 &1911276566
@@ -16634,8 +16648,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 54021303}
-  Room: {fileID: 458311789}
+  RoomButton: {fileID: 458311789}
   Window: {fileID: 1816177917}
   Picture: {fileID: 1811082327}
 --- !u!1 &1943898306
@@ -17602,8 +17617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1247187150}
-  Room: {fileID: 1555391060}
+  RoomButton: {fileID: 1555391060}
   Window: {fileID: 201715741}
   Picture: {fileID: 781672830}
 --- !u!1 &2040209436
@@ -18616,8 +18632,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 482155563}
+  currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1147697386}
-  Room: {fileID: 1952208264}
+  RoomButton: {fileID: 1952208264}
   Window: {fileID: 47206259}
   Picture: {fileID: 4404379}
 --- !u!1 &2139809454
