@@ -11,55 +11,6 @@ public class LevelEditorBuilder : MonoBehaviour {
 	private CorridorBuilder corridorBuilder;
     private PictureCreator pictureCreator;
 
-    // Test loading the first saved Loci in the list of saved Loci files
-    public void loadTest()
-    {
-        SaveLoad.load(); // Loads save file
-        SaveLoad.currentLoci = SaveLoad.savedLocis[0]; // Sets first saved Loci to be the one being viewed
-
-        // Place objects
-        ObjectPlacer op = new ObjectPlacer();
-        foreach (float[] item in SaveLoad.currentLoci.getObjects())
-        {
-            try
-            {
-                op.createPrefab((int)item[0], item[1], item[2], item[3]);
-            }
-            catch { Debug.Log("Error: Object could not be generated due to missing values"); }
-        }
-
-        // Create rooms
-        foreach (Room r in SaveLoad.currentLoci.getRooms())
-        {
-            string[] m = r.getMaterials();
-            float[] ce = r.getCentre();
-            int[] d = r.getRoomDoors();
-
-            try
-            {
-                roomBuilder.setMaterials(m[0], m[1], m[2]);
-                addRoom(new Vector3(ce[0], ce[1], ce[2]), d);
-                hangPictures(new Vector3(ce[0], ce[1], ce[2]), d);
-            }
-            catch { Debug.Log("Error: Room could not be generated due to missing values"); }
-        }
-
-        // Create corridors
-        foreach (Corridor c in SaveLoad.currentLoci.getCorridors())
-        {
-            string[] m = c.getMaterials();
-            float[] ce = c.getCentre();
-            int[] d = c.getCorrDoors();
-
-            try
-            {
-                corridorBuilder.setMaterials(m[0], m[1], m[2]);
-                addCorridor(new Vector3(ce[0], ce[1], ce[2]), d, c.getAngle());
-            }
-            catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
-        }
-    }
-
     // Use this for initialization
     void Start () {
 		roomBuilder = room.GetComponent<RoomBuilder>();
@@ -67,7 +18,7 @@ public class LevelEditorBuilder : MonoBehaviour {
         pictureCreator = new PictureCreator();
 
         
-        int[] roomDoors = {0, 0, 0, 0};
+        int[] roomDoors = {1, 1, 1, 1};
 		Vector3 centre = new Vector3(0, 0, 0);
 
 		roomBuilder.setMaterials (
@@ -77,10 +28,14 @@ public class LevelEditorBuilder : MonoBehaviour {
 		);
 		roomBuilder.addFloor (centre);
 		roomBuilder.addRoof (centre);
+        /*
 		roomBuilder.addWalls(
 			centre,
 			roomDoors
 		);
+        */
+
+
         /*
         //add pictures
         hangPictures(centre, roomDoors);
