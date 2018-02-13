@@ -226,6 +226,7 @@
     <Compile Include="Assets\Scripts\FileReader.cs" />
     <Compile Include="Assets\Scripts\FrameRate.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
+    <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
     <Compile Include="Assets\Scripts\Loci.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\ObjectPlacer.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\SnapToGround.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
+    <Compile Include="Assets\Scripts\subMenuButtons.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />
@@ -603,11 +605,13 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\ColorfulButtons\Credits.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
     <None Include="Assets\Meshes\WavySprite.shader" />
     <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
     <None Include="Assets\Prefabs\Downloaded Packs\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
     <None Include="Assets\Resources\test.txt" />
+    <None Include="Assets\Scripts\ColorfulButtons\Credits.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
