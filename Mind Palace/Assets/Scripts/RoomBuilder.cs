@@ -8,8 +8,9 @@ public class RoomBuilder : MonoBehaviour {
     public GameObject roof;
     public GameObject doorWall;
 	public GameObject filledWall;
+    public GameObject EditorButtons;
 
-	private GameObject component;
+    private GameObject component;
 	private Renderer[] materials;
 
 	private Material floorMat;
@@ -29,9 +30,45 @@ public class RoomBuilder : MonoBehaviour {
 		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
 		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 	}
+    public void addPlusSigns(Vector3 roomCentre, int DoorIndex)
+    {
+        component = Instantiate(
+            EditorButtons,
+            roomCentre,
+            Quaternion.Euler(0, 0, 0)
+        ) as GameObject;
+        Canvas[] PlusSigns = component.GetComponentsInChildren<Canvas>();
+        for (int i = 0; i < PlusSigns.Length; i++)
+        {
+            PlusSigns[i].GetComponent<subMenuButtons>().currentRoomCenter = roomCentre;
+            PlusSigns[i].GetComponent<subMenuButtons>().DefaultState();
+            PlusSigns[CalcOppositeDoorIndex(DoorIndex)].GetComponent<subMenuButtons>().HideAll();
+        }
+        print(PlusSigns.Length);
+        component.SetActive(true);
+    }
 
-	// returns the vectors for each inside corner
-	public Vector3[,] getInsideCorners(Vector3 roomCentre, int[] doorStates){
+    public int CalcOppositeDoorIndex(int doorIndex)
+    {
+        if(doorIndex==11 || doorIndex == 0|| doorIndex == 1)
+        {
+            return 6;
+        }
+        else if (doorIndex == 2 || doorIndex == 3 || doorIndex == 4)
+        {
+            return 9;
+        }
+        else if (doorIndex == 5 || doorIndex == 6 || doorIndex == 7)
+        {
+            return 0;
+        }else{
+            return 3;
+        }
+
+    }
+
+    // returns the vectors for each inside corner
+    public Vector3[,] getInsideCorners(Vector3 roomCentre, int[] doorStates){
 		Vector3[,] corners = new Vector3[4,2];
 		corners [0,0] = roomCentre + new Vector3 (4.75f, 0, 4.75f);
 		corners [1,0] = roomCentre + new Vector3 (4.75f, 0, -4.75f);
