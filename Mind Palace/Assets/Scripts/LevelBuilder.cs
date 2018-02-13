@@ -5,10 +5,12 @@ using UnityEngine;
 public class LevelBuilder : MonoBehaviour {
 	public GameObject room;
 	public GameObject corridor;
+	public GameObject space;
 
 	private GameObject currentRoom;
 	private RoomBuilder roomBuilder;
 	private CorridorBuilder corridorBuilder;
+	private RoomCreator roomCreator;
     private PictureCreator pictureCreator;
 
     // Test loading the first saved Loci in the list of saved Loci files
@@ -65,6 +67,10 @@ public class LevelBuilder : MonoBehaviour {
 		roomBuilder = room.GetComponent<RoomBuilder>();
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
+		roomCreator = space.GetComponent<RoomCreator>();
+
+		int[] spaceDoors = {2, 2, 2, 2};
+		roomCreator.addDoors (spaceDoors);
 
         loadTest(); 
 
