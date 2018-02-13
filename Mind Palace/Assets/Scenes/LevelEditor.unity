@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 134884627}
   - component: {fileID: 134884632}
   m_Layer: 5
-  m_Name: WallAdd (7)
+  m_Name: WallAdd (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1608,7 +1608,7 @@ RectTransform:
   - {fileID: 61500063}
   - {fileID: 420028001}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2843,7 +2843,7 @@ GameObject:
   - component: {fileID: 317714708}
   - component: {fileID: 317714713}
   m_Layer: 5
-  m_Name: WallAdd (3)
+  m_Name: WallAdd (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2934,7 +2934,7 @@ RectTransform:
   - {fileID: 336671985}
   - {fileID: 2056294289}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7070,7 +7070,7 @@ GameObject:
   - component: {fileID: 808061271}
   - component: {fileID: 808061276}
   m_Layer: 5
-  m_Name: WallAdd (9)
+  m_Name: WallAdd (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7161,7 +7161,7 @@ RectTransform:
   - {fileID: 777988171}
   - {fileID: 2145420326}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7595,16 +7595,16 @@ Transform:
   m_Children:
   - {fileID: 1907311080}
   - {fileID: 1001341885}
-  - {fileID: 2136087033}
+  - {fileID: 1792796208}
+  - {fileID: 1520313377}
+  - {fileID: 808061275}
+  - {fileID: 1938755393}
+  - {fileID: 134884631}
+  - {fileID: 2024254336}
   - {fileID: 317714712}
   - {fileID: 1575388295}
   - {fileID: 920849701}
-  - {fileID: 2024254336}
-  - {fileID: 134884631}
-  - {fileID: 1938755393}
-  - {fileID: 808061275}
-  - {fileID: 1520313377}
-  - {fileID: 1792796208}
+  - {fileID: 2136087033}
   m_Father: {fileID: 482155565}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8089,7 +8089,7 @@ GameObject:
   - component: {fileID: 920849697}
   - component: {fileID: 920849702}
   m_Layer: 5
-  m_Name: WallAdd (5)
+  m_Name: WallAdd (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8180,7 +8180,7 @@ RectTransform:
   - {fileID: 145744581}
   - {fileID: 444869826}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 5
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12734,7 +12734,7 @@ GameObject:
   - component: {fileID: 1520313373}
   - component: {fileID: 1520313378}
   m_Layer: 5
-  m_Name: WallAdd (10)
+  m_Name: WallAdd (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12825,7 +12825,7 @@ RectTransform:
   - {fileID: 1124953931}
   - {fileID: 1159347222}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 10
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13453,7 +13453,7 @@ GameObject:
   - component: {fileID: 1575388291}
   - component: {fileID: 1575388296}
   m_Layer: 5
-  m_Name: WallAdd (4)
+  m_Name: WallAdd (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13544,7 +13544,7 @@ RectTransform:
   - {fileID: 1082167870}
   - {fileID: 1166686192}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15312,7 +15312,7 @@ GameObject:
   - component: {fileID: 1792796204}
   - component: {fileID: 1792796209}
   m_Layer: 5
-  m_Name: WallAdd (11)
+  m_Name: WallAdd (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15403,7 +15403,7 @@ RectTransform:
   - {fileID: 313693332}
   - {fileID: 1614187099}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 11
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16538,7 +16538,7 @@ GameObject:
   - component: {fileID: 1938755389}
   - component: {fileID: 1938755394}
   m_Layer: 5
-  m_Name: WallAdd (8)
+  m_Name: WallAdd (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16629,7 +16629,7 @@ RectTransform:
   - {fileID: 1816177921}
   - {fileID: 1811082331}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17507,7 +17507,7 @@ GameObject:
   - component: {fileID: 2024254332}
   - component: {fileID: 2024254337}
   m_Layer: 5
-  m_Name: WallAdd (6)
+  m_Name: WallAdd (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17598,7 +17598,7 @@ RectTransform:
   - {fileID: 201715745}
   - {fileID: 781672834}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18522,7 +18522,7 @@ GameObject:
   - component: {fileID: 2136087029}
   - component: {fileID: 2136087034}
   m_Layer: 5
-  m_Name: WallAdd (2)
+  m_Name: WallAdd (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18613,7 +18613,7 @@ RectTransform:
   - {fileID: 47206263}
   - {fileID: 4404383}
   m_Father: {fileID: 850851257}
-  m_RootOrder: 2
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

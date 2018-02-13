@@ -30,7 +30,7 @@ public class RoomBuilder : MonoBehaviour {
 		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
 		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 	}
-    public void addPlusSigns(Vector3 roomCentre)
+    public void addPlusSigns(Vector3 roomCentre, int DoorIndex)
     {
         component = Instantiate(
             EditorButtons,
@@ -41,9 +41,30 @@ public class RoomBuilder : MonoBehaviour {
         for (int i = 0; i < PlusSigns.Length; i++)
         {
             PlusSigns[i].GetComponent<subMenuButtons>().currentRoomCenter = roomCentre;
+            PlusSigns[i].GetComponent<subMenuButtons>().DefaultState();
+            PlusSigns[CalcOppositeDoorIndex(DoorIndex)].GetComponent<subMenuButtons>().HideAll();
         }
         print(PlusSigns.Length);
         component.SetActive(true);
+    }
+
+    public int CalcOppositeDoorIndex(int doorIndex)
+    {
+        if(doorIndex==11 || doorIndex == 0|| doorIndex == 1)
+        {
+            return 6;
+        }
+        else if (doorIndex == 2 || doorIndex == 3 || doorIndex == 4)
+        {
+            return 9;
+        }
+        else if (doorIndex == 5 || doorIndex == 6 || doorIndex == 7)
+        {
+            return 0;
+        }else{
+            return 3;
+        }
+
     }
 
     // returns the vectors for each inside corner
