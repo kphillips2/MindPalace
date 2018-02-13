@@ -297,7 +297,6 @@
     <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
     <None Include="Assets\Prefabs\Downloaded Packs\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
     <None Include="Assets\Resources\test.txt" />
-    <None Include="Assets\Scripts\ColorfulButtons\Credits.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
