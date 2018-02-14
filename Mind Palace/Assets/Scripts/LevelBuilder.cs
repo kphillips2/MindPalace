@@ -69,7 +69,7 @@ public class LevelBuilder : MonoBehaviour {
         pictureCreator = new PictureCreator();
 		roomCreator = space.GetComponent<RoomCreator>();
 
-		int[] spaceDoors = {2, 2, 2, 2};
+		int[] spaceDoors = {1, 2, 2, 2};
 		roomCreator.addDoors (spaceDoors);
 
         loadTest(); 

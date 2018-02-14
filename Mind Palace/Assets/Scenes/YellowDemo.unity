@@ -1218,7 +1218,7 @@ Transform:
   m_GameObject: {fileID: 244690162}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1585812479}
   m_Father: {fileID: 0}
@@ -1950,9 +1950,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 406507524}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1293450481}
   - {fileID: 1574344660}
   - {fileID: 827535833}
   - {fileID: 869910840}
@@ -3699,7 +3700,7 @@ Transform:
   m_Children:
   - {fileID: 2010509368}
   m_Father: {fileID: 406507525}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832690325
 GameObject:
@@ -4039,7 +4040,7 @@ Transform:
   m_Children:
   - {fileID: 1471616744}
   m_Father: {fileID: 406507525}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &869910841
 MonoBehaviour:
@@ -6111,6 +6112,56 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1293450480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1293450481}
+  - component: {fileID: 1293450483}
+  - component: {fileID: 1293450482}
+  m_Layer: 0
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1293450481
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293450480}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 406507525}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1293450482
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293450480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 0.25
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1293450483
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1293450480}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1297103434
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,7 +7374,7 @@ Transform:
   m_Children:
   - {fileID: 354711202}
   m_Father: {fileID: 406507525}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1515763106
 MonoBehaviour:
@@ -7814,7 +7865,7 @@ RectTransform:
   - {fileID: 1169759099}
   - {fileID: 58962871}
   m_Father: {fileID: 406507525}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8809,7 +8860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04101513ece37524797428a93f9acdc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionDetector: 0
+  collisionDetector: 2
   ignoreTriggerColliders: 0
   rewindDelay: 0.5
   pushbackDistance: 0.5
@@ -8857,7 +8908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreTriggerColliders: 0
-  colliderRadius: 0.1
+  colliderRadius: 0.2
   targetListPolicy: {fileID: 0}
   headsetColliding: 0
   collidingWith: {fileID: 0}
@@ -8914,7 +8965,7 @@ MonoBehaviour:
   enableBodyCollisions: 1
   ignoreGrabbedCollisions: 1
   ignoreCollisionsWith: []
-  headsetYOffset: 0.2
+  headsetYOffset: 0.5
   movementThreshold: 0.0015
   playAreaMovementThreshold: 0.00075
   standingHistorySamples: 5
@@ -8930,7 +8981,7 @@ MonoBehaviour:
   gravityFallYThreshold: 0.15
   blinkYThreshold: 0.15
   floorHeightTolerance: 0.001
-  fallCheckPrecision: 5
+  fallCheckPrecision: 2
   teleporter: {fileID: 0}
   customBodyColliderContainer: {fileID: 0}
   customFootColliderContainer: {fileID: 0}
