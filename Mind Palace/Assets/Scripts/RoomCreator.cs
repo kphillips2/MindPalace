@@ -16,13 +16,29 @@ public class RoomCreator : MonoBehaviour {
 	public GameObject leftWall;
 
 	private const int ROOM_SIZE = 12;
+	private Material floorMat;
+	private Material roofMat;
+	private Material wallMat;
 
 	// Use this for initialization
 	void Start () {
 
 	}
+	// input: three strings which represent the materials for the room
+	public void setMaterials (string floorName, string roofName, string wallName){
+		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
+		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
+		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 
-	public void addDoors(int[] doorStates){
+		floor.GetComponentInChildren<Renderer> ().material = floorMat;
+		roof.GetComponentInChildren<Renderer> ().material = roofMat;
+
+		frontWall.GetComponent<Renderer> ().material = wallMat;
+		rightWall.GetComponentInChildren<Renderer> ().material = wallMat;
+		rearWall.GetComponentInChildren<Renderer> ().material = wallMat;
+		leftWall.GetComponentInChildren<Renderer> ().material = wallMat;
+	}
+	public void addDoor (int wall, float doorLoc){
 		// wall numbers correspond with indices of doorStates
 		// (->) is the start direction
 		//   ----0----
@@ -33,30 +49,18 @@ public class RoomCreator : MonoBehaviour {
 		//  |         |
 		//   ----2----
 
-		// states correspond with values of doorStates
-		// 0 = door inactive
-		// 1 = door left justify
-		// 2 = door centre
-		// 3 = door right justify
-		print("Door states : "+doorStates[0]+", "+doorStates[1]+", "+doorStates[2]+", "+doorStates[3]);
-
-		cut (frontWall, doorStates [0]);
-		//cut (rightWall, doorStates [1]);
-		//cut (rearWall, doorStates [2]);
-		//cut (leftWall, doorStates [3]);
-	}
-	private void cut (GameObject input, int state){
-		switch (state) {
+		switch (wall) {
 		case 1:
-			cutDoor (input, new Vector3 (-ROOM_SIZE/4, -2.5f, 0.125f));
+			cutDoor (rightWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		case 2:
-			cutDoor (input, new Vector3 (0, -2.5f, 0.125f));
+			cutDoor (rearWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		case 3:
-			cutDoor (input, new Vector3 (ROOM_SIZE/4, -2.5f, 0.125f));
+			cutDoor (leftWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		default:
+			cutDoor (frontWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		}
 	}
@@ -72,14 +76,13 @@ public class RoomCreator : MonoBehaviour {
 		// resize the vertices to remove scaling
 		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
 
-		for (int k = 0; k < vectors.Length; k += 2)
-			print (vectors [k] + ", " + vectors [k + 1]);
-
 		input.transform.GetComponent<MeshFilter> ().mesh.Clear ();
 		input.transform.GetComponent<MeshFilter> ().mesh.vertices = vectors;
-		input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles.ToArray();
+		input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles.ToArray ();
 
-		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateNormals ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
 	}
 	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
@@ -132,7 +135,7 @@ public class RoomCreator : MonoBehaviour {
 		vertices.Add(vertices[14]);
 		vertices.Add(vertices[1]);
 		vertices.Add(vertices[15]);
-		
+
 		addFace (triangles, vertices.Count);
 		// end right face
 
@@ -141,7 +144,7 @@ public class RoomCreator : MonoBehaviour {
 		vertices.Add(vertices[5]);
 		vertices.Add(vertices[2]);
 		vertices.Add(vertices[4]);
-		
+
 		addFace (triangles, vertices.Count);
 		// end left face
 
@@ -205,7 +208,7 @@ public class RoomCreator : MonoBehaviour {
 
 		ans.Add(ans[2] + new Vector3 (0, -2 * wallLoc.y, 0));
 		ans.Add(ans[3] + new Vector3 (0, -2 * wallLoc.y, 0));
-		ans.Add(wallLoc + doorLoc + new Vector3 (-1, 0, 0));
+		ans.Add(wallLoc + doorLoc + new Vector3 (-1, -wallLoc.y, 0.125f));
 		ans.Add(ans[6] + new Vector3 (0, 0, -0.25f));
 
 		ans.Add(ans[6] + new Vector3 (0, 4, 0));
