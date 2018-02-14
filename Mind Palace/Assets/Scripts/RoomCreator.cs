@@ -16,13 +16,29 @@ public class RoomCreator : MonoBehaviour {
 	public GameObject leftWall;
 
 	private const int ROOM_SIZE = 12;
+	private Material floorMat;
+	private Material roofMat;
+	private Material wallMat;
 
 	// Use this for initialization
 	void Start () {
 
 	}
+	// input: three strings which represent the materials for the room
+	public void setMaterials (string floorName, string roofName, string wallName){
+		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
+		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
+		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 
-	public void addDoors(int[] doorStates){
+		floor.GetComponent<Renderer> ().material = floorMat;
+		roof.GetComponent<Renderer> ().material = roofMat;
+
+		frontWall.GetComponent<Renderer> ().material = wallMat;
+		rightWall.GetComponent<Renderer> ().material = wallMat;
+		rearWall.GetComponent<Renderer> ().material = wallMat;
+		leftWall.GetComponent<Renderer> ().material = wallMat;
+	}
+	public void addDoor (int wall, float doorLoc){
 		// wall numbers correspond with indices of doorStates
 		// (->) is the start direction
 		//   ----0----
@@ -33,98 +49,47 @@ public class RoomCreator : MonoBehaviour {
 		//  |         |
 		//   ----2----
 
-		// states correspond with values of doorStates
-		// 0 = door inactive
-		// 1 = door left justify
-		// 2 = door centre
-		// 3 = door right justify
-		print("Door states : "+doorStates[0]+", "+doorStates[1]+", "+doorStates[2]+", "+doorStates[3]);
-
-		cut (frontWall, doorStates [0]);
-		//cut (rightWall, doorStates [1]);
-		//cut (rearWall, doorStates [2]);
-		//cut (leftWall, doorStates [3]);
-	}
-	private void cut (GameObject input, int state){
-		switch (state) {
+		switch (wall) {
 		case 1:
-			cutDoor (input, new Vector3 (-3, -2.5f, 0.125f));
+			cutDoor (rightWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		case 2:
-			cutDoor (input, new Vector3 (0, -2.5f, 0.125f));
+			cutDoor (rearWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		case 3:
-			cutDoor (input, new Vector3 (3, -2.5f, 0.125f));
+			cutDoor (leftWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		default:
+			cutDoor (frontWall, new Vector3 (doorLoc, 0, 0));
 			break;
 		}
 	}
-	private Vector3[] getTriangleVertices (GameObject input){
-		Mesh mesh = input.transform.GetComponent<MeshFilter> ().mesh;
-		int[] triangles = mesh.triangles;
-		Vector3[] vertices = mesh.vertices;
-		Vector3[] answer = new Vector3[triangles.Length];
-
-		Vector3 v;
-		Vector3 scale = input.transform.localScale;
-		Vector3 translation = input.transform.localPosition;
-		print ("scale: " + scale+", translation: "+translation+", num triangles: "+triangles.Length/3);
-		for (int k = 0; k < triangles.Length; k++) {
-			v = vertices [triangles [k]];
-			v.Scale (scale);
-			v += translation;
-			answer [k] = v;
-		}
-
-		string test = "triangle: ";
-		for (int k = 0; k < triangles.Length; k += 3)
-			print (test + answer [k] + ", " + answer [k + 1] + ", " + answer [k + 2]);
-		return answer;
-	}
 	private void cutDoor(GameObject input, Vector3 doorLoc){
-		Destroy (input.GetComponent<MeshCollider> ());
+		Destroy (input.GetComponent<BoxCollider> ());
 
-		// get new vertices and their vectors
+		// get new vertices after scaling
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLoc);
-		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
-
 		// create an list for the new triangles
-		int[] triangles = compileTriangles();
-
-		//string test = "triangle: ";
-		//Vector3 s1, s2, N;
-		//for (int k = 0; k < triangles.Length; k += 3) {
-		//	print (test + current [k] + ", " + current [k + 1] + ", " + current [k + 2]);
-		//
-		//	s1 = current [k + 1] - current [k];
-		//	s2 = current [k + 2] - current [k];
-		//	N = Vector3.Cross (s1, s2);
-		//
-		//	if (N.z != 0) {
-		//	} else {
-		//		newTriangles.Add (triangles [k]);
-		//		newTriangles.Add (triangles [k + 1]);
-		//		newTriangles.Add (triangles [k + 2]);
-		//	}
-		//		
-		//}
-
-		for (int k = 0; k < vectors.Length; k += 2)
-			print (vectors [k] + ", " + vectors [k + 1]);
+		List<int> triangles = new List<int> ();
+		// create an list for the new UV map
+		List<Vector2> uvs = new List<Vector2> ();
+		// set triangles and and new vertices
+		compileTriangles(triangles, vertices, uvs);
+		// resize the vertices to remove scaling
+		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
 
 		input.transform.GetComponent<MeshFilter> ().mesh.Clear ();
 		input.transform.GetComponent<MeshFilter> ().mesh.vertices = vectors;
-		input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles;
+		input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles.ToArray ();
+		input.transform.GetComponent<MeshFilter> ().mesh.uv = uvs.ToArray ();
 
-		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateNormals ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
-
-		Vector3[] current = getTriangleVertices (input);
 	}
-	private int[] compileTriangles(){
-		List<int> triangles = new List<int> ();
-
+	private void compileTriangles(List<int> triangles, List<Vector3> vertices, List<Vector2> uvs){
+		// close face
 		triangles.Add (7);
 		triangles.Add (5);
 		triangles.Add (9);
@@ -148,8 +113,109 @@ public class RoomCreator : MonoBehaviour {
 		triangles.Add (15);
 		triangles.Add (13);
 		triangles.Add (11);
+		// end close face
 
-		return triangles.ToArray ();
+		// far face
+		for (int k = 0; k < 18; k+=3){
+			triangles.Add (triangles [k + 2] - 1);
+			triangles.Add (triangles [k + 1] - 1);
+			triangles.Add (triangles [k] - 1);
+		}
+		// end far face
+
+		// right face
+		vertices.Add(vertices[0]);
+		vertices.Add(vertices[14]);
+		vertices.Add(vertices[1]);
+		vertices.Add(vertices[15]);
+
+		addFace (triangles, vertices.Count);
+
+		// door face
+		vertices.Add(vertices[8]);
+		vertices.Add(vertices[6]);
+		vertices.Add(vertices[9]);
+		vertices.Add(vertices[7]);
+
+		addFace (triangles, vertices.Count);
+		// end door face
+		// end right face
+
+		// left face
+		vertices.Add(vertices[3]);
+		vertices.Add(vertices[5]);
+		vertices.Add(vertices[2]);
+		vertices.Add(vertices[4]);
+
+		addFace (triangles, vertices.Count);
+
+		// door face
+		vertices.Add(vertices[11]);
+		vertices.Add(vertices[13]);
+		vertices.Add(vertices[10]);
+		vertices.Add(vertices[12]);
+
+		addFace (triangles, vertices.Count);
+		// end door face
+		// end left face
+
+		// uvs for vertical faces
+		int mark = vertices.Count;
+		for (int k = 0; k < mark; k++) {
+			uvs.Add (new Vector2(vertices [k].x, vertices [k].y));
+		}
+		// end uvs for vertical faces
+
+		// top face
+		vertices.Add(vertices[0]);
+		vertices.Add(vertices[1]);
+		vertices.Add(vertices[2]);
+		vertices.Add(vertices[3]);
+
+		addFace (triangles, vertices.Count);
+		// end top face
+
+		// bottom faces
+		vertices.Add(vertices[7]);
+		vertices.Add(vertices[6]);
+		vertices.Add(vertices[5]);
+		vertices.Add(vertices[4]);
+
+		addFace (triangles, vertices.Count);
+
+		vertices.Add(vertices[15]);
+		vertices.Add(vertices[14]);
+		vertices.Add(vertices[13]);
+		vertices.Add(vertices[12]);
+
+		addFace (triangles, vertices.Count);
+
+		// door face
+		vertices.Add(vertices[11]);
+		vertices.Add(vertices[10]);
+		vertices.Add(vertices[9]);
+		vertices.Add(vertices[8]);
+
+		addFace (triangles, vertices.Count);
+		// end door face
+		// end bottom faces
+
+		// uvs for horizontal faces
+		for (int k = mark; k < vertices.Count; k++) {
+			uvs.Add (new Vector2(vertices [k].x, vertices [k].z));
+		}
+		// end uvs for horizontal faces
+	}
+	private void addFace(List<int> triangles, int size){
+		size -= 4;
+
+		triangles.Add (size + 0);
+		triangles.Add (size + 1);
+		triangles.Add (size + 3);
+
+		triangles.Add (size + 3);
+		triangles.Add (size + 2);
+		triangles.Add (size + 0);
 	}
 	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3 doorLoc){
 		List<Vector3> ans = new List<Vector3> ();
@@ -161,7 +227,7 @@ public class RoomCreator : MonoBehaviour {
 
 		ans.Add(ans[2] + new Vector3 (0, -2 * wallLoc.y, 0));
 		ans.Add(ans[3] + new Vector3 (0, -2 * wallLoc.y, 0));
-		ans.Add(wallLoc + doorLoc + new Vector3 (-1, 0, 0));
+		ans.Add(wallLoc + doorLoc + new Vector3 (-1, -wallLoc.y, 0.125f));
 		ans.Add(ans[6] + new Vector3 (0, 0, -0.25f));
 
 		ans.Add(ans[6] + new Vector3 (0, 4, 0));

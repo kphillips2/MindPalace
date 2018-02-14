@@ -5,10 +5,12 @@ using UnityEngine;
 public class LevelEditorBuilder : MonoBehaviour {
 	public GameObject room;
 	public GameObject corridor;
+	public GameObject space;
 
 	private GameObject currentRoom;
 	private RoomBuilder roomBuilder;
 	private CorridorBuilder corridorBuilder;
+	private RoomCreator roomCreator;
     private PictureCreator pictureCreator;
 
     // Use this for initialization
@@ -17,6 +19,17 @@ public class LevelEditorBuilder : MonoBehaviour {
 		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
         pictureCreator = new PictureCreator();
 
+		roomCreator = space.GetComponent<RoomCreator>();
+		roomCreator.addDoor (0, -3);
+		roomCreator.addDoor (1, 0);
+		roomCreator.addDoor (2, -3);
+		roomCreator.addDoor (3, 3);
+
+		roomCreator.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
         
         int[] roomDoors = {1, 1, 1, 1};
 		Vector3 centre = new Vector3(0, 0, 0);
