@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/LevelEditor.unity
-=======
-- path: Assets/Scenes/YellowDemo.unity
->>>>>>> 65c2bd1a0c616edd3a325acaecb17cea4cceb4e3
   isLoaded: 1
   isActive: 1
