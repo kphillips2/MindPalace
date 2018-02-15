@@ -37,6 +37,11 @@ public class RoomCreator : MonoBehaviour {
 		rightWall.GetComponent<Renderer> ().material = wallMat;
 		rearWall.GetComponent<Renderer> ().material = wallMat;
 		leftWall.GetComponent<Renderer> ().material = wallMat;
+
+		//frontWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
+		//rightWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
+		//rearWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
+		//leftWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
 	}
 	public void addDoor (int wall, float doorLoc){
 		// wall numbers correspond with indices of doorStates
@@ -71,12 +76,14 @@ public class RoomCreator : MonoBehaviour {
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLoc);
 		// create an list for the new triangles
 		List<int> triangles = new List<int> ();
-		// create an list for the new UV map
-		List<Vector2> uvs = new List<Vector2> ();
 		// set triangles and and new vertices
-		compileTriangles(triangles, vertices, uvs);
+		compileTriangles(triangles, vertices);
 		// resize the vertices to remove scaling
 		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
+		// create an list for the new UV map
+		List<Vector2> uvs = new List<Vector2> ();
+		for (int k = 0; k < vectors.Length; k++)
+			uvs.Add (new Vector2(vectors [k].x, vectors [k].y));
 
 		input.transform.GetComponent<MeshFilter> ().mesh.Clear ();
 		input.transform.GetComponent<MeshFilter> ().mesh.vertices = vectors;
@@ -88,7 +95,7 @@ public class RoomCreator : MonoBehaviour {
 		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
 	}
-	private void compileTriangles(List<int> triangles, List<Vector3> vertices, List<Vector2> uvs){
+	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		// close face
 		triangles.Add (7);
 		triangles.Add (5);
@@ -123,7 +130,7 @@ public class RoomCreator : MonoBehaviour {
 		}
 		// end far face
 
-		// right face
+		// right faces
 		vertices.Add(vertices[0]);
 		vertices.Add(vertices[14]);
 		vertices.Add(vertices[1]);
@@ -139,9 +146,9 @@ public class RoomCreator : MonoBehaviour {
 
 		addFace (triangles, vertices.Count);
 		// end door face
-		// end right face
+		// end right faces
 
-		// left face
+		// left faces
 		vertices.Add(vertices[3]);
 		vertices.Add(vertices[5]);
 		vertices.Add(vertices[2]);
@@ -157,14 +164,7 @@ public class RoomCreator : MonoBehaviour {
 
 		addFace (triangles, vertices.Count);
 		// end door face
-		// end left face
-
-		// uvs for vertical faces
-		int mark = vertices.Count;
-		for (int k = 0; k < mark; k++) {
-			uvs.Add (new Vector2(vertices [k].x, vertices [k].y));
-		}
-		// end uvs for vertical faces
+		// end left faces
 
 		// top face
 		vertices.Add(vertices[0]);
@@ -199,12 +199,6 @@ public class RoomCreator : MonoBehaviour {
 		addFace (triangles, vertices.Count);
 		// end door face
 		// end bottom faces
-
-		// uvs for horizontal faces
-		for (int k = mark; k < vertices.Count; k++) {
-			uvs.Add (new Vector2(vertices [k].x, vertices [k].z));
-		}
-		// end uvs for horizontal faces
 	}
 	private void addFace(List<int> triangles, int size){
 		size -= 4;
