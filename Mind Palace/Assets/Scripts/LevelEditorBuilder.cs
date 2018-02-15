@@ -22,7 +22,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 		roomCreator = space.GetComponent<RoomCreator>();
 		roomCreator.addDoor (0, -3);
 		roomCreator.addDoor (1, 0);
-		roomCreator.addDoor (2, -3);
+		//roomCreator.addDoor (2, -3);
 		roomCreator.addDoor (3, 3);
 
 		roomCreator.setMaterials (
