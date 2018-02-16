@@ -15,7 +15,7 @@ public class RoomCreator : MonoBehaviour {
 	// negative x
 	public GameObject leftWall;
 
-	private const int ROOM_SIZE = 12;
+	private int ROOM_SIZE = 12;
 	private Material floorMat;
 	private Material roofMat;
 	private Material wallMat;
@@ -33,15 +33,18 @@ public class RoomCreator : MonoBehaviour {
 		floor.GetComponent<Renderer> ().material = floorMat;
 		roof.GetComponent<Renderer> ().material = roofMat;
 
+		floor.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		roof.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+
 		frontWall.GetComponent<Renderer> ().material = wallMat;
 		rightWall.GetComponent<Renderer> ().material = wallMat;
 		rearWall.GetComponent<Renderer> ().material = wallMat;
 		leftWall.GetComponent<Renderer> ().material = wallMat;
 
-		//frontWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
-		//rightWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
-		//rearWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
-		//leftWall.GetComponent<Renderer> ().material.SetTextureScale("_MainTex", new Vector2(2f, 2f));
+		frontWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		rightWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		rearWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		leftWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
 	}
 	public void addDoor (int wall, float doorLoc){
 		// wall numbers correspond with indices of doorStates
@@ -237,7 +240,7 @@ public class RoomCreator : MonoBehaviour {
 		return ans;
 	}
 	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
-		Vector3[] answer = vertices.ToArray();
+		Vector3[] answer = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
 		Vector3 v;
 		for (int k = 0; k < vertices.Count; k++){

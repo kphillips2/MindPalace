@@ -20,6 +20,7 @@ public class LevelEditorBuilder : MonoBehaviour {
         pictureCreator = new PictureCreator();
 
 		roomCreator = space.GetComponent<RoomCreator>();
+		// input: index, loc (-6)------------(6)
 		roomCreator.addDoor (0, -3);
 		roomCreator.addDoor (1, 0);
 		//roomCreator.addDoor (2, -3);
