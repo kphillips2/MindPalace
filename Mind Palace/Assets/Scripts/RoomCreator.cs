@@ -30,21 +30,17 @@ public class RoomCreator : MonoBehaviour {
 		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
 		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 
+		floorMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		roofMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+		wallMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+
 		floor.GetComponent<Renderer> ().material = floorMat;
 		roof.GetComponent<Renderer> ().material = roofMat;
-
-		floor.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		roof.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
 
 		frontWall.GetComponent<Renderer> ().material = wallMat;
 		rightWall.GetComponent<Renderer> ().material = wallMat;
 		rearWall.GetComponent<Renderer> ().material = wallMat;
 		leftWall.GetComponent<Renderer> ().material = wallMat;
-
-		frontWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		rightWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		rearWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		leftWall.GetComponent<Renderer> ().material.mainTexture.wrapMode = TextureWrapMode.Repeat;
 	}
 	public void addDoor (int wall, float doorLoc){
 		// wall numbers correspond with indices of doorStates
