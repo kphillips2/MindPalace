@@ -8,9 +8,9 @@ public class LevelBuilder : MonoBehaviour {
 	public GameObject space;
 
 	private GameObject currentRoom;
-	private RoomBuilder roomBuilder;
-	private CorridorBuilder corridorBuilder;
-	private RoomCreator roomCreator;
+	private OldRoom oldRoom;
+	private OldCorridor oldCorridor;
+	private RoomBuilder roomCreator;
 	private PictureCreator pictureCreator;
 
 	// Test loading the first saved Loci in the list of saved Loci files
@@ -39,7 +39,7 @@ public class LevelBuilder : MonoBehaviour {
 
 			try
 			{
-				roomBuilder.setMaterials(m[0], m[1], m[2]);
+				oldRoom.setMaterials(m[0], m[1], m[2]);
 				addRoom(new Vector3(ce[0], ce[1], ce[2]), d);
 				hangPictures(new Vector3(ce[0], ce[1], ce[2]), d);
 			}
@@ -55,7 +55,7 @@ public class LevelBuilder : MonoBehaviour {
 
 			try
 			{
-				corridorBuilder.setMaterials(m[0], m[1], m[2]);
+				oldCorridor.setMaterials(m[0], m[1], m[2]);
 				addCorridor(new Vector3(ce[0], ce[1], ce[2]), d, c.getAngle());
 			}
 			catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
@@ -64,21 +64,21 @@ public class LevelBuilder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		roomBuilder = room.GetComponent<RoomBuilder>();
-		corridorBuilder = corridor.GetComponent<CorridorBuilder>();
+		oldRoom = room.GetComponent<OldRoom>();
+		oldCorridor = corridor.GetComponent<OldCorridor>();
 		pictureCreator = new PictureCreator();
 
-		roomCreator = space.GetComponent<RoomCreator>();
-		roomCreator.addDoor (0, -3);
-		roomCreator.addDoor (1, 0);
-		roomCreator.addDoor (2, -3);
-		roomCreator.addDoor (3, 3);
-
-		roomCreator.setMaterials (
-			"Wood Texture 06", // floor material
-			"Wood Texture 15", // roof material
-			"Wood texture 12"  // wall material
-		);
+		//roomCreator = space.GetComponent<RoomCreator>();
+		//roomCreator.addDoor (0, -3);
+		//roomCreator.addDoor (1, 0);
+		//roomCreator.addDoor (2, -3);
+		//roomCreator.addDoor (3, 3);
+		//
+		//roomCreator.setMaterials (
+		//	"Wood Texture 06", // floor material
+		//	"Wood Texture 15", // roof material
+		//	"Wood texture 12"  // wall material
+		//);
 
 		loadTest(); 
 
@@ -86,14 +86,14 @@ public class LevelBuilder : MonoBehaviour {
         int[] roomDoors = {1, 1, 1, 0};
 		Vector3 centre = new Vector3(0, 0, 0);
 
-		roomBuilder.setMaterials (
+		oldRoom.setMaterials (
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
 		);
-		roomBuilder.addFloor (centre);
-		roomBuilder.addRoof (centre);
-		roomBuilder.addWalls(
+		oldRoom.addFloor (centre);
+		oldRoom.addRoof (centre);
+		oldRoom.addWalls(
 			centre,
 			roomDoors
 		);
@@ -109,24 +109,24 @@ public class LevelBuilder : MonoBehaviour {
 			1			//left end wall
 		};
 		centre = new Vector3 (20, 0, 0);
-		corridorBuilder.setMaterials (
+		oldCorridor.setMaterials (
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
 		);
-		corridorBuilder.addFloor (
+		oldCorridor.addFloor (
 			centre, 0
 		);
-		corridorBuilder.addRoof (
+		oldCorridor.addRoof (
 			centre, 0
 		);
-		corridorBuilder.addWalls (
+		oldCorridor.addWalls (
 			centre, corridorDoors, 0
 		);
 
 		corridorDoors = new int[]{0, 0, 0, 1, 0, 1, 0, 1};
 		centre = new Vector3 (20, 0, 17.5f);
-		corridorBuilder.setMaterials (
+		oldCorridor.setMaterials (
 			"Bricks1", // floor material
 			"Wood Texture 05", // roof material
 			"Wood texture 06"  // wall material
@@ -153,7 +153,7 @@ public class LevelBuilder : MonoBehaviour {
 		//add pictures
 		hangPictures(centre, roomDoors);
 
-		roomBuilder.setMaterials (
+		oldRoom.setMaterials (
 			"Bricks1", // floor material
 			"Wood Texture 05", // roof material
 			"Wood texture 06"  // wall material
@@ -178,23 +178,23 @@ public class LevelBuilder : MonoBehaviour {
 		hangPictures(centre, roomDoors);
 	}
 	private void addRoom(Vector3 roomCentre, int[] doorStates){
-		roomBuilder.addFloor (roomCentre);
-		roomBuilder.addRoof (roomCentre);
-		roomBuilder.addWalls (
+		oldRoom.addFloor (roomCentre);
+		oldRoom.addRoof (roomCentre);
+		oldRoom.addWalls (
 			roomCentre,
 			doorStates
 		);
 	}
 	private void addCorridor(Vector3 roomCentre, int[] doorStates, int angle){
-		corridorBuilder.addFloor (
+		oldCorridor.addFloor (
 			roomCentre,
 			angle
 		);
-		corridorBuilder.addRoof (
+		oldCorridor.addRoof (
 			roomCentre,
 			angle
 		);
-		corridorBuilder.addWalls (
+		oldCorridor.addWalls (
 			roomCentre,
 			doorStates,
 			angle
