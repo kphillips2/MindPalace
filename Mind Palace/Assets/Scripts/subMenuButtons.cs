@@ -6,7 +6,7 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject room;
     public Vector3 currentRoomCenter;
     private Vector3 newRoomCentre;
-    private RoomBuilder roomBuilder;
+    private OldRoom oldRoom;
     public GameObject ClickedOn;
     public GameObject RoomButton;
     public GameObject Window;
@@ -14,7 +14,7 @@ public class subMenuButtons : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        roomBuilder = room.GetComponent<RoomBuilder>();
+		oldRoom = room.GetComponent<OldRoom>();
     }
 	
 	// Update is called once per frame
@@ -121,7 +121,7 @@ public class subMenuButtons : MonoBehaviour {
             print("nowhere?");
         }
         print(buttonCenter);
-        roomBuilder.setMaterials(
+		oldRoom.setMaterials(
             "Wood Texture 06", // floor material
             "Wood Texture 15", // roof material
             "Wood texture 12"  // wall material
@@ -133,10 +133,10 @@ public class subMenuButtons : MonoBehaviour {
     }
     private void buildRoom(Vector3 newRoomCentre, int[] doorStates, int doorIndexParam)
     {
-        roomBuilder.addFloor(newRoomCentre);
-        roomBuilder.addRoof(newRoomCentre);
-        roomBuilder.addPlusSigns(newRoomCentre, doorIndexParam);
-        roomBuilder.addWalls(
+		oldRoom.addFloor(newRoomCentre);
+		oldRoom.addRoof(newRoomCentre);
+		oldRoom.addPlusSigns(newRoomCentre, doorIndexParam);
+		oldRoom.addWalls(
             newRoomCentre,
             doorStates
         );
