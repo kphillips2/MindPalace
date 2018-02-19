@@ -10,7 +10,7 @@ public class LevelBuilder : MonoBehaviour {
 	private GameObject currentRoom;
 	private OldRoom oldRoom;
 	private OldCorridor oldCorridor;
-	private RoomBuilder roomCreator;
+	private RoomCreator roomCreator;
 	private PictureCreator pictureCreator;
 
 	// Test loading the first saved Loci in the list of saved Loci files
@@ -68,17 +68,17 @@ public class LevelBuilder : MonoBehaviour {
 		oldCorridor = corridor.GetComponent<OldCorridor>();
 		pictureCreator = new PictureCreator();
 
-		//roomCreator = space.GetComponent<RoomCreator>();
-		//roomCreator.addDoor (0, -3);
-		//roomCreator.addDoor (1, 0);
-		//roomCreator.addDoor (2, -3);
-		//roomCreator.addDoor (3, 3);
-		//
-		//roomCreator.setMaterials (
-		//	"Wood Texture 06", // floor material
-		//	"Wood Texture 15", // roof material
-		//	"Wood texture 12"  // wall material
-		//);
+		roomCreator = space.GetComponent<RoomCreator>();
+		roomCreator.addDoor (0, -3);
+		roomCreator.addDoor (1, 0);
+		roomCreator.addDoor (2, -3);
+		roomCreator.addDoor (3, 3);
+		
+		roomCreator.setMaterials (
+			"Wood Texture 06", // floor material
+			"Wood Texture 15", // roof material
+			"Wood texture 12"  // wall material
+		);
 
 		loadTest(); 
 
