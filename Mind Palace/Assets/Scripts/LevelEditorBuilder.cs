@@ -15,7 +15,6 @@ public class LevelEditorBuilder : MonoBehaviour {
     // Use this for initialization
     void Start () {
         pictureCreator = new PictureCreator();
-
 		roomBuilder = space.GetComponent<RoomCreator>();
         /*
 		// input: index, loc (-6)------------(6)
