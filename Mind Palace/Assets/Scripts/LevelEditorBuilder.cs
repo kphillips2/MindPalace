@@ -19,12 +19,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 		oldRoom = room.GetComponent<OldRoom>();
 		oldCorridor = corridor.GetComponent<OldCorridor>();
         pictureCreator = new PictureCreator();
-<<<<<<< HEAD
-		roomBuilder = space.GetComponent<RoomCreator>();
-=======
-
 		roomCreator = space.GetComponent<RoomCreator>();
->>>>>>> parent of afe92dcb... fixedPlusSignIBroke
         /*
 		// input: index, loc (-6)------------(6)
 		roomCreator.addDoor (0, -3);
