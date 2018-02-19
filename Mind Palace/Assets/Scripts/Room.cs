@@ -26,6 +26,17 @@ public class Room {
         else this.materials = materials;
     }
 
+    public Room(int[] roomDoors, Vector3 centre, string[] materials)
+    {
+        if (roomDoors.Length != 4) Debug.Log("Error: roomDoors array length must be 4");
+        else this.roomDoors = roomDoors;
+
+        this.centre = new float[] { centre.x, centre.y, centre.z};
+
+        if (materials.Length != 3) Debug.Log("Error: materials array length must be 3");
+        else this.materials = materials;
+    }
+
     // Getters
     public int[] getRoomDoors() { return roomDoors; }
     public float[] getCentre() { return centre; }

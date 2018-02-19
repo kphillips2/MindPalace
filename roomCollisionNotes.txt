@@ -1,0 +1,43 @@
+When user first enters level editor (and they're making a brand new palace):
+
+SaveLoad.currentLoci = new Loci("New Loci's name");
+Room r = new Room(door arrangement of starting room, center of starting room, string array of materials for starting room);
+SaveLoad.currentLoci.addRoom(r);
+
+To find out if a room can be placed:
+
+bool canBePlaced = RoomCollision.canRoomBePlaced(center of new room);
+-> If returns true, you can place a room there
+
+When building the new room, add new room to save file:
+
+Room r = new Room(doors of new room, center of new room, materials of new room);
+SaveLoad.currentLoci.addRoom(r);
+
+Also, need to save the new door configuration of the room/corridor you were building off of. For this, I could make functions
+that look something like this:
+
+SaveLoad.currentLoci.updateRoomAt(center of the updated room, something to indicate the door change) 
+AND SaveLoad.currentLoci.updateCorridorAt(center of the updated corridor, something to indicate the door change)
+
+where the door change could be indicated by passing the new int[] array or passing an integer that corresponds to the changed door
+
+To find out if a corridor can be placed:
+
+bool canBePlaced = RoomCollision.canCorridorBePlaced(center of new corridor, angle of new corridor);
+
+When building the new corridor, add new corridor to save file:
+
+Corridor c = new Corridor(doors of new corridor, center of new corridor, materials of new corridor, angle of new corridor);
+SaveLoad.currentLoci.addCorridor(c);
+
+Like with new rooms, will also want to update doors of the room/corridor that is being built off of
+
+
+
+****************** CURRENT ASSUMPTIONS BEING MADE BY SAVEFILE/ROOMCOLLISION *********************
+- room doors are stored as a int[] of length 4 
+- corridor doors are stored as a int[] of length 8
+- room/corridor materials are stored as a string[] of length 3
+- ALL rooms in scene are 10x10
+- ALL corridors in scene are 5x30
