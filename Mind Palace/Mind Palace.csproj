@@ -236,7 +236,6 @@
     <Compile Include="Assets\Scripts\Old\OldCorridor.cs" />
     <Compile Include="Assets\Scripts\Old\OldRoom.cs" />
     <Compile Include="Assets\Scripts\Old\RoomCreator.cs" />
-    <Compile Include="Assets\Scripts\Old\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
     <Compile Include="Assets\Scripts\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
@@ -249,6 +248,7 @@
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\subMenuButtons.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
+    <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />
     <Compile Include="Assets\Scripts\WavySprite.cs" />
     <Compile Include="Assets\Scripts\WavySpriteEditor.cs" />
