@@ -610,7 +610,6 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ColorfulButtons\Credits.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
     <None Include="Assets\Meshes\WavySprite.shader" />
     <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
@@ -627,6 +626,7 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
     <None Include="Assets\SteamVR\readme.txt" />
+    <None Include="Assets\UI\ColorfulButtons\Credits.txt" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\AdaptiveQualityDebugVisualization.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\TransparentFresnelBehind.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\UIOverlay.shader" />

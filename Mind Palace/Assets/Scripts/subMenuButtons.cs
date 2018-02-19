@@ -19,6 +19,7 @@ public class subMenuButtons : MonoBehaviour {
     void Start () {
         roomCreator = room.GetComponent<RoomCreator>();
         roomBuilder = level.GetComponent<LevelEditorBuilder>();
+        
     }
 
     public void ShowMoreOptions()
