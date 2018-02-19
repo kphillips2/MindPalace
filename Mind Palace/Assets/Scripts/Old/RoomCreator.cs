@@ -19,9 +19,10 @@ public class RoomCreator : MonoBehaviour {
 	private Material floorMat;
 	private Material roofMat;
 	private Material wallMat;
+    private GameObject component;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
 	}
 	// input: three strings which represent the materials for the room
@@ -247,8 +248,8 @@ public class RoomCreator : MonoBehaviour {
 		return answer;
 	}
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 
 	}
 }

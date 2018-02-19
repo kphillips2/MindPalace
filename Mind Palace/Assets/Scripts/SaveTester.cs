@@ -58,7 +58,7 @@ public class SaveTester : MonoBehaviour {
         int[] doors = new int[] { 1, 1, 1, 0 };
         float[] centre = new float[] { 0, 0, 0 };
         string[] materials = new string[] { "Wood Texture 06", "Wood Texture 15", "Wood texture 12" };
-        Room r = new Room(doors, centre, materials);
+        Room r = new Room(doors, new Vector3(0, 0, 0), materials);
         SaveLoad.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 0, 0, 10 };
@@ -74,7 +74,7 @@ public class SaveTester : MonoBehaviour {
 
         doors = new int[] { 0, 1, 1, 0, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 0 };
-        Corridor c = new Corridor(doors, centre, materials, 0);
+        Corridor c = new Corridor(doors, new Vector3(20, 0, 0), materials, 0);
         SaveLoad.currentLoci.addCorridor(c);
 
         materials = new string[] { "Bricks1", "Wood Texture 05", "Wood texture 06" };

@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class subMenuButtons : MonoBehaviour {
     public GameObject room;
+    public GameObject level;
+
     public Vector3 currentRoomCenter;
-    private Vector3 newRoomCentre;
-    private OldRoom oldRoom;
     public GameObject ClickedOn;
     public GameObject RoomButton;
     public GameObject Window;
     public GameObject Picture;
 
-    // Use this for initialization
+    private Vector3 newRoomCentre;
+    private RoomCreator roomCreator;
+    private LevelEditorBuilder roomBuilder;
+
     void Start () {
-		oldRoom = room.GetComponent<OldRoom>();
+        roomCreator = room.GetComponent<RoomCreator>();
+        roomBuilder = level.GetComponent<LevelEditorBuilder>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void ShowMoreOptions()
     {
@@ -49,6 +48,7 @@ public class subMenuButtons : MonoBehaviour {
     {
         Vector3 buttonCenter = this.transform.position;
         int doorIndex = -1;
+        int wallIndex = -1;
         print(buttonCenter.x + "=X");
         print(buttonCenter.z + "=Z");
         if (buttonCenter.x>=4.6f + currentRoomCenter.x)
@@ -56,16 +56,19 @@ public class subMenuButtons : MonoBehaviour {
             if (buttonCenter.z == 0f + currentRoomCenter.z)
             {
                 doorIndex = 3;
-                newRoomCentre = new Vector3(10, 0, 0);
+                wallIndex = 1;
+                newRoomCentre = new Vector3(12, 0, 0);
             }
             else if (buttonCenter.z > 0f + currentRoomCenter.z)
             {
                 doorIndex = 2;
-                newRoomCentre = new Vector3(10, 0, 3);
+                wallIndex = 1;
+                newRoomCentre = new Vector3(12, 0, 4);
             } else if (buttonCenter.z < 0f + currentRoomCenter.z)
             {
                 doorIndex = 4;
-                newRoomCentre = new Vector3(10, 0, -3);
+                wallIndex = 1;
+                newRoomCentre = new Vector3(12, 0, -4);
             }
         }
         else if (buttonCenter.x <= -4.6f+ currentRoomCenter.x)
@@ -73,15 +76,18 @@ public class subMenuButtons : MonoBehaviour {
             if (buttonCenter.z == 0f + currentRoomCenter.z)
             {
                 doorIndex = 9;
-                newRoomCentre = new Vector3(-10, 0, 0);
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-12, 0, 0);
             }else if (buttonCenter.z > 0f + currentRoomCenter.z)
             {
                 doorIndex = 10;
-                newRoomCentre = new Vector3(-10, 0, 3);
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-12, 0, 4);
             }else if (buttonCenter.z < 0f + currentRoomCenter.z)
             {
                 doorIndex = 8;
-                newRoomCentre = new Vector3(-10, 0, -3);
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-12, 0, -4);
             }
         }
         else if (buttonCenter.z >= 4.6f+ currentRoomCenter.z)
@@ -89,15 +95,18 @@ public class subMenuButtons : MonoBehaviour {
             if (buttonCenter.x == 0f + currentRoomCenter.x)
             {
                 doorIndex = 0;
-                newRoomCentre = new Vector3(0, 0, 10);
+                wallIndex = 0;
+                newRoomCentre = new Vector3(0, 0, 12);
             }else if (buttonCenter.x > 0f + currentRoomCenter.x)
             {
                 doorIndex = 1;
-                newRoomCentre = new Vector3(3, 0, 10);
+                wallIndex = 0;
+                newRoomCentre = new Vector3(4, 0, 12);
             }else if (buttonCenter.x < 0f + currentRoomCenter.x)
             {
                 doorIndex = 11;
-                newRoomCentre = new Vector3(-3, 0, 10);
+                wallIndex = 0;
+                newRoomCentre = new Vector3(-4, 0, 12);
             }
         }
         else if (buttonCenter.z <= -4.6f+ currentRoomCenter.z)
@@ -105,15 +114,18 @@ public class subMenuButtons : MonoBehaviour {
             if (buttonCenter.x == 0f + currentRoomCenter.x)
             {
                 doorIndex = 6;
-                newRoomCentre = new Vector3(0, 0, -10);
+                wallIndex = 2;
+                newRoomCentre = new Vector3(0, 0, -12);
             }else if (buttonCenter.x > 0f + currentRoomCenter.x)
             {
                 doorIndex = 5;
-                newRoomCentre = new Vector3(3, 0, -10);
+                wallIndex = 2;
+                newRoomCentre = new Vector3(4, 0, -12);
             }else if (buttonCenter.x < 0f + currentRoomCenter.x)
             {
                 doorIndex = 7;
-                newRoomCentre = new Vector3(-3, 0, -10);
+                wallIndex = 2;
+                newRoomCentre = new Vector3(-4, 0, -12);
             }
         }
         else
@@ -121,24 +133,78 @@ public class subMenuButtons : MonoBehaviour {
             print("nowhere?");
         }
         print(buttonCenter);
-		oldRoom.setMaterials(
+		roomCreator.setMaterials(
             "Wood Texture 06", // floor material
             "Wood Texture 15", // roof material
             "Wood texture 12"  // wall material
         );
-        int[] roomDoors = new int[] { 1, 1, 1, 1 };
-        buildRoom(newRoomCentre + currentRoomCenter, roomDoors, doorIndex);
+        buildRoom(newRoomCentre + currentRoomCenter,wallIndex, doorIndex);
         HideAll();
 
     }
-    private void buildRoom(Vector3 newRoomCentre, int[] doorStates, int doorIndexParam)
+    private void buildRoom(Vector3 newRoomCentre, int wallIndexParam, int doorIndexParam)
     {
-		oldRoom.addFloor(newRoomCentre);
-		oldRoom.addRoof(newRoomCentre);
-		oldRoom.addPlusSigns(newRoomCentre, doorIndexParam);
-		oldRoom.addWalls(
-            newRoomCentre,
-            doorStates
-        );
+        float oldDoorLoc = 0;
+        if(doorIndexParam==0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
+        {
+            oldDoorLoc = 0;
+        } else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
+        {
+            oldDoorLoc = 4;
+        }
+        if (doorIndexParam == 2 || doorIndexParam == 5 || doorIndexParam == 8 || doorIndexParam == 11)
+        {
+            oldDoorLoc = -4;
+        }
+        roomCreator.addDoor(wallIndexParam, oldDoorLoc);
+        GameObject newRoom = roomBuilder.addRoom(newRoomCentre);
+
+        //Make the plus sign on the new door dissapear in the new room
+        Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
+        for (int i = 0; i < PlusSigns.Length; i++)
+        {
+            PlusSigns[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
+            PlusSigns[i].GetComponent<subMenuButtons>().DefaultState();
+        }
+        PlusSigns[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
+
+
+        RoomCreator useToCutDoor = newRoom.GetComponent<RoomCreator>();
+
+        //Door Cut in new room
+        int oppositeDoorIndex = -1;
+        if (wallIndexParam == 0)
+        {
+            oppositeDoorIndex = 2;
+        } else if (wallIndexParam == 1) {
+            oppositeDoorIndex = 3;
+        } else if (wallIndexParam == 2)
+        {
+            oppositeDoorIndex = 0;
+        } else if (wallIndexParam == 3)
+        {
+            oppositeDoorIndex = 1;
+        }
+        useToCutDoor.addDoor(oppositeDoorIndex, 0);
+    }
+
+    public int CalcOppositeDoorIndex(int doorIndex)
+    {
+        if (doorIndex == 11 || doorIndex == 0 || doorIndex == 1)
+        {
+            return 6;
+        }
+        else if (doorIndex == 2 || doorIndex == 3 || doorIndex == 4)
+        {
+            return 9;
+        }
+        else if (doorIndex == 5 || doorIndex == 6 || doorIndex == 7)
+        {
+            return 0;
+        }
+        else
+        {
+            return 3;
+        }
     }
 }

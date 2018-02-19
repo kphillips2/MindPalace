@@ -32,11 +32,6 @@ public class OldRoom : MonoBehaviour {
 	}
 	public void addPlusSigns(Vector3 roomCentre, int DoorIndex)
 	{
-		component = Instantiate(
-			EditorButtons,
-			roomCentre,
-			Quaternion.Euler(0, 0, 0)
-		) as GameObject;
 		Canvas[] PlusSigns = component.GetComponentsInChildren<Canvas>();
 		for (int i = 0; i < PlusSigns.Length; i++)
 		{

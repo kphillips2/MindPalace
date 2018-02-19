@@ -220,22 +220,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\backSettings.cs" />
+    <Compile Include="Assets\Scripts\Builders\DoorCutter.cs" />
+    <Compile Include="Assets\Scripts\Builders\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
     <Compile Include="Assets\Scripts\Corridor.cs" />
-    <Compile Include="Assets\Scripts\CorridorBuilder.cs" />
     <Compile Include="Assets\Scripts\FileReader.cs" />
     <Compile Include="Assets\Scripts\FrameRate.cs" />
+    <Compile Include="Assets\Scripts\ImageMenu.cs" />
+    <Compile Include="Assets\Scripts\ImageMenuText.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
     <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
     <Compile Include="Assets\Scripts\Loci.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
     <Compile Include="Assets\Scripts\ObjectPlacer.cs" />
+    <Compile Include="Assets\Scripts\Old\OldCorridor.cs" />
+    <Compile Include="Assets\Scripts\Old\OldRoom.cs" />
+    <Compile Include="Assets\Scripts\Old\RoomCreator.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
     <Compile Include="Assets\Scripts\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
-    <Compile Include="Assets\Scripts\RoomBuilder.cs" />
-    <Compile Include="Assets\Scripts\RoomCreator.cs" />
+    <Compile Include="Assets\Scripts\RoomCollision.cs" />
     <Compile Include="Assets\Scripts\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveTester.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
