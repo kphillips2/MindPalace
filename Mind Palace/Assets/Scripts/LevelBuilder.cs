@@ -60,7 +60,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 			catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
 		}
-	}
+    }
 
 	// Use this for initialization
 	void Start () {

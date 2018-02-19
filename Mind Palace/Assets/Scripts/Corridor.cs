@@ -30,6 +30,19 @@ public class Corridor {
         this.angle = angle;
     }
 
+    public Corridor(int[] corrDoors, Vector3 centre, string[] materials, int angle)
+    {
+        if (corrDoors.Length != 8) Debug.Log("Error: corrDoors array length must be 8");
+        else this.corrDoors = corrDoors;
+
+        this.centre = new float[] { centre.x, centre.y, centre.z };
+
+        if (materials.Length != 3) Debug.Log("Error: materials array length must be 3");
+        else this.materials = materials;
+
+        this.angle = angle;
+    }
+
     // Getters
     public int[] getCorrDoors() { return corrDoors; }
     public float[] getCentre() { return centre; }
