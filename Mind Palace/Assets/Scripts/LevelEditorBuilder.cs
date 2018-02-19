@@ -10,7 +10,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 	private GameObject currentRoom;
 	private OldRoom oldRoom;
 	private OldCorridor oldCorridor;
-	private RoomCreator roomCreator;
+	private RoomBuilder roomBuilder;
     private PictureCreator pictureCreator;
 
     // Use this for initialization
@@ -19,14 +19,15 @@ public class LevelEditorBuilder : MonoBehaviour {
 		oldCorridor = corridor.GetComponent<OldCorridor>();
         pictureCreator = new PictureCreator();
 
-		roomCreator = space.GetComponent<RoomCreator>();
+		roomBuilder = space.GetComponent<RoomBuilder>();
 		// input: index, loc (-6)------------(6)
-		roomCreator.addDoor (0, -3);
-		roomCreator.addDoor (1, 0);
-		//roomCreator.addDoor (2, -3);
-		roomCreator.addDoor (3, 3);
+		//roomBuilder.addDoor (0, -3);
+		//roomBuilder.addDoor (1, 0);
+		//roomBuilder.addDoor (2, -3);
+		roomBuilder.addDoor (1, 0);
+		roomBuilder.addDoor (1, 3);
 
-		roomCreator.setMaterials (
+		roomBuilder.setMaterials (
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
