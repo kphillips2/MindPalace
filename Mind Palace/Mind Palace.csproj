@@ -222,9 +222,12 @@
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\Builders\DoorCutter.cs" />
     <Compile Include="Assets\Scripts\Builders\RoomBuilder.cs" />
+    <Compile Include="Assets\Scripts\ButtonListButton.cs" />
+    <Compile Include="Assets\Scripts\ButtonListControl.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
     <Compile Include="Assets\Scripts\Corridor.cs" />
     <Compile Include="Assets\Scripts\FileReader.cs" />
+    <Compile Include="Assets\Scripts\FloorMenu.cs" />
     <Compile Include="Assets\Scripts\FrameRate.cs" />
     <Compile Include="Assets\Scripts\ImageMenu.cs" />
     <Compile Include="Assets\Scripts\ImageMenuText.cs" />
@@ -610,7 +613,6 @@
     <Compile Include="Assets\VRTK\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ColorfulButtons\Credits.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
     <None Include="Assets\Meshes\WavySprite.shader" />
     <None Include="Assets\Misc\SimpleSky\ReadMe.txt" />
@@ -627,6 +629,7 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
     <None Include="Assets\SteamVR\readme.txt" />
+    <None Include="Assets\UI\ColorfulButtons\Credits.txt" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\AdaptiveQualityDebugVisualization.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\TransparentFresnelBehind.shader" />
     <None Include="Assets\VRTK\Scripts\Internal\Shaders\UIOverlay.shader" />

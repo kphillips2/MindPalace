@@ -55,7 +55,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4589005292330406}
-  - component: {fileID: 114181705386000500}
+  - component: {fileID: 114112453422656828}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -259,9 +259,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4313815845819456}
-  - {fileID: 4949503942607396}
   - {fileID: 4718821767675828}
   - {fileID: 4639399383716478}
+  - {fileID: 4949503942607396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,7 +279,7 @@ Transform:
   - {fileID: 4276048396555822}
   - {fileID: 4439791562580526}
   m_Father: {fileID: 4589005292330406}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4718821767675828
 Transform:
@@ -293,7 +293,7 @@ Transform:
   m_Children:
   - {fileID: 4900318497751702}
   m_Father: {fileID: 4589005292330406}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4743678121151812
 Transform:
@@ -334,7 +334,7 @@ Transform:
   - {fileID: 4743678121151812}
   - {fileID: 4040369200859072}
   m_Father: {fileID: 4589005292330406}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4984323570209884
 Transform:
@@ -363,7 +363,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 681e525d0bcd7c048882cf869c20ebc5, type: 2}
+  - {fileID: 2100000, guid: e2683922e5bf81f4e882a1cccb4eb644, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -465,7 +465,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 681e525d0bcd7c048882cf869c20ebc5, type: 2}
+  - {fileID: 2100000, guid: e2683922e5bf81f4e882a1cccb4eb644, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,12 +677,12 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 1.2
   m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -703,7 +703,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114181705386000500
+--- !u!114 &114112453422656828
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -711,11 +711,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1095193490665554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4733fa410a100d41a10f6b4343ce335, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c8dda276533fc9458bc59bcb3523333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 1257508024848568}
-  roof: {fileID: 1917617365238872}
+  roof: {fileID: 0}
   doorWall: {fileID: 1527320351006630}
   filledWall: {fileID: 1583753875703550}
-  EditorButtons: {fileID: 0}

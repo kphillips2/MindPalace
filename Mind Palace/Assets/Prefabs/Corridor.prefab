@@ -361,7 +361,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4368232973453306}
-  - component: {fileID: 114682358609896984}
+  - component: {fileID: 114163876243757402}
   m_Layer: 0
   m_Name: Corridor
   m_TagString: Untagged
@@ -982,7 +982,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 681e525d0bcd7c048882cf869c20ebc5, type: 2}
+  - {fileID: 2100000, guid: e2683922e5bf81f4e882a1cccb4eb644, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1366,7 +1366,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1402,7 +1402,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1423,6 +1423,23 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114163876243757402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1934403023785170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e0fb437fc4b5c41b181d1bd4900e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floor: {fileID: 1213682589842474}
+  roof: {fileID: 1932498910926710}
+  doorWall: {fileID: 1277696733273208}
+  filledWall: {fileID: 1026286751265370}
+  wallEnd: {fileID: 1756637803123420}
+  doorEnd: {fileID: 1520730822516454}
 --- !u!114 &114388639575964868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1440,20 +1457,3 @@ MonoBehaviour:
   sideToSide: {fileID: 1881051648719106}
   middleToEnd: {fileID: 1886841355454810}
   sideToOpposite: {fileID: 1017413571267548}
---- !u!114 &114682358609896984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1934403023785170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7aa3a076ea5ec240a801a13f4a24872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floor: {fileID: 1213682589842474}
-  roof: {fileID: 1932498910926710}
-  doorWall: {fileID: 1277696733273208}
-  filledWall: {fileID: 1026286751265370}
-  wallEnd: {fileID: 1756637803123420}
-  doorEnd: {fileID: 1520730822516454}
