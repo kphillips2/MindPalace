@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelEditorBuilder : MonoBehaviour {
-	public GameObject room;
 	public GameObject corridor;
 	public GameObject space;
 
@@ -16,7 +15,6 @@ public class LevelEditorBuilder : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		oldRoom = room.GetComponent<OldRoom>();
 		oldCorridor = corridor.GetComponent<OldCorridor>();
         pictureCreator = new PictureCreator();
 		roomCreator = space.GetComponent<RoomCreator>();

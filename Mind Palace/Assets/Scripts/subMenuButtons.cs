@@ -50,8 +50,6 @@ public class subMenuButtons : MonoBehaviour {
         Vector3 buttonCenter = this.transform.position;
         int doorIndex = -1;
         int wallIndex = -1;
-        print(buttonCenter.x + "=X");
-        print(buttonCenter.z + "=Z");
         if (buttonCenter.x>=4.6f + currentRoomCenter.x)
         {
             if (buttonCenter.z == 0f + currentRoomCenter.z)
@@ -133,7 +131,6 @@ public class subMenuButtons : MonoBehaviour {
         {
             print("nowhere?");
         }
-        print(buttonCenter);
 		roomCreator.setMaterials(
             "Wood Texture 06", // floor material
             "Wood Texture 15", // roof material
@@ -162,12 +159,23 @@ public class subMenuButtons : MonoBehaviour {
 
         //Make the plus sign on the new door dissapear in the new room
         Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
-        for (int i = 0; i < PlusSigns.Length; i++)
+        List<Canvas> PlusSignList = new List<Canvas>();
+        for (int j = 0; j < PlusSigns.Length; j++)
         {
-            PlusSigns[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
-            PlusSigns[i].GetComponent<subMenuButtons>().DefaultState();
+            if(PlusSigns[j].tag == "PlusSign")
+            {
+                PlusSignList.Add(PlusSigns[j]);
+            }
         }
-        PlusSigns[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
+            //make sure only plus signs in list
+        print(PlusSignList.Count);
+        for (int i = 0; i < PlusSignList.Count; i++)
+        {
+            
+            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
+            PlusSignList[i].GetComponent<subMenuButtons>().DefaultState();
+        }
+        PlusSignList[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
 
 
         RoomCreator useToCutDoor = newRoom.GetComponent<RoomCreator>();
