@@ -5,42 +5,37 @@ using UnityEngine;
 public class DoorCutter : MonoBehaviour {
 	private int wallSize;
 	private int doorCount;
-	private List<Vector3> overlapLocs;
 
 	// Use this for initialization
 	void Start () {
 		wallSize = 4;
 		doorCount = 0;
-		overlapLocs = new List<Vector3> ();
 	}
 	public void cutDoor(GameObject input, Vector3[] doorLocs, int size){
-		if (doorLocs.Length >= 0) {
-			Destroy (input.GetComponent<BoxCollider> ());
-			wallSize = size;
+		Destroy (input.GetComponent<BoxCollider> ());
+		Destroy (input.GetComponent<MeshCollider> ());
+		wallSize = size;
+		// get new vertices after scaling
+		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs);
+		// set triangles and and new vertices
+		List<int> triangles = new List<int>();
+		compileTriangles (triangles, vertices);
+		// resize the vertices to remove scaling
+		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
+		// create an list for the new UV map
+		List<Vector2> uvs = new List<Vector2> ();
+		for (int k = 0; k < vectors.Length; k++)
+			uvs.Add (new Vector2 (vectors [k].x, vectors [k].y));
 
-			// get new vertices after scaling
-			List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs);
-			// create an list for the new triangles
-			List<int> triangles = new List<int> ();
-			// set triangles and and new vertices
-			compileTriangles (triangles, vertices);
-			// resize the vertices to remove scaling
-			Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
-			// create an list for the new UV map
-			List<Vector2> uvs = new List<Vector2> ();
-			for (int k = 0; k < vectors.Length; k++)
-				uvs.Add (new Vector2 (vectors [k].x, vectors [k].y));
+		input.transform.GetComponent<MeshFilter> ().mesh.Clear ();
+		input.transform.GetComponent<MeshFilter> ().mesh.vertices = vectors;
+		input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles.ToArray ();
+		input.transform.GetComponent<MeshFilter> ().mesh.uv = uvs.ToArray ();
 
-			input.transform.GetComponent<MeshFilter> ().mesh.Clear ();
-			input.transform.GetComponent<MeshFilter> ().mesh.vertices = vectors;
-			input.transform.GetComponent<MeshFilter> ().mesh.triangles = triangles.ToArray ();
-			input.transform.GetComponent<MeshFilter> ().mesh.uv = uvs.ToArray ();
-
-			input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds ();
-			input.transform.GetComponent<MeshFilter> ().mesh.RecalculateNormals ();
-			input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
-			input.AddComponent<MeshCollider> ();
-		}
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateBounds ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateNormals ();
+		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
+		input.AddComponent<MeshCollider> ();
 	}
 	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		// close face
@@ -74,10 +69,10 @@ public class DoorCutter : MonoBehaviour {
 		// end close face
 
 		// far face
-		for (int k = 0; k < triangles.Count; k+=3){
-			triangles.Add (triangles [k + 2] - 1);
-			triangles.Add (triangles [k + 1] - 1);
+		for (int k = triangles.Count-1; k > 0; k-=3){
 			triangles.Add (triangles [k] - 1);
+			triangles.Add (triangles [k - 1] - 1);
+			triangles.Add (triangles [k - 2] - 1);
 		}
 		// end far face
 
@@ -191,6 +186,8 @@ public class DoorCutter : MonoBehaviour {
 	}
 	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] doorLocs){
 		List<Vector3> ans = new List<Vector3> ();
+		List<Vector3> overlapLocs = new List<Vector3> ();
+		doorCount = 0;
 
 		ans.Add (wallLoc + new Vector3 (wallSize / 2, wallLoc.y, 0.125f));// index: 0
 		ans.Add(ans[0] + new Vector3 (0, 0, -0.25f));// index: 1
@@ -209,7 +206,7 @@ public class DoorCutter : MonoBehaviour {
 		Vector3 doorCentre;
 		foreach (Vector3 doorLoc in doorLocs) {
 			doorCentre = doorLoc + wallLoc + new Vector3 (0, -wallLoc.y, 0.125f);
-			if(checkDoorPlacement(doorCentre)){
+			if(checkDoorPlacement(doorCentre, overlapLocs)){
 				ans.Add (doorCentre + new Vector3 (-1, 0, 0));// index: mark
 				ans.Add (ans [mark] + new Vector3 (0, 0, -0.25f));// index: mark + 1
 				ans.Add (ans [mark] + new Vector3 (0, 4, 0));// index: mark + 2
@@ -228,27 +225,29 @@ public class DoorCutter : MonoBehaviour {
 
 		return ans;
 	}
-	private bool checkDoorPlacement(Vector3 doorLoc){
+	private bool checkDoorPlacement(Vector3 doorLoc, List<Vector3> overlapLocs){
 		foreach (Vector3 existingLoc in overlapLocs) {
-			float dist = Vector3.Distance (existingLoc, doorLoc);
-			if (dist < 3)
+			float dist = Mathf.Abs(Vector3.Distance (existingLoc, doorLoc));
+			if (dist < 2.5f) {
+				Debug.LogError ("A door that you are trying to add overlaps with either another door or the end of the wall.");
 				return false;
+			}
 		}
 		return true;
 	}
 	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
-		Vector3[] answer = new Vector3[vertices.Count];
+		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
 		Vector3 v;
-		for (int k = 0; k < vertices.Count; k++){
+		for (int k = 0; k < ans.Length; k++){
 			v = vertices [k] - translation;
 			v.Scale (s);
-			answer [k] = v;
+			ans [k] = v;
 		}
-		return answer;
+		return ans;
 	}
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }
