@@ -10,7 +10,6 @@ public class LevelEditorBuilder : MonoBehaviour {
 	private OldRoom oldRoom;
 	private OldCorridor oldCorridor;
 	private RoomCreator roomCreator;
-	private RoomBuilder roomBuilder;
     private PictureCreator pictureCreator;
     private GameObject component;
 
@@ -18,8 +17,7 @@ public class LevelEditorBuilder : MonoBehaviour {
     void Start () {
 		oldCorridor = corridor.GetComponent<OldCorridor> ();
         pictureCreator = new PictureCreator();
-		//roomCreator = space.GetComponent<RoomCreator> ();
-		roomBuilder = space.GetComponent<RoomBuilder> ();
+		roomCreator = space.GetComponent<RoomCreator> ();
         /*
 		// input: index, loc (-6)------------(6)
 		roomCreator.addDoor (0, -3);
@@ -28,7 +26,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 		roomCreator.addDoor (3, 3);
         */
 
-		roomBuilder.setMaterials(
+		roomCreator.setMaterials(
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
