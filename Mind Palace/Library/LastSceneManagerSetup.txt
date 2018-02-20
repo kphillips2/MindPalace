@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 sceneSetups: []
+=======
+sceneSetups:
+- path: Assets/Scenes/LevelEditor.unity
+  isLoaded: 1
+  isActive: 1
+>>>>>>> 0ae5a940a549ba8dd0692b3ce1960eff4ae5dc1d
