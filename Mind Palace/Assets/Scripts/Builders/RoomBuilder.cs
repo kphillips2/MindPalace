@@ -18,14 +18,16 @@ public class RoomBuilder : MonoBehaviour {
 	private Material roofMat;
 	private Material wallMat;
 
-	private const int ROOM_SIZE = 12;
+	private int ROOM_SIZE = 12;
 	private DoorCutter doorCutter;
 	private List<Vector3>[] doors;
 
 	// Use this for initialization
 	void Start () {
 		doors = new List<Vector3>[4];
-		doorCutter = floor.GetComponent<DoorCutter>();
+		for (int k = 0; k < 4; k++)
+			doors [k] = new List<Vector3> ();
+		doorCutter = floor.GetComponent<DoorCutter> ();
 	}
 	// input: three strings which represent the materials for the room
 	public void setMaterials (string floorName, string roofName, string wallName){
@@ -57,29 +59,30 @@ public class RoomBuilder : MonoBehaviour {
 		//  |         |
 		//   ----2----
 
-		switch (wall) {
-		case 1:
-			doors [1].Add (new Vector3 (doorLoc, 0, 0));
-			doorCutter.cutDoor (rightWall, doors[1].ToArray(), ROOM_SIZE);
-			break;
-		case 2:
-			doors [2].Add (new Vector3 (doorLoc, 0, 0));
-			doorCutter.cutDoor (rearWall, doors[2].ToArray(), ROOM_SIZE);
-			break;
-		case 3:
-			doors [3].Add (new Vector3 (doorLoc, 0, 0));
-			doorCutter.cutDoor (leftWall, doors[3].ToArray(), ROOM_SIZE);
-			break;
-		default:
-			doors [0].Add (new Vector3 (doorLoc, 0, 0));
-			doorCutter.cutDoor (frontWall, doors[0].ToArray(), ROOM_SIZE);
-			break;
+		if(wall >=0 && wall <= 3)
+			if(doorLoc >= -6 && doorLoc <= 6)
+				switch (wall) {
+			case 1:
+				doors [1].Add (new Vector3 (doorLoc, 0, 0));
+				doorCutter.cutDoor (rightWall, doors [1].ToArray (), ROOM_SIZE);
+				break;
+			case 2:
+				doors [2].Add (new Vector3 (doorLoc, 0, 0));
+				doorCutter.cutDoor (rearWall, doors [2].ToArray (), ROOM_SIZE);
+				break;
+			case 3:
+				doors [3].Add (new Vector3 (doorLoc, 0, 0));
+				doorCutter.cutDoor (leftWall, doors [3].ToArray (), ROOM_SIZE);
+				break;
+			default:
+				doors [0].Add (new Vector3 (doorLoc, 0, 0));
+				doorCutter.cutDoor (frontWall, doors [0].ToArray (), ROOM_SIZE);
+				break;
 		}
 	}
 
-	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }
