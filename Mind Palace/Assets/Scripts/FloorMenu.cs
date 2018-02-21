@@ -9,8 +9,9 @@ public class FloorMenu : MonoBehaviour {
     public GameObject Left;
     public GameObject Right;
     public GameObject CurrentThemeDisplay;
+    public GameObject CloseButton;
     public GameObject Room;
-    public static int NUMBER_OF_THEMES = 5;
+    public static int NUMBER_OF_THEMES = 3;
 
     private int CurrentThemeNumber = 1;
     private RoomCreator RoomTextureSetter;
@@ -19,13 +20,23 @@ public class FloorMenu : MonoBehaviour {
         RoomTextureSetter = Room.GetComponent<RoomCreator>();
     }
 
-    public void ShowThemeOptions()
+    public void ShowMoreOptions()
     {
         MainButton.SetActive(false);
         Left.SetActive(true);
         Right.SetActive(true);
         CurrentThemeDisplay.SetActive(true);
+        CloseButton.SetActive(true);
         CheckGreyOut();
+    }
+
+    public void DefaultState()
+    {
+        MainButton.SetActive(true);
+        Left.SetActive(false);
+        Right.SetActive(false);
+        CurrentThemeDisplay.SetActive(false);
+        CloseButton.SetActive(false);
     }
 
     public void LeftClick()
