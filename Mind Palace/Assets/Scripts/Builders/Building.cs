@@ -22,25 +22,37 @@ public class Building : MonoBehaviour {
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
 		);
-		addRoom(new Vector3(0,0,0));
-		roomScript = rooms [rooms.Count - 1].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (0, -4.5f);
+		addRoom (new Vector3 (0, 0, 12));
+		addRoom (new Vector3 (0, 0, -12));
+		roomScript = rooms [0].GetComponent<RoomBuilder> ();
+		roomScript.addDoor (0, -4f);
 		roomScript.addDoor (0, 0f);
-		roomScript.addDoor (0, 2.25f);
-		roomScript.addDoor (0, -2.5f);
-		roomScript.addDoor (0, 5f);
-		roomScript.addDoor (5, 2.5f);
+		roomScript.addDoor (0, 4f);
+
+		roomScript.addDoor (1, -4f);
+		roomScript.addDoor (1, 4f);
+
+		roomScript.addDoor (2, -4f);
+
+		roomScript.addDoor (3, 4f);
+
+		roomScript = rooms [1].GetComponent<RoomBuilder> ();
+		roomScript.addDoor (0, -4f);
+
+		//roomScript.addDoor (0, 2.25f);
+		//roomScript.addDoor (0, -2.5f);
+		//roomScript.addDoor (0, 5f);
+		//roomScript.addDoor (5, 2.5f);
 	}
 
 	public void addRoom(Vector3 roomCentre){
-		rooms.Add(
-			Instantiate(
-				room,
-				roomCentre,
-				Quaternion.Euler(0, 0, 0)
-			) as GameObject
-		);
-		rooms [rooms.Count - 1].SetActive (true);
+		component = Instantiate (
+			room,
+			roomCentre,
+			Quaternion.Euler (0, 0, 0)
+		) as GameObject;
+		component.SetActive (true);
+		rooms.Add(component);
 	}
 	public void setMaterials(int index){
 	}

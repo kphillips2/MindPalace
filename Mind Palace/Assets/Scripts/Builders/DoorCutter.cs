@@ -16,12 +16,12 @@ public class DoorCutter : MonoBehaviour {
 		Destroy (input.GetComponent<MeshCollider> ());
 		wallSize = size;
 		// get new vertices after scaling
-		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs);
+		List<Vector3> vertices = compileVertices (input.transform.position, doorLocs);
 		// set triangles and and new vertices
 		List<int> triangles = new List<int>();
 		compileTriangles (triangles, vertices);
 		// resize the vertices to remove scaling
-		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
+		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.position);
 		// create an list for the new UV map
 		List<Vector2> uvs = new List<Vector2> ();
 		for (int k = 0; k < vectors.Length; k++)
