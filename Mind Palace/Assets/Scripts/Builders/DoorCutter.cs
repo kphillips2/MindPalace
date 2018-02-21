@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorCutter : MonoBehaviour {
-	private int wallSize;
+	private float wallSize;
 	private int doorCount;
 
 	// Use this for initialization
@@ -11,17 +11,17 @@ public class DoorCutter : MonoBehaviour {
 		wallSize = 4;
 		doorCount = 0;
 	}
-	public void cutDoor(GameObject input, Vector3[] doorLocs, int size){
+	public void cutDoor(GameObject input, Vector3[] doorLocs, float size){
 		Destroy (input.GetComponent<BoxCollider> ());
 		Destroy (input.GetComponent<MeshCollider> ());
 		wallSize = size;
 		// get new vertices after scaling
-		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs);
+		List<Vector3> vertices = compileVertices (input.transform.position, doorLocs);
 		// set triangles and and new vertices
 		List<int> triangles = new List<int>();
 		compileTriangles (triangles, vertices);
 		// resize the vertices to remove scaling
-		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
+		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.position);
 		// create an list for the new UV map
 		List<Vector2> uvs = new List<Vector2> ();
 		for (int k = 0; k < vectors.Length; k++)
@@ -195,11 +195,8 @@ public class DoorCutter : MonoBehaviour {
 		ans.Add(ans[1] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 3
 
 		ans.Add (ans [2] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 4
-		overlapLocs.Add (ans [4]);
 		ans.Add (ans [3] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 5
-
 		ans.Add (ans [0] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 6
-		overlapLocs.Add (ans [6]);
 		ans.Add (ans [1] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 7
 
 		int mark = ans.Count;
@@ -228,8 +225,8 @@ public class DoorCutter : MonoBehaviour {
 	private bool checkDoorPlacement(Vector3 doorLoc, List<Vector3> overlapLocs){
 		foreach (Vector3 existingLoc in overlapLocs) {
 			float dist = Mathf.Abs(Vector3.Distance (existingLoc, doorLoc));
-			if (dist < 2.5f) {
-				Debug.LogError ("A door that you are trying to add overlaps with either another door or the end of the wall.");
+			if (dist < 2.25f) {
+				Debug.LogError ("The door at {"+doorLoc.x+"} is too close to an existing door at {"+existingLoc.x+"}.");
 				return false;
 			}
 		}
