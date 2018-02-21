@@ -3,22 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorCutter : MonoBehaviour {
-	private float wallSize;
 	private int doorCount;
 	private bool doesNewestOverlap;
 
 	// Use this for initialization
 	void Awake () {
-		wallSize = 4;
-		doorCount = 0;
 	}
 	public bool cutDoor(GameObject input, Vector3[] doorLocs, float size){
 		doesNewestOverlap = false;
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
 			Destroy (collider);
-		wallSize = size;
 		// get new vertices after scaling
-		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs);
+		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs, size);
 		// set triangles and and new vertices
 		List<int> triangles = new List<int>();
 		compileTriangles (triangles, vertices);
@@ -188,7 +184,7 @@ public class DoorCutter : MonoBehaviour {
 		triangles.Add (mark + 2);
 		triangles.Add (mark);
 	}
-	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] doorLocs){
+	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] doorLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
 		doorCount = 0;

@@ -14,10 +14,6 @@ public class RoomBuilder : MonoBehaviour {
 	// negative x
 	public GameObject leftWall;
 
-	private Material floorMat;
-	private Material roofMat;
-	private Material wallMat;
-
 	private float ROOM_SIZE = 12;
 	private DoorCutter doorCutter;
 	private List<Vector3>[] doors;
@@ -31,9 +27,9 @@ public class RoomBuilder : MonoBehaviour {
 	}
 	// input: three strings which represent the materials for the room
 	public void setMaterials (string floorName, string roofName, string wallName){
-		floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
-		roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
-		wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
+		Material floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
+		Material roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
+		Material wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
 
 		floorMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
 		roofMat.mainTexture.wrapMode = TextureWrapMode.Repeat;

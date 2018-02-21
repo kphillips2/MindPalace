@@ -6,16 +6,14 @@ public class Building : MonoBehaviour {
 	public GameObject room;
 	private List<GameObject> rooms;
 
-	private GameObject currentRoom;
 	private RoomBuilder roomScript;
 	private PictureCreator pictureCreator;
-	private GameObject component;
 
 	// Use this for initialization
 	void Start () {
-		pictureCreator = new PictureCreator();
-		rooms = new List<GameObject> ();
+		pictureCreator = new PictureCreator ();
 		roomScript = room.GetComponent<RoomBuilder> ();
+		rooms = new List<GameObject> ();
 
 		roomScript.setMaterials(
 			"Wood Texture 06", // floor material
@@ -58,7 +56,7 @@ public class Building : MonoBehaviour {
 	}
 
 	public void addRoom(Vector3 roomCentre){
-		component = Instantiate (
+		GameObject component = Instantiate (
 			room,
 			roomCentre,
 			Quaternion.Euler (0, 0, 0)

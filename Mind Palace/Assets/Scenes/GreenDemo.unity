@@ -2222,8 +2222,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1349186311}
   RoomButton: {fileID: 312418343}
-  Window: {fileID: 1752611619}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1760161005}
+  Window: {fileID: 1752611619}
+  SingularActivation: {fileID: 0}
 --- !u!114 &228124045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3161,8 +3163,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1839981109}
   RoomButton: {fileID: 1231464749}
-  Window: {fileID: 484203341}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 84038646}
+  Window: {fileID: 484203341}
+  SingularActivation: {fileID: 0}
 --- !u!114 &332647169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5110,8 +5114,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1821022246}
   RoomButton: {fileID: 2116233680}
-  Window: {fileID: 1250994452}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1765512693}
+  Window: {fileID: 1250994452}
+  SingularActivation: {fileID: 0}
 --- !u!114 &589124781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5533,8 +5539,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1532559958}
   RoomButton: {fileID: 201378699}
-  Window: {fileID: 1593064780}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1692334274}
+  Window: {fileID: 1593064780}
+  SingularActivation: {fileID: 0}
 --- !u!114 &616057391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8862,8 +8870,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 378501734}
   RoomButton: {fileID: 558280859}
-  Window: {fileID: 490099844}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1751219229}
+  Window: {fileID: 490099844}
+  SingularActivation: {fileID: 0}
 --- !u!114 &959614538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10610,8 +10620,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1848513000}
   RoomButton: {fileID: 1234618870}
-  Window: {fileID: 1053988330}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 939734303}
+  Window: {fileID: 1053988330}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1157211141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12052,8 +12064,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 862567915}
   RoomButton: {fileID: 190768602}
-  Window: {fileID: 1756497135}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1462983701}
+  Window: {fileID: 1756497135}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1258570264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13077,8 +13091,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1646785063}
   RoomButton: {fileID: 1756991739}
-  Window: {fileID: 791930534}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1656278715}
+  Window: {fileID: 791930534}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1385250326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14263,8 +14279,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 762167755}
   RoomButton: {fileID: 779669233}
-  Window: {fileID: 940128306}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1408082034}
+  Window: {fileID: 940128306}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1549051135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15199,8 +15217,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1148805169}
   RoomButton: {fileID: 1804684997}
-  Window: {fileID: 565222472}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 920584848}
+  Window: {fileID: 565222472}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1628366381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17546,8 +17566,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1802779239}
   RoomButton: {fileID: 728754425}
-  Window: {fileID: 168888033}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1255013258}
+  Window: {fileID: 168888033}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1775243241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18496,6 +18518,7 @@ MonoBehaviour:
   Left: {fileID: 1219318294}
   Right: {fileID: 1778602798}
   CurrentThemeDisplay: {fileID: 603126782}
+  CloseButton: {fileID: 0}
   Room: {fileID: 1285771112}
 --- !u!114 &1870541844
 MonoBehaviour:
@@ -19345,8 +19368,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1321371806}
   RoomButton: {fileID: 2121047792}
-  Window: {fileID: 1616562415}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 2002733777}
+  Window: {fileID: 1616562415}
+  SingularActivation: {fileID: 0}
 --- !u!114 &2020162588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19788,7 +19813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2081149161
 Transform:
   m_ObjectHideFlags: 0
