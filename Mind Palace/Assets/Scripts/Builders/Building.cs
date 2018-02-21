@@ -21,8 +21,10 @@ public class Building : MonoBehaviour {
 			"Wood texture 12"  // wall material
 		);
 		//addRoom(new Vector3(0,0,0));
-		roomScript.addDoor (1, -4f);
-		roomScript.addDoor (1, 4f);
+		roomScript.addDoor (1, -4.5f);
+		roomScript.addDoor (1, -2.5f);
+		roomScript.addDoor (1, 5f);
+		roomScript.addDoor (5, 0f);
 	}
 
 	public GameObject addRoom(Vector3 roomCentre){

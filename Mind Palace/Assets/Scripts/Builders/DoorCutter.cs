@@ -195,11 +195,8 @@ public class DoorCutter : MonoBehaviour {
 		ans.Add(ans[1] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 3
 
 		ans.Add (ans [2] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 4
-		overlapLocs.Add (ans [4] + new Vector3(-0.25f, 0, 0));
 		ans.Add (ans [3] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 5
-
 		ans.Add (ans [0] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 6
-		overlapLocs.Add (ans [6]);
 		ans.Add (ans [1] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 7
 
 		int mark = ans.Count;
@@ -229,7 +226,7 @@ public class DoorCutter : MonoBehaviour {
 		foreach (Vector3 existingLoc in overlapLocs) {
 			float dist = Mathf.Abs(Vector3.Distance (existingLoc, doorLoc));
 			if (dist < 2.25f) {
-				Debug.LogError ("The door at "+doorLoc+" is too close to the existing vector "+existingLoc);
+				Debug.LogError ("The door at {"+doorLoc.x+"} is too close to an existing door at {"+existingLoc.x+"}.");
 				return false;
 			}
 		}
