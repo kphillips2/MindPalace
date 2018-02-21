@@ -11,9 +11,9 @@ public class DoorCutter : MonoBehaviour {
 	void Awake () {
 		wallSize = 4;
 		doorCount = 0;
-		doesNewestOverlap = false;
 	}
 	public bool cutDoor(GameObject input, Vector3[] doorLocs, float size){
+		doesNewestOverlap = false;
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
 			Destroy (collider);
 		wallSize = size;
