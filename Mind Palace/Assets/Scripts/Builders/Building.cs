@@ -6,23 +6,23 @@ public class Building : MonoBehaviour {
 	public GameObject space;
 
 	private GameObject currentRoom;
-	private RoomCreator roomCreator;
+	private RoomBuilder roomScript;
 	private PictureCreator pictureCreator;
 	private GameObject component;
 
 	// Use this for initialization
 	void Start () {
 		pictureCreator = new PictureCreator();
-		roomCreator = space.GetComponent<RoomCreator> ();
+		roomScript = space.GetComponent<RoomBuilder> ();
 
-		roomCreator.setMaterials(
+		roomScript.setMaterials(
 			"Wood Texture 06", // floor material
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
 		);
-		addRoom(new Vector3(0,0,0));
-		//roomBuilder.addDoor (1, -3);
-		//roomBuilder.addDoor (1, 3);
+		//addRoom(new Vector3(0,0,0));
+		roomScript.addDoor (1, -4f);
+		roomScript.addDoor (1, 4f);
 	}
 
 	public GameObject addRoom(Vector3 roomCentre){

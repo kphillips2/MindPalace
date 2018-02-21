@@ -23,7 +23,7 @@ public class RoomBuilder : MonoBehaviour {
 	private List<Vector3>[] doors;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		doors = new List<Vector3>[4];
 		for (int k = 0; k < 4; k++)
 			doors [k] = new List<Vector3> ();
