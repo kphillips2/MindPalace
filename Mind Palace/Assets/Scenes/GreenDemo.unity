@@ -9067,7 +9067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c712a0bad8508ac45be657493c6fc156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  space: {fileID: 1285771112}
+  room: {fileID: 1285771112}
 --- !u!1 &999997428
 GameObject:
   m_ObjectHideFlags: 0
@@ -12264,12 +12264,12 @@ GameObject:
   - component: {fileID: 1285771114}
   - component: {fileID: 1285771113}
   m_Layer: 0
-  m_Name: Space
+  m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1285771113
 MonoBehaviour:
   m_ObjectHideFlags: 0

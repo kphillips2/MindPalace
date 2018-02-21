@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorCutter : MonoBehaviour {
-	private int wallSize;
+	private float wallSize;
 	private int doorCount;
 
 	// Use this for initialization
@@ -11,7 +11,7 @@ public class DoorCutter : MonoBehaviour {
 		wallSize = 4;
 		doorCount = 0;
 	}
-	public void cutDoor(GameObject input, Vector3[] doorLocs, int size){
+	public void cutDoor(GameObject input, Vector3[] doorLocs, float size){
 		Destroy (input.GetComponent<BoxCollider> ());
 		Destroy (input.GetComponent<MeshCollider> ());
 		wallSize = size;

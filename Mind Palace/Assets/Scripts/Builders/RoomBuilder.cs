@@ -18,7 +18,7 @@ public class RoomBuilder : MonoBehaviour {
 	private Material roofMat;
 	private Material wallMat;
 
-	private int ROOM_SIZE = 12;
+	private float ROOM_SIZE = 12;
 	private DoorCutter doorCutter;
 	private List<Vector3>[] doors;
 
@@ -62,30 +62,30 @@ public class RoomBuilder : MonoBehaviour {
 		float doorLimit = ROOM_SIZE / 2 - 1.5f;
 		Vector3 doorCentre = new Vector3 (doorLoc, 0, 0);
 
-		if (wall >= 0 && wall <= 3)
-		if (doorLoc >= -doorLimit && doorLoc <= doorLimit)
-			switch (wall) {
-			case 1:
-				doors [1].Add (doorCentre);
-				doorCutter.cutDoor (rightWall, doors [1].ToArray (), ROOM_SIZE);
-				break;
-			case 2:
-				doors [2].Add (doorCentre);
-				doorCutter.cutDoor (rearWall, doors [2].ToArray (), ROOM_SIZE);
-				break;
-			case 3:
-				doors [3].Add (doorCentre);
-				doorCutter.cutDoor (leftWall, doors [3].ToArray (), ROOM_SIZE);
-				break;
-			default:
-				doors [0].Add (doorCentre);
-				doorCutter.cutDoor (frontWall, doors [0].ToArray (), ROOM_SIZE);
-				break;
-			}
-		else
-			Debug.LogError ("The door at {"+doorLoc+"} is too close to end of the wall.");
-		else
-			Debug.LogError ("A wall with index of {"+wall+"} doesn't exist.");
+		if (wall >= 0 && wall <= 3) {
+			if (doorLoc >= -doorLimit && doorLoc <= doorLimit)
+				switch (wall) {
+				case 1:
+					doors [1].Add (doorCentre);
+					doorCutter.cutDoor (rightWall, doors [1].ToArray (), ROOM_SIZE);
+					break;
+				case 2:
+					doors [2].Add (doorCentre);
+					doorCutter.cutDoor (rearWall, doors [2].ToArray (), ROOM_SIZE);
+					break;
+				case 3:
+					doors [3].Add (doorCentre);
+					doorCutter.cutDoor (leftWall, doors [3].ToArray (), ROOM_SIZE);
+					break;
+				default:
+					doors [0].Add (doorCentre);
+					doorCutter.cutDoor (frontWall, doors [0].ToArray (), ROOM_SIZE);
+					break;
+				}
+			else
+				Debug.LogError ("The door at {" + doorLoc + "} is too close to end of the wall.");
+		} else
+			Debug.LogError ("A wall with index of {" + wall + "} doesn't exist.");
 	}
 
 	// Update is called once per frame
