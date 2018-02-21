@@ -219,6 +219,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ActivationManager.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\Builders\DoorCutter.cs" />
     <Compile Include="Assets\Scripts\Builders\RoomBuilder.cs" />

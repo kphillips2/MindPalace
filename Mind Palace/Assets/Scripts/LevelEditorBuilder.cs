@@ -33,9 +33,10 @@ public class LevelEditorBuilder : MonoBehaviour {
 			"Wood Texture 15", // roof material
 			"Wood texture 12"  // wall material
 		);
-		addRoom(new Vector3(0,0,0));
-		//roomBuilder.addDoor (1, -3);
-		//roomBuilder.addDoor (1, 3);
+        //roomBuilder.addDoor(1, -3);
+        //roomBuilder.addDoor(1, 3);
+        GameObject FirstRoom =addRoom(new Vector3(0,0,0));
+        
     }
 
 	public GameObject addRoom(Vector3 roomCentre){

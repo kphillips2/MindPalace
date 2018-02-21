@@ -9,25 +9,30 @@ public class subMenuButtons : MonoBehaviour {
     public Vector3 currentRoomCenter;
     public GameObject ClickedOn;
     public GameObject RoomButton;
-    public GameObject Window;
+    public GameObject CorridorButton;
     public GameObject Picture;
+    public GameObject Window;
+    public GameObject SingularActivation;
 
     private Vector3 newRoomCentre;
     private RoomCreator roomCreator;
     private LevelEditorBuilder roomBuilder;
+    private ActivationManager MenuActivationManager;
 
     void Start () {
         roomCreator = room.GetComponent<RoomCreator>();
         roomBuilder = level.GetComponent<LevelEditorBuilder>();
-        
+        MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
     }
 
     public void ShowMoreOptions()
     {
         ClickedOn.SetActive(false);
         RoomButton.SetActive(true);
+        CorridorButton.SetActive(true);
         Window.SetActive(true);
         Picture.SetActive(true);
+        MenuActivationManager.ActivateMenu(this.gameObject);
     }
     public void HideAll()
     {
@@ -35,6 +40,9 @@ public class subMenuButtons : MonoBehaviour {
         RoomButton.SetActive(false);
         Window.SetActive(false);
         Picture.SetActive(false);
+        CorridorButton.SetActive(false);
+        MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
+        MenuActivationManager.NoActive();
     }
     
     public void DefaultState()
@@ -43,6 +51,22 @@ public class subMenuButtons : MonoBehaviour {
         RoomButton.SetActive(false);
         Window.SetActive(false);
         Picture.SetActive(false);
+        CorridorButton.SetActive(false);
+    }
+
+    public void AddCorridor()
+    {
+        print("TODO");
+    }
+
+    public void AddWindow()
+    {
+        print("TODO");
+    }
+
+    public void AddPicture()
+    {
+        print("TODO");
     }
 
     public void AddRoom()
@@ -168,7 +192,6 @@ public class subMenuButtons : MonoBehaviour {
             }
         }
             //make sure only plus signs in list
-        print(PlusSignList.Count);
         for (int i = 0; i < PlusSignList.Count; i++)
         {
             
