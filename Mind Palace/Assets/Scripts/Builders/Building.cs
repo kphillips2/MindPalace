@@ -24,10 +24,13 @@ public class Building : MonoBehaviour {
 		);
 		addRoom (new Vector3 (0, 0, 12));
 		addRoom (new Vector3 (0, 0, -12));
+		addRoom (new Vector3 (0, 0, 0));
 		roomScript = rooms [0].GetComponent<RoomBuilder> ();
 		roomScript.addDoor (0, -4f);
 		roomScript.addDoor (0, 0f);
+		roomScript.addDoor (0, 2f);
 		roomScript.addDoor (0, 4f);
+		roomScript.addDoor (0, 5f);
 
 		roomScript.addDoor (1, -4f);
 		roomScript.addDoor (1, 4f);
@@ -36,13 +39,23 @@ public class Building : MonoBehaviour {
 
 		roomScript.addDoor (3, 4f);
 
-		roomScript = rooms [1].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (0, -4f);
+		roomScript.addDoor (4, 2.5f);
 
-		//roomScript.addDoor (0, 2.25f);
-		//roomScript.addDoor (0, -2.5f);
-		//roomScript.addDoor (0, 5f);
-		//roomScript.addDoor (5, 2.5f);
+		roomScript = rooms [1].GetComponent<RoomBuilder> ();
+		roomScript.addDoor (0, -4.5f);
+		roomScript.addDoor (0, -2.25f);
+		roomScript.addDoor (0, 4.5f);
+		roomScript.addDoor (0, 2.25f);
+		roomScript.addDoor (0, 0f);
+
+		roomScript = rooms [2].GetComponent<RoomBuilder> ();
+		roomScript.addDoor (0, 4f);
+
+		roomScript.addDoor (2, -4.5f);
+		roomScript.addDoor (2, -2.25f);
+		roomScript.addDoor (2, 4.5f);
+		roomScript.addDoor (2, 2.25f);
+		roomScript.addDoor (2, 0f);
 	}
 
 	public void addRoom(Vector3 roomCentre){

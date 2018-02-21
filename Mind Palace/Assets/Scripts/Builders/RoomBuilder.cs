@@ -48,7 +48,7 @@ public class RoomBuilder : MonoBehaviour {
 		leftWall.GetComponent<Renderer> ().material = wallMat;
 	}
 	// input: index, loc (-6)------------(6)
-	public void addDoor (int wall, float doorLoc){
+	public void addDoor (int wallIndex, float doorLoc){
 		// wall numbers correspond with indices of doorStates
 		// (->) is the start direction
 		//   ----0----
@@ -60,32 +60,34 @@ public class RoomBuilder : MonoBehaviour {
 		//   ----2----
 
 		float doorLimit = ROOM_SIZE / 2 - 1.5f;
-		Vector3 doorCentre = new Vector3 (doorLoc, 0, 0);
 
-		if (wall >= 0 && wall <= 3) {
+		if (wallIndex >= 0 && wallIndex <= 3) {
 			if (doorLoc >= -doorLimit && doorLoc <= doorLimit)
-				switch (wall) {
+				switch (wallIndex) {
 				case 1:
-					doors [1].Add (doorCentre);
-					doorCutter.cutDoor (rightWall, doors [1].ToArray (), ROOM_SIZE);
+					cutDoor (rightWall, 1, doorLoc);
 					break;
 				case 2:
-					doors [2].Add (doorCentre);
-					doorCutter.cutDoor (rearWall, doors [2].ToArray (), ROOM_SIZE);
+					cutDoor (rearWall, 2, doorLoc);
 					break;
 				case 3:
-					doors [3].Add (doorCentre);
-					doorCutter.cutDoor (leftWall, doors [3].ToArray (), ROOM_SIZE);
+					cutDoor (leftWall, 3, doorLoc);
 					break;
 				default:
-					doors [0].Add (doorCentre);
-					doorCutter.cutDoor (frontWall, doors [0].ToArray (), ROOM_SIZE);
+					cutDoor (frontWall, 0, doorLoc);
 					break;
 				}
 			else
 				Debug.LogError ("The door at {" + doorLoc + "} is too close to end of the wall.");
 		} else
-			Debug.LogError ("A wall with index of {" + wall + "} doesn't exist.");
+			Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
+	}
+	private void cutDoor (GameObject input, int wallIndex, float doorLoc){
+		Vector3 doorCentre = new Vector3 (doorLoc, 0, 0);
+		doors [wallIndex].Add (doorCentre);
+		doors [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
+		if (doorCutter.cutDoor (input, doors [wallIndex].ToArray (), ROOM_SIZE))
+			doors [wallIndex].Remove (doorCentre);
 	}
 
 	// Update is called once per frame
