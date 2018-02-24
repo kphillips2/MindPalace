@@ -22,15 +22,12 @@ public class Loci {
 
     // Getters
     public string getName() { return name; }
-    public List<float[]> getObjects() { return objects; }
-    public List<Room> getRooms() { return rooms; }
-    public List<Corridor> getCorridors() { return corridors; }
+    public List<float[]> getObjects() { return new List<float[]>(objects); }
+    public List<Room> getRooms() { return new List<Room>(rooms); }
+    public List<Corridor> getCorridors() { return new List<Corridor>(corridors) ; }
 
-    // Set name or set full lists
+    // Set name
     public void setName(string name) { this.name = name; }
-    public void setObjects(List<float[]> objects) { this.objects = objects; }
-    public void setRooms(List<Room> rooms) { this.rooms = rooms; }
-    public void setCorridors(List<Corridor> corridors) { this.corridors = corridors; }
 
     // Add to Lists
     public void addObject(float[] obj)
