@@ -72,4 +72,10 @@ public class Corridor {
     {
         this.angle = angle;
     }
+
+    public void setCorridorDoor(int index, int value)
+    {
+        if (index >= corrDoors.Length) Debug.Log("Error: Index is too large for corrDoors attribute");
+        else corrDoors[index] = value;
+    }
 }

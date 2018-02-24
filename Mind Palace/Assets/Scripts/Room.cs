@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Room {
 
-    private int[] roomDoors; // Must be length 4
+    private int[] roomDoors; // Must be length 12
     private float[] centre; // Must be length 3
     private string[] materials; // Must be length 3 (floor material, roof material, wall material)
 
@@ -16,7 +16,7 @@ public class Room {
     }
 
     public Room(int[] roomDoors, float[] centre, string[] materials){
-        if (roomDoors.Length != 4) Debug.Log("Error: roomDoors array length must be 4");
+        if (roomDoors.Length != 12) Debug.Log("Error: roomDoors array length must be 12");
         else this.roomDoors = roomDoors;
 
         if (centre.Length != 3) Debug.Log("Error: centre array length must be 3");
@@ -28,7 +28,7 @@ public class Room {
 
     public Room(int[] roomDoors, Vector3 centre, string[] materials)
     {
-        if (roomDoors.Length != 4) Debug.Log("Error: roomDoors array length must be 4");
+        if (roomDoors.Length != 12) Debug.Log("Error: roomDoors array length must be 12");
         else this.roomDoors = roomDoors;
 
         this.centre = new float[] { centre.x, centre.y, centre.z};
@@ -45,7 +45,7 @@ public class Room {
     // Setters
     public void setRoomDoors(int[] roomDoors)
     {
-        if (roomDoors.Length != 4) Debug.Log("Error: roomDoors array length must be 4");
+        if (roomDoors.Length != 12) Debug.Log("Error: roomDoors array length must be 12");
         else this.roomDoors = roomDoors;
     }
 
@@ -59,5 +59,11 @@ public class Room {
     {
         if (materials.Length != 3) Debug.Log("Error: materials array length must be 3");
         else this.materials = materials;
+    }
+
+    public void setRoomDoor(int index, int value)
+    {
+        if (index >= roomDoors.Length) Debug.Log("Error: Index is too large for roomDoors attribute");
+        else roomDoors[index] = value;
     }
 }
