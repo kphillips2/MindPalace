@@ -33,7 +33,7 @@ public class ImageMenuText : MonoBehaviour {
                 while (img < files.Length)
                 {
                     string extension = Path.GetExtension(files[img]);
-                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg") // Only list jpg files
+                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png") // Only list image files
                     {
                         // Set button text to file name
                         child.GetComponentInChildren<Text>().text = files[img].Substring(filePath.Length + 1);
@@ -50,7 +50,7 @@ public class ImageMenuText : MonoBehaviour {
             // Testing adding an image to the image display on the side
             else if(child.name == "ImageDisplay" && files.Length > 1)
             {
-                child.GetComponent<Image>().overrideSprite = PictureCreator.LoadNewSprite(files[1]);
+                child.GetComponent<Image>().overrideSprite = PictureCreator.LoadNewSprite("C:/Users/Katie/Documents/TestImages/anteater.png");
             }
         }
     }

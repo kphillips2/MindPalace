@@ -43,7 +43,7 @@ public class ButtonListControl : MonoBehaviour {
         foreach (string f in files)
         {
             string extension = Path.GetExtension(f);
-            if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg") // Only list jpg files
+            if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png") // Only list jpg/png files
             {
                 GameObject button = Instantiate(buttonTemplate) as GameObject;
                 button.SetActive(true);
