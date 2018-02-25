@@ -153,7 +153,6 @@ public class DoorCutter : MonoBehaviour {
 			triangles.Add (5);
 			triangles.Add (7);
 		}
-
 		// end bottom faces
 	}
 	// creates the face of the wall towards the centre of the room
@@ -219,9 +218,9 @@ public class DoorCutter : MonoBehaviour {
 		doorCount = 0;
 
 		ans.Add (wallLoc + new Vector3 (wallSize / 2, wallLoc.y, 0.125f));// index: 0
-		ans.Add(ans[0] + new Vector3 (0, 0, -0.25f));// index: 1
-		ans.Add(ans[0] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 2
-		ans.Add(ans[1] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 3
+		ans.Add (ans[0] + new Vector3 (0, 0, -0.25f));// index: 1
+		ans.Add (ans[0] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 2
+		ans.Add (ans[1] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 3
 
 		ans.Add (ans [2] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 4
 		ans.Add (ans [3] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 5
