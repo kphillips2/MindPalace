@@ -17,13 +17,13 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject ImageMenu;
 
     private Vector3 newRoomCentre;
-    private RoomCreator roomCreator;
-    private LevelEditorBuilder roomBuilder;
+	private RoomBuilder roomBuilder;
+    private LevelEditorBuilder levelBuilder;
     private ActivationManager MenuActivationManager;
 
     void Start () {
-        roomCreator = room.GetComponent<RoomCreator>();
-        roomBuilder = level.GetComponent<LevelEditorBuilder>();
+		roomBuilder = room.GetComponent<RoomBuilder>();
+		levelBuilder = level.GetComponent<LevelEditorBuilder>();
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
     }
 
@@ -268,8 +268,8 @@ public class subMenuButtons : MonoBehaviour {
         {
             oldDoorLoc = -4;
         }
-        roomCreator.addDoor(wallIndexParam, oldDoorLoc);
-        GameObject newRoom = roomBuilder.addRoom(newRoomCentre);
+        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
+        GameObject newRoom = levelBuilder.addRoom(newRoomCentre);
 
         //Make the plus sign on the new door dissapear in the new room
         Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
@@ -291,7 +291,7 @@ public class subMenuButtons : MonoBehaviour {
         PlusSignList[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
 
 
-        RoomCreator useToCutDoor = newRoom.GetComponent<RoomCreator>();
+        RoomBuilder useToCutDoor = newRoom.GetComponent<RoomBuilder>();
 
         //Door Cut in new room
         int oppositeDoorIndex = -1;

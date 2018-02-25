@@ -8,11 +8,9 @@ public class Building : MonoBehaviour {
 	private List<GameObject> corridors;
 
 	private RoomBuilder roomScript;
-	private PictureCreator pictureCreator;
 
 	// Use this for initialization
-	void Start () {
-		pictureCreator = new PictureCreator ();
+	void Awake () {
 		roomScript = room.GetComponent<RoomBuilder> ();
 		rooms = new List<GameObject> ();
 		corridors = new List<GameObject> ();
@@ -23,38 +21,38 @@ public class Building : MonoBehaviour {
 			"Wood texture 12"  // wall material
 		);
 
-		addRoom (new Vector3 (0, 0, 12));
-		roomScript = rooms [0].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (0, -4f);
-		roomScript.addDoor (0, 0f);
-		roomScript.addDoor (0, 4f);
-
-		roomScript.addDoor (1, -4f);
-		roomScript.addDoor (1, 4f);
-
-		roomScript.addDoor (2, 4f);
-
-		roomScript.addDoor (3, -4f);
-		
-		addRoom (new Vector3 (0, 0, 0));
-		roomScript = rooms [1].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (0, -4f);
-		
-		roomScript.addDoor (2, 0f);
-		
-		addRoom (new Vector3 (0, 0, -12));
-		roomScript = rooms [2].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (0, 0f);
-		
-		roomScript.addDoor (3, -4.5f);
-		roomScript.addDoor (3, -2.25f);
-		roomScript.addDoor (3, 4.5f);
-		roomScript.addDoor (3, 2.25f);
-		roomScript.addDoor (3, 0f);
-
-		addCorridor (new Vector3 (0, 0, 30));
-		roomScript = corridors [0].GetComponent<RoomBuilder> ();
-		roomScript.addDoor (2, 0f);
+		//addRoom (new Vector3 (0, 0, 12));
+		//roomScript = rooms [0].GetComponent<RoomBuilder> ();
+		//roomScript.addDoor (0, -4f);
+		//roomScript.addDoor (0, 0f);
+		//roomScript.addDoor (0, 4f);
+		//
+		//roomScript.addDoor (1, -4f);
+		//roomScript.addDoor (1, 4f);
+		//
+		//roomScript.addDoor (2, 4f);
+		//
+		//roomScript.addDoor (3, -4f);
+		//
+		//addRoom (new Vector3 (0, 0, 0));
+		//roomScript = rooms [1].GetComponent<RoomBuilder> ();
+		//roomScript.addDoor (0, -4f);
+		//
+		//roomScript.addDoor (2, 0f);
+		//
+		//addRoom (new Vector3 (0, 0, -12));
+		//roomScript = rooms [2].GetComponent<RoomBuilder> ();
+		//roomScript.addDoor (0, 0f);
+		//
+		//roomScript.addDoor (3, -4.5f);
+		//roomScript.addDoor (3, -2.25f);
+		//roomScript.addDoor (3, 4.5f);
+		//roomScript.addDoor (3, 2.25f);
+		//roomScript.addDoor (3, 0f);
+		//
+		//addCorridor (new Vector3 (0, 0, 30));
+		//roomScript = corridors [0].GetComponent<RoomBuilder> ();
+		//roomScript.addDoor (2, 0f);
 	}
 
 	public void addRoom(Vector3 roomCentre){
