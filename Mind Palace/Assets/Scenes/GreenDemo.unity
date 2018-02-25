@@ -2222,8 +2222,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1349186311}
   RoomButton: {fileID: 312418343}
-  Window: {fileID: 1752611619}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1760161005}
+  Window: {fileID: 1752611619}
+  SingularActivation: {fileID: 0}
 --- !u!114 &228124045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3103,102 +3105,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 312418343}
---- !u!1 &328594345
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 328594350}
-  - component: {fileID: 328594349}
-  - component: {fileID: 328594348}
-  - component: {fileID: 328594347}
-  - component: {fileID: 328594346}
-  m_Layer: 0
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &328594346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328594345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f269ba24f8b21a84e9ab0184cb95bd1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!23 &328594347
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328594345}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &328594348
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328594345}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &328594349
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328594345}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &328594350
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328594345}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.125, z: 0}
-  m_LocalScale: {x: 12, y: 0.25, z: 12}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &332647166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,8 +3163,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1839981109}
   RoomButton: {fileID: 1231464749}
-  Window: {fileID: 484203341}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 84038646}
+  Window: {fileID: 484203341}
+  SingularActivation: {fileID: 0}
 --- !u!114 &332647169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3948,7 +3856,7 @@ Transform:
   m_Children:
   - {fileID: 629021335}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &484203341
 GameObject:
@@ -4523,7 +4431,7 @@ Transform:
   - {fileID: 1581463958}
   - {fileID: 1032539366}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526243999
 GameObject:
@@ -5206,8 +5114,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1821022246}
   RoomButton: {fileID: 2116233680}
-  Window: {fileID: 1250994452}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1765512693}
+  Window: {fileID: 1250994452}
+  SingularActivation: {fileID: 0}
 --- !u!114 &589124781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5629,8 +5539,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1532559958}
   RoomButton: {fileID: 201378699}
-  Window: {fileID: 1593064780}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1692334274}
+  Window: {fileID: 1593064780}
+  SingularActivation: {fileID: 0}
 --- !u!114 &616057391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5888,7 +5800,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &628603451
 GameObject:
@@ -8958,8 +8870,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 378501734}
   RoomButton: {fileID: 558280859}
-  Window: {fileID: 490099844}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1751219229}
+  Window: {fileID: 490099844}
+  SingularActivation: {fileID: 0}
 --- !u!114 &959614538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10706,8 +10620,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1848513000}
   RoomButton: {fileID: 1234618870}
-  Window: {fileID: 1053988330}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 939734303}
+  Window: {fileID: 1053988330}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1157211141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12148,8 +12064,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 862567915}
   RoomButton: {fileID: 190768602}
-  Window: {fileID: 1756497135}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1462983701}
+  Window: {fileID: 1756497135}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1258570264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13173,8 +13091,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1646785063}
   RoomButton: {fileID: 1756991739}
-  Window: {fileID: 791930534}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1656278715}
+  Window: {fileID: 791930534}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1385250326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14359,8 +14279,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 762167755}
   RoomButton: {fileID: 779669233}
-  Window: {fileID: 940128306}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1408082034}
+  Window: {fileID: 940128306}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1549051135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14931,7 +14853,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1610937430
 GameObject:
@@ -15295,8 +15217,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1148805169}
   RoomButton: {fileID: 1804684997}
-  Window: {fileID: 565222472}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 920584848}
+  Window: {fileID: 565222472}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1628366381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17642,8 +17566,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1802779239}
   RoomButton: {fileID: 728754425}
-  Window: {fileID: 168888033}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 1255013258}
+  Window: {fileID: 168888033}
+  SingularActivation: {fileID: 0}
 --- !u!114 &1775243241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18592,6 +18518,7 @@ MonoBehaviour:
   Left: {fileID: 1219318294}
   Right: {fileID: 1778602798}
   CurrentThemeDisplay: {fileID: 603126782}
+  CloseButton: {fileID: 0}
   Room: {fileID: 1285771112}
 --- !u!114 &1870541844
 MonoBehaviour:
@@ -19441,8 +19368,10 @@ MonoBehaviour:
   currentRoomCenter: {x: 0, y: 0, z: 0}
   ClickedOn: {fileID: 1321371806}
   RoomButton: {fileID: 2121047792}
-  Window: {fileID: 1616562415}
+  CorridorButton: {fileID: 0}
   Picture: {fileID: 2002733777}
+  Window: {fileID: 1616562415}
+  SingularActivation: {fileID: 0}
 --- !u!114 &2020162588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19794,7 +19723,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075756789
 GameObject:
@@ -19884,7 +19813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2081149161
 Transform:
   m_ObjectHideFlags: 0

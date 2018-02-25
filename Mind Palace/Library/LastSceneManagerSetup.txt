@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/LevelEditor.unity
+=======
+- path: Assets/Scenes/ImageMenuTesting.unity
+>>>>>>> a917d0b07518e6bdc3b8bf5857a124dc501e9a43
   isLoaded: 1
   isActive: 1

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PictureCreator : MonoBehaviour {
 
-    //Loads a jpg image from the given file path and places it at position indicated by pos.
+    //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
     public void placePicture(string filePath, float roty, Vector3 pos)
     {
@@ -121,8 +121,10 @@ public class PictureCreator : MonoBehaviour {
         return texture;
     }
 
-    public static Sprite LoadNewSprite(string filePath, float pixelsPerUnit = 100.0f)
+    // Creates a Sprite version of picture to be used in menus. Can be jpg or png
+    public static Sprite LoadNewSprite(string filePath)
     {
+        float pixelsPerUnit = 100.0f;
         Sprite newSprite = new Sprite();
         Texture2D spriteTexture = LoadImg(filePath);
         newSprite = Sprite.Create(spriteTexture, new Rect(0, 0, spriteTexture.width, spriteTexture.height), new Vector2(0, 0), pixelsPerUnit);
