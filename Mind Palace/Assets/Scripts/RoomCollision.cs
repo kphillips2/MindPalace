@@ -16,8 +16,8 @@ public static class RoomCollision  {
         foreach (Room r in SaveLoad.currentLoci.getRooms())
         {
             float[] rCentre = r.getCentre();
-            if (centre.x < rCentre[0] + 10 && centre.x > rCentre[0] - 10 &&
-                centre.z < rCentre[2] + 10 && centre.z > rCentre[2] - 10) return false;
+            if (centre.x < rCentre[0] + 12 && centre.x > rCentre[0] - 12 &&
+                centre.z < rCentre[2] + 12 && centre.z > rCentre[2] - 12) return false;
         }
         // Check that room does not collide with any existing corridors
         foreach (Corridor c in SaveLoad.currentLoci.getCorridors())
@@ -28,14 +28,14 @@ public static class RoomCollision  {
             // Case that corridor is long in the x-direction, short in z-direction
             if(cAngle % 180 == 0)
             {
-                if (centre.x < cCentre[0] + 20 && centre.x > cCentre[0] - 20 &&
-                centre.z < cCentre[2] + 7.5 && centre.z > cCentre[2] - 7.5) return false;
+                if (centre.x < cCentre[0] + 24 && centre.x > cCentre[0] - 24 &&
+                centre.z < cCentre[2] + 8 && centre.z > cCentre[2] - 8) return false;
             }
             // Case that corridor is long in the z-direction, short in x-direction
             else
             {
-                if (centre.x < cCentre[0] + 7.5 && centre.x > cCentre[0] - 7.5 &&
-                centre.z < cCentre[2] + 20 && centre.z > cCentre[2] - 20) return false;
+                if (centre.x < cCentre[0] + 8 && centre.x > cCentre[0] - 8 &&
+                centre.z < cCentre[2] + 24 && centre.z > cCentre[2] - 24) return false;
             }
         }
 
@@ -55,14 +55,14 @@ public static class RoomCollision  {
             // Corridor is long in x-direction
             if (angle % 180 == 0)
             {
-                if (centre.x < rCentre[0] + 20 && centre.x > rCentre[0] - 20 &&
-                centre.z < rCentre[2] + 7.5 && centre.z > rCentre[2] - 7.5) return false;
+                if (centre.x < rCentre[0] + 24 && centre.x > rCentre[0] - 24 &&
+                centre.z < rCentre[2] + 8 && centre.z > rCentre[2] - 8) return false;
             }
             // Corridor is long in z-direction
             else
             {
-                if (centre.x < rCentre[0] + 7.5 && centre.x > rCentre[0] - 7.5 &&
-                centre.z < rCentre[2] + 20 && centre.z > rCentre[2] - 20) return false;
+                if (centre.x < rCentre[0] + 8 && centre.x > rCentre[0] - 8 &&
+                centre.z < rCentre[2] + 24 && centre.z > rCentre[2] - 24) return false;
             }
         }
 
@@ -75,20 +75,20 @@ public static class RoomCollision  {
             //Both corridors long in x-direction
             if (angle % 180 == 0 && cAngle % 180 == 0)
             {
-                if (centre.x < cCentre[0] + 30 && centre.x > cCentre[0] - 30 &&
-                centre.z < cCentre[2] + 5 && centre.z > cCentre[2] - 5) return false;
+                if (centre.x < cCentre[0] + 36 && centre.x > cCentre[0] - 36 &&
+                centre.z < cCentre[2] + 4 && centre.z > cCentre[2] - 4) return false;
             }
             //Both corridors long in z-direction
             else if(angle % 180 != 0 && cAngle % 180 != 0)
             {
-                if (centre.x < cCentre[0] + 5 && centre.x > cCentre[0] - 5 &&
-                centre.z < cCentre[2] + 30 && centre.z > cCentre[2] - 30) return false;
+                if (centre.x < cCentre[0] + 4 && centre.x > cCentre[0] - 4 &&
+                centre.z < cCentre[2] + 36 && centre.z > cCentre[2] - 36) return false;
             }
             //One corridor long in x-direction, other long in z-direction
             else
             {
-                if (centre.x < cCentre[0] + 17.5 && centre.x > cCentre[0] - 17.5 &&
-                centre.z < cCentre[2] + 17.5 && centre.z > cCentre[2] - 17.5) return false;
+                if (centre.x < cCentre[0] + 20 && centre.x > cCentre[0] - 20 &&
+                centre.z < cCentre[2] + 20 && centre.z > cCentre[2] - 20) return false;
             }
         }
 

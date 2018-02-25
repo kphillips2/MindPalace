@@ -7,7 +7,7 @@ using System.IO;
 // Class for saving and loading palaces (Loci)
 
 public static class SaveLoad {
-    public static Loci currentLoci; //The current save file being loaded/edited/viewed
+    public static Loci currentLoci= new Loci("blao"); //The current save file being loaded/edited/viewed
     public static List<Loci> savedLocis = new List<Loci>(); //List of save files
 
     // Adds the current Loci to the list of savedLocis and saves it to file. Should be called after editing a palace and

@@ -10,15 +10,21 @@ public class ButtonListButton : MonoBehaviour {
     private ButtonListControl buttonControl;
 
     private string textString;
+    private bool isFile; //True if corresponds to an image file, false if directory
 
 	public void setText(string textString)
     {
         this.textString = textString;
         text.text = textString;
     }
-	
-	public void outputString()
+    
+    public void setIsFile(bool isFile)
     {
-        buttonControl.buttonClicked(this.textString);
+        this.isFile = isFile;
+    }
+	
+	public void respondToClick()
+    {
+        buttonControl.listButtonClicked(this.textString, this.isFile);
     }
 }

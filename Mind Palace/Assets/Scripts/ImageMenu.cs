@@ -23,7 +23,7 @@ public class ImageMenu : MonoBehaviour {
             // For the buttons, list directories (folders) first
             if (child.name == "ImageButton" && dir < directories.Length)
             {
-                child.GetComponent<Image>().overrideSprite = PictureCreator.LoadNewSprite("Assets/Resources/folder.jpg");
+                //child.GetComponent<Image>().overrideSprite = PictureCreator.LoadNewSprite("Assets/Resources/folder.jpg");
                 dir++;
             }
 
@@ -33,7 +33,7 @@ public class ImageMenu : MonoBehaviour {
                 while (img < files.Length)
                 {
                     string extension = Path.GetExtension(files[img]);
-                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg") // Only list jpg files
+                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png") // Only list image files
                     {
                         // Set button sprite to image
                         child.GetComponent<Image>().overrideSprite = PictureCreator.LoadNewSprite(files[img]);

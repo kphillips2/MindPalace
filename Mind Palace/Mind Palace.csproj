@@ -242,6 +242,7 @@
     <Compile Include="Assets\Scripts\Old\OldRoom.cs" />
     <Compile Include="Assets\Scripts\Old\RoomCreator.cs" />
     <Compile Include="Assets\Scripts\pauseListener.cs" />
+    <Compile Include="Assets\Scripts\Picture.cs" />
     <Compile Include="Assets\Scripts\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />

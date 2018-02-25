@@ -6,6 +6,7 @@ public class ActivationManager : MonoBehaviour {
 
     private bool Activated = false;
     private GameObject ActivatedObject = null;
+    public GameObject ImageMenu;
 
 	void Start () {
 		
@@ -22,6 +23,7 @@ public class ActivationManager : MonoBehaviour {
         {
             ActivatedObject.GetComponent<subMenuButtons>().DefaultState();
             ActivatedObject = NewActivation;
+            ImageMenu.transform.position = new Vector3(0, -100, 0); //Like Dactivating, but deactivating breaks it
         }
     }
 
