@@ -14,6 +14,7 @@ public class ButtonListControl : MonoBehaviour {
     private string currentFilePath = "Assets/TestImages"; //Current folder being looked at
 
     public GameObject ImageMenu;
+    public GameObject ButtonManager;
 
     // Use this for initialization
     void Start ()
@@ -78,6 +79,7 @@ public class ButtonListControl : MonoBehaviour {
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
             pc.placePicture(picFilePath, roty, location);
+            ButtonManager.GetComponent<ActivationManager>().NoActive();
             ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
             //******** UNCOMMENT WHEN SAVING IS IMPLEMENTED **********
