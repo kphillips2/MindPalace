@@ -11,6 +11,7 @@ public class Loci {
     private List<float[]> objects; // Each float array must be length 4 (obj number, xcor, zcor, y rotation)
     private List<Room> rooms;
     private List<Corridor> corridors;
+    private List<Picture> pictures;
 
     // Constructor, all lists initialized to be empty
     public Loci (string name) {
@@ -18,6 +19,7 @@ public class Loci {
         objects = new List<float[]>();
         rooms = new List<Room>();
         corridors = new List<Corridor>();
+        pictures = new List<Picture>();
     }
 
     // Getters
@@ -25,6 +27,7 @@ public class Loci {
     public List<float[]> getObjects() { return new List<float[]>(objects); }
     public List<Room> getRooms() { return new List<Room>(rooms); }
     public List<Corridor> getCorridors() { return new List<Corridor>(corridors) ; }
+    public List<Picture> getPictures() { return new List<Picture>(pictures); }
 
     // Set name
     public void setName(string name) { this.name = name; }
@@ -37,11 +40,13 @@ public class Loci {
     }
     public void addRoom(Room room) { rooms.Add(room); }
     public void addCorridor(Corridor corridor) { corridors.Add(corridor); }
+    public void addPicture(Picture picture) { pictures.Add(picture); }
 
     // Clear list
     public void clearObjects() { objects = new List<float[]>(); }
     public void clearRooms() { rooms = new List<Room>(); }
     public void clearCorridors() { corridors = new List<Corridor>(); }
+    public void clearPictures() { pictures = new List<Picture>(); }
 
     // Update
 

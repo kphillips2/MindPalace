@@ -72,8 +72,14 @@ public class ButtonListControl : MonoBehaviour {
         if (isFile)
         {
             PictureCreator pc = new PictureCreator();
-            pc.placePicture(currentFilePath + "/" + textString, transform.eulerAngles.y + 90f,
-                    new Vector3(transform.position.x, transform.position.y, transform.position.z));
+            string picFilePath = currentFilePath + "/" + textString;
+            float roty = transform.eulerAngles.y + 90f;
+            Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+            pc.placePicture(picFilePath, roty, location);
+
+            //******** UNCOMMENT WHEN SAVING IS IMPLEMENTED **********
+            //SaveLoad.currentLoci.addPicture(new Picture(picFilePath, roty, location));
         }
         // If directory, navigate to that directory
         else
