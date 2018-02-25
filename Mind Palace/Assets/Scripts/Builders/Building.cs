@@ -5,6 +5,7 @@ using UnityEngine;
 public class Building : MonoBehaviour {
 	public GameObject room;
 	private List<GameObject> rooms;
+	private List<GameObject> corridors;
 
 	private RoomBuilder roomScript;
 	private PictureCreator pictureCreator;
@@ -14,6 +15,7 @@ public class Building : MonoBehaviour {
 		pictureCreator = new PictureCreator ();
 		roomScript = room.GetComponent<RoomBuilder> ();
 		rooms = new List<GameObject> ();
+		corridors = new List<GameObject> ();
 
 		roomScript.setMaterials(
 			"Wood Texture 06", // floor material
@@ -25,9 +27,7 @@ public class Building : MonoBehaviour {
 		roomScript = rooms [0].GetComponent<RoomBuilder> ();
 		roomScript.addDoor (0, -4f);
 		roomScript.addDoor (0, 0f);
-		roomScript.addDoor (0, 2f);
 		roomScript.addDoor (0, 4f);
-		roomScript.addDoor (0, 5f);
 
 		roomScript.addDoor (1, -4f);
 		roomScript.addDoor (1, 4f);
@@ -35,8 +35,6 @@ public class Building : MonoBehaviour {
 		roomScript.addDoor (2, 4f);
 
 		roomScript.addDoor (3, -4f);
-
-		roomScript.addDoor (4, 2.5f);
 		
 		addRoom (new Vector3 (0, 0, 0));
 		roomScript = rooms [1].GetComponent<RoomBuilder> ();
@@ -54,8 +52,8 @@ public class Building : MonoBehaviour {
 		roomScript.addDoor (3, 2.25f);
 		roomScript.addDoor (3, 0f);
 
-		addCorridor (new Vector3 (0, 0, 36));
-		roomScript = rooms [3].GetComponent<RoomBuilder> ();
+		addCorridor (new Vector3 (0, 0, 30));
+		roomScript = corridors [0].GetComponent<RoomBuilder> ();
 		roomScript.addDoor (2, 0f);
 	}
 
@@ -76,8 +74,8 @@ public class Building : MonoBehaviour {
 			Quaternion.Euler (0, 0, 0)
 		) as GameObject;
 		component.SetActive (true);
-		component.GetComponent<RoomBuilder> ().setRoomSize (4, 36);
-		rooms.Add(component);
+		component.GetComponent<RoomBuilder> ().setRoomSize (4, 24);
+		corridors.Add(component);
 	}
 	public void setMaterials(int index){
 	}
