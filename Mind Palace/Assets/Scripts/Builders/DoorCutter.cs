@@ -38,35 +38,17 @@ public class DoorCutter : MonoBehaviour {
 		return doesNewestOverlap;
 	}
 	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
-		// close face
-		triangles.Add (11);
-		triangles.Add (9);
-		triangles.Add (5);
+		if (doorCount > 0)
+			addFrontFace (triangles);
+		else {
+			triangles.Add (1);
+			triangles.Add (7);
+			triangles.Add (5);
 
-		triangles.Add (5);
-		triangles.Add (3);
-		triangles.Add (11);
-
-		triangles.Add (11);
-		triangles.Add (3);
-		triangles.Add (1);
-
-		for (int k = 1; k < doorCount; k++)
-			addDoorFace (triangles, k);
-		int mark = 8 + 8 * (doorCount - 1);
-
-		triangles.Add (1);
-		triangles.Add (mark + 5);
-		triangles.Add (11);
-
-		triangles.Add (mark + 5);
-		triangles.Add (1);
-		triangles.Add (7);
-
-		triangles.Add (7);
-		triangles.Add (mark + 7);
-		triangles.Add (mark + 5);
-		// end close face
+			triangles.Add (5);
+			triangles.Add (3);
+			triangles.Add (1);
+		}
 
 		// far face
 		for (int k = triangles.Count-1; k > 0; k-=3) {
@@ -85,6 +67,7 @@ public class DoorCutter : MonoBehaviour {
 		addSquareFace (triangles, vertices.Count);
 
 		// door face(s)
+		int mark;
 		for (int k = 0; k < doorCount; k++) {
 			mark = 8 + 8 * k;
 
@@ -152,16 +135,60 @@ public class DoorCutter : MonoBehaviour {
 		}
 		// end door faces
 
-		mark = 8 + 8 * (doorCount - 1);
+		if (doorCount > 0) {
+			mark = 8 + 8 * (doorCount - 1);
 
-		vertices.Add (vertices [7]);
-		vertices.Add (vertices [6]);
-		vertices.Add (vertices [mark + 7]);
-		vertices.Add (vertices [mark + 6]);
+			vertices.Add (vertices [7]);
+			vertices.Add (vertices [6]);
+			vertices.Add (vertices [mark + 7]);
+			vertices.Add (vertices [mark + 6]);
 
-		addSquareFace (triangles, vertices.Count);
+			addSquareFace (triangles, vertices.Count);
+		} else {
+			triangles.Add (7);
+			triangles.Add (6);
+			triangles.Add (4);
+
+			triangles.Add (4);
+			triangles.Add (5);
+			triangles.Add (7);
+		}
+
 		// end bottom faces
 	}
+	// creates the face of the wall towards the centre of the room
+	private void addFrontFace(List<int> triangles){
+		// close face
+		triangles.Add (11);
+		triangles.Add (9);
+		triangles.Add (5);
+
+		triangles.Add (5);
+		triangles.Add (3);
+		triangles.Add (11);
+
+		triangles.Add (11);
+		triangles.Add (3);
+		triangles.Add (1);
+
+		for (int k = 1; k < doorCount; k++)
+			addDoorFace (triangles, k);
+		int mark = 8 + 8 * (doorCount - 1);
+
+		triangles.Add (1);
+		triangles.Add (mark + 5);
+		triangles.Add (11);
+
+		triangles.Add (mark + 5);
+		triangles.Add (1);
+		triangles.Add (7);
+
+		triangles.Add (7);
+		triangles.Add (mark + 7);
+		triangles.Add (mark + 5);
+		// end close face
+	}
+	// adds a face to the left of each door
 	private void addDoorFace(List<int> triangles, int doorIndex){
 		int mark = 8 + 8 * doorIndex;
 
@@ -173,6 +200,7 @@ public class DoorCutter : MonoBehaviour {
 		triangles.Add (mark - 3);
 		triangles.Add (mark + 3);
 	}
+	// create a square face from the last four vertices in vertices
 	private void addSquareFace(List<int> triangles, int mark){
 		mark -= 4;
 
@@ -184,6 +212,7 @@ public class DoorCutter : MonoBehaviour {
 		triangles.Add (mark + 2);
 		triangles.Add (mark);
 	}
+	// returns a list of vertices with the given doors
 	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] doorLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
@@ -223,6 +252,7 @@ public class DoorCutter : MonoBehaviour {
 
 		return ans;
 	}
+	// checks whether the door location overlaps with any other doors.
 	private bool checkDoorPlacement(Vector3 doorLoc, List<Vector3> existingLocs){
 		foreach (Vector3 existingLoc in existingLocs) {
 			float dist = Mathf.Abs(Vector3.Distance (existingLoc, doorLoc));
@@ -233,6 +263,7 @@ public class DoorCutter : MonoBehaviour {
 		}
 		return true;
 	}
+	// removes the scale and translation from the given list and returns the resulting vectors as an array
 	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
