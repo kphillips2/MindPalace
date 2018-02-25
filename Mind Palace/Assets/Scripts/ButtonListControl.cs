@@ -78,7 +78,7 @@ public class ButtonListControl : MonoBehaviour {
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
             pc.placePicture(picFilePath, roty, location);
-            ImageMenu.transform.position= new Vector3(0,-100,0); //Like Dactivating, but deactivating breaks it
+            ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
             //******** UNCOMMENT WHEN SAVING IS IMPLEMENTED **********
             //SaveLoad.currentLoci.addPicture(new Picture(picFilePath, roty, location));
