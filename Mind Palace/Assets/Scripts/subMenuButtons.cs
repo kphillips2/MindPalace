@@ -13,6 +13,7 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject Picture;
     public GameObject Window;
     public GameObject SingularActivation;
+    public GameObject ImageMenu;
 
     private Vector3 newRoomCentre;
     private RoomCreator roomCreator;
@@ -44,7 +45,16 @@ public class subMenuButtons : MonoBehaviour {
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
         MenuActivationManager.NoActive();
     }
-    
+
+    public void HideAllStillActive()
+    {
+        ClickedOn.SetActive(false);
+        RoomButton.SetActive(false);
+        Window.SetActive(false);
+        Picture.SetActive(false);
+        CorridorButton.SetActive(false);
+    }
+
     public void DefaultState()
     {
         ClickedOn.SetActive(true);
@@ -66,7 +76,9 @@ public class subMenuButtons : MonoBehaviour {
 
     public void AddPicture()
     {
-        print("TODO");
+        ImageMenu.transform.position = this.transform.position;
+        ImageMenu.transform.rotation = this.transform.rotation;
+        HideAllStillActive();
     }
 
     public void AddRoom()
@@ -155,11 +167,6 @@ public class subMenuButtons : MonoBehaviour {
         {
             print("nowhere?");
         }
-		roomCreator.setMaterials(
-            "Wood Texture 06", // floor material
-            "Wood Texture 15", // roof material
-            "Wood texture 12"  // wall material
-        );
         buildRoom(newRoomCentre + currentRoomCenter,wallIndex, doorIndex);
         HideAll();
 
