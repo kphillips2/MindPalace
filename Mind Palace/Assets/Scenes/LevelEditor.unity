@@ -3182,6 +3182,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114962067568564824, guid: 44de53bd9a4e289459f18d270b27ca28,
+        type: 2}
+      propertyPath: ActivationManager
+      value: 
+      objectReference: {fileID: 2010165889}
+    - target: {fileID: 114962067568564824, guid: 44de53bd9a4e289459f18d270b27ca28,
+        type: 2}
+      propertyPath: ButtonManager
+      value: 
+      objectReference: {fileID: 2010165889}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44de53bd9a4e289459f18d270b27ca28, type: 2}
   m_IsPrefabParent: 0
@@ -6725,7 +6735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1086852203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7452,6 +7462,30 @@ Prefab:
       propertyPath: ImageMenu
       value: 
       objectReference: {fileID: 432220060}
+    - target: {fileID: 1217539601047126, guid: 8b53686d42d1dc5419578b6adba80fd3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135256011176122, guid: 8b53686d42d1dc5419578b6adba80fd3,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135256011176122, guid: 8b53686d42d1dc5419578b6adba80fd3,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135256011176122, guid: 8b53686d42d1dc5419578b6adba80fd3,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135256011176122, guid: 8b53686d42d1dc5419578b6adba80fd3,
+        type: 2}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b53686d42d1dc5419578b6adba80fd3, type: 2}
   m_IsPrefabParent: 0
@@ -9166,6 +9200,10 @@ Prefab:
       propertyPath: ImageMenu
       value: 
       objectReference: {fileID: 432220060}
+    - target: {fileID: 1217539601047126, guid: 8b53686d42d1dc5419578b6adba80fd3, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b53686d42d1dc5419578b6adba80fd3, type: 2}
   m_IsPrefabParent: 0
