@@ -9,10 +9,12 @@ public class ButtonListControl : MonoBehaviour {
     private GameObject buttonTemplate;
     [SerializeField]
     private Button backButton;
-
     private List<GameObject> buttons = new List<GameObject>();
     private string startFilePath = "Assets/TestImages"; //Top level where pictures are stored
     private string currentFilePath = "Assets/TestImages"; //Current folder being looked at
+
+    public GameObject ImageMenu;
+    public GameObject ButtonManager;
 
     // Use this for initialization
     void Start ()
@@ -77,6 +79,8 @@ public class ButtonListControl : MonoBehaviour {
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
             pc.placePicture(picFilePath, roty, location);
+            ButtonManager.GetComponent<ActivationManager>().NoActive();
+            ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
             //******** UNCOMMENT WHEN SAVING IS IMPLEMENTED **********
             //SaveLoad.currentLoci.addPicture(new Picture(picFilePath, roty, location));

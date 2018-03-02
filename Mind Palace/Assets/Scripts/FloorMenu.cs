@@ -14,10 +14,10 @@ public class FloorMenu : MonoBehaviour {
     public static int NUMBER_OF_THEMES = 3;
 
     private int CurrentThemeNumber = 1;
-    private RoomCreator RoomTextureSetter;
+    private RoomBuilder RoomTextureSetter;
 
 	void Start () {
-        RoomTextureSetter = Room.GetComponent<RoomCreator>();
+        RoomTextureSetter = Room.GetComponent<RoomBuilder>();
     }
 
     public void ShowMoreOptions()

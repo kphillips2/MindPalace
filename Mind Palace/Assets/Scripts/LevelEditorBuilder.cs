@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelEditorBuilder : MonoBehaviour {
-	public GameObject corridor;
-	public GameObject space;
+	public GameObject room;
 
-	private GameObject currentRoom;
-	private OldRoom oldRoom;
-	private OldCorridor oldCorridor;
-	private RoomCreator roomCreator;
     private PictureCreator pictureCreator;
+	private Building building;
     private GameObject component;
 
     // Use this for initialization
     void Start () {
-		oldCorridor = corridor.GetComponent<OldCorridor> ();
+		//oldCorridor = corridor.GetComponent<OldCorridor> ();
         pictureCreator = new PictureCreator();
-		roomCreator = space.GetComponent<RoomCreator> ();
+		building = GetComponentInParent<Building> (); 
+		//roomCreator = room.GetComponent<RoomCreator> ();
         /*
 		// input: index, loc (-6)------------(6)
 		roomCreator.addDoor (0, -3);
@@ -26,41 +23,28 @@ public class LevelEditorBuilder : MonoBehaviour {
 		roomCreator.addDoor (3, 3);
         */
 
-		roomCreator.setMaterials(
-			"Wood Texture 06", // floor material
-			"Wood Texture 15", // roof material
-			"Wood texture 12"  // wall material
-		);
-        //roomBuilder.addDoor(1, -3);
-        //roomBuilder.addDoor(1, 3);
-        GameObject FirstRoom =addRoom(new Vector3(0,0,0));
+		//roomCreator.setMaterials(
+		//	"Wood Texture 06", // floor material
+		//	"Wood Texture 15", // roof material
+		//	"Wood texture 12"  // wall material
+		//);
+        ////roomBuilder.addDoor(1, -3);
+        ////roomBuilder.addDoor(1, 3);
+        //GameObject FirstRoom =addRoom(new Vector3(0,0,0));
+
+		building.addRoom (new Vector3 (0, 0, 0));
         
     }
 
 	public GameObject addRoom(Vector3 roomCentre){
         component = Instantiate(
-            space,
+			room,
             roomCentre,
             Quaternion.Euler(0, 0, 0)
         ) as GameObject;
         component.SetActive(true);
         return component;
     }
-	private void addCorridor(Vector3 roomCentre, int[] doorStates, int angle){
-		oldCorridor.addFloor (
-			roomCentre,
-			angle
-		);
-		oldCorridor.addRoof (
-			roomCentre,
-			angle
-		);
-		oldCorridor.addWalls (
-			roomCentre,
-			doorStates,
-			angle
-		);
-	}
 
 
 	// Update is called once per frame
