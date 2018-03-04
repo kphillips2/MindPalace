@@ -1317,7 +1317,8 @@ MonoBehaviour:
   active: 1
   unhighlightOnDisable: 1
   thickness: 1
-  customOutlineModels: []
+  customOutlineModels:
+  - {fileID: 1104132371121128}
   customOutlineModelPaths: []
   enableSubmeshHighlight: 0
 --- !u!114 &114220632727629828
