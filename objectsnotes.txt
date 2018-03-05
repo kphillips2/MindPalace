@@ -1,0 +1,42 @@
+SCENE SETUP
+------------
+
+On both LeftController and RightController under [VRTK_Scripts]
+
+- Add VRTK_InteractTouch
+- Add VRTK_InteractGrab
+
+On VRTK SDK Manager
+
+- Under Script Aliases, drag LeftController from under [VRTK_Scripts]
+to 'Left Controller' attribute. Do same thing with right controller.
+
+VRTK_HeadsetCollision (Script) - (Under [VRTK_Scripts]->PlayArea)
+
+- Check 'Ignore Trigger Collision' (Makes it so you won't collide with
+the mind palace objects - but you'll still collide with walls - despite 
+them having colliders)
+
+-----------------------------------------------------------------------
+
+POTENTIAL CHANGES THAT MAY ALLOW GRABBING WITH POINTER
+------------------------------------------------------
+
+VRTK_Pointer (Script) - (Type name of script in searchbar to find)
+
+- Check 'Interact With Objects'
+- Check 'Grab To Pointer Tip'?
+
+On Prefab that you're trying to grab
+
+- Mess around with settings under VRTK_InteractableObject
+
+-----------------------------------------------------------------------
+
+TO TEST OBJECTS
+---------------
+
+- Go under Assets->Resources->Objects
+- Drag prefabs whose names end in '_G' into the scene. (The prefabs
+without the '_G' are the original non-grabbable versions) 
+- To change outline color, change color under VRTK_InteractableObject
