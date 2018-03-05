@@ -312,6 +312,7 @@
     <Compile Include="Assets\Scripts\SaveTester.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\SnapToGround.cs" />
+    <Compile Include="Assets\Scripts\StartingScreen.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\subMenuButtons.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
