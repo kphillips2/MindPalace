@@ -65,7 +65,7 @@ public class Building : MonoBehaviour {
 		component.GetComponent<RoomBuilder> ().setRoomSize (12, 12);
 		rooms.Add(component);
 	}
-	public void addCorridor(Vector3 roomCentre){
+	public void addCorridorAlongX(Vector3 roomCentre){
 		GameObject component = Instantiate (
 			room,
 			roomCentre,
@@ -75,7 +75,18 @@ public class Building : MonoBehaviour {
 		component.GetComponent<RoomBuilder> ().setRoomSize (4, 24);
 		corridors.Add(component);
 	}
-	public void setMaterials(int index){
+    public void addCorridorAlongZ(Vector3 roomCentre)
+    {
+        GameObject component = Instantiate(
+            room,
+            roomCentre,
+            Quaternion.Euler(0, 0, 0)
+        ) as GameObject;
+        component.SetActive(true);
+        component.GetComponent<RoomBuilder>().setRoomSize(4, 24);
+        corridors.Add(component);
+    }
+    public void setMaterials(int index){
 	}
 
 	// Update is called once per frame

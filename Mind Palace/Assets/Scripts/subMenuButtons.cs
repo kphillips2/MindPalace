@@ -15,6 +15,7 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject Window;
     public GameObject SingularActivation;
     public GameObject ImageMenu;
+    public bool RoomNotCorridor = true;
 
     private Vector3 newRoomCentre;
 	private RoomBuilder roomBuilder;
@@ -36,6 +37,7 @@ public class subMenuButtons : MonoBehaviour {
         Picture.SetActive(true);
         MenuActivationManager.ActivateMenu(this.gameObject);
         RoomButton.GetComponent<Button>().interactable= CheckRoomPlacement();
+        CorridorButton.GetComponent<Button>().interactable = CheckCorridorPlacement();
     }
     public void HideAll()
     {
@@ -68,7 +70,196 @@ public class subMenuButtons : MonoBehaviour {
 
     public void AddCorridor()
     {
-        print("TODO");
+        Vector3 buttonCenter = this.transform.position;
+        int doorIndex = -1;
+        int wallIndex = -1;
+        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
+        {
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
+            {
+                doorIndex = 3;
+                wallIndex = 1;
+                newRoomCentre = new Vector3(18, 0, 0);
+            }
+            else if (buttonCenter.z > 0f + currentRoomCenter.z)
+            {
+                doorIndex = 2;
+                wallIndex = 1;
+                newRoomCentre = new Vector3(18, 0, 4);
+            }
+            else if (buttonCenter.z < 0f + currentRoomCenter.z)
+            {
+                doorIndex = 4;
+                wallIndex = 1;
+                newRoomCentre = new Vector3(18, 0, -4);
+            }
+        }
+        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
+        {
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
+            {
+                doorIndex = 9;
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-18, 0, 0);
+            }
+            else if (buttonCenter.z > 0f + currentRoomCenter.z)
+            {
+                doorIndex = 10;
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-18, 0, 4);
+            }
+            else if (buttonCenter.z < 0f + currentRoomCenter.z)
+            {
+                doorIndex = 8;
+                wallIndex = 3;
+                newRoomCentre = new Vector3(-18, 0, -4);
+            }
+        }
+        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
+        {
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            {
+                doorIndex = 0;
+                wallIndex = 0;
+                newRoomCentre = new Vector3(0, 0, 18);
+            }
+            else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            {
+                doorIndex = 1;
+                wallIndex = 0;
+                newRoomCentre = new Vector3(4, 0, 18);
+            }
+            else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            {
+                doorIndex = 11;
+                wallIndex = 0;
+                newRoomCentre = new Vector3(-4, 0, 18);
+            }
+        }
+        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
+        {
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            {
+                doorIndex = 6;
+                wallIndex = 2;
+                newRoomCentre = new Vector3(0, 0, -18);
+            }
+            else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            {
+                doorIndex = 5;
+                wallIndex = 2;
+                newRoomCentre = new Vector3(4, 0, -18);
+            }
+            else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            {
+                doorIndex = 7;
+                wallIndex = 2;
+                newRoomCentre = new Vector3(-4, 0, -18);
+            }
+        }
+        else
+        {
+            print("nowhere?");
+        }
+        if(wallIndex==0 || wallIndex == 2)
+        {
+            BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, true);
+            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            string[] DummyMat = { "", "", "" };
+            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat,90));
+            HideAll();
+        }
+        else
+        {
+            BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, false);
+            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            string[] DummyMat = { "", "", "" };
+            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
+            HideAll();
+        }
+       
+
+    }
+
+    public void PopulateRoomPlusSigns(Vector3 roomcenter, int doorIndex)
+    {
+
+    }
+
+    public void PopulateCorridorPlusSigns(Vector3 roomcenter, int doorIndex, bool onZAxis)
+    {
+
+    }
+
+    public void BuildCorridor(Vector3 corridorCenter, int wallIndexParam, int doorIndexParam, bool zAxis)
+    {
+        float oldDoorLoc = 0;
+        if (doorIndexParam == 0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
+        {
+            oldDoorLoc = 0;
+        }
+        else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
+        {
+            oldDoorLoc = 4;
+        }
+        if (doorIndexParam == 2 || doorIndexParam == 5 || doorIndexParam == 8 || doorIndexParam == 11)
+        {
+            oldDoorLoc = -4;
+        }
+        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
+        GameObject newCorridor;
+        if (zAxis)
+        {
+            newCorridor = levelBuilder.addCorridorAlongZ(newRoomCentre);
+        }
+        else
+        {
+            newCorridor = levelBuilder.addCorridorAlongX(newRoomCentre);
+        }
+       
+        
+        //Make the plus sign on the new door dissapear in the new room
+        Canvas[] PlusSigns = newCorridor.GetComponentsInChildren<Canvas>();
+        List<Canvas> PlusSignList = new List<Canvas>();
+        for (int j = 0; j < PlusSigns.Length; j++)
+        {
+            if (PlusSigns[j].tag == "PlusSign")
+            {
+                PlusSignList.Add(PlusSigns[j]);
+            }
+        }
+        //make sure only plus signs in list
+        for (int i = 0; i < PlusSignList.Count; i++)
+        {
+
+            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
+            PlusSignList[i].GetComponent<subMenuButtons>().DefaultState();
+        }
+        PlusSignList[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
+
+
+        RoomBuilder useToCutDoor = newCorridor.GetComponent<RoomBuilder>();
+
+        //Door Cut in new room
+        int oppositeDoorIndex = -1;
+        if (wallIndexParam == 0)
+        {
+            oppositeDoorIndex = 2;
+        }
+        else if (wallIndexParam == 1)
+        {
+            oppositeDoorIndex = 3;
+        }
+        else if (wallIndexParam == 2)
+        {
+            oppositeDoorIndex = 0;
+        }
+        else if (wallIndexParam == 3)
+        {
+            oppositeDoorIndex = 1;
+        }
+        useToCutDoor.addDoor(oppositeDoorIndex, 0);
+        
     }
 
     public void AddWindow()
@@ -152,6 +343,82 @@ public class subMenuButtons : MonoBehaviour {
             print("nowhere?");
         }
         return RoomCollision.canRoomBePlaced(RoomCenterToCheck+currentRoomCenter);
+    }
+
+    private bool CheckCorridorPlacement()
+    {
+        Vector3 buttonCenter = this.transform.position;
+        Vector3 RoomCenterToCheck = new Vector3(-1, -1, -1);
+        float corridorAngle = -1;
+        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
+        {
+            corridorAngle = 0;
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(18, 0, 0);
+            }
+            else if (buttonCenter.z > 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(18, 0, 4);
+            }
+            else if (buttonCenter.z < 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(18, 0, -4);
+            }
+        }
+        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
+        {
+            corridorAngle = 180;
+            if (buttonCenter.z == 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(-18, 0, 0);
+            }
+            else if (buttonCenter.z > 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(-18, 0, 4);
+            }
+            else if (buttonCenter.z < 0f + currentRoomCenter.z)
+            {
+                RoomCenterToCheck = new Vector3(-18, 0, -4);
+            }
+        }
+        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
+        {
+            corridorAngle = 270;
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(0, 0, 18);
+            }
+            else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(4, 0, 18);
+            }
+            else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(-4, 0, 18);
+            }
+        }
+        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
+        {
+            corridorAngle = 90;
+            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(0, 0, -18);
+            }
+            else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(4, 0, -18);
+            }
+            else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            {
+                RoomCenterToCheck = new Vector3(-4, 0, -18);
+            }
+        }
+        else
+        {
+            print("nowhere?");
+        }
+        return RoomCollision.canCorridorBePlaced(RoomCenterToCheck + currentRoomCenter,corridorAngle);
     }
 
     public void AddRoom()
