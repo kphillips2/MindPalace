@@ -11,7 +11,7 @@ public class FloorMenu : MonoBehaviour {
     public GameObject CurrentThemeDisplay;
     public GameObject CloseButton;
     public GameObject Room;
-    public static int NUMBER_OF_THEMES = 3;
+    public static int NUMBER_OF_THEMES = 8;
 
     private int CurrentThemeNumber = 1;
     private RoomBuilder RoomTextureSetter;
