@@ -181,6 +181,16 @@ public class subMenuButtons : MonoBehaviour {
 
     }
 
+    public void PopulateRoomPlusSigns(Vector3 roomcenter, int doorIndex)
+    {
+
+    }
+
+    public void PopulateCorridorPlusSigns(Vector3 roomcenter, int doorIndex, bool onZAxis)
+    {
+
+    }
+
     public void BuildCorridor(Vector3 corridorCenter, int wallIndexParam, int doorIndexParam, bool zAxis)
     {
         float oldDoorLoc = 0;
