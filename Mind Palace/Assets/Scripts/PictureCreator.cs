@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PictureCreator : MonoBehaviour {
 
-    private float scale = 1f; //Increasing this value will make the pictures larger
+    private float scale = 2f; //Increasing this value will make the pictures larger
 
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
