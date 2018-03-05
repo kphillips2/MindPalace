@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PictureCreator : MonoBehaviour {
 
+    private float scale = 1f; //Increasing this value will make the pictures larger
+
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
     public void placePicture(string filePath, float roty, Vector3 pos)
@@ -34,9 +36,9 @@ public class PictureCreator : MonoBehaviour {
             h = (float)img.height/ img.width;
         }
  
-        pic.transform.localScale = new Vector3(0.05f, h, w); //Scales the cube
+        pic.transform.localScale = new Vector3(0.05f, scale * h, scale * w); //Scales the cube
         pic.GetComponent<Renderer>().material.mainTexture = img; //Textures cube with the image
-        framePicture(roty, pos, w, h);
+        framePicture(roty, pos, scale * w, scale * h);
     }
 
     //Places a frame around a picture that is positioned at pos and rotated around the y-axis by roty.

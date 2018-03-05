@@ -37,4 +37,4 @@ Like with new rooms, will also want to update doors of the room/corridor that is
 - corridor doors are stored as a int[] of length 8
 - room/corridor materials are stored as a string[] of length 3
 - ALL rooms in scene are 12x12
-- ALL corridors in scene are 4x36
+- ALL corridors in scene are 4x24
