@@ -33,6 +33,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 
     public GameObject addCorridorAlongZ(Vector3 roomCentre)
     {
+        print(roomCentre);
         GameObject component = Instantiate(
             room,
             roomCentre,
@@ -46,6 +47,7 @@ public class LevelEditorBuilder : MonoBehaviour {
 
     public GameObject addCorridorAlongX(Vector3 roomCentre)
     {
+        print(roomCentre);
         GameObject component = Instantiate(
             room,
             roomCentre,

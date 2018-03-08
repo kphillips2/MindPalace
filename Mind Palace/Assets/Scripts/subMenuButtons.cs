@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AKA: Max's Monstrosity
+ * WARNING: Do not attempt to read or alter this script
+ * lest you be driven to madness by its labyrinthine structure.
+ * Remember, when you stare into darkness, the darkness stares back.
+ */
 public class subMenuButtons : MonoBehaviour {
     public GameObject room;
     public GameObject level;
@@ -15,8 +21,10 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject Window;
     public GameObject SingularActivation;
     public GameObject ImageMenu;
-    public bool RoomNotCorridor = true;
+    public int doorIndex;
 
+    private bool CorridorOnZ;
+    private bool RoomNotCorridor = true;
     private Vector3 newRoomCentre;
 	private RoomBuilder roomBuilder;
     private LevelEditorBuilder levelBuilder;
@@ -27,7 +35,7 @@ public class subMenuButtons : MonoBehaviour {
 		levelBuilder = level.GetComponent<LevelEditorBuilder>();
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
     }
-
+    //Menu Manipulators:
     public void ShowMoreOptions()
     {
         ClickedOn.SetActive(false);
@@ -49,7 +57,6 @@ public class subMenuButtons : MonoBehaviour {
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
         MenuActivationManager.NoActive();
     }
-
     public void HideAllStillActive()
     {
         ClickedOn.SetActive(false);
@@ -58,7 +65,6 @@ public class subMenuButtons : MonoBehaviour {
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
     }
-
     public void DefaultState()
     {
         ClickedOn.SetActive(true);
@@ -67,120 +73,409 @@ public class subMenuButtons : MonoBehaviour {
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
     }
-
-    public void AddCorridor()
+    //Should Probably be Statics:
+    private int WallIndexForRoom()
     {
-        Vector3 buttonCenter = this.transform.position;
-        int doorIndex = -1;
         int wallIndex = -1;
-        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
+        if (doorIndex == 11 || doorIndex == 0 || doorIndex == 1)
         {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                doorIndex = 3;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(18, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                doorIndex = 2;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(18, 0, 4);
-            }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                doorIndex = 4;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(18, 0, -4);
-            }
+            wallIndex = 0;
         }
-        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
+        else if (doorIndex == 2 || doorIndex == 3 || doorIndex == 4)
         {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                doorIndex = 9;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-18, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                doorIndex = 10;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-18, 0, 4);
-            }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                doorIndex = 8;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-18, 0, -4);
-            }
+            wallIndex = 1;
         }
-        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
+        else if (doorIndex == 5 || doorIndex == 6 || doorIndex == 7)
         {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                doorIndex = 0;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(0, 0, 18);
-            }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                doorIndex = 1;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(4, 0, 18);
-            }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                doorIndex = 11;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(-4, 0, 18);
-            }
+            wallIndex = 2;
         }
-        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
+        else
         {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
+            wallIndex = 3;
+        }
+
+        return wallIndex;
+    }
+    private int WallIndexForCorridor()
+    {
+        if (CorridorOnZ)
+        {
+            if (doorIndex == 0)
             {
-                doorIndex = 6;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(0, 0, -18);
+                return 0;
             }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
+            else if (1 <= doorIndex && doorIndex <= 6)
             {
-                doorIndex = 5;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(4, 0, -18);
+                return 1;
             }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
+            else if (doorIndex == 7)
             {
-                doorIndex = 7;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(-4, 0, -18);
+                return 2;
+            }
+            else
+            {
+                return 3;
             }
         }
         else
         {
-            print("nowhere?");
+            if (doorIndex == 3)
+            {
+                return 1;
+            }
+            else if (4 <= doorIndex && doorIndex <= 9)
+            {
+                return 2;
+            }
+            else if (doorIndex == 10)
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
         }
-        if(wallIndex==0 || wallIndex == 2)
+    }
+    private float OldDoorLocationCorridor()
+    {
+        if (CorridorOnZ)
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return 0f;
+                case 1:
+                    return -10f;
+                case 2:
+                    return -6f;
+                case 3:
+                    return -2f;
+                case 4:
+                    return 2f;
+                case 5:
+                    return 6f;
+                case 6:
+                    return 10f;
+                case 7:
+                    return 0f;
+                case 8:
+                    return -10f;
+                case 9:
+                    return -6f;
+                case 10:
+                    return -2f;
+                case 11:
+                    return 2f;
+                case 12:
+                    return 6f;
+                default:
+                    return 10f;
+            }
+        }
+        else
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return 2f;
+                case 1:
+                    return 6f;
+                case 2:
+                    return 10f;
+                case 3:
+                    return 0f;
+                case 4:
+                    return -10f;
+                case 5:
+                    return -6f;
+                case 6:
+                    return -2f;
+                case 7:
+                    return 2f;
+                case 8:
+                    return 6f;
+                case 9:
+                    return 10f;
+                case 10:
+                    return 0f;
+                case 11:
+                    return -10f;
+                case 12:
+                    return -6f;
+                default:
+                    return -2f;
+            }
+        }
+    }
+    private Vector3 FindCorridorCenterFromCorridor()
+    {
+        if (CorridorOnZ)
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return new Vector3(0, 0, 24);
+                case 1:
+                    return new Vector3(14, 0, 10);
+                case 2:
+                    return new Vector3(14, 0, 6);
+                case 3:
+                    return new Vector3(14, 0, 2);
+                case 4:
+                    return new Vector3(14, 0, -2);
+                case 5:
+                    return new Vector3(14, 0, -6);
+                case 6:
+                    return new Vector3(14, 0, -10);
+                case 7:
+                    return new Vector3(0, 0, -24);
+                case 8:
+                    return new Vector3(-14, 0, -10);
+                case 9:
+                    return new Vector3(-14, 0, -6);
+                case 10:
+                    return new Vector3(-14, 0, -2);
+                case 11:
+                    return new Vector3(-14, 0, 2);
+                case 12:
+                    return new Vector3(-14, 0, 6);
+                default:
+                    return new Vector3(-14, 0, 10);
+            }
+        }
+        else
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return new Vector3(2, 0, 14);
+                case 1:
+                    return new Vector3(6, 0, 14);
+                case 2:
+                    return new Vector3(10, 0, 14);
+                case 3:
+                    return new Vector3(24, 0, 0);
+                case 4:
+                    return new Vector3(10, 0, -14);
+                case 5:
+                    return new Vector3(6, 0, -14);
+                case 6:
+                    return new Vector3(2, 0, -14);
+                case 7:
+                    return new Vector3(-2, 0, -14);
+                case 8:
+                    return new Vector3(-6, 0, -14);
+                case 9:
+                    return new Vector3(-10, 0, -14);
+                case 10:
+                    return new Vector3(-24, 0, 0);
+                case 11:
+                    return new Vector3(-10, 0, 14);
+                case 12:
+                    return new Vector3(-6, 0, 14);
+                default:
+                    return new Vector3(-2, 0, 14);
+            }
+        }
+    }
+    private Vector3 FindRoomCenterFromCorridor()
+    {
+        if (CorridorOnZ)
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return new Vector3(0, 0, 18);
+                case 1:
+                    return new Vector3(8, 0, 10);
+                case 2:
+                    return new Vector3(8, 0, 6);
+                case 3:
+                    return new Vector3(8, 0, 2);
+                case 4:
+                    return new Vector3(8, 0, -2);
+                case 5:
+                    return new Vector3(8, 0, -6);
+                case 6:
+                    return new Vector3(8, 0, -10);
+                case 7:
+                    return new Vector3(0, 0, -18);
+                case 8:
+                    return new Vector3(-8, 0, -10);
+                case 9:
+                    return new Vector3(-8, 0, -6);
+                case 10:
+                    return new Vector3(-8, 0, -2);
+                case 11:
+                    return new Vector3(-8, 0, 2);
+                case 12:
+                    return new Vector3(-8, 0, 6);
+                default:
+                    return new Vector3(-8, 0, 10);
+            }
+        }
+        else
+        {
+            switch (doorIndex)
+            {
+                case 0:
+                    return new Vector3(2, 0, 8);
+                case 1:
+                    return new Vector3(6, 0, 8);
+                case 2:
+                    return new Vector3(10, 0, 8);
+                case 3:
+                    return new Vector3(18, 0, 0);
+                case 4:
+                    return new Vector3(10, 0, -8);
+                case 5:
+                    return new Vector3(6, 0, -8);
+                case 6:
+                    return new Vector3(2, 0, -8);
+                case 7:
+                    return new Vector3(-2, 0, -8);
+                case 8:
+                    return new Vector3(-6, 0, -8);
+                case 9:
+                    return new Vector3(-10, 0, -8);
+                case 10:
+                    return new Vector3(-18, 0, 0);
+                case 11:
+                    return new Vector3(-10, 0, 8);
+                case 12:
+                    return new Vector3(-6, 0, 8);
+                default:
+                    return new Vector3(-2, 0, 8);
+            }
+        }
+    }
+    private Vector3 FindCorridorCenterFromRoom()
+    {
+        switch(doorIndex){
+            case 0:
+                return new Vector3(0, 0, 18);
+            case 1:
+                return new Vector3(4, 0, 18);
+            case 2:
+                return new Vector3(18, 0, 4);
+            case 3:
+                return new Vector3(18, 0, 0);
+            case 4:
+                return new Vector3(18, 0, -4);
+            case 5:
+                return new Vector3(4, 0, -18);
+            case 6:
+                return new Vector3(0, 0, -18);
+            case 7:
+                return new Vector3(-4, 0, -18);
+            case 8:
+                return new Vector3(-18, 0, -4);
+            case 9:
+                return new Vector3(-18, 0, 0);
+            case 10:
+                return new Vector3(-18, 0, 4);
+            default:
+                return new Vector3(-4, 0, 18);
+        }
+    }
+    private Vector3 FindRoomCenterFromRoom()
+    {
+        switch (doorIndex)
+        {
+            case 0:
+                return new Vector3(0, 0, 12);
+            case 1:
+                return new Vector3(4, 0, 12);
+            case 2:
+                return new Vector3(12, 0, 4);
+            case 3:
+                return new Vector3(12, 0, 0);
+            case 4:
+                return new Vector3(12, 0, -4);
+            case 5:
+                return new Vector3(4, 0, -12);
+            case 6:
+                return new Vector3(0, 0, -12);
+            case 7:
+                return new Vector3(-4, 0, -12);
+            case 8:
+                return new Vector3(-12, 0, -4);
+            case 9:
+                return new Vector3(-12, 0, 0);
+            case 10:
+                return new Vector3(-12, 0, 4);
+            default:
+                return new Vector3(-4, 0, 12);
+        }
+    }
+    //Menu Options:
+    public void AddRoom()
+    {
+        Vector3 buttonCenter = this.transform.position;
+        int wallIndex = -1;
+        if (RoomNotCorridor)
+        {
+           wallIndex = WallIndexForRoom();
+           newRoomCentre = FindRoomCenterFromRoom();
+        }
+        else
+        {
+            wallIndex = WallIndexForCorridor();
+            newRoomCentre = FindRoomCenterFromCorridor();
+        }
+        
+        BuildRoom(newRoomCentre + currentRoomCenter, wallIndex, doorIndex);
+        int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        string[] DummyMat = { "", "", "" };
+        SaveLoad.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
+        HideAll();
+
+    }
+    public void AddCorridor()
+    {
+        Vector3 buttonCenter = this.transform.position;
+        int wallIndex = -1;
+        if (RoomNotCorridor)
+        {
+            wallIndex = WallIndexForRoom();
+            newRoomCentre = FindCorridorCenterFromRoom();
+            
+        }
+        else
+        {
+            wallIndex = WallIndexForCorridor();
+            newRoomCentre = FindCorridorCenterFromCorridor();
+        }
+        if (wallIndex == 0 || wallIndex == 2)
         {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, true);
-            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0};
             string[] DummyMat = { "", "", "" };
-            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat,90));
+            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
             HideAll();
         }
         else
         {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, false);
-            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0 };
             string[] DummyMat = { "", "", "" };
             SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
             HideAll();
         }
-       
 
     }
-
+    public void AddWindow()
+    {
+        print("TODO");
+    }
+    public void AddPicture()
+    {
+        ImageMenu.transform.position = this.transform.position;
+        ImageMenu.transform.rotation = this.transform.rotation;
+        HideAllStillActive();
+    }
+    //Plus Sign Populators:
     public void PopulateRoomPlusSigns(Vector3 roomcenter, List<Canvas> PlusSignList)
     {
         PlusSignList[11].transform.position = roomcenter + new Vector3(-4f, 2.5f, 5.7f);
@@ -215,7 +510,6 @@ public class subMenuButtons : MonoBehaviour {
         PlusSignList[12].transform.position = new Vector3(0f, -100f, 0f);
         PlusSignList[13].transform.position = new Vector3(0f, -100f, 0f);
     }
-
     public void PopulateZCorridorPlusSigns(Vector3 corridorCenter, int wallIndex, List<Canvas> PlusSignList)
     {
         PlusSignList[0].transform.position = corridorCenter + new Vector3(0, 2.5f, 11.7f);
@@ -261,7 +555,6 @@ public class subMenuButtons : MonoBehaviour {
             PlusSignList[0].GetComponent<subMenuButtons>().HideAll();
         }
     }
-
     public void PopulateXCorridorPlusSigns(Vector3 corridorCenter, int wallIndex, List<Canvas> PlusSignList)
     {
         PlusSignList[0].transform.position = corridorCenter + new Vector3(2f, 2.5f, 1.7f);
@@ -308,31 +601,154 @@ public class subMenuButtons : MonoBehaviour {
             PlusSignList[3].GetComponent<subMenuButtons>().HideAll();
         }
     }
-
-    public void BuildCorridor(Vector3 corridorCenter, int wallIndexParam, int doorIndexParam, bool zAxis)
+    //Builders:
+    private void BuildRoom(Vector3 newRoomCentre, int wallIndexParam, int doorIndexParam)
     {
         float oldDoorLoc = 0;
-        if (doorIndexParam == 0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
+        if (RoomNotCorridor)
         {
-            oldDoorLoc = 0;
+            if (doorIndexParam == 0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
+            {
+                oldDoorLoc = 0;
+            }
+            else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
+            {
+                oldDoorLoc = 4;
+            }
+            else 
+            {
+                oldDoorLoc = -4;
+            }
         }
-        else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
+        else
         {
-            oldDoorLoc = 4;
+            oldDoorLoc = OldDoorLocationCorridor();
         }
-        if (doorIndexParam == 2 || doorIndexParam == 5 || doorIndexParam == 8 || doorIndexParam == 11)
+        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
+        GameObject newRoom = levelBuilder.addRoom(newRoomCentre);
+
+        //Make the plus sign on the new door dissapear in the new room
+        Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
+        List<Canvas> PlusSignList = new List<Canvas>();
+        for (int j = 0; j < PlusSigns.Length; j++)
         {
-            oldDoorLoc = -4;
+            if (PlusSigns[j].tag == "PlusSign")
+            {
+                PlusSignList.Add(PlusSigns[j]);
+            }
+        }
+        //make sure only plus signs in list
+        for (int i = 0; i < PlusSignList.Count; i++)
+        {
+
+            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
+            PlusSignList[i].GetComponent<subMenuButtons>().DefaultState();
+            PlusSignList[i].GetComponent<subMenuButtons>().RoomNotCorridor = true;
+        }
+
+        PopulateRoomPlusSigns(newRoomCentre, PlusSignList);
+        if (RoomNotCorridor)
+        {
+            PlusSignList[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
+        }
+        else
+        {
+            int PlusSignToHide = -1;
+            if (CorridorOnZ)
+            {
+                if (doorIndex == 0)
+                {
+                    PlusSignToHide = 6;
+                }
+                else if(2<=doorIndex && doorIndex<=6)
+                {
+                    PlusSignToHide = 9;
+                }
+                else if(doorIndex==7)
+                {
+                    PlusSignToHide = 0;
+                }
+                else
+                {
+                    PlusSignToHide = 3;
+                }
+            }
+            else
+            {
+                if (doorIndex == 3)
+                {
+                    PlusSignToHide = 9;
+                }
+                else if (4 <= doorIndex && doorIndex <= 9)
+                {
+                    PlusSignToHide = 0;
+                }
+                else if (doorIndex == 10)
+                {
+                    PlusSignToHide = 3;
+                }
+                else
+                {
+                    PlusSignToHide = 6;
+                }
+            }
+            PlusSignList[PlusSignToHide].GetComponent<subMenuButtons>().HideAll();
+        }
+
+        RoomBuilder useToCutDoor = newRoom.GetComponent<RoomBuilder>();
+
+        //Door Cut in new room
+        int oppositeDoorIndex = -1;
+        if (wallIndexParam == 0)
+        {
+            oppositeDoorIndex = 2;
+        }
+        else if (wallIndexParam == 1)
+        {
+            oppositeDoorIndex = 3;
+        }
+        else if (wallIndexParam == 2)
+        {
+            oppositeDoorIndex = 0;
+        }
+        else if (wallIndexParam == 3)
+        {
+            oppositeDoorIndex = 1;
+        }
+        useToCutDoor.addDoor(oppositeDoorIndex, 0);
+    }
+    public void BuildCorridor(Vector3 corridorCenter, int wallIndexParam, int doorIndexParam, bool zAxis)
+    {
+        //print(corridorCenter);
+        float oldDoorLoc = 0;
+        if (RoomNotCorridor)
+        {
+            if (doorIndexParam == 0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
+            {
+                oldDoorLoc = 0;
+            }
+            else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
+            {
+                oldDoorLoc = 4;
+            }
+            if (doorIndexParam == 2 || doorIndexParam == 5 || doorIndexParam == 8 || doorIndexParam == 11)
+            {
+                oldDoorLoc = -4;
+            }
+        }
+        else
+        {
+            oldDoorLoc = OldDoorLocationCorridor();
         }
         roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
         GameObject newCorridor;
         if (zAxis)
         {
-            newCorridor = levelBuilder.addCorridorAlongZ(newRoomCentre);
+            newCorridor = levelBuilder.addCorridorAlongZ(corridorCenter);
         }
         else
         {
-            newCorridor = levelBuilder.addCorridorAlongX(newRoomCentre);
+            newCorridor = levelBuilder.addCorridorAlongX(corridorCenter);
         }
        
         
@@ -347,12 +763,12 @@ public class subMenuButtons : MonoBehaviour {
             }
         }
         //make sure only plus signs in list
-        for (int i = 1; i < PlusSignList.Count; i++)
+        for (int i = 0; i < PlusSignList.Count; i++)
         {
-
-            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
+            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = corridorCenter;
             PlusSignList[i].GetComponent<subMenuButtons>().DefaultState();
             PlusSignList[i].GetComponent<subMenuButtons>().RoomNotCorridor = false;
+            PlusSignList[i].GetComponent<subMenuButtons>().CorridorOnZ = zAxis;
         }
 
 
@@ -387,325 +803,60 @@ public class subMenuButtons : MonoBehaviour {
             PopulateXCorridorPlusSigns(corridorCenter, wallIndexParam, PlusSignList);
         }
     }
-
-    public void AddWindow()
-    {
-        print("TODO");
-    }
-
-    public void AddPicture()
-    {
-        ImageMenu.transform.position = this.transform.position;
-        ImageMenu.transform.rotation = this.transform.rotation;
-        HideAllStillActive();
-    }
-
+    //Collider Checkers:
     private bool CheckRoomPlacement()
     {
-        Vector3 buttonCenter = this.transform.position;
         Vector3 RoomCenterToCheck = new Vector3(-1, -1, -1);
-        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
+        if (RoomNotCorridor)
         {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(12, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(12, 0, 4);
-            }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(12, 0, -4);
-            }
-        }
-        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
-        {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-12, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-12, 0, 4);
-            }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-12, 0, -4);
-            }
-        }
-        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
-        {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(0, 0, 12);
-            }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(4, 0, 12);
-            }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(-4, 0, 12);
-            }
-        }
-        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
-        {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(0, 0, -12);
-            }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(4, 0, -12);
-            }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(-4, 0, -12);
-            }
+            RoomCenterToCheck = FindRoomCenterFromRoom();
+
         }
         else
         {
-            print("nowhere?");
+            RoomCenterToCheck = FindRoomCenterFromCorridor();
         }
-        return RoomCollision.canRoomBePlaced(RoomCenterToCheck+currentRoomCenter);
+        return RoomCollision.canRoomBePlaced(RoomCenterToCheck + currentRoomCenter);
     }
-
     private bool CheckCorridorPlacement()
     {
-        Vector3 buttonCenter = this.transform.position;
-        Vector3 RoomCenterToCheck = new Vector3(-1, -1, -1);
+        Vector3 CorridorCenterToCheck = new Vector3(-1, -1, -1);
         float corridorAngle = -1;
-        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
+        if (RoomNotCorridor)
         {
-            corridorAngle = 0;
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
+            CorridorCenterToCheck = FindCorridorCenterFromRoom();
+            int wallIndex = WallIndexForRoom();
+            if (wallIndex % 2 == 0)
             {
-                RoomCenterToCheck = new Vector3(18, 0, 0);
+                corridorAngle = 90;
             }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
+            else
             {
-                RoomCenterToCheck = new Vector3(18, 0, 4);
+                corridorAngle = 0;
             }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(18, 0, -4);
-            }
-        }
-        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
-        {
-            corridorAngle = 180;
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-18, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-18, 0, 4);
-            }
-            else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                RoomCenterToCheck = new Vector3(-18, 0, -4);
-            }
-        }
-        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
-        {
-            corridorAngle = 270;
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(0, 0, 18);
-            }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(4, 0, 18);
-            }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(-4, 0, 18);
-            }
-        }
-        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
-        {
-            corridorAngle = 90;
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(0, 0, -18);
-            }
-            else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(4, 0, -18);
-            }
-            else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                RoomCenterToCheck = new Vector3(-4, 0, -18);
-            }
+            
         }
         else
         {
-            print("nowhere?");
+            CorridorCenterToCheck = FindCorridorCenterFromCorridor();
+            int wallIndex = WallIndexForCorridor();
+            if (wallIndex % 2 == 0)
+            {
+                corridorAngle = 90;
+            }
+            else
+            {
+                corridorAngle = 0;
+            }
         }
-        return RoomCollision.canCorridorBePlaced(RoomCenterToCheck + currentRoomCenter,corridorAngle);
+        return RoomCollision.canCorridorBePlaced(CorridorCenterToCheck + currentRoomCenter,corridorAngle);
     }
-
-    public void AddRoom()
-    {
-        Vector3 buttonCenter = this.transform.position;
-        int doorIndex = -1;
-        int wallIndex = -1;
-        if (buttonCenter.x >= 4.6f + currentRoomCenter.x)
-        {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                doorIndex = 3;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(12, 0, 0);
-            }
-            else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                doorIndex = 2;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(12, 0, 4);
-            } else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                doorIndex = 4;
-                wallIndex = 1;
-                newRoomCentre = new Vector3(12, 0, -4);
-            }
-        }
-        else if (buttonCenter.x <= -4.6f + currentRoomCenter.x)
-        {
-            if (buttonCenter.z == 0f + currentRoomCenter.z)
-            {
-                doorIndex = 9;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-12, 0, 0);
-            } else if (buttonCenter.z > 0f + currentRoomCenter.z)
-            {
-                doorIndex = 10;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-12, 0, 4);
-            } else if (buttonCenter.z < 0f + currentRoomCenter.z)
-            {
-                doorIndex = 8;
-                wallIndex = 3;
-                newRoomCentre = new Vector3(-12, 0, -4);
-            }
-        }
-        else if (buttonCenter.z >= 4.6f + currentRoomCenter.z)
-        {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                doorIndex = 0;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(0, 0, 12);
-            } else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                doorIndex = 1;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(4, 0, 12);
-            } else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                doorIndex = 11;
-                wallIndex = 0;
-                newRoomCentre = new Vector3(-4, 0, 12);
-            }
-        }
-        else if (buttonCenter.z <= -4.6f + currentRoomCenter.z)
-        {
-            if (buttonCenter.x == 0f + currentRoomCenter.x)
-            {
-                doorIndex = 6;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(0, 0, -12);
-            } else if (buttonCenter.x > 0f + currentRoomCenter.x)
-            {
-                doorIndex = 5;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(4, 0, -12);
-            } else if (buttonCenter.x < 0f + currentRoomCenter.x)
-            {
-                doorIndex = 7;
-                wallIndex = 2;
-                newRoomCentre = new Vector3(-4, 0, -12);
-            }
-        }
-        else
-        {
-            print("nowhere?");
-        }
-        buildRoom(newRoomCentre + currentRoomCenter, wallIndex, doorIndex);
-        int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        string[] DummyMat = {"","","" };
-        SaveLoad.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter),DummyMat));
-        HideAll();
-
-    }
-
+    //Utility
     private float[] ConvertVectorToFloat(Vector3 ParamVector)
     {
         float[] Converted = { ParamVector.x, ParamVector.y, ParamVector.z };
         return Converted;
     }
-
-    private void buildRoom(Vector3 newRoomCentre, int wallIndexParam, int doorIndexParam)
-    {
-        float oldDoorLoc = 0;
-        if(doorIndexParam==0 || doorIndexParam == 3 || doorIndexParam == 6 || doorIndexParam == 9)
-        {
-            oldDoorLoc = 0;
-        } else if (doorIndexParam == 1 || doorIndexParam == 4 || doorIndexParam == 7 || doorIndexParam == 10)
-        {
-            oldDoorLoc = 4;
-        }
-        if (doorIndexParam == 2 || doorIndexParam == 5 || doorIndexParam == 8 || doorIndexParam == 11)
-        {
-            oldDoorLoc = -4;
-        }
-        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
-        GameObject newRoom = levelBuilder.addRoom(newRoomCentre);
-
-        //Make the plus sign on the new door dissapear in the new room
-        Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
-        List<Canvas> PlusSignList = new List<Canvas>();
-        for (int j = 0; j < PlusSigns.Length; j++)
-        {
-            if(PlusSigns[j].tag == "PlusSign")
-            {
-                PlusSignList.Add(PlusSigns[j]);
-            }
-        }
-            //make sure only plus signs in list
-        for (int i = 0; i < PlusSignList.Count; i++)
-        {
-            
-            PlusSignList[i].GetComponent<subMenuButtons>().currentRoomCenter = newRoomCentre;
-            PlusSignList[i].GetComponent<subMenuButtons>().DefaultState();
-            PlusSignList[i].GetComponent<subMenuButtons>().RoomNotCorridor=true;
-        }
-
-        PopulateRoomPlusSigns(newRoomCentre, PlusSignList);
-        PlusSignList[CalcOppositeDoorIndex(doorIndexParam)].GetComponent<subMenuButtons>().HideAll();
-
-
-        RoomBuilder useToCutDoor = newRoom.GetComponent<RoomBuilder>();
-
-        //Door Cut in new room
-        int oppositeDoorIndex = -1;
-        if (wallIndexParam == 0)
-        {
-            oppositeDoorIndex = 2;
-        } else if (wallIndexParam == 1) {
-            oppositeDoorIndex = 3;
-        } else if (wallIndexParam == 2)
-        {
-            oppositeDoorIndex = 0;
-        } else if (wallIndexParam == 3)
-        {
-            oppositeDoorIndex = 1;
-        }
-        useToCutDoor.addDoor(oppositeDoorIndex, 0);
-    }
-
     public int CalcOppositeDoorIndex(int doorIndex)
     {
         if (doorIndex == 11 || doorIndex == 0 || doorIndex == 1)
