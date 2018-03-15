@@ -40,3 +40,36 @@ TO TEST OBJECTS
 - Drag prefabs whose names end in '_G' into the scene. (The prefabs
 without the '_G' are the original non-grabbable versions) 
 - To change outline color, change color under VRTK_InteractableObject
+
+-----------------------------------------------------------------------
+
+INCREASE/DECREASE DISTANCE BETWEEN CONTROLLER AND OBJECT
+--------------------------------------------------------
+
+- Look under the object whose distance you want to change (ex: Fridge_G)
+- The 'LeftTransform' object specifies the distance between the object
+and the left controller when you grab using left controller. To change
+this distance, change the position values of 'LeftTransform'
+- The 'RightTransform' object is the same thing, except for the right 
+controller
+
+------------------------------------------------------------------------
+
+POTENTIAL WAY TO CHANGE BUTTON YOU USE TO GRAB
+----------------------------------------------
+
+- Go to [VRTK_Scripts]->LeftController
+- It has 'VRTK_InteractGrab' attached to it. Under 'Grab Settings'
+change 'Grab Button'
+- Do the same for [VRTK_Scripts]->RightController
+- If doesn't work, may try changing 'Grab Toggle Button' under
+'VRTK_ControllerEvents' as well
+
+-------------------------------------------------------------------------
+
+DON'T HAVE TO HOLD BUTTON TO KEEP GRABBING
+------------------------------------------
+
+- Go to the grabbable object (ex: Fridge_G)
+- It should have 'VRTK_InteractableObject' attached to it
+- Under 'Grab Options', uncheck 'Hold Button to Grab'
