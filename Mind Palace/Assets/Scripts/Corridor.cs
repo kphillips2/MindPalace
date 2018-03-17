@@ -8,7 +8,7 @@ using System;
 [System.Serializable]
 public class Corridor {
 
-    private int[] corrDoors = new int[8]; // Must be length 8
+    private int[] corrDoors = new int[14]; // Must be length 14
     private float[] centre = new float[3]; // Must be length 3
     private string[] materials = new string[3]; // Must be length 3 (floor material, roof material, wall material)
     private int angle; 
@@ -19,7 +19,7 @@ public class Corridor {
     }
 
     public Corridor(int[] corrDoors, float[] centre, string[] materials, int angle) {
-        if (corrDoors.Length != 8) Debug.Log("Error: corrDoors array length must be 8");
+        if (corrDoors.Length != 14) Debug.Log("Error: corrDoors array length must be 14");
         else Array.Copy(corrDoors, this.corrDoors, corrDoors.Length);
 
         if (centre.Length != 3) Debug.Log("Error: centre array length must be 3");
@@ -33,7 +33,7 @@ public class Corridor {
 
     public Corridor(int[] corrDoors, Vector3 centre, string[] materials, int angle)
     {
-        if (corrDoors.Length != 8) Debug.Log("Error: corrDoors array length must be 8");
+        if (corrDoors.Length != 14) Debug.Log("Error: corrDoors array length must be 14");
         else Array.Copy(corrDoors, this.corrDoors, corrDoors.Length);
 
         this.centre = new float[] { centre.x, centre.y, centre.z };

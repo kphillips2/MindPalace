@@ -96,25 +96,50 @@ public static class RoomCollision  {
         return true;
     }
 
-    //Checks if a door can be built on room with the given centre and where the door would be at
-    //the given doorIndex. Currently returns null if door can't be built, float array containing
+    //Checks if a door can be built on room with the given centre and where the door corresponds
+    //to the given index. Currently returns null if door can't be built, float array containing
     //the centre of the corridor or room that it would be a door to if it can be built
     public static float[] canRoomDoorBePlaced(Vector3 centre, int doorIndex)
     {
         if (doorIndex < 0 || doorIndex > 11) return null; //Invalid index
-
         Vector3 door = getRoomDoorCoordinates(centre, doorIndex);
+        return canDoorBePlaced(centre, door);
+    }
 
+    //Checks if a door can be built on corridor with the given centre/angle and where the door corresponds
+    //to the given index. Currently returns null if door can't be built, float array containing
+    //the centre of the corridor or room that it would be a door to if it can be built
+    public static float[] canCorridorDoorBePlaced(Vector3 centre, float angle, int doorIndex)
+    {
+        if (doorIndex < 0 || doorIndex > 13) return null; //Invalid index
+        Vector3 door = getCorridorDoorCoordinates(centre, angle, doorIndex);
+        return canDoorBePlaced(centre, door);
+    }
+
+    //Checks if a door can be built on room/corridor with the given centre and where the door would be at
+    //the given location. Currently returns null if door can't be built, float array containing
+    //the centre of the corridor or room that it would be a door to if it can be built
+    public static float[] canDoorBePlaced(Vector3 centre, Vector3 door)
+    {
         //Look for rooms that touch the door
         foreach (Room r in SaveLoad.currentLoci.getRooms())
         {
             float[] rCentre = r.getCentre();
             //Skip if you reach the room whose door is being looked at
-            if (door.x == rCentre[0] && door.z == rCentre[2]) continue;
+            if (centre.x == rCentre[0] && centre.z == rCentre[2]) continue;
 
+            //If this is true, there is a wall next to the door space
             if ((Math.Abs(door.x - rCentre[0]) <= 4 && Math.Abs(door.z - rCentre[2]) <= 6) ||
                 (Math.Abs(door.x - rCentre[0]) <= 6 && Math.Abs(door.z - rCentre[2]) <= 4))
+            {
+                //If a picture is placed on the other side of the wall, don't place door
+                foreach(Picture p in SaveLoad.currentLoci.getPictures())
+                {
+                    float[] pLoc = p.getLocation();
+                    if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
+                }
                 return rCentre;
+            }
         }
 
         //If no rooms were found, look for corridors that touch the door
@@ -123,19 +148,38 @@ public static class RoomCollision  {
             float[] cCentre = c.getCentre();
             float cAngle = c.getAngle();
 
+            //Skip if you reach the room whose door is being looked at
+            if (centre.x == cCentre[0] && centre.z == cCentre[2]) continue;
+
             //Corridor is long in x-direction
             if (cAngle % 180 == 0)
             {
                 if ((Math.Abs(door.x - cCentre[0]) <= 10 && Math.Abs(door.z - cCentre[2]) <= 2) ||
                     (door.z == cCentre[2] && Math.Abs(door.x - cCentre[0]) <= 12))
+                {
+                    //If a picture is placed on the other side of the wall, don't place door
+                    foreach (Picture p in SaveLoad.currentLoci.getPictures())
+                    {
+                        float[] pLoc = p.getLocation();
+                        if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
+                    }
                     return cCentre;
+                }
             }
             //Corridor is long in z-direction
             else
             {
                 if ((Math.Abs(door.x - cCentre[0]) <= 2 && Math.Abs(door.z - cCentre[2]) <= 10) ||
                     (door.x == cCentre[0] && Math.Abs(door.z - cCentre[2]) <= 12))
+                {
+                    //If a picture is placed on the other side of the wall, don't place door
+                    foreach (Picture p in SaveLoad.currentLoci.getPictures())
+                    {
+                        float[] pLoc = p.getLocation();
+                        if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
+                    }
                     return cCentre;
+                }
             }
         }
 
@@ -161,6 +205,51 @@ public static class RoomCollision  {
             case 9: return new Vector3(centre.x - 6, centre.y, centre.z);
             case 10: return new Vector3(centre.x - 6, centre.y, centre.z + 4);
             default: return new Vector3(centre.x - 4, centre.y, centre.z + 6);
+        }
+    }
+
+    //Takes the center/angle of a corridor and the index of a door. Returns a vector containing
+    //the door's coordinates. doorIndex should be between 0 - 11
+    private static Vector3 getCorridorDoorCoordinates(Vector3 centre, float angle, int doorIndex)
+    {
+        //Long on x-axis
+        if(angle % 180 == 0)
+        {
+            switch (doorIndex)
+            {
+                case 0: return new Vector3(centre.x + 2, centre.y, centre.z + 2);
+                case 1: return new Vector3(centre.x + 6, centre.y, centre.z + 2);
+                case 2: return new Vector3(centre.x + 10, centre.y, centre.z + 2);
+                case 3: return new Vector3(centre.x + 12, centre.y, centre.z);
+                case 4: return new Vector3(centre.x + 10, centre.y, centre.z - 2);
+                case 5: return new Vector3(centre.x + 6, centre.y, centre.z - 2);
+                case 6: return new Vector3(centre.x + 2, centre.y, centre.z - 2);
+                case 7: return new Vector3(centre.x - 2, centre.y, centre.z - 2);
+                case 8: return new Vector3(centre.x - 6, centre.y, centre.z - 2);
+                case 9: return new Vector3(centre.x - 10, centre.y, centre.z - 2);
+                case 10: return new Vector3(centre.x - 12, centre.y, centre.z);
+                case 11: return new Vector3(centre.x - 10, centre.y, centre.z + 2);
+                case 12: return new Vector3(centre.x - 6, centre.y, centre.z + 2);
+                default: return new Vector3(centre.x - 2, centre.y, centre.z + 2);
+            }
+        }
+        //Long on z-axis
+        switch (doorIndex)
+        {
+            case 0: return new Vector3(centre.x, centre.y, centre.z + 12); //x = 0, pos z
+            case 1: return new Vector3(centre.x + 2, centre.y, centre.z + 10);
+            case 2: return new Vector3(centre.x + 2, centre.y, centre.z + 6);
+            case 3: return new Vector3(centre.x + 2, centre.y, centre.z + 2);
+            case 4: return new Vector3(centre.x + 2, centre.y, centre.z - 2);
+            case 5: return new Vector3(centre.x + 2, centre.y, centre.z - 6);
+            case 6: return new Vector3(centre.x + 2, centre.y, centre.z - 10);
+            case 7: return new Vector3(centre.x, centre.y, centre.z - 12);
+            case 8: return new Vector3(centre.x - 2, centre.y, centre.z - 10);
+            case 9: return new Vector3(centre.x - 2, centre.y, centre.z - 6);
+            case 10: return new Vector3(centre.x - 2, centre.y, centre.z - 2);
+            case 11: return new Vector3(centre.x - 2, centre.y, centre.z + 2);
+            case 12: return new Vector3(centre.x - 2, centre.y, centre.z + 6);
+            default: return new Vector3(centre.x - 2, centre.y, centre.z + 10);
         }
     }
 }
