@@ -298,6 +298,8 @@
     <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
     <Compile Include="Assets\Scripts\Loci.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
+    <Compile Include="Assets\Scripts\ObjectMenu\ObjectButton.cs" />
+    <Compile Include="Assets\Scripts\ObjectMenu\ObjectListControl.cs" />
     <Compile Include="Assets\Scripts\ObjectPlacer.cs" />
     <Compile Include="Assets\Scripts\Old\OldCorridor.cs" />
     <Compile Include="Assets\Scripts\Old\OldRoom.cs" />

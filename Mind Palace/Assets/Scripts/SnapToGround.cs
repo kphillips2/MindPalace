@@ -18,8 +18,11 @@ public class SnapToGround : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        //transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
-        //transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        if (transform.position.y < 0)
+        {
+            Destroy(GetComponent<Rigidbody>());
+            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        }
     }
 
     //Called when user grabs the object
@@ -31,8 +34,8 @@ public class SnapToGround : MonoBehaviour {
     //Called when user lets go of object
     private void ObjectUngrabbed(object sender, InteractableObjectEventArgs e)
     {
-        Destroy(GetComponent<Rigidbody>());
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+       // Destroy(GetComponent<Rigidbody>());
+        //transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        //transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
     }
 }

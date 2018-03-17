@@ -73,3 +73,11 @@ DON'T HAVE TO HOLD BUTTON TO KEEP GRABBING
 - Go to the grabbable object (ex: Fridge_G)
 - It should have 'VRTK_InteractableObject' attached to it
 - Under 'Grab Options', uncheck 'Hold Button to Grab'
+
+-------------------------------------------------------------------------
+
+TO MAKE ATTEMPTGRAB FUNCTION WORK
+---------------------------------
+
+- MUST have something listed as the 'Grab Attach Mechanic' under 
+VRTK_InteractableObject's 'Grab Options' on the grabbable object
