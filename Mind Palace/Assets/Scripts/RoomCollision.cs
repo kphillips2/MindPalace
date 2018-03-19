@@ -117,8 +117,10 @@ public static class RoomCollision  {
     }
 
     //Checks if a door can be built on room/corridor with the given centre and where the door would be at
-    //the given location. Currently returns null if door can't be built, float array containing
-    //the centre of the corridor or room that it would be a door to if it can be built
+    //the given location. Currently returns null if door can't be built.
+    //If can be built returns a float array containing:
+    //the centre of the corridor or room that it would be a door to, the index of the door on this room/corridor,
+    //and whether it is a room or corridor (0 = room, 1 = corridor)
     public static float[] canDoorBePlaced(Vector3 centre, Vector3 door)
     {
         //Look for rooms that touch the door
@@ -138,7 +140,8 @@ public static class RoomCollision  {
                     float[] pLoc = p.getLocation();
                     if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
                 }
-                return rCentre;
+                return new float[] {rCentre[0], rCentre[1], rCentre[2],
+                    getRoomDoorIndex(new Vector3(rCentre[0], rCentre[1], rCentre[2]), door), 0 };
             }
         }
 
@@ -163,7 +166,8 @@ public static class RoomCollision  {
                         float[] pLoc = p.getLocation();
                         if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
                     }
-                    return cCentre;
+                    return new float[] {cCentre[0], cCentre[1], cCentre[2],
+                    getCorridorDoorIndex(new Vector3(cCentre[0], cCentre[1], cCentre[2]), door, cAngle), 1 };
                 }
             }
             //Corridor is long in z-direction
@@ -178,7 +182,8 @@ public static class RoomCollision  {
                         float[] pLoc = p.getLocation();
                         if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
                     }
-                    return cCentre;
+                    return new float[] {cCentre[0], cCentre[1], cCentre[2],
+                    getCorridorDoorIndex(new Vector3(cCentre[0], cCentre[1], cCentre[2]), door, cAngle), 1 };
                 }
             }
         }
@@ -250,6 +255,99 @@ public static class RoomCollision  {
             case 11: return new Vector3(centre.x - 2, centre.y, centre.z + 2);
             case 12: return new Vector3(centre.x - 2, centre.y, centre.z + 6);
             default: return new Vector3(centre.x - 2, centre.y, centre.z + 10);
+        }
+    }
+
+    //Takes the center of a room and the location of the door. Returns the
+    //index of the door for the room
+    private static int getRoomDoorIndex(Vector3 centre, Vector3 door)
+    { 
+        if (door.x == centre.x)
+        {
+            if (door.z == centre.z + 6) return 0;
+            else return 6;
+        }
+        else if (door.x == centre.x + 4)
+        {
+            if (door.z == centre.z + 6) return 1;
+            else return 5;
+        }
+        else if (door.x == centre.x + 6)
+        {
+            if (door.z == centre.z + 4) return 2;
+            else if (door.z == centre.z) return 3;
+            else return 4;
+        }
+        else if(door.x == centre.x - 4)
+        {
+            if (door.z == centre.z - 6) return 7;
+            else return 11;
+        }
+        else
+        {
+            if (door.z == centre.z - 4) return 8;
+            else if (door.z == centre.z) return 9;
+            else return 10;
+        }
+    }
+
+    //Takes the center/angle of a corridor and the location of the door. Returns the
+    //index of the door for the corridor
+    private static int getCorridorDoorIndex(Vector3 centre, Vector3 door, float angle)
+    {
+        //Long on x-axis
+        if (angle % 180 == 0)
+        {
+            if (door.z == centre.z)
+            {
+                if (door.x == centre.x + 12) return 3;
+                else return 10;
+            }
+            else if (door.z == centre.z + 2)
+            {
+                if (door.x == centre.x + 2) return 0;
+                else if (door.x == centre.x + 6) return 1;
+                else if (door.x == centre.x + 10) return 2;
+                else if (door.x == centre.x - 10) return 11;
+                else if (door.x == centre.x - 6) return 12;
+                else return 13;
+            }
+            else
+            {
+                if (door.x == centre.x + 10) return 4;
+                else if (door.x == centre.x + 6) return 5;
+                else if (door.x == centre.x + 2) return 6;
+                else if (door.x == centre.x - 2) return 7;
+                else if (door.x == centre.x - 6) return 8;
+                else return 9;
+            }
+        }
+        //Long on z-axis
+        else
+        {
+            if (door.x == centre.x)
+            {
+                if (door.z == centre.z + 12) return 0;
+                else return 7;
+            }
+            else if (door.x == centre.x + 2)
+            {
+                if (door.z == centre.z + 2) return 3;
+                else if (door.z == centre.z + 6) return 2;
+                else if (door.z == centre.z + 10) return 1;
+                else if (door.z == centre.z - 10) return 6;
+                else if (door.z == centre.z - 6) return 5;
+                else return 4;
+            }
+            else
+            {
+                if (door.z == centre.z + 10) return 13;
+                else if (door.z == centre.z + 6) return 12;
+                else if (door.z == centre.z + 2) return 11;
+                else if (door.z == centre.z - 2) return 10;
+                else if (door.z == centre.z - 6) return 9;
+                else return 8;
+            }
         }
     }
 }
