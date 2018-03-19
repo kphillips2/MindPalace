@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PictureCreator : MonoBehaviour {
 
-    private float scale = 2f; //Increasing this value will make the pictures larger
+    private float scale = 1.8f; //Increasing this value will make the pictures larger
     private float maxWidth = 3.55f; //Maximum width that a picture can be
     private float maxHeight = 4f; //Maximum height that a picture can be
 

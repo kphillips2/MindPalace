@@ -35,7 +35,7 @@ public class Loci {
     // Add to Lists
     public void addObject(float[] obj)
     {
-        if (obj.Length != 4) Debug.Log("Error: Added objects must be represented by an array of length 4");
+        if (obj.Length != 7) Debug.Log("Error: Added objects must be represented by an array of length 7");
         else objects.Add(obj);
     }
     public void addRoom(Room room) { rooms.Add(room); }

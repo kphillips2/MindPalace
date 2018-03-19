@@ -18,6 +18,7 @@ public class SnapToGround : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
         if (transform.position.y < 0)
         {
             Destroy(GetComponent<Rigidbody>());

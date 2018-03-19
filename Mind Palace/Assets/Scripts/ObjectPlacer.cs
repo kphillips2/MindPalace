@@ -33,10 +33,10 @@ using VRTK;
 public class ObjectPlacer : MonoBehaviour {
 
     //Creates a prefab where num is the number that is associated with the prefab,
-    //xcor and zcor are the xz coordinates of the prefab, and roty is the value that 
-    //the prefab is rotated around the y-axis by. If you want the user to be able to
+    //pos are the position coordinates of the prefab, and rot is the value that 
+    //the prefab is rotated by. If you want the user to be able to
     //move the object, set isGrabbable to true, otherwise set to false.
-    public void createPrefab(int num, float xcor, float zcor, float roty, bool isGrabbable)
+    public void createPrefab(int num, Vector3 pos, Vector3 rot, bool isGrabbable)
     {
         string prefab;
 
@@ -111,8 +111,8 @@ public class ObjectPlacer : MonoBehaviour {
         if (isGrabbable) prefab += "_G";
 
         //Instanstiate the selected prefab with given position and rotation values
-        GameObject newObj = Instantiate(Resources.Load("Objects/" + prefab), new Vector3(xcor, 0f, zcor), Quaternion.identity) as GameObject;
-        newObj.transform.Rotate(0f, roty, 0f);
+        GameObject newObj = Instantiate(Resources.Load("Objects/" + prefab), pos, Quaternion.identity) as GameObject;
+        newObj.transform.Rotate(rot.x, rot.y, rot.z);
     }
 
     //Creates a prefab where num is the number that is associated with the prefab and places
