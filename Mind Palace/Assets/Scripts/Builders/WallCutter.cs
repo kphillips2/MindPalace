@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallCutter : MonoBehaviour {
-	private int doorCount, windowCount;
+	private int doorWindowCount;
 	private bool doesNewestOverlap;
 
 	// Use this for initialization
@@ -38,7 +38,7 @@ public class WallCutter : MonoBehaviour {
 		return doesNewestOverlap;
 	}
 	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
-		if (doorCount > 0)
+		if (doorWindowCount > 0)
 			addFrontFace (triangles);
 		else {
 			triangles.Add (1);
@@ -66,9 +66,9 @@ public class WallCutter : MonoBehaviour {
 
 		addSquareFace (triangles, vertices.Count);
 
-		// door face(s)
+		// door and window face(s)
 		int mark;
-		for (int k = 0; k < doorCount; k++) {
+		for (int k = 0; k < doorWindowCount; k++) {
 			mark = 8 + 8 * k;
 
 			vertices.Add (vertices [mark + 2]);
@@ -78,19 +78,19 @@ public class WallCutter : MonoBehaviour {
 
 			addSquareFace (triangles, vertices.Count);
 		}
-		// end door face(s)
-		// end right faces
+        // end door and window face(s)
+        // end right faces
 
-		// left faces
-		vertices.Add (vertices[3]);
+        // left faces
+        vertices.Add (vertices[3]);
 		vertices.Add (vertices[5]);
 		vertices.Add (vertices[2]);
 		vertices.Add (vertices[4]);
 
 		addSquareFace (triangles, vertices.Count);
 
-		// door face(s)
-		for (int k = 0; k < doorCount; k++) {
+        // door and window face(s)
+        for (int k = 0; k < doorWindowCount; k++) {
 			mark = 8 + 8 * k;
 
 			vertices.Add (vertices [mark + 5]);
@@ -100,21 +100,23 @@ public class WallCutter : MonoBehaviour {
 
 			addSquareFace (triangles, vertices.Count);
 		}
-		// end door face(s)
-		// end left faces
+        // end door and window face(s)
+        // end left faces
 
-		// top face
-		vertices.Add (vertices[0]);
+        // top face
+        vertices.Add (vertices[0]);
 		vertices.Add (vertices[1]);
 		vertices.Add (vertices[2]);
 		vertices.Add (vertices[3]);
 
 		addSquareFace (triangles, vertices.Count);
-		// end top face
+        // end top face
 
-		// bottom faces
-		// door faces
-		for (int k = 0; k < doorCount; k++) {
+        // bottom faces
+        // door and window faces
+        Vector3[] previous = { vertices [5], vertices [4] };
+
+        for (int k = 0; k < doorWindowCount; k++) {
 			mark = 8 + 8 * k;
 
 			vertices.Add (vertices [mark + 5]);
@@ -124,26 +126,29 @@ public class WallCutter : MonoBehaviour {
 
 			addSquareFace (triangles, vertices.Count);
 
-			vertices.Add (vertices [mark + 1]);
-			vertices.Add (vertices [mark]);
-			if (k == 0)
-				mark = 6;
-			vertices.Add (vertices [mark - 1]);
-			vertices.Add (vertices [mark - 2]);
+            if (vertices[mark].y == 0){
+                vertices.Add (vertices [mark + 1]);
+                vertices.Add (vertices [mark]);
+                vertices.Add (previous [0]);
+                vertices.Add (previous [1]);
 
-			addSquareFace (triangles, vertices.Count);
+                addSquareFace(triangles, vertices.Count);
+
+                previous[0] = vertices [mark + 7];
+                previous[1] = vertices [mark + 6];
+            }
 		}
-		// end door faces
+        // end door and window faces
 
-		if (doorCount > 0) {
-			mark = 8 + 8 * (doorCount - 1);
+        if (doorWindowCount > 0) {
+			mark = 8 + 8 * (doorWindowCount - 1);
 
 			vertices.Add (vertices [7]);
 			vertices.Add (vertices [6]);
-			vertices.Add (vertices [mark + 7]);
-			vertices.Add (vertices [mark + 6]);
+            vertices.Add (previous [0]);
+            vertices.Add (previous [1]);
 
-			addSquareFace (triangles, vertices.Count);
+            addSquareFace (triangles, vertices.Count);
 		} else {
 			triangles.Add (7);
 			triangles.Add (6);
@@ -170,9 +175,9 @@ public class WallCutter : MonoBehaviour {
 		triangles.Add (3);
 		triangles.Add (1);
 
-		for (int k = 1; k < doorCount; k++)
+		for (int k = 1; k < doorWindowCount; k++)
 			addDoorFace (triangles, k);
-		int mark = 8 + 8 * (doorCount - 1);
+		int mark = 8 + 8 * (doorWindowCount - 1);
 
 		triangles.Add (1);
 		triangles.Add (mark + 5);
@@ -215,8 +220,7 @@ public class WallCutter : MonoBehaviour {
 	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
-		doorCount = 0;
-        windowCount = 0;
+        doorWindowCount = 0;
 
         ans.Add (wallLoc + new Vector3 (wallSize / 2, wallLoc.y, 0.125f));// index: 0
 		ans.Add (ans[0] + new Vector3 (0, 0, -0.25f));// index: 1
@@ -233,7 +237,7 @@ public class WallCutter : MonoBehaviour {
             cutCentre = cutLocs[k] + new Vector3(wallLoc.x, 0, wallLoc.z + 0.125f);
             if (cutLocs[k].y > 0) {
                 if (checkPlacement(cutCentre, existingLocs, 1.5f)) {
-                    windowCount++;
+                    doorWindowCount++;
                     addCutVertices(ans, cutCentre, 3);
                     existingLocs.Add(cutCentre);
                 } else {
@@ -244,7 +248,7 @@ public class WallCutter : MonoBehaviour {
                     );
                 }
             } else if (checkPlacement(cutCentre, existingLocs, 1)) {
-                doorCount++;
+                doorWindowCount++;
                 addCutVertices(ans, cutCentre, 2);
                 existingLocs.Add(cutCentre);
             } else {
@@ -258,8 +262,7 @@ public class WallCutter : MonoBehaviour {
 
 		return ans;
 	}
-    private void addCutVertices(List<Vector3> verts, Vector3 centre, float size)
-    {
+    private void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
         int mark = verts.Count;
 
         verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
