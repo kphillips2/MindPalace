@@ -467,7 +467,29 @@ public class subMenuButtons : MonoBehaviour {
     }
     public void AddWindow()
     {
-        print("TODO");
+        float windowLocation;
+        if (RoomNotCorridor)
+        {
+            if(doorIndex==0 ||doorIndex==3||doorIndex==6||doorIndex==9)
+            {
+                windowLocation = 0;
+            } else if (doorIndex == 1 || doorIndex == 4 || doorIndex == 7 || doorIndex == 10)
+            {
+                windowLocation = 4;
+            }
+            else
+            {
+                windowLocation = -4;
+            }
+            roomBuilder.addWindow(WallIndexForRoom(), windowLocation);
+        }
+        else
+        {
+            windowLocation = OldDoorLocationCorridor();
+            roomBuilder.addWindow(WallIndexForCorridor(), windowLocation);
+        }
+        HideAll();
+
     }
     public void AddPicture()
     {
