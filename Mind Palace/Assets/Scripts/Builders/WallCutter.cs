@@ -37,9 +37,12 @@ public class WallCutter : MonoBehaviour {
 
 		return doesNewestOverlap;
 	}
+    // compiles the triangles needed for each surface on the wall
+    // note: this is from the perspective of the centre of the room
+    // therefore, front implies surface facing the centre of the room
 	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		if (doorWindowCount > 0)
-			addFrontFace (triangles);
+			addFrontFace (triangles, vertices);
 		else {
 			triangles.Add (1);
 			triangles.Add (7);
@@ -115,7 +118,6 @@ public class WallCutter : MonoBehaviour {
         // bottom faces
         // door and window faces
         Vector3[] previous = { vertices [5], vertices [4] };
-
         for (int k = 0; k < doorWindowCount; k++) {
 			mark = 8 + 8 * k;
 
@@ -161,51 +163,77 @@ public class WallCutter : MonoBehaviour {
 		// end bottom faces
 	}
 	// creates the face of the wall towards the centre of the room
-	private void addFrontFace(List<int> triangles){
-		// close face
-		triangles.Add (11);
-		triangles.Add (9);
-		triangles.Add (5);
+	private void addFrontFace(List<int> triangles, List<Vector3> vertices)
+    {
+        // close face
+        int[] previous = { 3, 5 };
+        int mark;
+        for (int k = 0; k < doorWindowCount; k++){
+            mark = 8 + 8 * k;
+            if (vertices[mark].y == 0)
+                addDoorFace(triangles, mark, previous);
+            else
+                addWindowFace(triangles, vertices, mark, previous);
+        }
+        mark = 8 + 8 * (doorWindowCount - 1);
 
-		triangles.Add (5);
-		triangles.Add (3);
-		triangles.Add (11);
+        triangles.Add(11);
+        triangles.Add(3);
+        triangles.Add(1);
 
-		triangles.Add (11);
-		triangles.Add (3);
-		triangles.Add (1);
+        triangles.Add(1);
+        triangles.Add(previous [0]);
+        triangles.Add(11);
 
-		for (int k = 1; k < doorWindowCount; k++)
-			addDoorFace (triangles, k);
-		int mark = 8 + 8 * (doorWindowCount - 1);
+        triangles.Add(previous [0]);
+        triangles.Add(1);
+        triangles.Add(7);
 
-		triangles.Add (1);
-		triangles.Add (mark + 5);
-		triangles.Add (11);
-
-		triangles.Add (mark + 5);
-		triangles.Add (1);
-		triangles.Add (7);
-
-		triangles.Add (7);
-		triangles.Add (mark + 7);
-		triangles.Add (mark + 5);
-		// end close face
-	}
-	// adds a face to the left of each door
-	private void addDoorFace(List<int> triangles, int doorIndex){
-		int mark = 8 + 8 * doorIndex;
-
+        triangles.Add(7);
+        triangles.Add(previous [1]);
+        triangles.Add(previous [0]);
+        // end close face
+    }
+	// adds a face to the left of a door
+	private void addDoorFace(List<int> triangles, int mark, int[] previous){
 		triangles.Add (mark + 3);
 		triangles.Add (mark + 1);
-		triangles.Add (mark - 1);
+		triangles.Add (previous [1]);
 
-		triangles.Add (mark - 1);
-		triangles.Add (mark - 3);
+		triangles.Add (previous [1]);
+		triangles.Add (previous [0]);
 		triangles.Add (mark + 3);
-	}
-	// create a square face from the last four vertices in vertices
-	private void addSquareFace(List<int> triangles, int mark){
+
+        previous [0] = mark + 5;
+        previous [1] = mark + 7;
+    }
+    // adds a face to the left of and below a window
+    private void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous){
+        triangles.Add(mark + 3);
+        triangles.Add(mark + 1);
+        triangles.Add(previous [1]);
+
+        triangles.Add(previous [1]);
+        triangles.Add(previous [0]);
+        triangles.Add(mark + 3);
+
+        int toGround = vertices.Count;
+        vertices.Add(new Vector3(vertices[mark + 6].x, 0, vertices[mark + 6].z));
+        vertices.Add(new Vector3(vertices[mark + 7].x, 0, vertices[mark + 7].z));
+
+        triangles.Add(mark + 7);
+        triangles.Add(toGround + 1);
+        triangles.Add(previous [1]);
+
+        triangles.Add(previous [1]);
+        triangles.Add(mark + 1);
+        triangles.Add(mark + 7);
+
+        previous[0] = mark + 5;
+        previous[1] = toGround + 1;
+    }
+    // create a square face from the last four vertices in vertices
+    private void addSquareFace(List<int> triangles, int mark){
 		mark -= 4;
 
 		triangles.Add (mark);
@@ -262,13 +290,14 @@ public class WallCutter : MonoBehaviour {
 
 		return ans;
 	}
+    // adds the 8 vertices needed for any door or window
     private void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
         int mark = verts.Count;
 
         verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
         verts.Add(verts[mark] + new Vector3(0, 0, -0.25f));// index: mark + 1
-        verts.Add(verts[mark] + new Vector3(0, 4, 0));// index: mark + 2
-        verts.Add(verts[mark + 1] + new Vector3(0, 4, 0));// index: mark + 3
+        verts.Add(new Vector3(verts[mark].x, 4, verts[mark].z));// index: mark + 2
+        verts.Add(new Vector3(verts[mark + 1].x, 4, verts[mark].z));// index: mark + 3
 
         verts.Add(verts[mark + 2] + new Vector3(size, 0, 0));// index: mark + 4
         verts.Add(verts[mark + 3] + new Vector3(size, 0, 0));// index: mark + 5
