@@ -229,21 +229,31 @@ public class WallCutter : MonoBehaviour {
 		ans.Add (ans [1] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 7
 
 		Vector3 cutCentre;
-		for (int k = 0; k < cutLocs.Length; k++) {
+        for (int k = 0; k < cutLocs.Length; k++) {
             cutCentre = cutLocs[k] + new Vector3(wallLoc.x, 0, wallLoc.z + 0.125f);
             if (cutLocs[k].y > 0) {
-                if (checkWindowPlacement(cutCentre, existingLocs)) {
+                if (checkPlacement(cutCentre, existingLocs, 1.5f)) {
                     windowCount++;
                     addCutVertices(ans, 3, cutCentre);
                     existingLocs.Add(cutCentre);
-                } else if (k == cutLocs.Length - 1)
+                }
+                else if (k == cutLocs.Length - 1) {
                     doesNewestOverlap = true;
-            } else if (checkDoorPlacement(cutCentre, existingLocs)) {
+                    Debug.LogError(
+                        "The window at {" + cutCentre.x + "} is too close to an existing door or window."
+                    );
+                }
+            } else if (checkPlacement(cutCentre, existingLocs, 1)) {
                 doorCount++;
-                addCutVertices (ans, 2, cutCentre);
+                addCutVertices(ans, 2, cutCentre);
                 existingLocs.Add(cutCentre);
-            } else if (k == cutLocs.Length - 1)
-                doesNewestOverlap = true;
+            } else {
+                if (k == cutLocs.Length - 1)
+                    doesNewestOverlap = true;
+                Debug.LogError(
+                    "The door at {" + cutCentre.x + "} is too close to an existing door or window."
+                );
+            }
 		}
 
 		return ans;
@@ -261,44 +271,21 @@ public class WallCutter : MonoBehaviour {
         verts.Add(verts[mark] + new Vector3(size, 0, 0));// index: mark + 6
         verts.Add(verts[mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
     }
-	// checks whether the door location overlaps with any other doors or windows.
-	private bool checkDoorPlacement(Vector3 doorLoc, List<Vector3> existingLocs){
+	// checks whether a window or door location overlaps with any other doors or windows.
+	private bool checkPlacement(Vector3 doorLoc, List<Vector3> existingLocs, float size){
         float dist, minDist;
         foreach (Vector3 existingLoc in existingLocs) {
 			dist = Mathf.Abs (Vector3.Distance (
                 new Vector3(existingLoc.x, 0, existingLoc.z), new Vector3(doorLoc.x, 0, doorLoc.z)
             ));
-            minDist = 2.25f;
+            minDist = size + 0.25f + 1;
             if (existingLoc.y > 0)
                 minDist += 0.5f;
-			if (dist < minDist) {
-				Debug.LogError (
-                    "The door at {"+doorLoc.x+"} is too close to an existing door or window at {"+existingLoc.x+"}."
-                );
-				return false;
-			}
+            if (dist < minDist)
+                return false;
 		}
 		return true;
 	}
-    // checks whether the window location overlaps with any other doors or windows.
-    private bool checkWindowPlacement(Vector3 windowLoc, List<Vector3> existingLocs){
-        float dist, minDist;
-        foreach (Vector3 existingLoc in existingLocs) {
-            dist = Mathf.Abs (Vector3.Distance (
-                new Vector3 (existingLoc.x, 0, existingLoc.z), new Vector3(windowLoc.x, 0, windowLoc.z)
-            ));
-            minDist = 2.75f;
-            if (existingLoc.y > 0)
-                minDist += 0.5f;
-            if (dist < minDist) {
-                Debug.LogError (
-                    "The window at {" + windowLoc.x + "} is too close to an existing door or window at {" + existingLoc.x + "}."
-                );
-                return false;
-            }
-        }
-        return true;
-    }
     // removes the scale and translation from the given list and returns the resulting vectors as an array
     private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
