@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorCutter : MonoBehaviour {
-	private int doorCount;
+public class WallCutter : MonoBehaviour {
+	private int doorCount, windowCount;
 	private bool doesNewestOverlap;
 
 	// Use this for initialization
 	void Awake () {
 	}
-	public bool cutDoor(GameObject input, Vector3[] doorLocs, float size){
+	public bool cutDoorsAndWindows(GameObject input, Vector3[] cutLocs, float size){
 		doesNewestOverlap = false;
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
 			Destroy (collider);
 		// get new vertices after scaling
-		List<Vector3> vertices = compileVertices (input.transform.localPosition, doorLocs, size);
+		List<Vector3> vertices = compileVertices (input.transform.localPosition, cutLocs, size);
 		// set triangles and and new vertices
 		List<int> triangles = new List<int>();
 		compileTriangles (triangles, vertices);
@@ -82,10 +82,10 @@ public class DoorCutter : MonoBehaviour {
 		// end right faces
 
 		// left faces
-		vertices.Add(vertices[3]);
-		vertices.Add(vertices[5]);
-		vertices.Add(vertices[2]);
-		vertices.Add(vertices[4]);
+		vertices.Add (vertices[3]);
+		vertices.Add (vertices[5]);
+		vertices.Add (vertices[2]);
+		vertices.Add (vertices[4]);
 
 		addSquareFace (triangles, vertices.Count);
 
@@ -104,10 +104,10 @@ public class DoorCutter : MonoBehaviour {
 		// end left faces
 
 		// top face
-		vertices.Add(vertices[0]);
-		vertices.Add(vertices[1]);
-		vertices.Add(vertices[2]);
-		vertices.Add(vertices[3]);
+		vertices.Add (vertices[0]);
+		vertices.Add (vertices[1]);
+		vertices.Add (vertices[2]);
+		vertices.Add (vertices[3]);
 
 		addSquareFace (triangles, vertices.Count);
 		// end top face
@@ -212,12 +212,13 @@ public class DoorCutter : MonoBehaviour {
 		triangles.Add (mark);
 	}
 	// returns a list of vertices with the given doors
-	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] doorLocs, float wallSize){
+	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
 		doorCount = 0;
+        windowCount = 0;
 
-		ans.Add (wallLoc + new Vector3 (wallSize / 2, wallLoc.y, 0.125f));// index: 0
+        ans.Add (wallLoc + new Vector3 (wallSize / 2, wallLoc.y, 0.125f));// index: 0
 		ans.Add (ans[0] + new Vector3 (0, 0, -0.25f));// index: 1
 		ans.Add (ans[0] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 2
 		ans.Add (ans[1] + new Vector3 (-(wallSize - 0.25f), 0, 0));// index: 3
@@ -227,43 +228,79 @@ public class DoorCutter : MonoBehaviour {
 		ans.Add (ans [0] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 6
 		ans.Add (ans [1] + new Vector3 (0, -2 * wallLoc.y, 0));// index: 7
 
-		int mark = ans.Count;
-		Vector3 doorCentre;
-		for (int k = 0; k < doorLocs.Length; k++) {
-			doorCentre = doorLocs[k] + wallLoc + new Vector3 (0, -wallLoc.y, 0.125f);
-			if (checkDoorPlacement (doorCentre, existingLocs)) {
-				ans.Add (doorCentre + new Vector3 (-1, 0, 0));// index: mark
-				ans.Add (ans [mark] + new Vector3 (0, 0, -0.25f));// index: mark + 1
-				ans.Add (ans [mark] + new Vector3 (0, 4, 0));// index: mark + 2
-				ans.Add (ans [mark + 1] + new Vector3 (0, 4, 0));// index: mark + 3
-
-				ans.Add (ans [mark + 2] + new Vector3 (2, 0, 0));// index: mark + 4
-				ans.Add (ans [mark + 3] + new Vector3 (2, 0, 0));// index: mark + 5
-				ans.Add (ans [mark] + new Vector3 (2, 0, 0));// index: mark + 6
-				ans.Add (ans [mark + 1] + new Vector3 (2, 0, 0));// index: mark + 7
-
-				doorCount++;
-				existingLocs.Add (doorCentre);
-				mark = ans.Count;
-			} else if (k == doorLocs.Length - 1)
-				doesNewestOverlap = true;
+		Vector3 cutCentre;
+		for (int k = 0; k < cutLocs.Length; k++) {
+            cutCentre = cutLocs[k] + new Vector3(wallLoc.x, 0, wallLoc.z + 0.125f);
+            if (cutLocs[k].y > 0) {
+                if (checkWindowPlacement(cutCentre, existingLocs)) {
+                    windowCount++;
+                    addCutVertices(ans, 3, cutCentre);
+                    existingLocs.Add(cutCentre);
+                } else if (k == cutLocs.Length - 1)
+                    doesNewestOverlap = true;
+            } else if (checkDoorPlacement(cutCentre, existingLocs)) {
+                doorCount++;
+                addCutVertices (ans, 2, cutCentre);
+                existingLocs.Add(cutCentre);
+            } else if (k == cutLocs.Length - 1)
+                doesNewestOverlap = true;
 		}
 
 		return ans;
 	}
-	// checks whether the door location overlaps with any other doors.
+    private void addCutVertices(List<Vector3> verts, float size, Vector3 centre){
+        int mark = verts.Count;
+
+        verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
+        verts.Add(verts[mark] + new Vector3(0, 0, -0.25f));// index: mark + 1
+        verts.Add(verts[mark] + new Vector3(0, 4, 0));// index: mark + 2
+        verts.Add(verts[mark + 1] + new Vector3(0, 4, 0));// index: mark + 3
+
+        verts.Add(verts[mark + 2] + new Vector3(size, 0, 0));// index: mark + 4
+        verts.Add(verts[mark + 3] + new Vector3(size, 0, 0));// index: mark + 5
+        verts.Add(verts[mark] + new Vector3(size, 0, 0));// index: mark + 6
+        verts.Add(verts[mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
+    }
+	// checks whether the door location overlaps with any other doors or windows.
 	private bool checkDoorPlacement(Vector3 doorLoc, List<Vector3> existingLocs){
-		foreach (Vector3 existingLoc in existingLocs) {
-			float dist = Mathf.Abs(Vector3.Distance (existingLoc, doorLoc));
-			if (dist < 2.25f) {
-				Debug.LogError ("The door at {"+doorLoc.x+"} is too close to an existing door at {"+existingLoc.x+"}.");
+        float dist, minDist;
+        foreach (Vector3 existingLoc in existingLocs) {
+			dist = Mathf.Abs (Vector3.Distance (
+                new Vector3(existingLoc.x, 0, existingLoc.z), new Vector3(doorLoc.x, 0, doorLoc.z)
+            ));
+            minDist = 2.25f;
+            if (existingLoc.y > 0)
+                minDist += 0.5f;
+			if (dist < minDist) {
+				Debug.LogError (
+                    "The door at {"+doorLoc.x+"} is too close to an existing door or window at {"+existingLoc.x+"}."
+                );
 				return false;
 			}
 		}
 		return true;
 	}
-	// removes the scale and translation from the given list and returns the resulting vectors as an array
-	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+    // checks whether the window location overlaps with any other doors or windows.
+    private bool checkWindowPlacement(Vector3 windowLoc, List<Vector3> existingLocs){
+        float dist, minDist;
+        foreach (Vector3 existingLoc in existingLocs) {
+            dist = Mathf.Abs (Vector3.Distance (
+                new Vector3 (existingLoc.x, 0, existingLoc.z), new Vector3(windowLoc.x, 0, windowLoc.z)
+            ));
+            minDist = 2.75f;
+            if (existingLoc.y > 0)
+                minDist += 0.5f;
+            if (dist < minDist) {
+                Debug.LogError (
+                    "The window at {" + windowLoc.x + "} is too close to an existing door or window at {" + existingLoc.x + "}."
+                );
+                return false;
+            }
+        }
+        return true;
+    }
+    // removes the scale and translation from the given list and returns the resulting vectors as an array
+    private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
 		Vector3 v;
