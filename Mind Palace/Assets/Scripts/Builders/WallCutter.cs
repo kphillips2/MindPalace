@@ -175,7 +175,6 @@ public class WallCutter : MonoBehaviour {
             else
                 addWindowFace(triangles, vertices, mark, previous);
         }
-        mark = 8 + 8 * (doorWindowCount - 1);
 
         triangles.Add(11);
         triangles.Add(3);
