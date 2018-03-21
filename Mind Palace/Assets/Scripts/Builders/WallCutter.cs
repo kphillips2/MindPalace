@@ -234,18 +234,18 @@ public class WallCutter : MonoBehaviour {
             if (cutLocs[k].y > 0) {
                 if (checkPlacement(cutCentre, existingLocs, 1.5f)) {
                     windowCount++;
-                    addCutVertices(ans, 3, cutCentre);
+                    addCutVertices(ans, cutCentre, 3);
                     existingLocs.Add(cutCentre);
-                }
-                else if (k == cutLocs.Length - 1) {
-                    doesNewestOverlap = true;
+                } else {
+                    if (k == cutLocs.Length - 1)
+                        doesNewestOverlap = true;
                     Debug.LogError(
                         "The window at {" + cutCentre.x + "} is too close to an existing door or window."
                     );
                 }
             } else if (checkPlacement(cutCentre, existingLocs, 1)) {
                 doorCount++;
-                addCutVertices(ans, 2, cutCentre);
+                addCutVertices(ans, cutCentre, 2);
                 existingLocs.Add(cutCentre);
             } else {
                 if (k == cutLocs.Length - 1)
@@ -258,7 +258,8 @@ public class WallCutter : MonoBehaviour {
 
 		return ans;
 	}
-    private void addCutVertices(List<Vector3> verts, float size, Vector3 centre){
+    private void addCutVertices(List<Vector3> verts, Vector3 centre, float size)
+    {
         int mark = verts.Count;
 
         verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
