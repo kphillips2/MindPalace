@@ -159,8 +159,7 @@ public class RoomBuilder : MonoBehaviour {
             doors [wallIndex].Sort ((a, b) => a.x.CompareTo(b.x));
             if (wallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))
                 doors [wallIndex].Remove (windowCentre);
-        }
-        else
+        } else
             Debug.LogError ("The Window at {" + doorLoc + "} is too close to end of the wall.");
     }
     private void adjustWall (GameObject input, int wallIndex){
