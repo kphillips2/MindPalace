@@ -222,9 +222,9 @@
     <Compile Include="Assets\Scripts\ActivationManager.cs" />
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\Builders\Building.cs" />
-    <Compile Include="Assets\Scripts\Builders\DoorCutter.cs" />
+    <Compile Include="Assets\Scripts\Builders\FloorResizer.cs" />
     <Compile Include="Assets\Scripts\Builders\RoomBuilder.cs" />
-    <Compile Include="Assets\Scripts\Builders\RoomResizer.cs" />
+    <Compile Include="Assets\Scripts\Builders\WallCutter.cs" />
     <Compile Include="Assets\Scripts\ButtonListButton.cs" />
     <Compile Include="Assets\Scripts\ButtonListControl.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
