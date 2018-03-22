@@ -189,16 +189,10 @@ public class WallCutter : MonoBehaviour {
             else
                 addWindowFace(triangles, vertices, mark, previous);
         }
-<<<<<<< HEAD
 
         triangles.Add (11);
         triangles.Add (3);
         triangles.Add (1);
-=======
-        triangles.Add(11);
-        triangles.Add(3);
-        triangles.Add(1);
->>>>>>> 0f01e6c6b94336cc2cdf54007b044e78386c07ca
 
         triangles.Add (1);
         triangles.Add (previous [0]);
