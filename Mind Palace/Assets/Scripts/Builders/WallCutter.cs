@@ -113,6 +113,20 @@ public class WallCutter : MonoBehaviour {
 		vertices.Add (vertices[3]);
 
 		addSquareFace (triangles, vertices.Count);
+
+        // window faces
+        for (int k = 0; k < doorWindowCount; k++) {
+            mark = 8 + 8 * k;
+            if (vertices[mark].y > 0) {
+                vertices.Add (vertices[mark + 6]);
+                vertices.Add (vertices[mark + 7]);
+                vertices.Add (vertices[mark]);
+                vertices.Add (vertices[mark + 1]);
+
+                addSquareFace(triangles, vertices.Count);
+            }
+        }
+        // end window faces
         // end top face
 
         // bottom faces
@@ -170,27 +184,27 @@ public class WallCutter : MonoBehaviour {
         int mark;
         for (int k = 0; k < doorWindowCount; k++){
             mark = 8 + 8 * k;
-            if (vertices[mark].y == 0)
+            if (vertices [mark].y == 0)
                 addDoorFace(triangles, mark, previous);
             else
                 addWindowFace(triangles, vertices, mark, previous);
         }
 
-        triangles.Add(11);
-        triangles.Add(3);
-        triangles.Add(1);
+        triangles.Add (11);
+        triangles.Add (3);
+        triangles.Add (1);
 
-        triangles.Add(1);
-        triangles.Add(previous [0]);
-        triangles.Add(11);
+        triangles.Add (1);
+        triangles.Add (previous [0]);
+        triangles.Add (11);
 
-        triangles.Add(previous [0]);
-        triangles.Add(1);
-        triangles.Add(7);
+        triangles.Add (previous [0]);
+        triangles.Add (1);
+        triangles.Add (7);
 
-        triangles.Add(7);
-        triangles.Add(previous [1]);
-        triangles.Add(previous [0]);
+        triangles.Add (7);
+        triangles.Add (previous [1]);
+        triangles.Add (previous [0]);
         // end close face
     }
 	// adds a face to the left of a door
@@ -208,25 +222,25 @@ public class WallCutter : MonoBehaviour {
     }
     // adds a face to the left of and below a window
     private void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous){
-        triangles.Add(mark + 3);
-        triangles.Add(mark + 1);
-        triangles.Add(previous [1]);
+        triangles.Add (mark + 3);
+        triangles.Add (mark + 1);
+        triangles.Add (previous [1]);
 
-        triangles.Add(previous [1]);
-        triangles.Add(previous [0]);
-        triangles.Add(mark + 3);
+        triangles.Add (previous [1]);
+        triangles.Add (previous [0]);
+        triangles.Add (mark + 3);
 
         int toGround = vertices.Count;
-        vertices.Add(new Vector3(vertices[mark + 6].x, 0, vertices[mark + 6].z));
-        vertices.Add(new Vector3(vertices[mark + 7].x, 0, vertices[mark + 7].z));
+        vertices.Add (new Vector3(vertices [mark + 6].x, 0, vertices [mark + 6].z));
+        vertices.Add (new Vector3(vertices [mark + 7].x, 0, vertices [mark + 7].z));
 
-        triangles.Add(mark + 7);
-        triangles.Add(toGround + 1);
-        triangles.Add(previous [1]);
+        triangles.Add (mark + 7);
+        triangles.Add (toGround + 1);
+        triangles.Add (previous [1]);
 
-        triangles.Add(previous [1]);
-        triangles.Add(mark + 1);
-        triangles.Add(mark + 7);
+        triangles.Add (previous [1]);
+        triangles.Add (mark + 1);
+        triangles.Add (mark + 7);
 
         previous[0] = mark + 5;
         previous[1] = toGround + 1;
@@ -263,10 +277,10 @@ public class WallCutter : MonoBehaviour {
         for (int k = 0; k < cutLocs.Length; k++) {
             cutCentre = cutLocs[k] + new Vector3(wallLoc.x, 0, wallLoc.z + 0.125f);
             if (cutLocs[k].y > 0) {
-                if (checkPlacement(cutCentre, existingLocs, 1.5f)) {
+                if (checkPlacement (cutCentre, existingLocs, 1.5f)) {
                     doorWindowCount++;
-                    addCutVertices(ans, cutCentre, 3);
-                    existingLocs.Add(cutCentre);
+                    addCutVertices (ans, cutCentre, 3);
+                    existingLocs.Add (cutCentre);
                 } else {
                     if (k == cutLocs.Length - 1)
                         doesNewestOverlap = true;
@@ -274,10 +288,10 @@ public class WallCutter : MonoBehaviour {
                         "The window at {" + cutCentre.x + "} is too close to an existing door or window."
                     );
                 }
-            } else if (checkPlacement(cutCentre, existingLocs, 1)) {
+            } else if (checkPlacement (cutCentre, existingLocs, 1)) {
                 doorWindowCount++;
-                addCutVertices(ans, cutCentre, 2);
-                existingLocs.Add(cutCentre);
+                addCutVertices (ans, cutCentre, 2);
+                existingLocs.Add (cutCentre);
             } else {
                 if (k == cutLocs.Length - 1)
                     doesNewestOverlap = true;
@@ -293,15 +307,15 @@ public class WallCutter : MonoBehaviour {
     private void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
         int mark = verts.Count;
 
-        verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
-        verts.Add(verts[mark] + new Vector3(0, 0, -0.25f));// index: mark + 1
-        verts.Add(new Vector3(verts[mark].x, 4, verts[mark].z));// index: mark + 2
-        verts.Add(new Vector3(verts[mark + 1].x, 4, verts[mark + 1].z));// index: mark + 3
+        verts.Add (centre + new Vector3(-size / 2, 0, 0));// index: mark
+        verts.Add (verts [mark] + new Vector3(0, 0, -0.25f));// index: mark + 1
+        verts.Add (new Vector3(verts [mark].x, 4, verts [mark].z));// index: mark + 2
+        verts.Add (new Vector3(verts [mark + 1].x, 4, verts [mark + 1].z));// index: mark + 3
 
-        verts.Add(verts[mark + 2] + new Vector3(size, 0, 0));// index: mark + 4
-        verts.Add(verts[mark + 3] + new Vector3(size, 0, 0));// index: mark + 5
-        verts.Add(verts[mark] + new Vector3(size, 0, 0));// index: mark + 6
-        verts.Add(verts[mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
+        verts.Add (verts [mark + 2] + new Vector3(size, 0, 0));// index: mark + 4
+        verts.Add (verts [mark + 3] + new Vector3(size, 0, 0));// index: mark + 5
+        verts.Add (verts [mark] + new Vector3(size, 0, 0));// index: mark + 6
+        verts.Add (verts [mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
     }
 	// checks whether a window or door location overlaps with any other doors or windows.
 	private bool checkPlacement(Vector3 doorLoc, List<Vector3> existingLocs, float size){
