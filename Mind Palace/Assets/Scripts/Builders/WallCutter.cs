@@ -296,7 +296,7 @@ public class WallCutter : MonoBehaviour {
         verts.Add(centre + new Vector3(-size / 2, 0, 0));// index: mark
         verts.Add(verts[mark] + new Vector3(0, 0, -0.25f));// index: mark + 1
         verts.Add(new Vector3(verts[mark].x, 4, verts[mark].z));// index: mark + 2
-        verts.Add(new Vector3(verts[mark + 1].x, 4, verts[mark].z));// index: mark + 3
+        verts.Add(new Vector3(verts[mark + 1].x, 4, verts[mark + 1].z));// index: mark + 3
 
         verts.Add(verts[mark + 2] + new Vector3(size, 0, 0));// index: mark + 4
         verts.Add(verts[mark + 3] + new Vector3(size, 0, 0));// index: mark + 5
