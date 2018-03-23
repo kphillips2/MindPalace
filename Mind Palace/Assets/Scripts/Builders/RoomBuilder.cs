@@ -5,14 +5,11 @@ using UnityEngine;
 public class RoomBuilder : MonoBehaviour {
 	public GameObject floor;
 	public GameObject roof;
-	// positive z
-	public GameObject frontWall;
-	// positive x
-	public GameObject rightWall;
-	// negative z
-	public GameObject rearWall;
-	// negative x
-	public GameObject leftWall;
+
+	public GameObject posZWall;
+	public GameObject posXWall;
+	public GameObject negZWall;
+	public GameObject negXWall;
 
 	private float ROOM_WIDTH = 12;
 	private float ROOM_LENGTH = 12;
@@ -34,18 +31,18 @@ public class RoomBuilder : MonoBehaviour {
         floorResizer.resize (floor, dimensions);
         floorResizer.resize (roof, dimensions);
 
-		frontWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
-		rightWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
-		rearWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
-		leftWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
+		posZWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
+		posXWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
+		negZWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
+		negXWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
 
 		ROOM_WIDTH = width;
 		ROOM_LENGTH = length;
 
-        adjustWall (frontWall, 0);
-        adjustWall (rightWall, 1);
-        adjustWall (rearWall, 2);
-        adjustWall (leftWall, 3);
+        adjustWall (posZWall, 0);
+        adjustWall (posXWall, 1);
+        adjustWall (negZWall, 2);
+        adjustWall (negXWall, 3);
 	}
 	// input: three strings which represent the materials for the room
 	public void setMaterials(string floorName, string roofName, string wallName){
@@ -60,10 +57,10 @@ public class RoomBuilder : MonoBehaviour {
 		floor.GetComponent<Renderer> ().material = floorMat;
 		roof.GetComponent<Renderer> ().material = roofMat;
 
-		frontWall.GetComponent<Renderer> ().material = wallMat;
-		rightWall.GetComponent<Renderer> ().material = wallMat;
-		rearWall.GetComponent<Renderer> ().material = wallMat;
-		leftWall.GetComponent<Renderer> ().material = wallMat;
+		posZWall.GetComponent<Renderer> ().material = wallMat;
+		posXWall.GetComponent<Renderer> ().material = wallMat;
+		negZWall.GetComponent<Renderer> ().material = wallMat;
+		negXWall.GetComponent<Renderer> ().material = wallMat;
 	}
 	// input: index, loc (-6)------------(6)
 	public void addDoor(int wallIndex, float doorLoc){
@@ -80,16 +77,16 @@ public class RoomBuilder : MonoBehaviour {
 		if (wallIndex >= 0 && wallIndex <= 3)
             switch (wallIndex) {
                 case 1:
-                    adjustForDoor (rightWall, 1, doorLoc);
+                    adjustForDoor (posXWall, 1, doorLoc);
                     break;
                 case 2:
-                    adjustForDoor (rearWall, 2, doorLoc);
+                    adjustForDoor (negZWall, 2, doorLoc);
                     break;
                 case 3:
-                    adjustForDoor (leftWall, 3, doorLoc);
+                    adjustForDoor (negXWall, 3, doorLoc);
                     break;
                 default:
-                    adjustForDoor (frontWall, 0, doorLoc);
+                    adjustForDoor (posZWall, 0, doorLoc);
                     break;
             }
 		else
@@ -111,16 +108,16 @@ public class RoomBuilder : MonoBehaviour {
         if (wallIndex >= 0 && wallIndex <= 3)
             switch (wallIndex) {
                 case 1:
-                    adjustForWindow (rightWall, 1, windowLoc);
+                    adjustForWindow (posXWall, 1, windowLoc);
                     break;
                 case 2:
-                    adjustForWindow (rearWall, 2, windowLoc);
+                    adjustForWindow (negZWall, 2, windowLoc);
                     break;
                 case 3:
-                    adjustForWindow (leftWall, 3, windowLoc);
+                    adjustForWindow (negXWall, 3, windowLoc);
                     break;
                 default:
-                    adjustForWindow (frontWall, 0, windowLoc);
+                    adjustForWindow (posZWall, 0, windowLoc);
                     break;
             }
         else
@@ -128,12 +125,7 @@ public class RoomBuilder : MonoBehaviour {
     }
     // gets either the room width or the room length depending on the index
     private float getWallSize(int wallIndex){
-        switch (wallIndex % 2) {
-            case 0:
-                return ROOM_WIDTH;
-            default:
-                return ROOM_LENGTH;
-        }
+        return (wallIndex % 2 == 0) ? ROOM_WIDTH : ROOM_LENGTH;
     }
     private void adjustForDoor(GameObject input, int wallIndex, float doorLoc){
         float wallLength = getWallSize (wallIndex);

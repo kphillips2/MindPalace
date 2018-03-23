@@ -97,7 +97,7 @@ public class FloorResizer : MonoBehaviour {
 	private List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
 		List<Vector3> ans = new List<Vector3> ();
 
-		ans.Add (wallLoc + new Vector3 (dims.x/2, dims.y/2, dims.z/2));// index: 0
+		ans.Add (wallLoc + new Vector3 (dims.x / 2, dims.y / 2, dims.z / 2));// index: 0
 		ans.Add (ans[0] + new Vector3 (0, 0, -dims.z));// index: 1
 		ans.Add (ans[0] + new Vector3 (-dims.x, 0, 0));// index: 2
 		ans.Add (ans[1] + new Vector3 (-dims.x, 0, 0));// index: 3
@@ -112,7 +112,7 @@ public class FloorResizer : MonoBehaviour {
 	// removes the scale and translation from the given list and returns the resulting vectors as an array
 	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
-		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
+		Vector3 s = new Vector3(1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
 		for (int k = 0; k < ans.Length; k++){
 			v = vertices [k] - translation;

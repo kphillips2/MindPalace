@@ -335,7 +335,7 @@ public class WallCutter : MonoBehaviour {
     // removes the scale and translation from the given list and returns the resulting vectors as an array
     private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
-		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
+		Vector3 s = new Vector3(1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
 		for (int k = 0; k < ans.Length; k++){
 			v = vertices [k] - translation;
