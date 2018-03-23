@@ -428,7 +428,7 @@ public class subMenuButtons : MonoBehaviour {
         BuildRoom(newRoomCentre + currentRoomCenter, wallIndex, doorIndex);
         int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         string[] DummyMat = { "", "", "" };
-        SaveLoad.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
+        Save.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
         HideAll();
 
     }
@@ -452,7 +452,7 @@ public class subMenuButtons : MonoBehaviour {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, true);
             int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0};
             string[] DummyMat = { "", "", "" };
-            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
+            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
             HideAll();
         }
         else
@@ -460,7 +460,7 @@ public class subMenuButtons : MonoBehaviour {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, false);
             int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0 };
             string[] DummyMat = { "", "", "" };
-            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
+            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
             HideAll();
         }
 
