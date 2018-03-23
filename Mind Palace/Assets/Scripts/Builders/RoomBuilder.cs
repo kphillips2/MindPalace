@@ -21,7 +21,7 @@ public class RoomBuilder : MonoBehaviour {
 	private FloorResizer floorResizer;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake() {
 		doors = new List<Vector3>[4];
 		for (int k = 0; k < 4; k++)
 			doors [k] = new List<Vector3> ();
@@ -48,7 +48,7 @@ public class RoomBuilder : MonoBehaviour {
         adjustWall (leftWall, 3);
 	}
 	// input: three strings which represent the materials for the room
-	public void setMaterials (string floorName, string roofName, string wallName){
+	public void setMaterials(string floorName, string roofName, string wallName){
 		Material floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
 		Material roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
 		Material wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
@@ -66,7 +66,7 @@ public class RoomBuilder : MonoBehaviour {
 		leftWall.GetComponent<Renderer> ().material = wallMat;
 	}
 	// input: index, loc (-6)------------(6)
-	public void addDoor (int wallIndex, float doorLoc){
+	public void addDoor(int wallIndex, float doorLoc){
 		// wall numbers correspond with indices of doorStates
 		// (->) is the start direction
 		//   ----0----
@@ -109,8 +109,7 @@ public class RoomBuilder : MonoBehaviour {
         //   ----2----
 
         if (wallIndex >= 0 && wallIndex <= 3)
-            switch (wallIndex)
-            {
+            switch (wallIndex) {
                 case 1:
                     adjustForWindow (rightWall, 1, windowLoc);
                     break;
@@ -136,7 +135,7 @@ public class RoomBuilder : MonoBehaviour {
                 return ROOM_LENGTH;
         }
     }
-    private void adjustForDoor (GameObject input, int wallIndex, float doorLoc){
+    private void adjustForDoor(GameObject input, int wallIndex, float doorLoc){
         float wallLength = getWallSize (wallIndex);
 		float doorLimit = wallLength / 2 - 1.5f;
 
@@ -149,20 +148,20 @@ public class RoomBuilder : MonoBehaviour {
 		} else
 			Debug.LogError ("The door at {" + doorLoc + "} is too close to end of the wall.");
 	}
-    private void adjustForWindow(GameObject input, int wallIndex, float doorLoc){
+    private void adjustForWindow(GameObject input, int wallIndex, float windowLoc){
         float wallLength = getWallSize (wallIndex);
         float windowLimit = wallLength / 2 - 2f;
 
-        if (doorLoc >= -windowLimit && doorLoc <= windowLimit){
-            Vector3 windowCentre = new Vector3(doorLoc, 1.5f, 0);
+        if (windowLoc >= -windowLimit && windowLoc <= windowLimit){
+            Vector3 windowCentre = new Vector3(windowLoc, 1.5f, 0);
             doors [wallIndex].Add (windowCentre);
             doors [wallIndex].Sort ((a, b) => a.x.CompareTo(b.x));
             if (wallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))
                 doors [wallIndex].Remove (windowCentre);
         } else
-            Debug.LogError ("The Window at {" + doorLoc + "} is too close to end of the wall.");
+            Debug.LogError ("The Window at {" + windowLoc + "} is too close to end of the wall.");
     }
-    private void adjustWall (GameObject input, int wallIndex){
+    private void adjustWall(GameObject input, int wallIndex){
         float wallLength = getWallSize (wallIndex);
         wallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength);
 	}

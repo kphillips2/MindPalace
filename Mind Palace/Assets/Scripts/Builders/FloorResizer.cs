@@ -94,7 +94,7 @@ public class FloorResizer : MonoBehaviour {
 		// end far face
 	}
 	// returns a list of vertices with the new size
-	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3 dims){
+	private List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
 		List<Vector3> ans = new List<Vector3> ();
 
 		ans.Add (wallLoc + new Vector3 (dims.x/2, dims.y/2, dims.z/2));// index: 0

@@ -258,7 +258,7 @@ public class WallCutter : MonoBehaviour {
 		triangles.Add (mark);
 	}
 	// returns a list of vertices with the given doors
-	private List<Vector3> compileVertices (Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
+	private List<Vector3> compileVertices(Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
         doorWindowCount = 0;
