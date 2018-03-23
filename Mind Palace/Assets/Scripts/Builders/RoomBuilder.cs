@@ -58,6 +58,17 @@ public class RoomBuilder : MonoBehaviour {
 		negZWall.GetComponent<Renderer> ().material = wallMat;
 		negXWall.GetComponent<Renderer> ().material = wallMat;
 	}
+    // input: a list of float arrays for each wall
+    public void addDoorsAndWindows(List<float[]>[] doorData){
+        for (int k = 0; k < 4; k++)
+            foreach (float[] loc in doorData[k])
+                doors[k].Add (new Vector3 (loc[0], loc[1], loc[2]));
+
+        adjustWall(posZWall, 0);
+        adjustWall(posXWall, 1);
+        adjustWall(negZWall, 2);
+        adjustWall(negXWall, 3);
+    }
 	// input: index, loc (-6)------------(6)
 	public void addDoor(int wallIndex, float doorLoc){
 		// wall numbers correspond with indices of doorStates
@@ -141,7 +152,7 @@ public class RoomBuilder : MonoBehaviour {
         float windowLimit = wallLength / 2 - 2f;
 
         if (windowLoc >= -windowLimit && windowLoc <= windowLimit){
-            Vector3 windowCentre = new Vector3(windowLoc, 1.5f, 0);
+            Vector3 windowCentre = new Vector3 (windowLoc, 1.5f, 0);
             doors [wallIndex].Add (windowCentre);
             doors [wallIndex].Sort ((a, b) => a.x.CompareTo(b.x));
             if (WallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))

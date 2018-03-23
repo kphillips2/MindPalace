@@ -228,8 +228,8 @@ public static class WallCutter {
         triangles.Add (mark + 3);
 
         int toGround = vertices.Count;
-        vertices.Add (new Vector3(vertices [mark + 6].x, 0, vertices [mark + 6].z));
-        vertices.Add (new Vector3(vertices [mark + 7].x, 0, vertices [mark + 7].z));
+        vertices.Add (new Vector3 (vertices [mark + 6].x, 0, vertices [mark + 6].z));
+        vertices.Add (new Vector3 (vertices [mark + 7].x, 0, vertices [mark + 7].z));
 
         triangles.Add (mark + 7);
         triangles.Add (toGround + 1);
