@@ -6,7 +6,7 @@ public static class FloorResizer{
 	// input: width is the distance in the x, length is the distance in the z
 	public static void resize(GameObject input, Vector3 dimensions){
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
-			UnityEngine.Object.Destroy (collider);
+			Object.Destroy (collider);
 		// get new vertices after scaling
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, dimensions);
 		// set triangles and and new vertices

@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallCutter : MonoBehaviour {
-	private int doorWindowCount;
-	private bool doesNewestOverlap;
+public static class WallCutter {
+	private static int doorWindowCount;
+	private static bool doesNewestOverlap;
 
-	// Use this for initialization
-	void Awake () {
-	}
-	public bool cutDoorsAndWindows(GameObject input, Vector3[] cutLocs, float size){
+	public static bool cutDoorsAndWindows(GameObject input, Vector3[] cutLocs, float size){
 		doesNewestOverlap = false;
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
-			Destroy (collider);
+			Object.Destroy (collider);
 		// get new vertices after scaling
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, cutLocs, size);
 		// set triangles and and new vertices
@@ -40,7 +37,7 @@ public class WallCutter : MonoBehaviour {
     // compiles the triangles needed for each surface on the wall
     // note: this is from the perspective of the centre of the room
     // therefore, front implies surface facing the centre of the room
-	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
+	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		if (doorWindowCount > 0)
 			addFrontFace (triangles, vertices);
 		else {
@@ -177,7 +174,7 @@ public class WallCutter : MonoBehaviour {
 		// end bottom faces
 	}
 	// creates the face of the wall towards the centre of the room
-	private void addFrontFace(List<int> triangles, List<Vector3> vertices)
+	private static void addFrontFace(List<int> triangles, List<Vector3> vertices)
     {
         // close face
         int[] previous = { 3, 5 };
@@ -208,7 +205,7 @@ public class WallCutter : MonoBehaviour {
         // end close face
     }
 	// adds a face to the left of a door
-	private void addDoorFace(List<int> triangles, int mark, int[] previous){
+	private static void addDoorFace(List<int> triangles, int mark, int[] previous){
 		triangles.Add (mark + 3);
 		triangles.Add (mark + 1);
 		triangles.Add (previous [1]);
@@ -221,7 +218,7 @@ public class WallCutter : MonoBehaviour {
         previous [1] = mark + 7;
     }
     // adds a face to the left of and below a window
-    private void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous){
+    private static void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous){
         triangles.Add (mark + 3);
         triangles.Add (mark + 1);
         triangles.Add (previous [1]);
@@ -246,7 +243,7 @@ public class WallCutter : MonoBehaviour {
         previous[1] = toGround + 1;
     }
     // create a square face from the last four vertices in vertices
-    private void addSquareFace(List<int> triangles, int mark){
+    private static void addSquareFace(List<int> triangles, int mark){
 		mark -= 4;
 
 		triangles.Add (mark);
@@ -258,7 +255,7 @@ public class WallCutter : MonoBehaviour {
 		triangles.Add (mark);
 	}
 	// returns a list of vertices with the given doors
-	private List<Vector3> compileVertices(Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
+	private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
         doorWindowCount = 0;
@@ -304,7 +301,7 @@ public class WallCutter : MonoBehaviour {
 		return ans;
 	}
     // adds the 8 vertices needed for any door or window
-    private void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
+    private static void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
         int mark = verts.Count;
 
         verts.Add (centre + new Vector3(-size / 2, 0, 0));// index: mark
@@ -318,7 +315,7 @@ public class WallCutter : MonoBehaviour {
         verts.Add (verts [mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
     }
 	// checks whether a window or door location overlaps with any other doors or windows.
-	private bool checkPlacement(Vector3 doorLoc, List<Vector3> existingLocs, float size){
+	private static bool checkPlacement(Vector3 doorLoc, List<Vector3> existingLocs, float size){
         float dist, minDist;
         foreach (Vector3 existingLoc in existingLocs) {
 			dist = Mathf.Abs (Vector3.Distance (
@@ -333,7 +330,7 @@ public class WallCutter : MonoBehaviour {
 		return true;
 	}
     // removes the scale and translation from the given list and returns the resulting vectors as an array
-    private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+    private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
@@ -343,9 +340,5 @@ public class WallCutter : MonoBehaviour {
 			ans [k] = v;
 		}
 		return ans;
-	}
-	// Update is called once per frame
-	void Update () {
-
 	}
 }

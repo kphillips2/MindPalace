@@ -13,7 +13,6 @@ public class RoomBuilder : MonoBehaviour {
 
 	private float ROOM_WIDTH = 12;
 	private float ROOM_LENGTH = 12;
-	private WallCutter wallCutter;
 	private List<Vector3>[] doors;
 
 	// Use this for initialization
@@ -21,7 +20,6 @@ public class RoomBuilder : MonoBehaviour {
 		doors = new List<Vector3>[4];
 		for (int k = 0; k < 4; k++)
 			doors [k] = new List<Vector3> ();
-        wallCutter = floor.GetComponent<WallCutter> ();
 	}
 	// input: two floats that represent the size of the room
 	public void setRoomSize(float width, float length){
@@ -133,7 +131,7 @@ public class RoomBuilder : MonoBehaviour {
 			Vector3 doorCentre = new Vector3 (doorLoc, 0, 0);
 			doors [wallIndex].Add (doorCentre);
 			doors [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
-			if (wallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength))
+			if (WallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength))
 				doors [wallIndex].Remove (doorCentre);
 		} else
 			Debug.LogError ("The door at {" + doorLoc + "} is too close to end of the wall.");
@@ -146,14 +144,14 @@ public class RoomBuilder : MonoBehaviour {
             Vector3 windowCentre = new Vector3(windowLoc, 1.5f, 0);
             doors [wallIndex].Add (windowCentre);
             doors [wallIndex].Sort ((a, b) => a.x.CompareTo(b.x));
-            if (wallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))
+            if (WallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))
                 doors [wallIndex].Remove (windowCentre);
         } else
             Debug.LogError ("The Window at {" + windowLoc + "} is too close to end of the wall.");
     }
     private void adjustWall(GameObject input, int wallIndex){
         float wallLength = getWallSize (wallIndex);
-        wallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength);
+        WallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength);
 	}
 
 	// Update is called once per frame
