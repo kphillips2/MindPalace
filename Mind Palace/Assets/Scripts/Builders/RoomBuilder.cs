@@ -15,7 +15,6 @@ public class RoomBuilder : MonoBehaviour {
 	private float ROOM_LENGTH = 12;
 	private WallCutter wallCutter;
 	private List<Vector3>[] doors;
-	private FloorResizer floorResizer;
 
 	// Use this for initialization
 	void Awake() {
@@ -23,13 +22,12 @@ public class RoomBuilder : MonoBehaviour {
 		for (int k = 0; k < 4; k++)
 			doors [k] = new List<Vector3> ();
         wallCutter = floor.GetComponent<WallCutter> ();
-        floorResizer = floor.GetComponent<FloorResizer> ();
 	}
 	// input: two floats that represent the size of the room
 	public void setRoomSize(float width, float length){
         Vector3 dimensions = new Vector3(width, 0.25f, length);
-        floorResizer.resize (floor, dimensions);
-        floorResizer.resize (roof, dimensions);
+        FloorResizer.resize (floor, dimensions);
+        FloorResizer.resize (roof, dimensions);
 
 		posZWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
 		posXWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);

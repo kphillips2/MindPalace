@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorResizer : MonoBehaviour {
-	// Use this for initialization
-	void Awake () {
-	}
+public static class FloorResizer{
 	// input: width is the distance in the x, length is the distance in the z
-	public void resize(GameObject input, Vector3 dimensions){
+	public static void resize(GameObject input, Vector3 dimensions){
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
-			Destroy (collider);
+			UnityEngine.Object.Destroy (collider);
 		// get new vertices after scaling
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, dimensions);
 		// set triangles and and new vertices
@@ -32,7 +29,7 @@ public class FloorResizer : MonoBehaviour {
 		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
 	}
-	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
+	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		// top face
 		triangles.Add (0);
 		triangles.Add (1);
@@ -94,7 +91,7 @@ public class FloorResizer : MonoBehaviour {
 		// end far face
 	}
 	// returns a list of vertices with the new size
-	private List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
+	private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
 		List<Vector3> ans = new List<Vector3> ();
 
 		ans.Add (wallLoc + new Vector3 (dims.x / 2, dims.y / 2, dims.z / 2));// index: 0
@@ -110,7 +107,7 @@ public class FloorResizer : MonoBehaviour {
 		return ans;
 	}
 	// removes the scale and translation from the given list and returns the resulting vectors as an array
-	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3(1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
@@ -120,9 +117,5 @@ public class FloorResizer : MonoBehaviour {
 			ans [k] = v;
 		}
 		return ans;
-	}
-	// Update is called once per frame
-	void Update () {
-
 	}
 }
