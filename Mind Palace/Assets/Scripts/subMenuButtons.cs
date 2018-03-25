@@ -56,6 +56,7 @@ public class subMenuButtons : MonoBehaviour {
         CorridorButton.SetActive(false);
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
         MenuActivationManager.NoActive();
+        this.transform.position = new Vector3(0, -100, 0);
     }
     public void HideAllStillActive()
     {
