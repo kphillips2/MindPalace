@@ -53,11 +53,15 @@ MonoBehaviour:
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
 <<<<<<< HEAD
+  controlID: 134
+=======
+<<<<<<< HEAD
   controlID: 129
 >>>>>>> d0e49b399ac82832359dd1a2c7ff9fbcd41b67d8
 =======
   controlID: 133
 >>>>>>> dda4284a48cd84d69ca594205dd0b9cba37db743
+>>>>>>> fde3153dbcb08ccd110049d0c25a2f3626b85102
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -847,9 +851,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 98fbffff00000000
+    m_SelectedIDs: b6f7ffff
+    m_LastClickedID: -2122
+    m_ExpandedIDs: 904cfeffbaf7ffff98fbffff00000000e4430000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -905,9 +909,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.9872155, y: -1.6563673, z: 3.5070248}
+    m_Target: {x: -9.157367, y: 0.45883274, z: 1.174343}
     speed: 2
-    m_Value: {x: -2.9872155, y: -1.6563673, z: 3.5070248}
+    m_Value: {x: -9.157367, y: 0.45883274, z: 1.174343}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -931,13 +935,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.22876437, y: 0.26805428, z: -0.065683894, w: -0.9335414}
+    m_Target: {x: -0.06431623, y: 0.6267265, z: -0.052018546, w: -0.77483636}
     speed: 2
-    m_Value: {x: -0.22876434, y: 0.26805425, z: -0.06568389, w: -0.9335413}
+    m_Value: {x: -0.06431623, y: 0.6267265, z: -0.052018546, w: -0.77483636}
   m_Size:
-    m_Target: 12.386318
+    m_Target: 14.134847
     speed: 2
-    m_Value: 12.386318
+    m_Value: 14.134847
   m_Ortho:
     m_Target: 0
     speed: 2
