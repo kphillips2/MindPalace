@@ -192,7 +192,8 @@ public class ObjectPlacer : MonoBehaviour {
         prefab += "_G";
 
         //Find controller
-        GameObject controllerGameObj = GameObject.Find("RightController");
+        //GameObject controllerGameObj = GameObject.Find("RightController");
+        GameObject controllerGameObj = VRTK_DeviceFinder.GetControllerRightHand();
         //Instanstiate the selected prefab
         GameObject gameObj = Instantiate(Resources.Load("Objects/" + prefab), controllerGameObj.transform.position, Quaternion.identity) as GameObject;
         //Place prefab in user's hand

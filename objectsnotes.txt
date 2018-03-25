@@ -81,3 +81,16 @@ TO MAKE ATTEMPTGRAB FUNCTION WORK
 
 - MUST have something listed as the 'Grab Attach Mechanic' under 
 VRTK_InteractableObject's 'Grab Options' on the grabbable object
+
+------------------------------------------------------------------------
+
+TO DO THINGS WITH OBJECT (SUCH AS DELETE) BY PRESSING A BUTTON WHILE IT'S GRABBED
+---------------------------------------------------------------------------------
+
+- Attach 'VRTK_InteractUse' to LeftController and RightController
+- Change 'Use Button' on this script to desired button
+- May also want to change 'Use Toggle Button' under 'VRTK_ControllerEvents' which
+is also attached to the controllers
+- Go to object, and under 'VRTK_InteractableObject', go to 'Use Options'. Check
+'Is Usable' and 'Use Only if Grabbed'. Uncheck the other two boxes. Set 'Use
+Override Button' to the same button as before.

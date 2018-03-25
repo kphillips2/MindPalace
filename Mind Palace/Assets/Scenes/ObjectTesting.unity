@@ -3827,10 +3827,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 194652901}
   roof: {fileID: 946590673}
-  frontWall: {fileID: 742486826}
-  rightWall: {fileID: 263854662}
-  rearWall: {fileID: 1617096911}
-  leftWall: {fileID: 1512701182}
+  posZWall: {fileID: 0}
+  posXWall: {fileID: 0}
+  negZWall: {fileID: 0}
+  negXWall: {fileID: 0}
 --- !u!4 &692741735
 Transform:
   m_ObjectHideFlags: 0
@@ -6954,6 +6954,7 @@ GameObject:
   - component: {fileID: 1082347762}
   - component: {fileID: 1082347765}
   - component: {fileID: 1082347764}
+  - component: {fileID: 1082347766}
   m_Layer: 0
   m_Name: LeftController
   m_TagString: Untagged
@@ -6999,7 +7000,7 @@ MonoBehaviour:
   pointerToggleButton: 10
   pointerSetButton: 10
   grabToggleButton: 7
-  useToggleButton: 3
+  useToggleButton: 12
   uiClickButton: 3
   menuToggleButton: 14
   axisFidelity: 1
@@ -7063,6 +7064,21 @@ MonoBehaviour:
   controllerAttachPoint: {fileID: 0}
   controllerEvents: {fileID: 0}
   interactTouch: {fileID: 0}
+--- !u!114 &1082347766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082347760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useButton: 12
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
+  interactGrab: {fileID: 0}
 --- !u!1 &1090904416
 GameObject:
   m_ObjectHideFlags: 0
@@ -7747,7 +7763,7 @@ Prefab:
     - target: {fileID: 224462422256806276, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 224462422256806276, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
@@ -7777,12 +7793,12 @@ Prefab:
     - target: {fileID: 224462422256806276, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -3.7412024
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 224462422256806276, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 2.303
+      value: 2.226
       objectReference: {fileID: 0}
     - target: {fileID: 224462422256806276, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
@@ -7833,6 +7849,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1, type: 2}
@@ -9200,6 +9221,7 @@ GameObject:
   - component: {fileID: 1581463962}
   - component: {fileID: 1581463961}
   - component: {fileID: 1581463963}
+  - component: {fileID: 1581463964}
   m_Layer: 0
   m_Name: RightController
   m_TagString: Untagged
@@ -9245,7 +9267,7 @@ MonoBehaviour:
   pointerToggleButton: 10
   pointerSetButton: 10
   grabToggleButton: 7
-  useToggleButton: 3
+  useToggleButton: 12
   uiClickButton: 3
   menuToggleButton: 14
   axisFidelity: 1
@@ -9325,6 +9347,21 @@ MonoBehaviour:
   objectIsPrefab: 0
   cloneGrabbedObject: 0
   alwaysCloneOnEnable: 0
+  interactTouch: {fileID: 0}
+  interactGrab: {fileID: 0}
+--- !u!114 &1581463964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1581463957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useButton: 12
+  controllerEvents: {fileID: 0}
   interactTouch: {fileID: 0}
   interactGrab: {fileID: 0}
 --- !u!1 &1593242010
