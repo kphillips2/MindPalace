@@ -12,8 +12,6 @@ using UnityEngine;
 public class TouchpadMovement : MonoBehaviour {
 
     public Transform cameraRigTransform;
-    public Transform pauseMenu;
-    public Transform settingsMenu;
     public GameObject otherController;
 
     private SteamVR_TrackedObject trackedObj;
