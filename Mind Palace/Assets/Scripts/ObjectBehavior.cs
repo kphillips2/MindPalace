@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-// Attaching this script to an object will make it so that when the user grabs the object, the xz
-// coordinates will be updated but the object will remain stuck to the ground
+// Attach this script to an object to define how it behaves when it is grabbed, ungrabbed, and used
 
-public class SnapToGround : MonoBehaviour {
+public class ObjectBehavior : MonoBehaviour {
 
     void Start()
     {
         //Set functions to be used when object is grabbed or ungrabbed
         GetComponent<VRTK_InteractableObject>().InteractableObjectGrabbed += new InteractableObjectEventHandler(ObjectGrabbed);
         GetComponent<VRTK_InteractableObject>().InteractableObjectUngrabbed += new InteractableObjectEventHandler(ObjectUngrabbed);
+        GetComponent<VRTK_InteractableObject>().InteractableObjectUsed += new InteractableObjectEventHandler(ObjectUsed);
     }
  
     // Update is called once per frame
@@ -35,8 +35,20 @@ public class SnapToGround : MonoBehaviour {
     //Called when user lets go of object
     private void ObjectUngrabbed(object sender, InteractableObjectEventArgs e)
     {
-       // Destroy(GetComponent<Rigidbody>());
-        //transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-        //transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
+    }
+
+    //Called when object is used
+    private void ObjectUsed(object sender, InteractableObjectEventArgs e)
+    {
+        //Delete object
+        Destroy(transform.root.gameObject);
+
+        //Tell controllers that an object is no longer being held
+        GameObject controllerGameObj = VRTK_DeviceFinder.GetControllerLeftHand();
+        GameObject controllerGameObj2 = VRTK_DeviceFinder.GetControllerRightHand();
+        VRTK_InteractGrab myGrab = controllerGameObj.GetComponent<VRTK_InteractGrab>();
+        VRTK_InteractGrab myGrab2 = controllerGameObj2.GetComponent<VRTK_InteractGrab>();
+        myGrab.ForceRelease();
+        myGrab2.ForceRelease();
     }
 }
