@@ -247,8 +247,9 @@
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\RoomCollision.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad.cs" />
-    <Compile Include="Assets\Scripts\SaveTester.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\Load.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\Save.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\SaveTester.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\SnapToGround.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />

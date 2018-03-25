@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Building : MonoBehaviour {
 	public GameObject room;
-	private List<GameObject> rooms;
-	private List<GameObject> corridors;
 
+    private List<GameObject> rooms;
+	private List<GameObject> corridors;
 	private RoomBuilder roomScript;
 
 	// Use this for initialization
@@ -63,7 +63,7 @@ public class Building : MonoBehaviour {
 		) as GameObject;
 		component.SetActive (true);
 		component.GetComponent<RoomBuilder> ().setRoomSize (12, 12);
-		rooms.Add(component);
+		rooms.Add (component);
 	}
     public void addCorridorAlongZ(Vector3 roomCentre){
         GameObject component = Instantiate(
