@@ -394,8 +394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114962067568564824, guid: 44de53bd9a4e289459f18d270b27ca28,
-          type: 2}
+      - m_Target: {fileID: 114815344441281740}
         m_MethodName: backButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -516,8 +515,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114332420963011388, guid: 44de53bd9a4e289459f18d270b27ca28,
-          type: 2}
+      - m_Target: {fileID: 114186349638441738}
         m_MethodName: respondToClick
         m_Mode: 1
         m_Arguments:
@@ -664,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonTemplate: {fileID: 1657089988743938}
+  backButton: {fileID: 114341855130655314}
   ObjectMenu: {fileID: 1674562909196952}
 --- !u!114 &114824553241638766
 MonoBehaviour:

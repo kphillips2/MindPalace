@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectListControl : MonoBehaviour
 {
     [SerializeField]
     private GameObject buttonTemplate;
+    [SerializeField]
+    private Button backButton;
     private List<GameObject> buttons = new List<GameObject>();
     public GameObject ObjectMenu;
     private string[] objectList = {"Bed", "Bookcase", "Chair", "Dining Chair","Coffee Table", "Couch", "Counter", "Fireplace",
@@ -46,6 +49,11 @@ public class ObjectListControl : MonoBehaviour
     {
         ObjectPlacer op = new ObjectPlacer();
         op.createPrefabInHand(objectNum);
+    }
+
+    public void backButtonClicked()
+    {
+        //Code for back button
     }
 
     /*
