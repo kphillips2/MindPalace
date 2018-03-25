@@ -7000,7 +7000,7 @@ MonoBehaviour:
   pointerToggleButton: 10
   pointerSetButton: 10
   grabToggleButton: 7
-  useToggleButton: 12
+  useToggleButton: 10
   uiClickButton: 3
   menuToggleButton: 14
   axisFidelity: 1
@@ -7075,7 +7075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useButton: 12
+  useButton: 10
   controllerEvents: {fileID: 0}
   interactTouch: {fileID: 0}
   interactGrab: {fileID: 0}
@@ -9267,7 +9267,7 @@ MonoBehaviour:
   pointerToggleButton: 10
   pointerSetButton: 10
   grabToggleButton: 7
-  useToggleButton: 12
+  useToggleButton: 10
   uiClickButton: 3
   menuToggleButton: 14
   axisFidelity: 1
@@ -9360,7 +9360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eb64f0f2fd6d64faddbcf5d7d3bdbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useButton: 12
+  useButton: 10
   controllerEvents: {fileID: 0}
   interactTouch: {fileID: 0}
   interactGrab: {fileID: 0}
