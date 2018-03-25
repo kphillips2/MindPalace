@@ -245,6 +245,6 @@ MonoBehaviour:
   holdButtonToUse: 0
   useOnlyIfGrabbed: 1
   pointerActivatesUseAction: 0
-  useOverrideButton: 10
+  useOverrideButton: 3
   allowedUseControllers: 0
   usingState: 0
