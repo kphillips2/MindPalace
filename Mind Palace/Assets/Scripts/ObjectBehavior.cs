@@ -18,18 +18,11 @@ public class ObjectBehavior : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
-        if (transform.position.y < 0)
-        {
-            Destroy(GetComponent<Rigidbody>());
-            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-        }
     }
 
     //Called when user grabs the object
     private void ObjectGrabbed(object sender, InteractableObjectEventArgs e)
     {
-        Destroy(GetComponent<Rigidbody>());
     }
 
     //Called when user lets go of object
