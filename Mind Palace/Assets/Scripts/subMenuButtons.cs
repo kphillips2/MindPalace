@@ -428,7 +428,7 @@ public class subMenuButtons : MonoBehaviour {
         BuildRoom(newRoomCentre + currentRoomCenter, wallIndex, doorIndex);
         int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         string[] DummyMat = { "", "", "" };
-        SaveLoad.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
+        Save.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
         HideAll();
 
     }
@@ -452,7 +452,7 @@ public class subMenuButtons : MonoBehaviour {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, true);
             int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0};
             string[] DummyMat = { "", "", "" };
-            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
+            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
             HideAll();
         }
         else
@@ -460,14 +460,36 @@ public class subMenuButtons : MonoBehaviour {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, false);
             int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0 };
             string[] DummyMat = { "", "", "" };
-            SaveLoad.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
+            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
             HideAll();
         }
 
     }
     public void AddWindow()
     {
-        print("TODO");
+        float windowLocation;
+        if (RoomNotCorridor)
+        {
+            if(doorIndex==0 ||doorIndex==3||doorIndex==6||doorIndex==9)
+            {
+                windowLocation = 0;
+            } else if (doorIndex == 1 || doorIndex == 4 || doorIndex == 7 || doorIndex == 10)
+            {
+                windowLocation = 4;
+            }
+            else
+            {
+                windowLocation = -4;
+            }
+            roomBuilder.addWindow(WallIndexForRoom(), windowLocation);
+        }
+        else
+        {
+            windowLocation = OldDoorLocationCorridor();
+            roomBuilder.addWindow(WallIndexForCorridor(), windowLocation);
+        }
+        HideAll();
+
     }
     public void AddPicture()
     {

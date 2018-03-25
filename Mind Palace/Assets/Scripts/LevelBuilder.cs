@@ -16,12 +16,12 @@ public class LevelBuilder : MonoBehaviour {
 	// Test loading the first saved Loci in the list of saved Loci files
 	public void loadTest()
 	{
-		SaveLoad.load(); // Loads save file
-		SaveLoad.currentLoci = SaveLoad.savedLocis[0]; // Sets first saved Loci to be the one being viewed
+		Save.load(); // Loads save file
+		Save.currentLoci = Save.savedLocis[0]; // Sets first saved Loci to be the one being viewed
 
 		// Place objects
 		ObjectPlacer op = new ObjectPlacer();
-		foreach (float[] item in SaveLoad.currentLoci.getObjects())
+		foreach (float[] item in Save.currentLoci.getObjects())
 		{
 			try
 			{
@@ -32,7 +32,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 
 		// Create rooms
-		foreach (Room r in SaveLoad.currentLoci.getRooms())
+		foreach (Room r in Save.currentLoci.getRooms())
 		{
 			string[] m = r.getMaterials();
 			float[] ce = r.getCentre();
@@ -48,7 +48,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 
 		// Create corridors
-		foreach (Corridor c in SaveLoad.currentLoci.getCorridors())
+		foreach (Corridor c in Save.currentLoci.getCorridors())
 		{
 			string[] m = c.getMaterials();
 			float[] ce = c.getCentre();

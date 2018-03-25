@@ -13,6 +13,13 @@ public class Loci {
     private List<Corridor> corridors;
     private List<Picture> pictures;
 
+    private struct RoomData
+    {
+        float width;
+        float length;
+        List<float[]>[] doors;
+    }
+
     // Constructor, all lists initialized to be empty
     public Loci (string name) {
         this.name = name;

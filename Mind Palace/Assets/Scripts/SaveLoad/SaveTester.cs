@@ -13,7 +13,7 @@ public class SaveTester : MonoBehaviour {
     // Creates a test Loci and saves it, called "saveTest". Commenting-out the loadTest() line in the Start function of
     // LevelBuilder.cs and running this function will reset the save file so that it only contains this Loci.
     void performSaveTest () {
-        SaveLoad.currentLoci = new Loci("saveTest"); //Make a new Loci
+        Save.currentLoci = new Loci("saveTest"); //Make a new Loci
 
         // Place objects in the scene which will be saved when the save() function is called
         ObjectPlacer op = new ObjectPlacer();
@@ -59,43 +59,43 @@ public class SaveTester : MonoBehaviour {
         float[] centre = new float[] { 0, 0, 0 };
         string[] materials = new string[] { "Wood Texture 06", "Wood Texture 15", "Wood texture 12" };
         Room r = new Room(doors, new Vector3(0, 0, 0), materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 0, 0, 10 };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
         doors = new int[] { 1, 0, 0, 0 };
         centre = new float[] { 0, 0, -10 };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
         centre = new float[] { 20, 0, -7.5f };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
 
         doors = new int[] { 0, 1, 1, 0, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 0 };
         Corridor c = new Corridor(doors, new Vector3(20, 0, 0), materials, 0);
-        SaveLoad.currentLoci.addCorridor(c);
+        Save.currentLoci.addCorridor(c);
 
         materials = new string[] { "Bricks1", "Wood Texture 05", "Wood texture 06" };
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 30, 0, 7.5f };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
         doors = new int[] { 0, 1, 0, 0 };
         centre = new float[] { 12.5f, 0, 17.5f };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 20, 0, 37.5f };
         r = new Room(doors, centre, materials);
-        SaveLoad.currentLoci.addRoom(r);
+        Save.currentLoci.addRoom(r);
 
         doors = new int[] { 0, 0, 0, 1, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 17.5f };
         c = new Corridor(doors, centre, materials, 90);
-        SaveLoad.currentLoci.addCorridor(c);
+        Save.currentLoci.addCorridor(c);
 
-        SaveLoad.save(); // Save the current Loci to file
+        Save.save(); // Save the current Loci to file
     }
 }

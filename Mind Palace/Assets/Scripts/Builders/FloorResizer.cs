@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomResizer : MonoBehaviour {
-	// Use this for initialization
-	void Awake () {
-	}
+public static class FloorResizer{
 	// input: width is the distance in the x, length is the distance in the z
-	public void resize(GameObject input, float width, float length){
+	public static void resize(GameObject input, Vector3 dimensions){
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
-			Destroy (collider);
+			Object.Destroy (collider);
 		// get new vertices after scaling
-		List<Vector3> vertices = compileVertices (input.transform.localPosition, width, length);
+		List<Vector3> vertices = compileVertices (input.transform.localPosition, dimensions);
 		// set triangles and and new vertices
 		List<int> triangles = new List<int>();
 		compileTriangles (triangles, vertices);
@@ -32,7 +29,7 @@ public class RoomResizer : MonoBehaviour {
 		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
 	}
-	private void compileTriangles(List<int> triangles, List<Vector3> vertices){
+	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		// top face
 		triangles.Add (0);
 		triangles.Add (1);
@@ -94,25 +91,25 @@ public class RoomResizer : MonoBehaviour {
 		// end far face
 	}
 	// returns a list of vertices with the new size
-	private List<Vector3> compileVertices (Vector3 wallLoc, float width, float length){
+	private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
 		List<Vector3> ans = new List<Vector3> ();
 
-		ans.Add (wallLoc + new Vector3 (width/2, 0.125f, length/2));// index: 0
-		ans.Add (ans[0] + new Vector3 (0, 0, -length));// index: 1
-		ans.Add (ans[0] + new Vector3 (-width, 0, 0));// index: 2
-		ans.Add (ans[1] + new Vector3 (-width, 0, 0));// index: 3
+		ans.Add (wallLoc + new Vector3 (dims.x / 2, dims.y / 2, dims.z / 2));// index: 0
+		ans.Add (ans[0] + new Vector3 (0, 0, -dims.z));// index: 1
+		ans.Add (ans[0] + new Vector3 (-dims.x, 0, 0));// index: 2
+		ans.Add (ans[1] + new Vector3 (-dims.x, 0, 0));// index: 3
 
-		ans.Add (ans [0] + new Vector3 (0, -0.25f, 0));// index: 4
-		ans.Add (ans [1] + new Vector3 (0, -0.25f, 0));// index: 5
-		ans.Add (ans [2] + new Vector3 (0, -0.25f, 0));// index: 6
-		ans.Add (ans [3] + new Vector3 (0, -0.25f, 0));// index: 7
+		ans.Add (ans [0] + new Vector3 (0, -dims.y, 0));// index: 4
+		ans.Add (ans [1] + new Vector3 (0, -dims.y, 0));// index: 5
+		ans.Add (ans [2] + new Vector3 (0, -dims.y, 0));// index: 6
+		ans.Add (ans [3] + new Vector3 (0, -dims.y, 0));// index: 7
 
 		return ans;
 	}
 	// removes the scale and translation from the given list and returns the resulting vectors as an array
-	private Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
-		Vector3 s = new Vector3(1/scale.x,1/scale.y,1/scale.z);
+		Vector3 s = new Vector3 (1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
 		for (int k = 0; k < ans.Length; k++){
 			v = vertices [k] - translation;
@@ -120,9 +117,5 @@ public class RoomResizer : MonoBehaviour {
 			ans [k] = v;
 		}
 		return ans;
-	}
-	// Update is called once per frame
-	void Update () {
-
 	}
 }

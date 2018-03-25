@@ -6,7 +6,7 @@ using System.IO;
 
 // Class for saving and loading palaces (Loci)
 
-public static class SaveLoad {
+public static class Save {
     public static Loci currentLoci= new Loci("blao"); //The current save file being loaded/edited/viewed
     public static List<Loci> savedLocis = new List<Loci>(); //List of save files
 
@@ -17,7 +17,7 @@ public static class SaveLoad {
         savedLocis.Add(currentLoci);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create("Assets/SaveFile/saveFile.gd");
-        bf.Serialize(file, SaveLoad.savedLocis);
+        bf.Serialize(file, Save.savedLocis);
         file.Close();
     }
 
@@ -26,7 +26,7 @@ public static class SaveLoad {
         if (File.Exists("Assets/SaveFile/saveFile.gd")) {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open("Assets/SaveFile/saveFile.gd", FileMode.Open);
-            SaveLoad.savedLocis = (List<Loci>)bf.Deserialize(file);
+            Save.savedLocis = (List<Loci>)bf.Deserialize(file);
             file.Close();
         }
     }
