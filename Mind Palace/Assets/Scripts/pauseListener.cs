@@ -15,7 +15,6 @@ public class pauseListener : MonoBehaviour {
    
     public GameObject pauseMenu; //pause canvas
     public GameObject settingsMenu; //settings canvas
-    public VRTK_Pointer pointer; //laser pointer
     public Transform cameraRigTransform; //camera rig
 
     private SteamVR_TrackedController controller;
@@ -29,7 +28,6 @@ public class pauseListener : MonoBehaviour {
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        pointer.pointerRenderer.enabled = false;
 
     }
 
@@ -41,7 +39,6 @@ public class pauseListener : MonoBehaviour {
         paused = !paused;
         pauseMenu.SetActive(paused);
         settingsMenu.SetActive(false);
-        pointer.pointerRenderer.enabled = paused;
     }
 	
     //Moves and rotates the settings canvas
