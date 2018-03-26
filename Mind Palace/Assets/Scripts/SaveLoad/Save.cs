@@ -12,7 +12,7 @@ public static class Save {
 
     // Adds the current Loci to the list of savedLocis and saves it to file. Should be called after editing a palace and
     // all new information about the Loci (except object info) has been added to the currentLoci attribute
-    public static void save() {
+    public static void save(){
         saveObjects();
         savedLocis.Add(currentLoci);
         BinaryFormatter bf = new BinaryFormatter();
@@ -22,7 +22,7 @@ public static class Save {
     }
 
     // Fills the savedLocis list with the Loci objects that were saved in the save file
-    public static void load() {
+    public static void load(){
         if (File.Exists("Assets/SaveFile/saveFile.gd")) {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open("Assets/SaveFile/saveFile.gd", FileMode.Open);
@@ -32,7 +32,7 @@ public static class Save {
     }
 
     // Saves all of the prefab objects in the scene to the current Loci
-    private static void saveObjects() {
+    private static void saveObjects(){
         //Reset the list of objects for the Loci
         currentLoci.clearObjects();
 

@@ -10,7 +10,7 @@ public class Building : MonoBehaviour {
 	private RoomBuilder roomScript;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake (){
 		roomScript = room.GetComponent<RoomBuilder> ();
 		rooms = new List<GameObject> ();
 		corridors = new List<GameObject> ();
@@ -86,10 +86,5 @@ public class Building : MonoBehaviour {
 		corridors.Add (component);
 	}
     public void setMaterials(int index){
-	}
-
-	// Update is called once per frame
-	void Update () {
-
 	}
 }

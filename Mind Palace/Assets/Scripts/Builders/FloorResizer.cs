@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class FloorResizer{
+public static class FloorResizer {
 	// input: width is the distance in the x, length is the distance in the z
 	public static void resize(GameObject input, Vector3 dimensions){
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())

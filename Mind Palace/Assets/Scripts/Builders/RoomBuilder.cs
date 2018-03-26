@@ -13,13 +13,13 @@ public class RoomBuilder : MonoBehaviour {
 
 	private float ROOM_WIDTH = 12;
 	private float ROOM_LENGTH = 12;
-	private List<Vector3>[] doors;
+	private List<Vector3>[] doorsAndWindows;
 
 	// Use this for initialization
-	void Awake() {
-		doors = new List<Vector3>[4];
+	void Awake(){
+		doorsAndWindows = new List<Vector3>[4];
 		for (int k = 0; k < 4; k++)
-			doors [k] = new List<Vector3> ();
+			doorsAndWindows [k] = new List<Vector3> ();
 	}
 	// input: two floats that represent the size of the room
 	public void setRoomSize(float width, float length){
@@ -62,7 +62,7 @@ public class RoomBuilder : MonoBehaviour {
     public void addDoorsAndWindows(List<float[]>[] doorData){
         for (int k = 0; k < 4; k++)
             foreach (float[] loc in doorData[k])
-                doors[k].Add (new Vector3 (loc[0], loc[1], loc[2]));
+                doorsAndWindows [k].Add (new Vector3 (loc [0], loc [1], loc [2]));
 
         adjustWall(posZWall, 0);
         adjustWall(posXWall, 1);
@@ -140,10 +140,10 @@ public class RoomBuilder : MonoBehaviour {
 
 		if (doorLoc >= -doorLimit && doorLoc <= doorLimit) {
 			Vector3 doorCentre = new Vector3 (doorLoc, 0, 0);
-			doors [wallIndex].Add (doorCentre);
-			doors [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
-			if (WallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength))
-				doors [wallIndex].Remove (doorCentre);
+			doorsAndWindows [wallIndex].Add (doorCentre);
+			doorsAndWindows [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
+			if (WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength))
+				doorsAndWindows [wallIndex].Remove (doorCentre);
 		} else
 			Debug.LogError ("The door at {" + doorLoc + "} is too close to end of the wall.");
 	}
@@ -153,20 +153,15 @@ public class RoomBuilder : MonoBehaviour {
 
         if (windowLoc >= -windowLimit && windowLoc <= windowLimit){
             Vector3 windowCentre = new Vector3 (windowLoc, 1.5f, 0);
-            doors [wallIndex].Add (windowCentre);
-            doors [wallIndex].Sort ((a, b) => a.x.CompareTo(b.x));
-            if (WallCutter.cutDoorsAndWindows (input, doors[wallIndex].ToArray(), wallLength))
-                doors [wallIndex].Remove (windowCentre);
+            doorsAndWindows [wallIndex].Add (windowCentre);
+            doorsAndWindows [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
+            if (WallCutter.cutDoorsAndWindows (input, doorsAndWindows[wallIndex].ToArray (), wallLength))
+                doorsAndWindows [wallIndex].Remove (windowCentre);
         } else
             Debug.LogError ("The Window at {" + windowLoc + "} is too close to end of the wall.");
     }
     private void adjustWall(GameObject input, int wallIndex){
         float wallLength = getWallSize (wallIndex);
-        WallCutter.cutDoorsAndWindows (input, doors [wallIndex].ToArray (), wallLength);
-	}
-
-	// Update is called once per frame
-	void Update () {
-
+        WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength);
 	}
 }
