@@ -94,3 +94,10 @@ is also attached to the controllers
 - Go to object, and under 'VRTK_InteractableObject', go to 'Use Options'. Check
 'Is Usable' and 'Use Only if Grabbed'. Uncheck the other two boxes. Set 'Use
 Override Button' to the same button as before.
+
+----------------------------------------------------------------------------------
+
+TO MAKE OBJECTS NOT MOVE WHEN COLLIDED WITH
+-------------------------------------------
+
+- On 'RigidBody' under the object, check 'Is Kinematic'

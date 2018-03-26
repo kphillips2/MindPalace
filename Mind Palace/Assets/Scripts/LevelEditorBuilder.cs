@@ -18,7 +18,6 @@ public class LevelEditorBuilder : MonoBehaviour {
         int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         string[] DummyMat = { "", "", "" };
         Save.currentLoci.addRoom(new Room(DummyDoors, new Vector3(0,0,0), DummyMat));
-
     }
 
 	public GameObject addRoom(Vector3 roomCentre){
