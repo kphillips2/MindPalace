@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 110
+  controlID: 9
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 56
+  controlID: 10
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 57
+  controlID: 11
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,19 +325,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Max Baker\Desktop\Senior project\Official\MindPalace\Mind
     Palace
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ce2a0000
-    m_LastClickedID: 10958
+    m_SelectedIDs: 223d0000
+    m_LastClickedID: 15650
     m_ExpandedIDs: 00000000ce2a00005e2c0000582d0000722e00000c32000032350000ca35000076380000fe380000c23b0000223d0000563d0000a43d00007a3f0000b64c0000b84c0000ba4c0000bc4c0000be4c0000c04c0000c24c0000c44c0000c64c0000c84c0000ca4c0000cc4c0000ce4c0000d04c0000d24c0000d44c0000d64c0000d84c0000da4c0000dc4c0000de4c0000e04c0000e24c0000e44c0000e64c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -482,9 +482,9 @@ MonoBehaviour:
     height: 552
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 203f0000
     m_LastClickedID: 0
-    m_ExpandedIDs: a0fbffff00000000
+    m_ExpandedIDs: ee81ffff7890ffffa0fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -566,11 +566,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.016901309, y: -0.9504575, z: -0.052510478, w: -0.30592072}
     speed: 2
-    m_Value: {x: 0.016901309, y: -0.9504575, z: -0.052510478, w: -0.30592072}
+    m_Value: {x: -0.016901309, y: 0.9504575, z: 0.052510474, w: 0.30592072}
   m_Size:
-    m_Target: 483.92746
+    m_Target: 253.99634
     speed: 2
-    m_Value: 483.92746
+    m_Value: 253.99634
   m_Ortho:
     m_Target: 0
     speed: 2

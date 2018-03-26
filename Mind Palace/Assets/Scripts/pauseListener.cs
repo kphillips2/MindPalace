@@ -40,7 +40,11 @@ public class pauseListener : MonoBehaviour {
         paused = !paused;
         if (paused)
         {
-            objectsMenu.transform.position = new Vector3(cameraRigTransform.position.x, 1, cameraRigTransform.position.z);
+            viewDir = SteamVR_Render.Top().GetRay().direction;
+            viewDir = new Vector3(viewDir.x, 0, viewDir.z);
+            viewDir = viewDir.normalized;
+            objectsMenu.transform.position = new Vector3(cameraRigTransform.position.x+(viewDir.x*3), 2, cameraRigTransform.position.z+ (viewDir.z*3));
+            objectsMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
         }
         else
         {
