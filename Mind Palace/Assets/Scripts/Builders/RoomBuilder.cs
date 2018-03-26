@@ -59,10 +59,12 @@ public class RoomBuilder : MonoBehaviour {
 		negXWall.GetComponent<Renderer> ().material = wallMat;
 	}
     // input: a list of float arrays for each wall
-    public void addDoorsAndWindows(List<float[]>[] doorData){
-        for (int k = 0; k < 4; k++)
-            foreach (float[] loc in doorData[k])
+    public void setDoorsAndWindows(List<float[]>[] wallData) {
+        for (int k = 0; k < 4; k++) {
+            doorsAndWindows [k].Clear ();
+            foreach (float[] loc in wallData[k])
                 doorsAndWindows [k].Add (new Vector3 (loc [0], loc [1], loc [2]));
+        }
 
         adjustWall(posZWall, 0);
         adjustWall(posXWall, 1);

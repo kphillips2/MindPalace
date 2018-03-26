@@ -5,7 +5,8 @@ using UnityEngine;
 // Class for storing information about a single palace
 
 [System.Serializable]
-public class Loci {
+public class Loci
+{
 
     private string name; // Name that the user has given the Loci
     private List<float[]> objects; // Each float array must be length 4 (obj number, xcor, zcor, y rotation)
@@ -13,14 +14,16 @@ public class Loci {
     private List<Corridor> corridors;
     private List<Picture> pictures;
 
-    private struct RoomData{
+    private struct RoomData
+    {
         float width;
         float length;
         List<float[]>[] doors;
     }
 
     // Constructor, all lists initialized to be empty
-    public Loci (string name) {
+    public Loci(string name)
+    {
         this.name = name;
         objects = new List<float[]>();
         rooms = new List<Room>();
@@ -32,7 +35,7 @@ public class Loci {
     public string getName() { return name; }
     public List<float[]> getObjects() { return new List<float[]>(objects); }
     public List<Room> getRooms() { return new List<Room>(rooms); }
-    public List<Corridor> getCorridors() { return new List<Corridor>(corridors) ; }
+    public List<Corridor> getCorridors() { return new List<Corridor>(corridors); }
     public List<Picture> getPictures() { return new List<Picture>(pictures); }
 
     // Set name
