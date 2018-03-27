@@ -315,11 +315,11 @@ public static class WallCutter {
         verts.Add (verts [mark + 1] + new Vector3(size, 0, 0));// index: mark + 7
     }
 	// checks whether a window or door location overlaps with any other doors or windows.
-	private static bool checkPlacement(Vector3 doorLoc, List<Vector3> existingLocs, float size){
+	private static bool checkPlacement(Vector3 newLoc, List<Vector3> existingLocs, float size){
         float dist, minDist;
         foreach (Vector3 existingLoc in existingLocs) {
 			dist = Mathf.Abs (Vector3.Distance (
-                new Vector3(existingLoc.x, 0, existingLoc.z), new Vector3(doorLoc.x, 0, doorLoc.z)
+                new Vector3(existingLoc.x, 0, existingLoc.z), new Vector3(newLoc.x, 0, newLoc.z)
             ));
             minDist = size + 0.25f + 1;
             if (existingLoc.y > 0)

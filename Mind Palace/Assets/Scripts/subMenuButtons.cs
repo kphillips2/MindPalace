@@ -26,13 +26,13 @@ public class subMenuButtons : MonoBehaviour {
     private bool CorridorOnZ;
     private bool RoomNotCorridor = true;
     private Vector3 newRoomCentre;
-	private RoomBuilder roomBuilder;
-    private LevelEditorBuilder levelBuilder;
+	private RoomHandler roomHandler;
+    private Building building;
     private ActivationManager MenuActivationManager;
 
     void Start () {
-		roomBuilder = room.GetComponent<RoomBuilder>();
-		levelBuilder = level.GetComponent<LevelEditorBuilder>();
+		roomHandler = room.GetComponent<RoomHandler> ();
+        building = level.GetComponent<Building> ();
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
     }
     //Menu Manipulators:
@@ -427,11 +427,7 @@ public class subMenuButtons : MonoBehaviour {
         }
         
         BuildRoom(newRoomCentre + currentRoomCenter, wallIndex, doorIndex);
-        int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        string[] DummyMat = { "", "", "" };
-        Save.currentLoci.addRoom(new Room(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat));
         HideAll();
-
     }
     public void AddCorridor()
     {
@@ -449,22 +445,10 @@ public class subMenuButtons : MonoBehaviour {
             newRoomCentre = FindCorridorCenterFromCorridor();
         }
         if (wallIndex == 0 || wallIndex == 2)
-        {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, true);
-            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0};
-            string[] DummyMat = { "", "", "" };
-            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 90));
-            HideAll();
-        }
         else
-        {
             BuildCorridor(newRoomCentre + currentRoomCenter, wallIndex, doorIndex, false);
-            int[] DummyDoors = { 0, 0, 0, 0, 0, 0, 0, 0 };
-            string[] DummyMat = { "", "", "" };
-            Save.currentLoci.addCorridor(new Corridor(DummyDoors, ConvertVectorToFloat(newRoomCentre + currentRoomCenter), DummyMat, 0));
-            HideAll();
-        }
-
+        HideAll();
     }
     public void AddWindow()
     {
@@ -482,12 +466,12 @@ public class subMenuButtons : MonoBehaviour {
             {
                 windowLocation = -4;
             }
-            roomBuilder.addWindow(WallIndexForRoom(), windowLocation);
+            roomHandler.AddWindow(WallIndexForRoom(), windowLocation);
         }
         else
         {
             windowLocation = OldDoorLocationCorridor();
-            roomBuilder.addWindow(WallIndexForCorridor(), windowLocation);
+            roomHandler.AddWindow(WallIndexForCorridor(), windowLocation);
         }
         HideAll();
 
@@ -647,8 +631,8 @@ public class subMenuButtons : MonoBehaviour {
         {
             oldDoorLoc = OldDoorLocationCorridor();
         }
-        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
-        GameObject newRoom = levelBuilder.addRoom(newRoomCentre);
+        roomHandler.AddDoor(wallIndexParam, oldDoorLoc);
+        GameObject newRoom = building.AddRoom(newRoomCentre);
 
         //Make the plus sign on the new door dissapear in the new room
         Canvas[] PlusSigns = newRoom.GetComponentsInChildren<Canvas>();
@@ -718,7 +702,7 @@ public class subMenuButtons : MonoBehaviour {
             PlusSignList[PlusSignToHide].GetComponent<subMenuButtons>().HideAll();
         }
 
-        RoomBuilder useToCutDoor = newRoom.GetComponent<RoomBuilder>();
+        RoomHandler useToCutDoor = newRoom.GetComponent<RoomHandler>();
 
         //Door Cut in new room
         int oppositeDoorIndex = -1;
@@ -738,7 +722,7 @@ public class subMenuButtons : MonoBehaviour {
         {
             oppositeDoorIndex = 1;
         }
-        useToCutDoor.addDoor(oppositeDoorIndex, 0);
+        useToCutDoor.AddDoor(oppositeDoorIndex, 0);
     }
     public void BuildCorridor(Vector3 corridorCenter, int wallIndexParam, int doorIndexParam, bool zAxis)
     {
@@ -763,16 +747,12 @@ public class subMenuButtons : MonoBehaviour {
         {
             oldDoorLoc = OldDoorLocationCorridor();
         }
-        roomBuilder.addDoor(wallIndexParam, oldDoorLoc);
+        roomHandler.AddDoor(wallIndexParam, oldDoorLoc);
         GameObject newCorridor;
         if (zAxis)
-        {
-            newCorridor = levelBuilder.addCorridorAlongZ(corridorCenter);
-        }
+            newCorridor = building.AddZCorridor(corridorCenter);
         else
-        {
-            newCorridor = levelBuilder.addCorridorAlongX(corridorCenter);
-        }
+            newCorridor = building.AddXCorridor(corridorCenter);
        
         
         //Make the plus sign on the new door dissapear in the new room
@@ -795,7 +775,7 @@ public class subMenuButtons : MonoBehaviour {
         }
 
 
-        RoomBuilder useToCutDoor = newCorridor.GetComponent<RoomBuilder>();
+        RoomHandler useToCutDoor = newCorridor.GetComponent<RoomHandler>();
 
         //Door Cut in new room
         int oppositeDoorIndex = -1;
@@ -815,7 +795,7 @@ public class subMenuButtons : MonoBehaviour {
         {
             oppositeDoorIndex = 1;
         }
-        useToCutDoor.addDoor(oppositeDoorIndex, 0);
+        useToCutDoor.AddDoor(oppositeDoorIndex, 0);
 
         if (zAxis)
         {
@@ -839,40 +819,30 @@ public class subMenuButtons : MonoBehaviour {
         {
             RoomCenterToCheck = FindRoomCenterFromCorridor();
         }
-        return RoomCollision.canRoomBePlaced(RoomCenterToCheck + currentRoomCenter);
+        return building.CheckRoomPlacement(RoomCenterToCheck + currentRoomCenter, "room");
     }
     private bool CheckCorridorPlacement()
     {
         Vector3 CorridorCenterToCheck = new Vector3(-1, -1, -1);
-        float corridorAngle = -1;
         if (RoomNotCorridor)
         {
             CorridorCenterToCheck = FindCorridorCenterFromRoom();
             int wallIndex = WallIndexForRoom();
             if (wallIndex % 2 == 0)
-            {
-                corridorAngle = 90;
-            }
+                return building.CheckRoomPlacement(CorridorCenterToCheck + currentRoomCenter, "xCorridor");
             else
-            {
-                corridorAngle = 0;
-            }
-            
+                return building.CheckRoomPlacement(CorridorCenterToCheck + currentRoomCenter, "zCorridor");
+
         }
         else
         {
             CorridorCenterToCheck = FindCorridorCenterFromCorridor();
             int wallIndex = WallIndexForCorridor();
             if (wallIndex % 2 == 0)
-            {
-                corridorAngle = 90;
-            }
+                return building.CheckRoomPlacement(CorridorCenterToCheck + currentRoomCenter, "xCorridor");
             else
-            {
-                corridorAngle = 0;
-            }
+                return building.CheckRoomPlacement(CorridorCenterToCheck + currentRoomCenter, "zCorridor");
         }
-        return RoomCollision.canCorridorBePlaced(CorridorCenterToCheck + currentRoomCenter,corridorAngle);
     }
     //Utility
     private float[] ConvertVectorToFloat(Vector3 ParamVector)

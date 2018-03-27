@@ -8507,7 +8507,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1175664225}
   - component: {fileID: 1175664224}
-  - component: {fileID: 1175664226}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -8523,7 +8522,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1175664223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7265cd3a99d35349987a908c13847ef, type: 3}
+  m_Script: {fileID: 11500000, guid: c712a0bad8508ac45be657493c6fc156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 692741733}
@@ -8540,18 +8539,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1175664226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1175664223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c712a0bad8508ac45be657493c6fc156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: 692741733}
 --- !u!1 &1179033161
 GameObject:
   m_ObjectHideFlags: 0
@@ -10528,7 +10515,7 @@ Prefab:
     - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 224666161614091206, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}

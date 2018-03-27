@@ -6,7 +6,7 @@ using System;
 //Class containing functions for checking whether or not a room, corridor, or door can be placed at a certain
 //location
 
-public static class RoomCollision  {
+/*public static class RoomCollision  {
 
     // Checks whether a room with the given centre can be built without colliding with another
     // room or corridor. If the room is okay to be placed, the function will return true. If
@@ -14,14 +14,14 @@ public static class RoomCollision  {
     public static bool canRoomBePlaced (Vector3 centre)
     {
         // Check that room does not collide with any existing rooms
-        foreach (Room r in Save.currentLoci.getRooms())
+        foreach (Room r in SaveFile.currentLoci.getRooms())
         {
             float[] rCentre = r.getCentre();
             if (centre.x < rCentre[0] + 12 && centre.x > rCentre[0] - 12 &&
                 centre.z < rCentre[2] + 12 && centre.z > rCentre[2] - 12) return false;
         }
         // Check that room does not collide with any existing corridors
-        foreach (Corridor c in Save.currentLoci.getCorridors())
+        foreach (Corridor c in SaveFile.currentLoci.getCorridors())
         {
             float[] cCentre = c.getCentre();
             float cAngle = c.getAngle();
@@ -49,7 +49,7 @@ public static class RoomCollision  {
     public static bool canCorridorBePlaced (Vector3 centre, float angle)
     {
         //Check that corridor does not collide with any existing rooms
-        foreach (Room r in Save.currentLoci.getRooms())
+        foreach (Room r in SaveFile.currentLoci.getRooms())
         {
             float[] rCentre = r.getCentre();
 
@@ -68,7 +68,7 @@ public static class RoomCollision  {
         }
 
         //Check that corridor does not collide with any existing corridors
-        foreach (Corridor c in Save.currentLoci.getCorridors())
+        foreach (Corridor c in SaveFile.currentLoci.getCorridors())
         {
             float[] cCentre = c.getCentre();
             float cAngle = c.getAngle();
@@ -124,7 +124,7 @@ public static class RoomCollision  {
     public static float[] canDoorBePlaced(Vector3 centre, Vector3 door)
     {
         //Look for rooms that touch the door
-        foreach (Room r in Save.currentLoci.getRooms())
+        foreach (Room r in SaveFile.currentLoci.getRooms())
         {
             float[] rCentre = r.getCentre();
             //Skip if you reach the room whose door is being looked at
@@ -135,7 +135,7 @@ public static class RoomCollision  {
                 (Math.Abs(door.x - rCentre[0]) <= 6 && Math.Abs(door.z - rCentre[2]) <= 4))
             {
                 //If a picture is placed on the other side of the wall, don't place door
-                foreach(Picture p in Save.currentLoci.getPictures())
+                foreach(Picture p in SaveFile.currentLoci.getPictures())
                 {
                     float[] pLoc = p.getLocation();
                     if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
@@ -146,7 +146,7 @@ public static class RoomCollision  {
         }
 
         //If no rooms were found, look for corridors that touch the door
-        foreach(Corridor c in Save.currentLoci.getCorridors())
+        foreach(Corridor c in SaveFile.currentLoci.getCorridors())
         {
             float[] cCentre = c.getCentre();
             float cAngle = c.getAngle();
@@ -161,7 +161,7 @@ public static class RoomCollision  {
                     (door.z == cCentre[2] && Math.Abs(door.x - cCentre[0]) <= 12))
                 {
                     //If a picture is placed on the other side of the wall, don't place door
-                    foreach (Picture p in Save.currentLoci.getPictures())
+                    foreach (Picture p in SaveFile.currentLoci.getPictures())
                     {
                         float[] pLoc = p.getLocation();
                         if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
@@ -177,7 +177,7 @@ public static class RoomCollision  {
                     (door.x == cCentre[0] && Math.Abs(door.z - cCentre[2]) <= 12))
                 {
                     //If a picture is placed on the other side of the wall, don't place door
-                    foreach (Picture p in Save.currentLoci.getPictures())
+                    foreach (Picture p in SaveFile.currentLoci.getPictures())
                     {
                         float[] pLoc = p.getLocation();
                         if (Math.Abs(door.x - pLoc[0]) <= 0.5 && Math.Abs(door.z - pLoc[2]) <= 0.5) return null;
@@ -350,4 +350,4 @@ public static class RoomCollision  {
             }
         }
     }
-}
+}*/
