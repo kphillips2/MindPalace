@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class FloorResizer {
-	// input: width is the distance in the x, length is the distance in the z
+    /// <summary>
+    /// Resizes a floor or roof object without scaling it.
+    /// </summary>
+    /// <param name="input"> the floor or roof object being changed </param>
+    /// <param name="dimensions"> the new dimensions for the floor or roof </param>
 	public static void resize(GameObject input, Vector3 dimensions){
 		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
 			Object.Destroy (collider);
@@ -29,6 +33,11 @@ public static class FloorResizer {
 		input.transform.GetComponent<MeshFilter> ().mesh.RecalculateTangents ();
 		input.AddComponent<MeshCollider> ();
 	}
+    /// <summary>
+    /// Compiles the triangles for each surface on the floor or roof.
+    /// </summary>
+    /// <param name="triangles"> all the triangles of the floor or roof </param>
+    /// <param name="vertices"> all the vertices of the floor or roof </param>
 	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
 		// top face
 		triangles.Add (0);
@@ -90,8 +99,13 @@ public static class FloorResizer {
 		triangles.Add (2);
 		// end far face
 	}
-	// returns a list of vertices with the new size
-	private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
+    /// <summary>
+    /// Compiles the vertices needed for the floor or roof.
+    /// </summary>
+    /// <param name="wallLoc"> the vector for the centre of the wall </param>
+    /// <param name="dims"> the new dimensions for the floor or roof </param>
+    /// <returns> the list of compiled vertices </returns>
+    private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
 		List<Vector3> ans = new List<Vector3> ();
 
 		ans.Add (wallLoc + new Vector3 (dims.x / 2, dims.y / 2, dims.z / 2));// index: 0
@@ -106,7 +120,13 @@ public static class FloorResizer {
 
 		return ans;
 	}
-	// removes the scale and translation from the given list and returns the resulting vectors as an array
+    /// <summary>
+    /// Removes the scale and translation from the given list and returns the resulting vectors as an array.
+    /// </summary>
+    /// <param name="vertices"> all the vertices of the floor or roof </param>
+    /// <param name="scale"> the scale to be removed </param>
+    /// <param name="translation"> the translation to be removed </param>
+    /// <returns> an array of the resulting vertices </returns>
 	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
 		Vector3[] ans = new Vector3[vertices.Count];
 		Vector3 s = new Vector3 (1 / scale.x, 1 / scale.y, 1 / scale.z);

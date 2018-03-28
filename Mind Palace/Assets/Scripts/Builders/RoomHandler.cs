@@ -208,7 +208,7 @@ public class RoomHandler : MonoBehaviour {
         );
     }
     /// <summary>
-    /// Cuts all doors and windows in a wall.
+    /// Cuts all doors and windows into a given wall object.
     /// </summary>
     /// <param name="input"> the wall object being changed </param>
     /// <param name="wallIndex"> the index of the wall being changed </param>
@@ -231,7 +231,7 @@ public class RoomHandler : MonoBehaviour {
             Debug.LogError(errMsg);
     }
     /// <summary>
-    /// Cuts all doors and windows in a wall.
+    /// Cuts all doors and windows into a given wall object.
     /// </summary>
     /// <param name="input"> the wall object being changed </param>
     /// <param name="wallIndex"> the index of the wall being changed </param>
