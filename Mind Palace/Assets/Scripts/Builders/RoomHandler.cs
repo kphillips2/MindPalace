@@ -110,6 +110,13 @@ public class RoomHandler : MonoBehaviour {
         SaveFile.currentLoci.addRoom (thisRoom);
     }
     /// <summary>
+    /// Adds a picture to the saved information for this room.
+    /// </summary>
+    /// <param name="picture"> a picture object to be added to the room information </param>
+    public void AddPicture(Picture picture){
+        thisRoom.AddPicture (picture);
+    }
+    /// <summary>
     /// Adds a door to a given wall.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>

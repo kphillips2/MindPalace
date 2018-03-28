@@ -82,7 +82,7 @@ public class ButtonListControl : MonoBehaviour {
             ButtonManager.GetComponent<ActivationManager>().NoActive();
             ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
-            SaveFile.currentLoci.addPicture(new Picture(picFilePath, roty, location));
+            //SaveFile.currentLoci.addPicture(new Picture(picFilePath, roty, location));
         }
         // If directory, navigate to that directory
         else

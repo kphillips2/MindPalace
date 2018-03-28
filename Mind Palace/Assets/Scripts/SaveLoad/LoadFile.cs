@@ -14,6 +14,7 @@ public static class LoadFile {
             FileStream file = File.Open ("Assets/SaveFile/saveFile.gd", FileMode.Open);
             SaveFile.savedLocis = (Dictionary<string, Loci>)bf.Deserialize (file);
             file.Close ();
+            MonoBehaviour.print("File successfully loaded.");
         } else
             Debug.LogError("The file was not found");
     }
@@ -24,8 +25,8 @@ public static class LoadFile {
     public static void LoadLoci(string name){
         if (SaveFile.savedLocis.TryGetValue (name, out SaveFile.currentLoci)) {
             SaveFile.name = name;
-            MonoBehaviour.print ("File and Loci successfully loaded.");
+            MonoBehaviour.print ("Loci successfully loaded.");
         } else
-            Debug.LogError ("The file was found but the given Loci was not.");
+            Debug.LogError ("The Loci was not found.");
     }
 }

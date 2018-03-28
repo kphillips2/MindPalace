@@ -10,16 +10,18 @@ public class RoomData {
     private float[] centre = new float[3];
     private List<float[]>[] doorsAndWindows = new List<float[]> [4];
     private string[] materials = new string[3];
+    private List<Picture> pictures;
 
     /// <summary>
     /// Contructs a save object for a room at the given centre.
     /// </summary>
-    /// <param name="loc"></param>
+    /// <param name="loc"> a float array for the centre vector of the room </param>
     public RoomData(float[] loc){
         if (loc.Length != 3)
             Debug.Log ("Error: centre array length must be 3");
         else
             Array.Copy (loc, centre, 3);
+        pictures = new List<Picture>();
     }
     /// <summary>
     /// Sets the stored length and width of the room.
@@ -53,6 +55,16 @@ public class RoomData {
         }
     }
     /// <summary>
+    /// Adds a given picture to the room
+    /// </summary>
+    /// <param name="picture"> the picture object being added </param>
+    public void AddPicture(Picture picture) { pictures.Add(picture); }
+    /// <summary>
+    /// Retrieves the pictures attached to the room.
+    /// </summary>
+    /// <returns></returns>
+    public List<Picture> GetPictures() { return pictures; }
+    /// <summary>
     /// Retrieves the stored width of the room.
     /// </summary>
     /// <returns> the width of the room along the X axis </returns>
@@ -77,4 +89,8 @@ public class RoomData {
     /// </summary>
     /// <returns> a string array of material names for the floor, roof and wall objects </returns>
     public string[] GetMaterials() { return materials; }
+    /// <summary>
+    /// Removes all pictures currently stored in the room.
+    /// </summary>
+    public void ClearPictures() { pictures = new List<Picture>(); }
 }
