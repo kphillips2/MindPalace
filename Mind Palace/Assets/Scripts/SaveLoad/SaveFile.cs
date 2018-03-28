@@ -5,8 +5,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.IO;
 
-// Class for saving and loading palaces (Loci)
-
 public static class SaveFile {
     public static string name = null;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed

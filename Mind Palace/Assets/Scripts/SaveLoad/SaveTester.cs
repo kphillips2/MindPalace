@@ -13,7 +13,7 @@ public class SaveTester : MonoBehaviour {
     // Creates a test Loci and saves it, called "saveTest". Commenting-out the loadTest() line in the Start function of
     // LevelBuilder.cs and running this function will reset the save file so that it only contains this Loci.
     void performSaveTest () {
-        SaveFile.currentLoci = new Loci("saveTest"); //Make a new Loci
+        SaveFile.currentLoci = new Loci(); //Make a new Loci
 
         // Place objects in the scene which will be saved when the save() function is called
         ObjectPlacer op = new ObjectPlacer();
@@ -96,6 +96,6 @@ public class SaveTester : MonoBehaviour {
         c = new Corridor(doors, centre, materials, 90);
         SaveFile.currentLoci.addCorridor(c);*/
 
-        SaveFile.save(); // SaveFile the current Loci to file
+        SaveFile.Save(); // SaveFile the current Loci to file
     }
 }
