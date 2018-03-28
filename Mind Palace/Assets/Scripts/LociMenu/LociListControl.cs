@@ -15,7 +15,7 @@ public class LociListControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        LoadFile.Load (" <Enter Loci name> ");
+        LoadFile.Load ();
         generateButtons();
     }
 
@@ -47,6 +47,7 @@ public class LociListControl : MonoBehaviour
     public void listButtonClicked(int lociNum)
     {
         //Code for loading
+        //implement LoadLoci("LociName") from LoadFile class
     }
 
     public void backButtonClicked()
