@@ -25,7 +25,7 @@ public class RoomHandler : MonoBehaviour {
 
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
         SetRoomSize (width, length);
-        SetMaterials (mats[0], mats[1], mats[2]);
+        SetMaterials (mats [0], mats [1], mats [2]);
     }
     /// <summary>
     /// Retrieves all the information that will apear in the save file for this room.
@@ -190,7 +190,7 @@ public class RoomHandler : MonoBehaviour {
     /// <param name="wallIndex"> the index of the wall being checked </param>
     /// <param name="doorLoc"> the location of the door with 0 representing the centre of the wall </param>
     private void AdjustForDoor(GameObject input, int wallIndex, float doorLoc){
-        AdjustWall(
+        AdjustWall (
             input, wallIndex, doorLoc, 0, 2,
             "The door at {" + doorLoc + "} is close to or outside the end of the wall."
         );
@@ -202,7 +202,7 @@ public class RoomHandler : MonoBehaviour {
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="windowLoc"> the location of the window with 0 representing the centre of the wall </param>
     private void AdjustForWindow(GameObject input, int wallIndex, float windowLoc){
-        AdjustWall(
+        AdjustWall (
             input, wallIndex, windowLoc, 1.5f, 3,
             "The Window at {" + windowLoc + "} is close to or outside the end of the wall."
         );
@@ -224,11 +224,11 @@ public class RoomHandler : MonoBehaviour {
             Vector3 cutCentre = new Vector3 (loc, height, 0);
             doorsAndWindows [wallIndex].Add (cutCentre);
             doorsAndWindows [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
-            if (WallCutter.cutDoorsAndWindows(input, doorsAndWindows [wallIndex].ToArray (), wallLength))
+            if (WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength))
                 doorsAndWindows [wallIndex].Remove (cutCentre);
         }
         else
-            Debug.LogError(errMsg);
+            Debug.LogError (errMsg);
     }
     /// <summary>
     /// Cuts all doors and windows into a given wall object.

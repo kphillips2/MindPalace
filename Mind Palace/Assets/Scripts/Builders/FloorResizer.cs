@@ -9,12 +9,12 @@ public static class FloorResizer {
     /// <param name="input"> the floor or roof object being changed </param>
     /// <param name="dimensions"> the new dimensions for the floor or roof </param>
 	public static void resize(GameObject input, Vector3 dimensions){
-		foreach (Collider collider in input.GetComponentsInChildren<Collider>())
+		foreach (Collider collider in input.GetComponentsInChildren<Collider> ())
 			Object.Destroy (collider);
 		// get new vertices after scaling
 		List<Vector3> vertices = compileVertices (input.transform.localPosition, dimensions);
 		// set triangles and and new vertices
-		List<int> triangles = new List<int>();
+		List<int> triangles = new List<int> ();
 		compileTriangles (triangles, vertices);
 		// resize the vertices to remove scaling
 		Vector3[] vectors = resizeVectors (vertices, input.transform.localScale, input.transform.localPosition);
@@ -128,7 +128,7 @@ public static class FloorResizer {
     /// <param name="translation"> the translation to be removed </param>
     /// <returns> an array of the resulting vertices </returns>
 	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
-		Vector3[] ans = new Vector3[vertices.Count];
+		Vector3[] ans = new Vector3 [vertices.Count];
 		Vector3 s = new Vector3 (1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;
 		for (int k = 0; k < ans.Length; k++){
