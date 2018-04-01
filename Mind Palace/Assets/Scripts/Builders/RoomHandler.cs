@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomHandler : MonoBehaviour {
-	public GameObject floor;
+    public GameObject plusSign;
+    public GameObject floor;
 	public GameObject roof;
 
 	public GameObject posZWall;
@@ -26,6 +27,7 @@ public class RoomHandler : MonoBehaviour {
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
         SetRoomSize (width, length);
         SetMaterials (mats [0], mats [1], mats [2]);
+        AddPlusSigns ();
     }
     /// <summary>
     /// Retrieves all the information that will apear in the save file for this room.
@@ -83,7 +85,7 @@ public class RoomHandler : MonoBehaviour {
     /// Sets all the doors and windows of a room at once.
     /// </summary>
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
-    public void SetDoorsAndWindows(List<float[]>[] wallData){
+    public void SetWallData(List<float[]>[] wallData){
         for (int k = 0; k < 4; k++) {
             doorsAndWindows [k] = new List<Vector3> ();
             foreach (float[] loc in wallData [k])
@@ -102,12 +104,65 @@ public class RoomHandler : MonoBehaviour {
         List<float[]>[] wallData = new List<float[]> [4];
 
         for (int k = 0; k < 4; k++) {
+            wallData [k] = new List<float[]> ();
             foreach (Vector3 loc in doorsAndWindows [k])
                 wallData [k].Add (new float[] { loc.x, loc.y, loc.z });
         }
 
         thisRoom.SetWallData (wallData);
         SaveFile.currentLoci.addRoom (thisRoom);
+    }
+    /// <summary>
+    /// Adds plus signs to all locations on the walls.
+    /// </summary>
+    public void AddPlusSigns(){
+        float wallLimit;
+        for (int k = 0; k < 4; k++) {
+            wallLimit = GetWallSize (k) / 2;
+            for (float loc = -4; loc > -wallLimit; loc -= 4)
+                AddPlusSign (k, loc);
+            for (float loc = 0; loc < wallLimit; loc += 4)
+                AddPlusSign (k, loc);
+        }
+    }
+    /// <summary>
+    /// Adds a plus sign to a given wall. Also saves the new plus sign to the currently open Loci.
+    /// </summary>
+    /// <param name="wallIndex"> the index of the wall being changed </param>
+    /// <param name="menuLoc"> the location of the menu with 0 representing the centre of the wall </param>
+    private void AddPlusSign(int wallIndex, float menuLoc){
+        float angle = 0;
+        if (wallIndex >= 0 && wallIndex <= 3) {
+            switch (wallIndex) {
+                case 1:
+                    angle = 90;
+                    break;
+                case 2:
+                    angle = 180;
+                    break;
+                case 3:
+                    angle = 270;
+                    break;
+                default:
+                    angle = 0;
+                    break;
+            }
+
+            float dist = GetWallSize (wallIndex) / 2 - 0.3f;
+            Vector3 centre = new Vector3 (menuLoc, 2.5f, dist);
+
+            GameObject component = Instantiate (
+                plusSign,
+                Vector3.zero,
+                Quaternion.Euler (0, angle, 0)
+            ) as GameObject;
+            component.transform.Translate (centre);
+            component.SetActive (true);
+
+            //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
+        }
+        else
+            Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
     }
     /// <summary>
     /// Adds a picture to the saved information for this room.
