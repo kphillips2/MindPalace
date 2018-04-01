@@ -223,7 +223,7 @@
     <Compile Include="Assets\Scripts\backSettings.cs" />
     <Compile Include="Assets\Scripts\Builders\Building.cs" />
     <Compile Include="Assets\Scripts\Builders\FloorResizer.cs" />
-    <Compile Include="Assets\Scripts\Builders\RoomBuilder.cs" />
+    <Compile Include="Assets\Scripts\Builders\RoomHandler.cs" />
     <Compile Include="Assets\Scripts\Builders\WallCutter.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
     <Compile Include="Assets\Scripts\Corridor.cs" />
@@ -232,8 +232,6 @@
     <Compile Include="Assets\Scripts\ImageMenu\ButtonListButton.cs" />
     <Compile Include="Assets\Scripts\ImageMenu\ButtonListControl.cs" />
     <Compile Include="Assets\Scripts\LevelBuilder.cs" />
-    <Compile Include="Assets\Scripts\LevelEditorBuilder.cs" />
-    <Compile Include="Assets\Scripts\Loci.cs" />
     <Compile Include="Assets\Scripts\LociMenu\LociButton.cs" />
     <Compile Include="Assets\Scripts\LociMenu\LociListControl.cs" />
     <Compile Include="Assets\Scripts\MenuTracker.cs" />
@@ -248,10 +246,12 @@
     <Compile Include="Assets\Scripts\Picture.cs" />
     <Compile Include="Assets\Scripts\PictureCreator.cs" />
     <Compile Include="Assets\Scripts\PictureSpacePlacer.cs" />
-    <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\RoomCollision.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\Load.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\Save.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\LoadFile.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\Loci.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\Room.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\RoomData.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\SaveFile.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveTester.cs" />
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />

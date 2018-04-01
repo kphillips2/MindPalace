@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114283524011682974}
   - component: {fileID: 114921747253801944}
   - component: {fileID: 114962127721623748}
+  - component: {fileID: 54108897203956734}
   m_Layer: 0
   m_Name: FlowerTable_G
   m_TagString: Untagged
@@ -350,6 +351,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345248366967228}
   m_Mesh: {fileID: 4300000, guid: 6def73f8311645b47a2d3ae4d6afb91f, type: 3}
+--- !u!54 &54108897203956734
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567803422688506}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &64339546067309872
 MeshCollider:
   m_ObjectHideFlags: 1

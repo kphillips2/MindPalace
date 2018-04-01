@@ -15,7 +15,7 @@ public class LociListControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Save.load();
+        LoadFile.Load ();
         generateButtons();
     }
 
@@ -32,11 +32,11 @@ public class LociListControl : MonoBehaviour
         }
 
         int num = 0;
-        foreach (Loci l in Save.savedLocis)
+        foreach (string name in SaveFile.savedLocis.Keys)
         {
             GameObject button = Instantiate(buttonTemplate) as GameObject;
             button.SetActive(true);
-            button.GetComponent<LociButton>().setText(l.getName());
+            button.GetComponent<LociButton>().setText(name);
             button.GetComponent<LociButton>().setLociNum(num);
             button.transform.SetParent(buttonTemplate.transform.parent, false);
             buttons.Add(button);
@@ -46,8 +46,8 @@ public class LociListControl : MonoBehaviour
 
     public void listButtonClicked(int lociNum)
     {
-        Save.currentLoci = Save.savedLocis[lociNum];
         //Code for loading
+        //implement LoadLoci("LociName") from LoadFile class
     }
 
     public void backButtonClicked()

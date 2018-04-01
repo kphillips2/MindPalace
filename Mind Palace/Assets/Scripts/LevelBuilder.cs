@@ -10,18 +10,17 @@ public class LevelBuilder : MonoBehaviour {
 	private GameObject currentRoom;
 	private OldRoom oldRoom;
 	private OldCorridor oldCorridor;
-	private RoomBuilder roomCreator;
 	private PictureCreator pictureCreator;
 
 	// Test loading the first saved Loci in the list of saved Loci files
-	public void loadTest()
+	/*public void loadTest()
 	{
-		Save.load(); // Loads save file
-		Save.currentLoci = Save.savedLocis[0]; // Sets first saved Loci to be the one being viewed
+		SaveFile.load(); // Loads save file
+		SaveFile.currentLoci = SaveFile.savedLocis[0]; // Sets first saved Loci to be the one being viewed
 
 		// Place objects
 		ObjectPlacer op = new ObjectPlacer();
-		foreach (float[] item in Save.currentLoci.getObjects())
+		foreach (float[] item in SaveFile.currentLoci.getObjects())
 		{
 			try
 			{
@@ -32,7 +31,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 
 		// Create rooms
-		foreach (Room r in Save.currentLoci.getRooms())
+		foreach (Room r in SaveFile.currentLoci.getRooms())
 		{
 			string[] m = r.getMaterials();
 			float[] ce = r.getCentre();
@@ -48,7 +47,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 
 		// Create corridors
-		foreach (Corridor c in Save.currentLoci.getCorridors())
+		foreach (Corridor c in SaveFile.currentLoci.getCorridors())
 		{
 			string[] m = c.getMaterials();
 			float[] ce = c.getCentre();
@@ -61,26 +60,13 @@ public class LevelBuilder : MonoBehaviour {
 			}
 			catch { Debug.Log("Error: Corridor could not be generated due to missing values"); }
 		}
-    }
+    }*/
 
 	// Use this for initialization
 	void Start () {
 		oldRoom = room.GetComponent<OldRoom>();
 		oldCorridor = corridor.GetComponent<OldCorridor>();
 		pictureCreator = new PictureCreator();
-
-        //roomCreator = space.GetComponent<RoomCreator>();
-        //roomCreator.addDoor (0, -3);
-        //roomCreator.addDoor (1, 0);
-        //roomCreator.addDoor (2, -3);
-        //roomCreator.addDoor (3, 3);
-        //
-        //roomCreator.setMaterials (
-        //	"Wood Texture 06", // floor material
-        //	"Wood Texture 15", // roof material
-        //	"Wood texture 12"  // wall material
-        //);
-
         //loadTest();
 
         int[] roomDoors = {1, 1, 1, 0};

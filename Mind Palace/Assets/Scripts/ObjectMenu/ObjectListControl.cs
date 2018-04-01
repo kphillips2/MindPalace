@@ -61,7 +61,7 @@ public class ObjectListControl : MonoBehaviour
     private int timeshappened = 0;
     void Update()
     {
-        if(counter == 250 && timeshappened < 2)
+        if(counter == 250 && timeshappened < 1)
         {
             listButtonClicked(1);
             timeshappened++;
