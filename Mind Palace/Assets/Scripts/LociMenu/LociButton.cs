@@ -10,20 +10,16 @@ public class LociButton : MonoBehaviour
     [SerializeField]
     private LociListControl buttonControl;
 
-    private int lociNum; //Integer corresponding to loci save file
+    private string lociName; //Name corresponding to loci save file
 
     public void setText(string textString)
     {
         text.text = textString;
-    }
-
-    public void setLociNum(int lociNum)
-    {
-        this.lociNum = lociNum;
+        lociName = textString;
     }
 
     public void respondToClick()
     {
-        buttonControl.listButtonClicked(this.lociNum);
+        buttonControl.listButtonClicked(this.lociName);
     }
 }
