@@ -105,11 +105,11 @@ GameObject:
   - component: {fileID: 4239963735727150}
   - component: {fileID: 64010604813926122}
   - component: {fileID: 114980653277120572}
-  - component: {fileID: 114047612278288384}
   - component: {fileID: 114220632727629828}
   - component: {fileID: 114570271924558314}
   - component: {fileID: 114096549788054226}
   - component: {fileID: 54324534755628590}
+  - component: {fileID: 114898576800380804}
   m_Layer: 0
   m_Name: BookCase_G
   m_TagString: Untagged
@@ -1329,7 +1329,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!64 &64010604813926122
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -1358,25 +1358,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 0989d878ef2d74c44b4c7ac19551ff67, type: 3}
---- !u!114 &114047612278288384
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370174194304480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  precisionGrab: 0
-  rightSnapHandle: {fileID: 4920156346538466}
-  leftSnapHandle: {fileID: 4139446469278390}
-  throwVelocityWithAttachDistance: 0
-  throwMultiplier: 1
-  onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
 --- !u!114 &114096549788054226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1427,7 +1408,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114047612278288384}
+  grabAttachMechanicScript: {fileID: 114898576800380804}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -1436,6 +1417,26 @@ MonoBehaviour:
   useOverrideButton: 3
   allowedUseControllers: 0
   usingState: 0
+--- !u!114 &114898576800380804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1370174194304480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 4920156346538466}
+  leftSnapHandle: {fileID: 4139446469278390}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 1
+  onGrabCollisionDelay: 0
+  detachDistance: 5
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity
 --- !u!114 &114980653277120572
 MonoBehaviour:
   m_ObjectHideFlags: 1
