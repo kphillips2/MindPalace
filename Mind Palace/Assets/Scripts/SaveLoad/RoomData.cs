@@ -9,6 +9,7 @@ public class RoomData {
     private float length;
     private float[] centre = new float[3];
     private List<float[]>[] doorsAndWindows = new List<float[]> [4];
+    private List<float[]>[] plusSigns = new List<float[]> [4];
     private string[] materials = new string[3];
     private List<Picture> pictures;
 
@@ -49,10 +50,13 @@ public class RoomData {
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
     public void SetWallData(List<float[]>[] wallData){
         for (int k = 0; k < 4; k++) {
-            doorsAndWindows [k] = new List<float[]> ();
+            doorsAndWindows [k].Clear ();
             foreach (float[] loc in wallData [k])
                 doorsAndWindows [k].Add (loc);
         }
+    }
+    public void AddPlusSign(int wallIndex, float[] menuLoc){
+        plusSigns [wallIndex].Add (menuLoc);
     }
     /// <summary>
     /// Adds a given picture to the room
@@ -84,11 +88,20 @@ public class RoomData {
     /// </summary>
     /// <returns> a list per wall and a float array for each door or window vector </returns>
     public List<float[]>[] GetWallData() { return doorsAndWindows; }
+    public List<float[]>[] GetMenuData() { return plusSigns;  }
     /// <summary>
     /// Retrieves the stored door and window locations.
     /// </summary>
     /// <returns> a string array of material names for the floor, roof and wall objects </returns>
     public string[] GetMaterials() { return materials; }
+    public void ClearWallData(){
+        for (int k = 0; k < 4; k++)
+            doorsAndWindows[k] = new List<float[]> ();
+    }
+    public void ClearPlusSigns(){
+        for (int k = 0; k < 4; k++)
+            plusSigns[k] = new List<float[]> ();
+    }
     /// <summary>
     /// Removes all pictures currently stored in the room.
     /// </summary>

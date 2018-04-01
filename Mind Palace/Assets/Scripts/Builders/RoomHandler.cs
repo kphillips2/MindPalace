@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomHandler : MonoBehaviour {
-	public GameObject floor;
+    public GameObject plusSign;
+    public GameObject floor;
 	public GameObject roof;
 
 	public GameObject posZWall;
@@ -26,6 +27,7 @@ public class RoomHandler : MonoBehaviour {
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
         SetRoomSize (width, length);
         SetMaterials (mats [0], mats [1], mats [2]);
+        AddPlusSigns ();
     }
     /// <summary>
     /// Retrieves all the information that will apear in the save file for this room.
@@ -83,7 +85,7 @@ public class RoomHandler : MonoBehaviour {
     /// Sets all the doors and windows of a room at once.
     /// </summary>
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
-    public void SetDoorsAndWindows(List<float[]>[] wallData){
+    public void SetWallData(List<float[]>[] wallData){
         for (int k = 0; k < 4; k++) {
             doorsAndWindows [k] = new List<Vector3> ();
             foreach (float[] loc in wallData [k])
@@ -102,6 +104,7 @@ public class RoomHandler : MonoBehaviour {
         List<float[]>[] wallData = new List<float[]> [4];
 
         for (int k = 0; k < 4; k++) {
+            wallData [k] = new List<float[]> ();
             foreach (Vector3 loc in doorsAndWindows [k])
                 wallData [k].Add (new float[] { loc.x, loc.y, loc.z });
         }
@@ -155,20 +158,11 @@ public class RoomHandler : MonoBehaviour {
             ) as GameObject;
             component.transform.Translate (centre);
             component.SetActive (true);
-            subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
-            menuFields.room = this.GetComponentInParent<GameObject>();
-            menuFields.currentRoomCenter = this.transform.position;
-            menuFields.doorIndex = CalcDoorIndex(wallIndex, menuLoc);
 
             //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
-    }
-
-    public int CalcDoorIndex(int wallIndex, float menuLoc)
-    {
-        return 1;
     }
     /// <summary>
     /// Adds a picture to the saved information for this room.
