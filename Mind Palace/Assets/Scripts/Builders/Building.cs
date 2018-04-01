@@ -157,12 +157,15 @@ public class Building : MonoBehaviour {
     }
     private void LoadRooms (List<RoomData> savedRooms){
         float[] centre;
+        string[] mats;
         List<float[]>[] wallData;
         foreach (RoomData data in savedRooms) {
             centre = data.GetCentre ();
             AddRoom (new Vector3(centre [0], centre [1], centre [2]));
 
-            wallData = data.GetWallData ();
+            mats = data.GetMaterials ();
+            room.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
+            wallData = data.GetWallData();
             room.GetComponent<RoomHandler> ().SetWallData (wallData);
         }
     }
