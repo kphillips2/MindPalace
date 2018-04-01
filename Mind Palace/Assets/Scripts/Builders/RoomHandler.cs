@@ -102,6 +102,7 @@ public class RoomHandler : MonoBehaviour {
         List<float[]>[] wallData = new List<float[]> [4];
 
         for (int k = 0; k < 4; k++) {
+            wallData [k] = new List<float[]> ();
             foreach (Vector3 loc in doorsAndWindows [k])
                 wallData [k].Add (new float[] { loc.x, loc.y, loc.z });
         }

@@ -17,18 +17,21 @@ public class pauseListener : MonoBehaviour {
     public GameObject settingsMenu; //settings canvas
     public GameObject objectsMenu;
     public Transform cameraRigTransform; //camera rig
+    public GameObject level;
 
     private SteamVR_TrackedController controller;
     private Vector3 viewDir;
     private float height = 1.5f;
     private float distance = 5.0f;
     private bool paused = false;
+    private Building building;
 
     //adds listener to menu button
     void Start()
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
+        building = level.GetComponent<Building>();
 
     }
 
@@ -43,22 +46,24 @@ public class pauseListener : MonoBehaviour {
             viewDir = SteamVR_Render.Top().GetRay().direction;
             viewDir = new Vector3(viewDir.x, 0, viewDir.z);
             viewDir = viewDir.normalized;
-            objectsMenu.transform.position = new Vector3(cameraRigTransform.position.x+(viewDir.x*3), 2, cameraRigTransform.position.z+ (viewDir.z*3));
-            objectsMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
+            pauseMenu.transform.position = new Vector3(cameraRigTransform.position.x+(viewDir.x*3), 2, cameraRigTransform.position.z+ (viewDir.z*3));
+            pauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
         }
         else
         {
-            objectsMenu.transform.position = new Vector3(0,-100,0);
+            pauseMenu.transform.position = new Vector3(0,-100,0);
         }
     }
 	
     //Moves and rotates the settings canvas
     public void GoToSettings()
     {
+        /*
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
         settingsMenu.transform.position = pauseMenu.transform.position;
         settingsMenu.transform.rotation = pauseMenu.transform.rotation;
+        */
     }
 
     public void LeaveSettings()
@@ -70,12 +75,21 @@ public class pauseListener : MonoBehaviour {
     public void ResumeGame()
     {
         paused = false;
-        pauseMenu.SetActive(false);
+        pauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        building.Save();
+        SaveFile.Save();
+        SceneManager.LoadScene("MinimalMenu");
+    }
+
+    public void ViewObjectMenu()
+    {
+        objectsMenu.transform.position = pauseMenu.transform.position;
+        objectsMenu.transform.rotation = pauseMenu.transform.rotation;
+        pauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void toStart()

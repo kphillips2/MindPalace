@@ -49,7 +49,7 @@ public class RoomData {
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
     public void SetWallData(List<float[]>[] wallData){
         for (int k = 0; k < 4; k++) {
-            doorsAndWindows [k].Clear ();
+            doorsAndWindows [k] = new List<float[]> ();
             foreach (float[] loc in wallData [k])
                 doorsAndWindows [k].Add (loc);
         }
