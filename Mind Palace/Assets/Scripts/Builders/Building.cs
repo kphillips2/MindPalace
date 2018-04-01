@@ -64,11 +64,11 @@ public class Building : MonoBehaviour {
 
         Vector3 newLoc =
             // loc lies on positive X wall
-            (loc.x > distX - 0.5f) ? new Vector3 (centre.x + distX + 0.125f, loc.y, loc.z) :
+            (loc.x > centre.x + distX - 0.5f) ? new Vector3 (centre.x + distX + 0.125f, loc.y, loc.z) :
             // loc lies on negative Z wall
-            (loc.z > distZ - 0.5f) ? new Vector3 (loc.x, loc.y, centre.z + distZ + 0.125f) :
+            (loc.z > centre.z + distZ - 0.5f) ? new Vector3 (loc.x, loc.y, centre.z + distZ + 0.125f) :
             // loc lies on negative X wall
-            (loc.x < -distX + 0.5f) ? new Vector3 (centre.x - distX - 0.125f, loc.y, loc.z) :
+            (loc.x < centre.x - distX + 0.5f) ? new Vector3 (centre.x - distX - 0.125f, loc.y, loc.z) :
             // loc must lie on positive Z wall
             new Vector3 (loc.x, loc.y, centre.z - distZ - 0.125f);
 
@@ -156,22 +156,14 @@ public class Building : MonoBehaviour {
         return component;
     }
     private void LoadRooms (List<RoomData> savedRooms){
-        /*Vector3 hld;
-        float index;
         float[] centre;
-        List<float[]>[] doorsAndWindows;
-        foreach (RoomData room in savedRooms) {
-            centre = room.GetCentre ();
-            hld = new Vector3 (centre[0], centre[1], centre[2]);
+        List<float[]>[] wallData;
+        foreach (RoomData data in savedRooms) {
+            centre = data.GetCentre ();
+            AddRoom (new Vector3(centre [0], centre [1], centre [2]));
 
-            index = rooms.Count;
-            AddRoom (hld);
-            doorsAndWindows = room.GetWallData ();
-            for (int k = 0; k < 4; k++) {
-                foreach (float[] loc in doorsAndWindows[k]) {
-                    //rooms[index].
-                }
-            }
-        }*/
+            wallData = data.GetWallData ();
+            room.GetComponent<RoomHandler> ().SetWallData (wallData);
+        }
     }
 }
