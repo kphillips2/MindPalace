@@ -14,11 +14,16 @@ public class subMenuButtons : MonoBehaviour {
     public GameObject level;
 
     public Vector3 currentRoomCenter;
+    //buttons
     public GameObject ClickedOn;
     public GameObject RoomButton;
     public GameObject CorridorButton;
     public GameObject Picture;
     public GameObject Window;
+    public GameObject BuildingButton;
+    public GameObject DoorButton;
+
+
     public GameObject SingularActivation;
     public GameObject ImageMenu;
     public int doorIndex;
@@ -39,11 +44,24 @@ public class subMenuButtons : MonoBehaviour {
     public void ShowMoreOptions()
     {
         ClickedOn.SetActive(false);
-        RoomButton.SetActive(true);
-        CorridorButton.SetActive(true);
+        RoomButton.SetActive(false);
+        CorridorButton.SetActive(false);
         Window.SetActive(true);
         Picture.SetActive(true);
+        BuildingButton.SetActive(true);
+        DoorButton.SetActive(false);
         MenuActivationManager.ActivateMenu(this.gameObject);
+    }
+
+    public void DoorSubMenu()
+    {
+        ClickedOn.SetActive(false);
+        RoomButton.SetActive(true);
+        CorridorButton.SetActive(true);
+        Window.SetActive(false);
+        Picture.SetActive(false);
+        BuildingButton.SetActive(false);
+        DoorButton.SetActive(true);
         RoomButton.GetComponent<Button>().interactable= CheckRoomPlacement();
         CorridorButton.GetComponent<Button>().interactable = CheckCorridorPlacement();
     }
@@ -54,6 +72,8 @@ public class subMenuButtons : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        BuildingButton.SetActive(false);
+        DoorButton.SetActive(false);
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
         MenuActivationManager.NoActive();
         this.transform.position = new Vector3(0, -100, 0);
@@ -65,6 +85,8 @@ public class subMenuButtons : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        BuildingButton.SetActive(false);
+        DoorButton.SetActive(false);
     }
     public void DefaultState()
     {
@@ -73,6 +95,8 @@ public class subMenuButtons : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        BuildingButton.SetActive(false);
+        DoorButton.SetActive(false);
     }
     //Should Probably be Statics:
     private int WallIndexForRoom()
@@ -481,6 +505,10 @@ public class subMenuButtons : MonoBehaviour {
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();
+    }
+    public void AddDoor()
+    {
+
     }
     //Plus Sign Populators:
     public void PopulateRoomPlusSigns(Vector3 roomcenter, List<Canvas> PlusSignList)
