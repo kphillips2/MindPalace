@@ -54,12 +54,11 @@ public class SaveTester : MonoBehaviour {
         op.createPrefab(18, new Vector3(34.13f, 0f, 7.88f), new Vector3(0f, -90f, 0f), false); //Toilet
         op.createPrefab(19, new Vector3(3.937f, 0f, -9.35f), new Vector3(0f, -90f, 0f), false); //TV
 
-        /* Add rooms and corridors to the current Loci
-        int[] doors = new int[] { 1, 1, 1, 0 };
+        // Add rooms and corridors to the current Loci
+        /*int[] doors = new int[] { 1, 1, 1, 0 };
         float[] centre = new float[] { 0, 0, 0 };
         string[] materials = new string[] { "Wood Texture 06", "Wood Texture 15", "Wood texture 12" };
-        RoomData r = new RoomData(centre);
-
+        RoomData r = new RoomData(doors, new Vector3(0, 0, 0), materials);
         SaveFile.currentLoci.addRoom(r);
         doors = new int[] { 0, 0, 1, 0 };
         centre = new float[] { 0, 0, 10 };
@@ -95,8 +94,8 @@ public class SaveTester : MonoBehaviour {
         doors = new int[] { 0, 0, 0, 1, 0, 1, 0, 1 };
         centre = new float[] { 20, 0, 17.5f };
         c = new Corridor(doors, centre, materials, 90);
-        SaveFile.currentLoci.addCorridor(c);
+        SaveFile.currentLoci.addCorridor(c);*/
 
-        SaveFile.Save(); // SaveFile the current Loci to file*/
+        SaveFile.Save(); // SaveFile the current Loci to file
     }
 }
