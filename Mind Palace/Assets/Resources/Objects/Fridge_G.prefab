@@ -70,10 +70,10 @@ GameObject:
   - component: {fileID: 64748953329165358}
   - component: {fileID: 114553387553547086}
   - component: {fileID: 114217610742607272}
+  - component: {fileID: 114664935000099728}
   - component: {fileID: 114508926299648376}
   - component: {fileID: 114947096254381844}
   - component: {fileID: 54683248636272912}
-  - component: {fileID: 114641531229606480}
   m_Layer: 0
   m_Name: Fridge_G
   m_TagString: Untagged
@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903418326612262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4990467627660932}
@@ -263,7 +263,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114641531229606480}
+  grabAttachMechanicScript: {fileID: 114664935000099728}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   useOverrideButton: 3
   allowedUseControllers: 0
   usingState: 0
---- !u!114 &114641531229606480
+--- !u!114 &114664935000099728
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903418326612262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
+  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   precisionGrab: 0
@@ -289,9 +289,8 @@ MonoBehaviour:
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
-  detachDistance: 5
-  velocityLimit: Infinity
-  angularVelocityLimit: Infinity
+  destroyImmediatelyOnThrow: 1
+  breakForce: 1500
 --- !u!114 &114947096254381844
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10675,24 +10675,32 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 0.99999905
 =======
       value: 0.9999979
 >>>>>>> 30d67a2809ffe365a132d0498747ce1b11bba7f1
+=======
+      value: 1
+>>>>>>> parent of cb247fd5... Object work
       objectReference: {fileID: 0}
     - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: -0.00024414062
 =======
       value: -0.000061035156
 >>>>>>> 30d67a2809ffe365a132d0498747ce1b11bba7f1
+=======
+      value: -0.00039672852
+>>>>>>> parent of cb247fd5... Object work
       objectReference: {fileID: 0}
     - target: {fileID: 224666161614091206, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
