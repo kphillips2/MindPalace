@@ -9,11 +9,8 @@ public class Building : MonoBehaviour {
 
 	// Use this for initialization
 	void Start (){
-        rooms = new List<GameObject>();
-        if (SaveFile.name == null)
-            AddRoom(new Vector3(0, 0, 0));
-        else
-            LoadRooms (SaveFile.currentLoci.getRooms ());
+		rooms = new List<GameObject> ();
+        AddRoom (new Vector3 (0, 0, 0));
 	}
     /// <summary>
     /// Saves all the rooms and corridors to the currently open Loci.
@@ -143,7 +140,7 @@ public class Building : MonoBehaviour {
     /// <param name="type"> determines which room dimensions to use </param>
     /// <returns> the new room object that has been created</returns>
     private GameObject InstantiateRoom(Vector3 roomCentre, string type){
-        GameObject component = Instantiate (
+        GameObject component = Instantiate(
             room,
             roomCentre,
             Quaternion.Euler (0, 0, 0)
@@ -154,24 +151,5 @@ public class Building : MonoBehaviour {
         component.GetComponent<RoomHandler> ().InitData (dims [0], dims [1]);
         rooms.Add (component);
         return component;
-    }
-    private void LoadRooms (List<RoomData> savedRooms){
-        /*Vector3 hld;
-        float index;
-        float[] centre;
-        List<float[]>[] doorsAndWindows;
-        foreach (RoomData room in savedRooms) {
-            centre = room.GetCentre ();
-            hld = new Vector3 (centre[0], centre[1], centre[2]);
-
-            index = rooms.Count;
-            AddRoom (hld);
-            doorsAndWindows = room.GetWallData ();
-            for (int k = 0; k < 4; k++) {
-                foreach (float[] loc in doorsAndWindows[k]) {
-                    //rooms[index].
-                }
-            }
-        }*/
     }
 }
