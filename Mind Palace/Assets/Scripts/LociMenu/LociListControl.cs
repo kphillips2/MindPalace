@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LociListControl : MonoBehaviour
 {
@@ -37,17 +38,16 @@ public class LociListControl : MonoBehaviour
             GameObject button = Instantiate(buttonTemplate) as GameObject;
             button.SetActive(true);
             button.GetComponent<LociButton>().setText(name);
-            button.GetComponent<LociButton>().setLociNum(num);
             button.transform.SetParent(buttonTemplate.transform.parent, false);
             buttons.Add(button);
             num++;
         }
     }
 
-    public void listButtonClicked(int lociNum)
+    public void listButtonClicked(string lociName)
     {
-        //Code for loading
-        //implement LoadLoci("LociName") from LoadFile class
+        LoadFile.LoadLoci(lociName);
+        SceneManager.LoadScene("GreenDemo");
     }
 
     public void backButtonClicked()
