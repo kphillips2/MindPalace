@@ -330,6 +330,7 @@
     <Compile Include="Assets\Scripts\RoomCollision.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\LoadFile.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\Loci.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\PlusData.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\Room.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\RoomData.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveFile.cs" />

@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+/// <summary>
+/// Responsible for Loading all stored information in a file.
+/// </summary>
 public static class LoadFile {
     /// <summary>
     /// Fills the savedLocis dictionary with the Loci objects that were saved in the file.

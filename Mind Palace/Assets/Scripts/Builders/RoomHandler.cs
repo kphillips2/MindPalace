@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for handling and room functionality.
+/// </summary>
 public class RoomHandler : MonoBehaviour {
     public GameObject plusSign;
     public GameObject floor;

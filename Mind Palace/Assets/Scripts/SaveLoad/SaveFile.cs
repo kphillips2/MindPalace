@@ -5,6 +5,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.IO;
 
+/// <summary>
+/// Responsible for storing all saved information in a file.
+/// </summary>
 public static class SaveFile {
     public static string name = null;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
@@ -15,10 +18,13 @@ public static class SaveFile {
     /// All new information about the Loci (except object info) has been added to the currentLoci attribute.
     /// </summary>
     public static void Save(){
-        if (name == null)
-            name = DateTime.Now.ToLongDateString () + ", " + DateTime.Now.ToLongTimeString ();
-        SaveObjects ();
-        savedLocis.Add (name, currentLoci);
+        SaveObjects();
+        if (name == null) {
+            name = DateTime.Now.ToLongDateString() + ", " + DateTime.Now.ToLongTimeString();
+            savedLocis.Add(name, currentLoci);
+        } else
+            savedLocis[name] = currentLoci;
+
         BinaryFormatter bf = new BinaryFormatter ();
         FileStream file = File.Create ("Assets/SaveFile/saveFile.gd");
         bf.Serialize (file, savedLocis);

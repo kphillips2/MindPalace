@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for cutting doors and windows into walls.
+/// </summary>
 public static class WallCutter {
 	private static int doorWindowCount;
 	private static bool doesNewestOverlap;
