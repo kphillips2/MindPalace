@@ -160,6 +160,11 @@ public class RoomHandler : MonoBehaviour {
             ) as GameObject;
             component.transform.Translate (centre);
             component.SetActive (true);
+            subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
+            menuFields.room = gameObject;
+            menuFields.currentRoomCenter = gameObject.transform.position;
+            menuFields.doorIndex = FindDoorIndex(wallIndex, plusLoc);
+            //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
 
             float[] loc = thisRoom.GetCentre ();
             centre = component.transform.position;
@@ -185,6 +190,11 @@ public class RoomHandler : MonoBehaviour {
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
+    }
+
+    public int FindDoorIndex(int wallIndex, float location)
+    {
+        return 0;
     }
     /// <summary>
     /// Adds a picture to the saved information for this room.

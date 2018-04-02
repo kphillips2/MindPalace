@@ -21,9 +21,9 @@ public class ActivationManager : MonoBehaviour {
         }
         else
         {
-            ActivatedObject.GetComponent<subMenuButtons>().DefaultState();
+            ActivatedObject.GetComponent<SubMenuHandler>().DefaultState();
             ActivatedObject = NewActivation;
-            ImageMenu.transform.position = new Vector3(0, -100, 0); //Like Dactivating, but deactivating breaks it
+            ImageMenu.transform.position = new Vector3(0, -100, 0); //Like Deactivating, but deactivating breaks it
         }
     }
 

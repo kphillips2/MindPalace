@@ -32,10 +32,7 @@ public class pauseListener : MonoBehaviour
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        if(building != null)
-        {
-            building = level.GetComponent<Building>();
-        }
+        building = level.GetComponent<Building>();
         
 
     }
@@ -57,24 +54,24 @@ public class pauseListener : MonoBehaviour
         else
         {
             pauseMenu.transform.position = new Vector3(0, -100, 0);
+            settingsMenu.transform.position = new Vector3(0, -100, 0);
+            objectsMenu.transform.position = new Vector3(0, -100, 0);
         }
     }
 
     //Moves and rotates the settings canvas
     public void GoToSettings()
     {
-        /*
-        pauseMenu.SetActive(false);
-        settingsMenu.SetActive(true);
         settingsMenu.transform.position = pauseMenu.transform.position;
         settingsMenu.transform.rotation = pauseMenu.transform.rotation;
-        */
+        pauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void LeaveSettings()
     {
-        pauseMenu.SetActive(true);
-        settingsMenu.SetActive(false);
+        pauseMenu.transform.position = settingsMenu.transform.position;
+        pauseMenu.transform.rotation = settingsMenu.transform.rotation;
+        settingsMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ResumeGame()
