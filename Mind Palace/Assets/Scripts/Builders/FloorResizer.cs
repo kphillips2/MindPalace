@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for resizing any floor or flat roof.
+/// </summary>
 public static class FloorResizer {
     /// <summary>
     /// Resizes a floor or roof object without scaling it.

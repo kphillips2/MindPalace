@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for handling and room functionality.
+/// </summary>
 public class RoomHandler : MonoBehaviour {
     public GameObject plusSign;
     public GameObject floor;
@@ -27,7 +30,6 @@ public class RoomHandler : MonoBehaviour {
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
         SetRoomSize (width, length);
         SetMaterials (mats [0], mats [1], mats [2]);
-        //AddPlusSigns ();
     }
     /// <summary>
     /// Retrieves all the information that will apear in the save file for this room.
@@ -126,11 +128,11 @@ public class RoomHandler : MonoBehaviour {
         }
     }
     /// <summary>
-    /// Adds a plus sign to a given wall. Also saves the new plus sign to the currently open Loci.
+    /// Adds a plus sign to a given wall. Also saves the new plus sign to the room information.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
-    /// <param name="menuLoc"> the location of the menu with 0 representing the centre of the wall </param>
-    private void AddPlusSign(int wallIndex, float menuLoc){
+    /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
+    private void AddPlusSign(int wallIndex, float plusLoc){
         float angle = 0;
         if (wallIndex >= 0 && wallIndex <= 3) {
             switch (wallIndex) {
@@ -149,7 +151,7 @@ public class RoomHandler : MonoBehaviour {
             }
 
             float dist = GetWallSize (wallIndex) / 2 - 0.3f;
-            Vector3 centre = new Vector3 (menuLoc, 2.5f, dist);
+            Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
 
             GameObject component = Instantiate (
                 plusSign,
@@ -161,8 +163,11 @@ public class RoomHandler : MonoBehaviour {
             subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
             menuFields.room = gameObject;
             menuFields.currentRoomCenter = gameObject.transform.position;
-            menuFields.doorIndex = FindDoorIndex(wallIndex, menuLoc);
+            menuFields.doorIndex = FindDoorIndex(wallIndex, plusLoc);
             //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
+
+            PlusData thisPlus = new PlusData (new float[] { centre.x, centre.y, centre.z }, angle);
+            thisRoom.AddPlusSign (thisPlus);
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");

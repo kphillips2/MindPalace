@@ -249,6 +249,7 @@
     <Compile Include="Assets\Scripts\RoomCollision.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\LoadFile.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\Loci.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\PlusData.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\Room.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\RoomData.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveFile.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\subMenuButtons.cs" />
+    <Compile Include="Assets\Scripts\SubMenuHandler.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />

@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Resonsible for loading any room objects. Also tracks all rooms.
+/// </summary>
 public class Building : MonoBehaviour {
 	public GameObject room;
+    public GameObject plusSign;
 
     private List<GameObject> rooms;
 
@@ -51,12 +55,37 @@ public class Building : MonoBehaviour {
         return true;
     }
     /// <summary>
+    /// Finds the centre of a potential new room based on it's type.
+    /// </summary>
+    /// <param name="centre"> the vector for the centre of the room holding the plus sign </param>
+    /// <param name="loc"> the vector for the centre of the plus sign </param>
+    /// <param name="width"> the width of the room that holds the plus sign </param>
+    /// <param name="length"> the length of the room that holds the plus sign </param>
+    /// <param name="type"> determines which room dimensions to use for the new room </param>
+    /// <returns> the vector for the centre of the new room </returns>
+    public Vector3 GetNewRoomCentre (Vector3 centre, Vector3 loc, float width, float length, string type){
+        float[] dims = GetDimensions(type);
+        float distX = width / 2, distZ = length / 2;
+        float moveX = dims [0] / 2, moveZ = dims [1] / 2;
+
+        Vector3 newLoc =
+            // loc lies on positive X wall
+            (loc.x > centre.x + distX - 0.5f) ? new Vector3(centre.x + distX + moveX, centre.y, loc.z) :
+            // loc lies on negative Z wall
+            (loc.z > centre.z + distZ - 0.5f) ? new Vector3(loc.x, centre.y, centre.z + distZ + moveZ) :
+            // loc lies on negative X wall
+            (loc.x < centre.x - distX + 0.5f) ? new Vector3(centre.x - distX - moveX, centre.y, loc.z) :
+            // loc must lie on positive Z wall
+            new Vector3(loc.x, centre.y, centre.z - distZ - moveZ);
+        return newLoc;
+    }
+    /// <summary>
     /// Checks whether a potential new door or window goes into an existing room.
     /// </summary>
-    /// <param name="centre"> the vector for the centre of the new room </param>
+    /// <param name="centre"> the vector for the centre of the room </param>
     /// <param name="loc"> the vector for the centre of the new door or window </param>
     /// <param name="type"> determines which room dimensions to use </param>
-    /// <returns> the room object that is adjacent to the new door or window</returns>
+    /// <returns> the room object that is adjacent to the new door or window </returns>
     public GameObject CheckDoorWindowPlacement (Vector3 centre, Vector3 loc, string type){
         bool inX, inZ;
         float[] chk, dims = GetDimensions (type);
@@ -89,6 +118,23 @@ public class Building : MonoBehaviour {
                 return room;
         }
         return null;
+    }
+    /// <summary>
+    /// Contains all the possible dimensions of different room sizes.
+    /// </summary>
+    /// <param name="type"> determines which room dimensions to use </param>
+    /// <returns> a float array of width and length </returns>
+    private float[] GetDimensions(string type){
+        switch (type) {
+            case "room":
+                return new float[] { 12, 12 };
+            case "xCorridor":
+                return new float[] { 24, 4 };
+            case "zCorridor":
+                return new float[] { 4, 24 };
+            default:
+                return new float[] { -1, -1 };
+        }
     }
     /// <summary>
     /// Adds a new room to the scene.
@@ -124,7 +170,7 @@ public class Building : MonoBehaviour {
     /// </summary>
     /// <param name="roomCentre"> the vector for the centre of the new room </param>
     /// <param name="type"> determines which room dimensions to use </param>
-    /// <returns> the new room object that has been created</returns>
+    /// <returns> the new room object that has been created </returns>
     private GameObject InstantiateRoom(Vector3 roomCentre, string type){
         GameObject component = Instantiate (
             room,
@@ -134,36 +180,17 @@ public class Building : MonoBehaviour {
         component.SetActive (true);
 
         float[] dims = GetDimensions (type);
-        component.GetComponent<RoomHandler> ().InitData (dims [0], dims [1]);
+        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
+        roomScript.InitData (dims [0], dims [1]);
+        roomScript.AddPlusSigns ();
+
         rooms.Add (component);
         return component;
     }
     /// <summary>
-    /// Contains all the possible dimensions of different room sizes.
+    /// Loads all the rooms and corridors from the list provided.
     /// </summary>
-    /// <param name="type"> determines which room dimensions to use </param>
-    /// <returns> a float array of width and length </returns>
-    private float[] GetDimensions(string type){
-        switch (type) {
-            case "room":
-                return new float[] { 12, 12 };
-            case "xCorridor":
-                return new float[] { 24, 4 };
-            case "zCorridor":
-                return new float[] { 4, 24 };
-            default:
-                return new float[] { -1, -1 };
-        }
-    }
-    private GameObject LoadRoom(Vector3 centre, float width, float length){
-        if (width == 12 && length == 12)
-            return AddRoom (centre);
-        else if (width == 24 && length == 4)
-            return AddXCorridor (centre);
-        else if (width == 4 && length == 24)
-            return AddZCorridor (centre);
-        return null;
-    }
+    /// <param name="savedRooms"> a list of room information </param>
     private void LoadRooms (List<RoomData> savedRooms){
         float width, length;
         float[] centre;
@@ -176,11 +203,52 @@ public class Building : MonoBehaviour {
             width = data.GetWidth ();
             length = data.GetLength ();
             component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
+            LoadPlusSigns (data.GetPlusData ());
 
             mats = data.GetMaterials ();
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
-            wallData = data.GetWallData();
+            wallData = data.GetWallData ();
             component.GetComponent<RoomHandler> ().SetWallData (wallData);
+        }
+    }
+    /// <summary>
+    /// Creates a clone of the room object inside the scene.
+    /// </summary>
+    /// <param name="roomCentre"> the vector for the centre of the new room </param>
+    /// <param name="width"> determines the size of the room along the X axis </param>
+    /// <param name="length"> determines the size of the room along the Z axis </param>
+    /// <returns> the new room object that has been created </returns>
+    private GameObject LoadRoom(Vector3 roomCentre, float width, float length){
+        GameObject component = Instantiate (
+            room,
+            roomCentre,
+            Quaternion.Euler (0, 0, 0)
+        ) as GameObject;
+        component.SetActive (true);
+
+        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
+        roomScript.InitData (width, length);
+
+        rooms.Add (component);
+        return component;
+    }
+    /// <summary>
+    /// Loads all the plus signs from the list provided.
+    /// </summary>
+    /// <param name="data"> a list of plus sign information </param>
+    private void LoadPlusSigns(List<PlusData> data){
+        float[] centre;
+        GameObject component;
+
+        foreach (PlusData plus in data) {
+            component = Instantiate (
+                plusSign,
+                Vector3.zero,
+                Quaternion.Euler (0, plus.GetAngle (), 0)
+            ) as GameObject;
+            centre = plus.GetCentre ();
+            component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
+            component.SetActive (true);
         }
     }
 }
