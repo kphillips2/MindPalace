@@ -19,7 +19,7 @@ public class ButtonListControl : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        backButton.enabled = false; //Currently at top level, don't want to let user go back a folder
+        backButton.interactable= false; //Currently at top level, don't want to let user go back a folder
         generateButtons();
     }
 
@@ -88,7 +88,7 @@ public class ButtonListControl : MonoBehaviour {
         else
         {
             currentFilePath = currentFilePath + "/" + textString;
-            backButton.enabled = true;
+            backButton.interactable = true;
             generateButtons();
         }
     }
@@ -101,7 +101,7 @@ public class ButtonListControl : MonoBehaviour {
         if (index > 0) currentFilePath = currentFilePath.Substring(0, index);
 
         //Don't allow user to go back further if they've hit the top level
-        if (currentFilePath == startFilePath) backButton.enabled = false;
+        if (currentFilePath == startFilePath) backButton.interactable = false;
 
         generateButtons();
     }

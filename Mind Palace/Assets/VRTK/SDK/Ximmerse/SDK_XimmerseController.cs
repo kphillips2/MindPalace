@@ -324,10 +324,11 @@ namespace VRTK
         }
 
         /// <summary>
-        /// The SetControllerRenderModelWheel method sets the state of the scroll wheel on the controller render model.
+        /// The SetControllerRenderModelWheel method sets the state of the 
+        wheel on the controller render model.
         /// </summary>
         /// <param name="renderModel">The GameObject containing the controller render model.</param>
-        /// <param name="state">If true and the render model has a scroll wheen then it will be displayed, if false then the scroll wheel will be hidden.</param>
+        /// <param name="state">If true and the render model has a scroll wheen then it will be displayed, if false then the wheel will be hidden.</param>
         public override void SetControllerRenderModelWheel(GameObject renderModel, bool state)
         {
         }

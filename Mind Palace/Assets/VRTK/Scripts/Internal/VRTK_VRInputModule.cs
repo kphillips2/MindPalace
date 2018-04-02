@@ -316,6 +316,7 @@
             var scrollWheelVisible = false;
             foreach (RaycastResult result in results)
             {
+                /*
                 if (pointer.pointerEventData.scrollDelta != Vector2.zero)
                 {
                     var target = ExecuteEvents.ExecuteHierarchy(result.gameObject, pointer.pointerEventData, ExecuteEvents.scrollHandler);
@@ -324,6 +325,7 @@
                         scrollWheelVisible = true;
                     }
                 }
+                */
             }
 
             if (pointer.controllerRenderModel)

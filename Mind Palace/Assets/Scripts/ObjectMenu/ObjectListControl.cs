@@ -53,7 +53,7 @@ public class ObjectListControl : MonoBehaviour
 
     public void backButtonClicked()
     {
-        //Code for back button
+        ObjectMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     /*

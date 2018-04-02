@@ -22,7 +22,8 @@ public class TouchpadMovement : MonoBehaviour {
     private float height;
     private float menuHeight;
     private SteamVR_Controller.Device device;
-    private float speed = 5.0f;
+    private float speed = 3.0f;
+    private float deadZoneSize = 0.4f;
     private bool moving = false;
     private TouchpadMovement otherControllerScript;
 
@@ -37,7 +38,7 @@ public class TouchpadMovement : MonoBehaviour {
     {
         device = SteamVR_Controller.Input((int)trackedObj.index);
         if (!otherControllerScript.IsMoving()) {
-            if (device.GetAxis().x != 0 || device.GetAxis().y != 0)
+            if (device.GetAxis().x > deadZoneSize || device.GetAxis().y > deadZoneSize ||device.GetAxis().x < -deadZoneSize || device.GetAxis().y < -deadZoneSize)
             {
                 moving = true;
                 viewDir = SteamVR_Render.Top().GetRay().direction;
