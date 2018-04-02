@@ -224,6 +224,7 @@
     <Compile Include="Assets\Scripts\Builders\Building.cs" />
     <Compile Include="Assets\Scripts\Builders\FloorResizer.cs" />
     <Compile Include="Assets\Scripts\Builders\RoomHandler.cs" />
+    <Compile Include="Assets\Scripts\Builders\RoomTypes.cs" />
     <Compile Include="Assets\Scripts\Builders\WallCutter.cs" />
     <Compile Include="Assets\Scripts\buttonStuff.cs" />
     <Compile Include="Assets\Scripts\Corridor.cs" />
