@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Responsible for handling and plus sign functionality.
+/// </summary>
 public class SubMenuHandler : MonoBehaviour {
     public GameObject room;
     public GameObject level;
@@ -19,16 +22,16 @@ public class SubMenuHandler : MonoBehaviour {
     private RoomHandler roomHandler;
     private ActivationManager MenuActivationManager;
     private PlusData thisPlus;
-    private Vector3 newRoomCentre;
-    private Vector3 newCorridorCentre;
 
-    // Use this for initialization
-    void Start () {
+    /// <summary>
+    /// Initializes the attributes for this plus sign.
+    /// </summary>
+    /// <param name="plus"></param>
+    public void InitData(PlusData plus){
         roomHandler = room.GetComponent<RoomHandler> ();
         building = level.GetComponent<Building> ();
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager> ();
-        newRoomCentre = GetNewRoomCentre ("room");
-        newCorridorCentre = GetNewRoomCentre (GetCorridorType ());
+        thisPlus = plus;
     }
     //Menu Manipulators:
     public void ShowMoreOptions()
@@ -39,8 +42,11 @@ public class SubMenuHandler : MonoBehaviour {
         Window.SetActive(true);
         Picture.SetActive(true);
         MenuActivationManager.ActivateMenu(this.gameObject);
-        RoomButton.GetComponent<Button> ().interactable = CheckRoomPlacement ("room");
-        CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (GetCorridorType ());
+
+        string type = "room";
+        RoomButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
+        type = RoomTypes.GetCorridorType (thisPlus.GetAngle ());
+        CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
     }
     public void HideAll()
     {
@@ -70,36 +76,9 @@ public class SubMenuHandler : MonoBehaviour {
         CorridorButton.SetActive(false);
     }
     //Collider Checkers:
-    private string GetCorridorType(){
-        return (thisPlus.GetAngle () % 180 == 0) ? "zCorridor" : "xCorridor";
-    }
     private bool CheckRoomPlacement(string type){
-        Vector3 newCentre;
-        switch (type) {
-            case "room":
-                newCentre = newRoomCentre;
-                break;
-            case "xCorridor":
-                newCentre = newCorridorCentre;
-                break;
-            case "zCorridor":
-                newCentre = newCorridorCentre;
-                break;
-            default:
-                return false;
-        }
-
+        Vector3 newCentre = ConvertToVector (RoomTypes.GetNewRoomCentre (thisPlus, type));
         return building.CheckRoomPlacement (newCentre, type);
-    }
-    private Vector3 GetNewRoomCentre(string type){
-        RoomData data = roomHandler.GetData ();
-
-        Vector3 centre = ConvertToVector(thisPlus.GetCentre ());
-        Vector3 roomCentre = ConvertToVector(data.GetCentre ());
-        centre = Quaternion.AngleAxis(thisPlus.GetAngle (), roomCentre) * centre;
-
-        float width = data.GetWidth (), length = data.GetLength ();
-        return building.GetNewRoomCentre (roomCentre, centre, width, length, type);
     }
     private Vector3 ConvertToVector(float[] data){
         return new Vector3 (data [0], data [1], data [2]);

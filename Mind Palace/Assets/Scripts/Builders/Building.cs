@@ -36,7 +36,7 @@ public class Building : MonoBehaviour {
     public bool CheckRoomPlacement (Vector3 centre, string type){
         float distX, distZ;
         bool inX, inZ;
-        float[] chk, dims = GetDimensions (type);
+        float[] chk, dims = RoomTypes.GetDimensions (type);
         RoomData current;
 
         foreach (GameObject room in rooms) {
@@ -55,31 +55,6 @@ public class Building : MonoBehaviour {
         return true;
     }
     /// <summary>
-    /// Finds the centre of a potential new room based on it's type.
-    /// </summary>
-    /// <param name="centre"> the vector for the centre of the room holding the plus sign </param>
-    /// <param name="loc"> the vector for the centre of the plus sign </param>
-    /// <param name="width"> the width of the room that holds the plus sign </param>
-    /// <param name="length"> the length of the room that holds the plus sign </param>
-    /// <param name="type"> determines which room dimensions to use for the new room </param>
-    /// <returns> the vector for the centre of the new room </returns>
-    public Vector3 GetNewRoomCentre (Vector3 centre, Vector3 loc, float width, float length, string type){
-        float[] dims = GetDimensions(type);
-        float distX = width / 2, distZ = length / 2;
-        float moveX = dims [0] / 2, moveZ = dims [1] / 2;
-
-        Vector3 newLoc =
-            // loc lies on positive X wall
-            (loc.x > centre.x + distX - 0.5f) ? new Vector3(centre.x + distX + moveX, centre.y, loc.z) :
-            // loc lies on negative Z wall
-            (loc.z > centre.z + distZ - 0.5f) ? new Vector3(loc.x, centre.y, centre.z + distZ + moveZ) :
-            // loc lies on negative X wall
-            (loc.x < centre.x - distX + 0.5f) ? new Vector3(centre.x - distX - moveX, centre.y, loc.z) :
-            // loc must lie on positive Z wall
-            new Vector3(loc.x, centre.y, centre.z - distZ - moveZ);
-        return newLoc;
-    }
-    /// <summary>
     /// Checks whether a potential new door or window goes into an existing room.
     /// </summary>
     /// <param name="centre"> the vector for the centre of the room </param>
@@ -88,7 +63,7 @@ public class Building : MonoBehaviour {
     /// <returns> the room object that is adjacent to the new door or window </returns>
     public GameObject CheckDoorWindowPlacement (Vector3 centre, Vector3 loc, string type){
         bool inX, inZ;
-        float[] chk, dims = GetDimensions (type);
+        float[] chk, dims = RoomTypes.GetDimensions (type);
         float distX = dims[0] / 2, distZ = dims [1] / 2;
 
         Vector3 newLoc =
@@ -118,23 +93,6 @@ public class Building : MonoBehaviour {
                 return room;
         }
         return null;
-    }
-    /// <summary>
-    /// Contains all the possible dimensions of different room sizes.
-    /// </summary>
-    /// <param name="type"> determines which room dimensions to use </param>
-    /// <returns> a float array of width and length </returns>
-    private float[] GetDimensions(string type){
-        switch (type) {
-            case "room":
-                return new float[] { 12, 12 };
-            case "xCorridor":
-                return new float[] { 24, 4 };
-            case "zCorridor":
-                return new float[] { 4, 24 };
-            default:
-                return new float[] { -1, -1 };
-        }
     }
     /// <summary>
     /// Adds a new room to the scene.
@@ -179,7 +137,7 @@ public class Building : MonoBehaviour {
         ) as GameObject;
         component.SetActive (true);
 
-        float[] dims = GetDimensions (type);
+        float[] dims = RoomTypes.GetDimensions (type);
         RoomHandler roomScript = component.GetComponent<RoomHandler> ();
         roomScript.InitData (dims [0], dims [1]);
         roomScript.AddPlusSigns ();

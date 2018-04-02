@@ -161,7 +161,26 @@ public class RoomHandler : MonoBehaviour {
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            PlusData thisPlus = new PlusData (new float[] { centre.x, centre.y, centre.z }, angle);
+            float[] loc = thisRoom.GetCentre ();
+            centre = component.transform.position;
+
+            Vector3 newRoom = RoomTypes.GetNewRoomCentre (
+                thisRoom.GetWidth (), thisRoom.GetLength (),
+                new Vector3 (loc [0], loc [1], loc [2]),
+                centre, "room"
+            );
+            Vector3 newCorridor = RoomTypes.GetNewRoomCentre(
+                thisRoom.GetWidth (), thisRoom.GetLength (),
+                new Vector3 (loc [0], loc [1], loc [2]),
+                centre, RoomTypes.GetCorridorType (angle)
+            );
+
+            float[] plusCentre = { centre.x, centre.y, centre.z };
+            float[] roomCentre = { newRoom.x, newRoom.y, newRoom.z };
+            float[] corridorCentre = { newCorridor.x, newCorridor.y, newCorridor.z };
+
+            PlusData thisPlus = new PlusData (plusCentre, roomCentre, corridorCentre, angle);
+            component.GetComponent<SubMenuHandler> ().InitData (thisPlus);
             thisRoom.AddPlusSign (thisPlus);
         }
         else
