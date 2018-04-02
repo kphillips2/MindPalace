@@ -14,8 +14,8 @@ public class PlusData : IComparable<PlusData> {
     /// <summary>
     /// Constructs a save object for a plus sign at the given centre and angle.
     /// </summary>
-    /// <param name="loc"> a float array for the centre vector of the room </param>
-    /// <param name="dir"> an angle that determines which wall to display the plus sign over </param>
+    /// <param name="loc"> a float array for the centre vector of the plus sign </param>
+    /// <param name="dir"> an angle that determines which wall to display the plus sign on </param>
     public PlusData(float[] loc, float dir){
         if (loc.Length != 3)
             Debug.Log("Error: centre array length must be 3");
