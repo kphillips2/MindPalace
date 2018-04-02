@@ -12,6 +12,8 @@ public class SubMenuHandler : MonoBehaviour {
     public GameObject CorridorButton;
     public GameObject Picture;
     public GameObject Window;
+    public GameObject DoorSubMenu;
+    public GameObject Door;
     public GameObject SingularActivation;
     public GameObject ImageMenu;
 
@@ -34,10 +36,12 @@ public class SubMenuHandler : MonoBehaviour {
     public void ShowMoreOptions()
     {
         ClickedOn.SetActive(false);
-        RoomButton.SetActive(true);
-        CorridorButton.SetActive(true);
+        RoomButton.SetActive(false);
+        CorridorButton.SetActive(false);
         Window.SetActive(true);
         Picture.SetActive(true);
+        DoorSubMenu.SetActive(true);
+        Door.SetActive(false);
         MenuActivationManager.ActivateMenu(this.gameObject);
         RoomButton.GetComponent<Button> ().interactable = CheckRoomPlacement ("room");
         CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (GetCorridorType ());
@@ -49,6 +53,8 @@ public class SubMenuHandler : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        DoorSubMenu.SetActive(false);
+        Door.SetActive(false);
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
         MenuActivationManager.NoActive();
         this.transform.position = new Vector3(0, -100, 0);
@@ -60,6 +66,8 @@ public class SubMenuHandler : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        DoorSubMenu.SetActive(false);
+        Door.SetActive(false);
     }
     public void DefaultState()
     {
@@ -68,7 +76,26 @@ public class SubMenuHandler : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
+        DoorSubMenu.SetActive(false);
+        Door.SetActive(false);
     }
+
+    public void OpenDoorSubMenu()
+    {
+        ClickedOn.SetActive(false);
+        RoomButton.SetActive(true);
+        Window.SetActive(false);
+        Picture.SetActive(false);
+        CorridorButton.SetActive(true);
+        DoorSubMenu.SetActive(false);
+        Door.SetActive(true);
+    }
+
+    public void AddDoor()
+    {
+
+    }
+
     //Collider Checkers:
     private string GetCorridorType(){
         return (thisPlus.GetAngle () % 180 == 0) ? "zCorridor" : "xCorridor";
