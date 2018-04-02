@@ -129,11 +129,11 @@ public class RoomHandler : MonoBehaviour {
         }
     }
     /// <summary>
-    /// Adds a plus sign to a given wall. Also saves the new plus sign to the currently open Loci.
+    /// Adds a plus sign to a given wall. Also saves the new plus sign to the room information.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
-    /// <param name="menuLoc"> the location of the menu with 0 representing the centre of the wall </param>
-    private void AddPlusSign(int wallIndex, float menuLoc){
+    /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
+    private void AddPlusSign(int wallIndex, float plusLoc){
         float angle = 0;
         if (wallIndex >= 0 && wallIndex <= 3) {
             switch (wallIndex) {
@@ -152,7 +152,7 @@ public class RoomHandler : MonoBehaviour {
             }
 
             float dist = GetWallSize (wallIndex) / 2 - 0.3f;
-            Vector3 centre = new Vector3 (menuLoc, 2.5f, dist);
+            Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
 
             GameObject component = Instantiate (
                 plusSign,
@@ -162,7 +162,8 @@ public class RoomHandler : MonoBehaviour {
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
+            PlusData thisPlus = new PlusData (new float[] { centre.x, centre.y, centre.z }, angle);
+            thisRoom.AddPlusSign (thisPlus);
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
