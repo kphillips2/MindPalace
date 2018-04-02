@@ -32,10 +32,7 @@ public class pauseListener : MonoBehaviour
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        if(building != null)
-        {
-            building = level.GetComponent<Building>();
-        }
+        building = level.GetComponent<Building>();
         
 
     }

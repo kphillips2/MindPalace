@@ -27,7 +27,7 @@ public class RoomHandler : MonoBehaviour {
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
         SetRoomSize (width, length);
         SetMaterials (mats [0], mats [1], mats [2]);
-        AddPlusSigns ();
+        //AddPlusSigns ();
     }
     /// <summary>
     /// Retrieves all the information that will apear in the save file for this room.
