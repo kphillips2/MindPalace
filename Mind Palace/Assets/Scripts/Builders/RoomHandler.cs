@@ -160,10 +160,11 @@ public class RoomHandler : MonoBehaviour {
             ) as GameObject;
             component.transform.Translate (centre);
             component.SetActive (true);
-            subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
-            menuFields.room = gameObject;
-            menuFields.currentRoomCenter = gameObject.transform.position;
-            menuFields.doorIndex = FindDoorIndex(wallIndex, plusLoc);
+
+            //subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
+            //menuFields.room = gameObject;
+            //menuFields.currentRoomCenter = gameObject.transform.position;
+            //menuFields.doorIndex = FindDoorIndex(wallIndex, plusLoc);
             //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
 
             float[] loc = thisRoom.GetCentre ();
