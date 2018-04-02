@@ -7,9 +7,7 @@ using UnityEngine.UI;
 /// Responsible for handling and plus sign functionality.
 /// </summary>
 public class SubMenuHandler : MonoBehaviour {
-    public GameObject room;
     public GameObject level;
-
     public GameObject ClickedOn;
     public GameObject RoomButton;
     public GameObject CorridorButton;
@@ -30,7 +28,7 @@ public class SubMenuHandler : MonoBehaviour {
     /// </summary>
     /// <param name="plus"></param>
     public void InitData(PlusData plus){
-        roomHandler = room.GetComponent<RoomHandler> ();
+        roomHandler = gameObject.GetComponent<RoomHandler> ();
         building = level.GetComponent<Building> ();
         MenuActivationManager = SingularActivation.GetComponent<ActivationManager> ();
         thisPlus = plus;
