@@ -12,7 +12,7 @@ public class RoomData {
     private float length;
     private float[] centre = new float [3];
     private List<float[]>[] doorsAndWindows = new List<float[]> [4];
-    private List<float[]>[] plusSigns = new List<float[]> [4];
+    private List<PlusData> plusSigns = new List<PlusData> ();
     private string[] materials = new string [3];
     private List<Picture> pictures;
 
@@ -59,15 +59,14 @@ public class RoomData {
         }
     }
     /// <summary>
-    /// 
+    /// Adds a given plus sign to the room.
     /// </summary>
-    /// <param name="wallIndex"></param>
-    /// <param name="menuLoc"></param>
-    public void AddPlusSign(int wallIndex, float[] menuLoc){
-        plusSigns [wallIndex].Add (menuLoc);
+    /// <param name="plusData"> the plus sign object being added </param>
+    public void AddPlusSign(PlusData plusData){
+        plusSigns.Add (plusData);
     }
     /// <summary>
-    /// Adds a given picture to the room
+    /// Adds a given picture to the room.
     /// </summary>
     /// <param name="picture"> the picture object being added </param>
     public void AddPicture(Picture picture) { pictures.Add(picture); }
@@ -100,7 +99,7 @@ public class RoomData {
     /// Retrieves the plus signs attached to the room.
     /// </summary>
     /// <returns> the stored plus sign information </returns>
-    public List<float[]>[] GetMenuData() { return plusSigns; }
+    public List<PlusData> GetPlusData() { return plusSigns; }
     /// <summary>
     /// Retrieves the pictures attached to the room.
     /// </summary>
@@ -116,12 +115,9 @@ public class RoomData {
     /// <summary>
     /// Removes all plus signs currently stored in the room.
     /// </summary>
-    public void ClearPlusSigns(){
-        for (int k = 0; k < 4; k++)
-            plusSigns[k] = new List<float[]> ();
-    }
+    public void ClearPlusSigns() { plusSigns = new List<PlusData> (); }
     /// <summary>
     /// Removes all pictures currently stored in the room.
     /// </summary>
-    public void ClearPictures() { pictures = new List<Picture>(); }
+    public void ClearPictures() { pictures = new List<Picture> (); }
 }
