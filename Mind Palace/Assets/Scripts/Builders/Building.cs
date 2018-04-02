@@ -178,15 +178,9 @@ public class Building : MonoBehaviour {
             component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
 
             mats = data.GetMaterials ();
-<<<<<<< HEAD
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
             wallData = data.GetWallData();
             component.GetComponent<RoomHandler> ().SetWallData (wallData);
-=======
-            //room.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
-            wallData = data.GetWallData();
-            //room.GetComponent<RoomHandler> ().SetWallData (wallData);
->>>>>>> b96ab04c18f509b908ffdbf179f68942b17a308b
         }
     }
 }
