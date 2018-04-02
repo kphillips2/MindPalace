@@ -91,23 +91,6 @@ public class Building : MonoBehaviour {
         return null;
     }
     /// <summary>
-    /// Contains all the possible dimensions of different room sizes.
-    /// </summary>
-    /// <param name="type"> determines which room dimensions to use </param>
-    /// <returns> a float array of width and length </returns>
-    private float[] GetDimensions(string type){
-        switch (type) {
-            case "room":
-                return new float[] { 12, 12 };
-            case "xCorridor":
-                return new float[] { 24, 4 };
-            case "zCorridor":
-                return new float[] { 4, 24 };
-            default:
-                return new float[] { -1, -1 };
-        }
-    }
-    /// <summary>
     /// Adds a new room to the scene.
     /// Since we have one room size this will create a 12 wide and 12 long room.
     /// </summary>
@@ -155,18 +138,49 @@ public class Building : MonoBehaviour {
         rooms.Add (component);
         return component;
     }
+    /// <summary>
+    /// Contains all the possible dimensions of different room sizes.
+    /// </summary>
+    /// <param name="type"> determines which room dimensions to use </param>
+    /// <returns> a float array of width and length </returns>
+    private float[] GetDimensions(string type){
+        switch (type) {
+            case "room":
+                return new float[] { 12, 12 };
+            case "xCorridor":
+                return new float[] { 24, 4 };
+            case "zCorridor":
+                return new float[] { 4, 24 };
+            default:
+                return new float[] { -1, -1 };
+        }
+    }
+    private GameObject LoadRoom(Vector3 centre, float width, float length){
+        if (width == 12 && length == 12)
+            return AddRoom (centre);
+        else if (width == 24 && length == 4)
+            return AddXCorridor (centre);
+        else if (width == 4 && length == 24)
+            return AddZCorridor (centre);
+        return null;
+    }
     private void LoadRooms (List<RoomData> savedRooms){
+        float width, length;
         float[] centre;
         string[] mats;
         List<float[]>[] wallData;
+        GameObject component;
+
         foreach (RoomData data in savedRooms) {
             centre = data.GetCentre ();
-            AddRoom (new Vector3(centre [0], centre [1], centre [2]));
+            width = data.GetWidth ();
+            length = data.GetLength ();
+            component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
 
             mats = data.GetMaterials ();
-            room.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
+            component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
             wallData = data.GetWallData();
-            room.GetComponent<RoomHandler> ().SetWallData (wallData);
+            component.GetComponent<RoomHandler> ().SetWallData (wallData);
         }
     }
 }
