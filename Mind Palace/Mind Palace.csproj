@@ -338,6 +338,7 @@
     <Compile Include="Assets\Scripts\settingsMenu.cs" />
     <Compile Include="Assets\Scripts\startPalace.cs" />
     <Compile Include="Assets\Scripts\subMenuButtons.cs" />
+    <Compile Include="Assets\Scripts\SubMenuHandler.cs" />
     <Compile Include="Assets\Scripts\TouchpadMovement.cs" />
     <Compile Include="Assets\Scripts\WallBuilder.cs" />
     <Compile Include="Assets\Scripts\WallSpaceFinder.cs" />

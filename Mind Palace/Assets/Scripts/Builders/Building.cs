@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Building : MonoBehaviour {
 	public GameObject room;
+    public GameObject plusSign;
 
     private List<GameObject> rooms;
 
@@ -154,7 +155,10 @@ public class Building : MonoBehaviour {
         component.SetActive (true);
 
         float[] dims = GetDimensions (type);
-        component.GetComponent<RoomHandler> ().InitData (dims [0], dims [1]);
+        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
+        roomScript.InitData (dims [0], dims [1]);
+        roomScript.AddPlusSigns ();
+
         rooms.Add (component);
         return component;
     }
@@ -174,6 +178,7 @@ public class Building : MonoBehaviour {
             width = data.GetWidth ();
             length = data.GetLength ();
             component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
+            LoadPlusSigns (data.GetPlusData ());
 
             mats = data.GetMaterials ();
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
@@ -196,8 +201,29 @@ public class Building : MonoBehaviour {
         ) as GameObject;
         component.SetActive (true);
 
-        component.GetComponent<RoomHandler> ().InitData (width, length);
+        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
+        roomScript.InitData (width, length);
+
         rooms.Add (component);
         return component;
+    }
+    /// <summary>
+    /// Loads all the plus signs from the list provided.
+    /// </summary>
+    /// <param name="data"> a list of plus sign information </param>
+    private void LoadPlusSigns(List<PlusData> data){
+        float[] centre;
+        GameObject component;
+
+        foreach (PlusData plus in data) {
+            component = Instantiate (
+                plusSign,
+                Vector3.zero,
+                Quaternion.Euler (0, plus.GetAngle (), 0)
+            ) as GameObject;
+            centre = plus.GetCentre ();
+            component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
+            component.SetActive (true);
+        }
     }
 }
