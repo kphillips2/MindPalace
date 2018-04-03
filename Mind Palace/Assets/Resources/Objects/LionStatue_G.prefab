@@ -39,10 +39,10 @@ GameObject:
   - component: {fileID: 64892257637393972}
   - component: {fileID: 114881740267495920}
   - component: {fileID: 114332586387463548}
-  - component: {fileID: 114230500186682292}
   - component: {fileID: 114099176406142554}
   - component: {fileID: 114189035643459634}
   - component: {fileID: 54546411030234890}
+  - component: {fileID: 114815061946253470}
   m_Layer: 0
   m_Name: LionStatue_G
   m_TagString: Untagged
@@ -204,25 +204,6 @@ MonoBehaviour:
   customOutlineModels: []
   customOutlineModelPaths: []
   enableSubmeshHighlight: 0
---- !u!114 &114230500186682292
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795760583301078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  precisionGrab: 0
-  rightSnapHandle: {fileID: 4619628032659482}
-  leftSnapHandle: {fileID: 4452209051494406}
-  throwVelocityWithAttachDistance: 0
-  throwMultiplier: 1
-  onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
 --- !u!114 &114332586387463548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,6 +215,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18055ba762aa3994f9c10208cd088bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114815061946253470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795760583301078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 4619628032659482}
+  leftSnapHandle: {fileID: 4452209051494406}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 1
+  onGrabCollisionDelay: 0
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity
 --- !u!114 &114881740267495920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +256,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114230500186682292}
+  grabAttachMechanicScript: {fileID: 114815061946253470}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0

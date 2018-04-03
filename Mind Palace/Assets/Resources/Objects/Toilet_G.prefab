@@ -69,11 +69,11 @@ GameObject:
   - component: {fileID: 4375590934290002}
   - component: {fileID: 64622881610046072}
   - component: {fileID: 114542869641982480}
-  - component: {fileID: 114858647342769298}
   - component: {fileID: 114646988998522470}
   - component: {fileID: 114104943159527230}
   - component: {fileID: 114051477656854396}
   - component: {fileID: 54905953503694572}
+  - component: {fileID: 114164651720772278}
   m_Layer: 0
   m_Name: Toilet_G
   m_TagString: Untagged
@@ -248,6 +248,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48be19dc4721922468b5fcb70218e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114164651720772278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896625919936610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 4238761956533926}
+  leftSnapHandle: {fileID: 4031112403916894}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 1
+  onGrabCollisionDelay: 0
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity
 --- !u!114 &114542869641982480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,7 +289,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114858647342769298}
+  grabAttachMechanicScript: {fileID: 114164651720772278}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -289,22 +309,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18055ba762aa3994f9c10208cd088bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114858647342769298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1896625919936610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  precisionGrab: 0
-  rightSnapHandle: {fileID: 4238761956533926}
-  leftSnapHandle: {fileID: 4031112403916894}
-  throwVelocityWithAttachDistance: 0
-  throwMultiplier: 1
-  onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
