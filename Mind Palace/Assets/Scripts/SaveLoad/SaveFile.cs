@@ -18,10 +18,10 @@ public static class SaveFile {
     /// All new information about the Loci (except object info) has been added to the currentLoci attribute.
     /// </summary>
     public static void Save(){
-        SaveObjects();
+        SaveObjects ();
         if (name == null) {
-            name = DateTime.Now.ToLongDateString() + ", " + DateTime.Now.ToLongTimeString();
-            savedLocis.Add(name, currentLoci);
+            name = DateTime.Now.ToLongDateString () + ", " + DateTime.Now.ToLongTimeString ();
+            savedLocis.Add (name, currentLoci);
         } else
             savedLocis[name] = currentLoci;
 

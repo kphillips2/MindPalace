@@ -152,40 +152,31 @@ public class RoomHandler : MonoBehaviour {
 
             float dist = GetWallSize (wallIndex) / 2 - 0.3f;
             Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
+            Vector3 roomCentre = new Vector3 (floor.transform.position.x, 0, floor.transform.position.z);
 
             GameObject component = Instantiate (
                 plusSign,
                 Vector3.zero,
-                Quaternion.Euler (0, angle, 0)
+                Quaternion.Euler (0, 0, 0)
             ) as GameObject;
+            component.transform.Translate (roomCentre);
+            component.transform.rotation = Quaternion.Euler (0, angle, 0);
             component.transform.Translate (centre);
             component.SetActive (true);
-
-            //subMenuButtons menuFields = component.GetComponent<subMenuButtons>();
-            //menuFields.room = gameObject;
-            //menuFields.currentRoomCenter = gameObject.transform.position;
-            //menuFields.doorIndex = FindDoorIndex(wallIndex, plusLoc);
-            //thisRoom.AddPlusSign (wallIndex, new float[] { centre.x, centre.y, centre.z });
-
-            float[] loc = thisRoom.GetCentre ();
             centre = component.transform.position;
 
-            Vector3 newRoom = RoomTypes.GetNewRoomCentre (
+            float[] newRoom = RoomTypes.GetNewRoomCentre (
                 thisRoom.GetWidth (), thisRoom.GetLength (),
-                new Vector3 (loc [0], loc [1], loc [2]),
-                centre, "room"
+                roomCentre, centre, "room"
             );
-            Vector3 newCorridor = RoomTypes.GetNewRoomCentre(
+            float[] newCorridor = RoomTypes.GetNewRoomCentre (
                 thisRoom.GetWidth (), thisRoom.GetLength (),
-                new Vector3 (loc [0], loc [1], loc [2]),
-                centre, RoomTypes.GetCorridorType (angle)
+                roomCentre, centre, RoomTypes.GetCorridorType (angle)
             );
 
             float[] plusCentre = { centre.x, centre.y, centre.z };
-            float[] roomCentre = { newRoom.x, newRoom.y, newRoom.z };
-            float[] corridorCentre = { newCorridor.x, newCorridor.y, newCorridor.z };
 
-            PlusData thisPlus = new PlusData (plusCentre, roomCentre, corridorCentre, angle);
+            PlusData thisPlus = new PlusData (plusCentre, newRoom, newCorridor, angle);
             component.GetComponent<SubMenuHandler> ().InitData (thisPlus);
             thisRoom.AddPlusSign (thisPlus);
         }

@@ -17,9 +17,9 @@ public static class LoadFile {
             FileStream file = File.Open ("Assets/SaveFile/saveFile.gd", FileMode.Open);
             SaveFile.savedLocis = (Dictionary<string, Loci>)bf.Deserialize (file);
             file.Close ();
-            MonoBehaviour.print("File successfully loaded.");
+            MonoBehaviour.print ("File successfully loaded.");
         } else
-            Debug.LogError("The file was not found");
+            Debug.LogError ("The file was not found");
     }
     /// <summary>
     /// Sets the currently open Loci to the Loci with the given name.
