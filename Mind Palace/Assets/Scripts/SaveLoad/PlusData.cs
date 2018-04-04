@@ -69,4 +69,15 @@ public class PlusData : IComparable<PlusData> {
             (centre[0] != chk[0]) ? centre[0] - chk[1] : 0;
         return (int)ans;
     }
+
+    public int GetWallIndex()
+    {
+        switch ((int) angle)
+        {
+            case 0: return 0;
+            case 90: return 1;
+            case 180: return 2;
+            default: return 3;
+        }
+    }
 }
