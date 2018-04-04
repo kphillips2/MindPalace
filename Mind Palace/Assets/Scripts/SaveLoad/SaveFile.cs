@@ -2,46 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
 using System.IO;
 
-// Class for saving and loading palaces (Loci)
+/// <summary>
+/// Responsible for storing all saved information in a file.
+/// </summary>
+public static class SaveFile {
+    public static string name = null;
+    public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
+    public static Dictionary<string, Loci> savedLocis = new Dictionary<string, Loci> (); //List of save files
 
-public static class SaveLoad {
-    public static Loci currentLoci= new Loci("blao"); //The current save file being loaded/edited/viewed
-    public static List<Loci> savedLocis = new List<Loci>(); //List of save files
+    /// <summary>
+    /// Adds the current Loci to the list of saved Locis and saves the list to a file.
+    /// All new information about the Loci (except object info) has been added to the currentLoci attribute.
+    /// </summary>
+    public static void Save(){
+        SaveObjects ();
+        if (name == null) {
+            name = DateTime.Now.ToLongDateString () + ", " + DateTime.Now.ToLongTimeString ();
+            savedLocis.Add (name, currentLoci);
+        } else
+            savedLocis[name] = currentLoci;
 
-    // Adds the current Loci to the list of savedLocis and saves it to file. Should be called after editing a palace and
-    // all new information about the Loci (except object info) has been added to the currentLoci attribute
-    public static void save() {
-        saveObjects();
-        savedLocis.Add(currentLoci);
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create("Assets/SaveFile/saveFile.gd");
-        bf.Serialize(file, SaveLoad.savedLocis);
-        file.Close();
+        BinaryFormatter bf = new BinaryFormatter ();
+        FileStream file = File.Create ("Assets/SaveFile/saveFile.gd");
+        bf.Serialize (file, savedLocis);
+        file.Close ();
     }
 
-    // Fills the savedLocis list with the Loci objects that were saved in the save file
-    public static void load() {
-        if (File.Exists("Assets/SaveFile/saveFile.gd")) {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("Assets/SaveFile/saveFile.gd", FileMode.Open);
-            SaveLoad.savedLocis = (List<Loci>)bf.Deserialize(file);
-            file.Close();
-        }
-    }
+    /// <summary>
+    /// Saves all of the prefab objects in the scene to the currently open Loci.
+    /// </summary>
+    private static void SaveObjects(){
+        // Reset the list of objects for the Loci
+        currentLoci.clearObjects ();
 
-    // Saves all of the prefab objects in the scene to the current Loci
-    private static void saveObjects() {
-        //Reset the list of objects for the Loci
-        currentLoci.clearObjects();
-
-        //Retrieves all of the GameObjects in the scene
-        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+        // Retrieves all of the GameObjects in the scene
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll (typeof(GameObject)))
         {
             float val;
-            switch (go.ToString()) //Name of GameObject, only want to save ones with certain names
-            {
+            // Name of GameObject, only want to save ones with certain names
+            switch (go.ToString ()) {
                 case "Bed(Clone) (UnityEngine.GameObject)":
                     val = 0f;
                     break;
@@ -106,9 +108,12 @@ public static class SaveLoad {
                     continue; //Don't save object if it doesn't match any of the above names
             }
             
-            // Save the object using its corresponding prefab value, x-coordinate, z-coordinate, and y-rotation
-            float[] f = new float[]{ val, go.transform.position.x, go.transform.position.z, go.transform.eulerAngles.y };
-            currentLoci.addObject(f); //Add to list of objects in current save
+            // SaveFile the object using its corresponding prefab value, x-coordinate, z-coordinate, and y-rotation
+            float[] f = new float[] {
+                val, go.transform.position.x, go.transform.position.y, go.transform.position.z,
+                go.transform.eulerAngles.x, go.transform.eulerAngles.y, go.transform.eulerAngles.z
+            };
+            currentLoci.addObject (f); //Add to list of objects in current save
         }
     }
 }

@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class PictureCreator : MonoBehaviour {
 
-    private float scale = 2f; //Increasing this value will make the pictures larger
+    private float scale = 1.8f; //Increasing this value will make the pictures larger
+    private float maxWidth = 3.55f; //Maximum width that a picture can be
+    private float maxHeight = 4f; //Maximum height that a picture can be
 
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
@@ -29,11 +31,25 @@ public class PictureCreator : MonoBehaviour {
         {
             w = (float)img.width / img.height;
             h = 1f;
+
+            //Scale down if too long
+            if(w * scale > maxWidth)
+            {
+                h = h * maxWidth / (w*scale);
+                w = maxWidth/scale;
+            }
         }
         else
         {
             w = 1f;
             h = (float)img.height/ img.width;
+
+            //Scale down if too tall
+            if (h * scale > maxHeight)
+            {
+                w = w * maxHeight / (h*scale);
+                h = maxHeight/scale;
+            }
         }
  
         pic.transform.localScale = new Vector3(0.05f, scale * h, scale * w); //Scales the cube

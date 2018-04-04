@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/StartingScreen.unity
+=======
+- path: Assets/Scenes/GreenDemo.unity
+>>>>>>> ec6bed8c343030cefeaca3272120f50ac117a007
   isLoaded: 1
   isActive: 1

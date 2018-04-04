@@ -1,0 +1,39 @@
+To check if a door can be placed on a room:
+
+float[] results =
+RoomCollision.canRoomDoorBePlaced(center of the room, index of the door to be created);
+
+To check if a door can be placed on a corridor:
+
+float[] results =
+RoomCollision.canCorridorDoorBePlaced(center of the corridor, angle of the corridor,
+index of the door to be created);
+
+If the results array is NULL -> Door cannot be placed due to there not being a room
+on the other side or due to a picture being in the way
+
+Contents of the results array (if not null) ->
+results[0] = xcor of the center of the room/corridor on the other side of the wall
+results[1] = ycor ""
+results[2] = zcor ""
+results[3] = index of the door for the room/corridor on the other side of the wall
+results[4] = 0 if the space on the other side of the wall is a room, 1 if corridor
+
+If you choose to build the door, update save file with code like this:
+------------------------------------------------------------------------
+
+SaveLoad.currentLoci.openRoomDoorAt(center of the room you're building off of, index of door);
+(If you're building off of a corridor, change function to openCorridorDoorAt instead)
+
+if(results[4] == 0)
+{
+SaveLoad.currentLoci.openRoomDoorAt(new Vector3([results[0],results[1],results[2]), 
+results[3]);
+}
+else
+{
+SaveLoad.currentLoci.openCorridorDoorAt(new Vector3([results[0],results[1],results[2]), 
+results[3]);
+}
+
+
