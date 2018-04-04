@@ -70,10 +70,10 @@ GameObject:
   - component: {fileID: 64071755611252714}
   - component: {fileID: 114063557632451086}
   - component: {fileID: 114681198714207536}
-  - component: {fileID: 114630788739521932}
   - component: {fileID: 114151922893114626}
   - component: {fileID: 114291206915967706}
   - component: {fileID: 54311193206550000}
+  - component: {fileID: 114490722867204066}
   m_Layer: 0
   m_Name: Fireplace_G
   m_TagString: Untagged
@@ -241,7 +241,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114630788739521932}
+  grabAttachMechanicScript: {fileID: 114490722867204066}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   customOutlineModels: []
   customOutlineModelPaths: []
   enableSubmeshHighlight: 0
---- !u!114 &114630788739521932
+--- !u!114 &114490722867204066
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982742032823096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   precisionGrab: 0
@@ -295,8 +295,9 @@ MonoBehaviour:
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity
 --- !u!114 &114681198714207536
 MonoBehaviour:
   m_ObjectHideFlags: 1

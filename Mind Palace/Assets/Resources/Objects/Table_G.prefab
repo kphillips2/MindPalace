@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 64409237049158992}
   - component: {fileID: 114468998317576862}
   - component: {fileID: 114216493155561282}
-  - component: {fileID: 114511450223180722}
   - component: {fileID: 114172917171153714}
   - component: {fileID: 114328489601817066}
   - component: {fileID: 54269224202923654}
+  - component: {fileID: 114719718740326748}
   m_Layer: 0
   m_Name: Table_G
   m_TagString: Untagged
@@ -280,7 +280,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114511450223180722}
+  grabAttachMechanicScript: {fileID: 114719718740326748}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   useOverrideButton: 3
   allowedUseControllers: 0
   usingState: 0
---- !u!114 &114511450223180722
+--- !u!114 &114719718740326748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190140624524814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   precisionGrab: 0
@@ -306,5 +306,6 @@ MonoBehaviour:
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity

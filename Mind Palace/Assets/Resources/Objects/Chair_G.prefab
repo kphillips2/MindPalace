@@ -40,10 +40,10 @@ GameObject:
   - component: {fileID: 64557515890824944}
   - component: {fileID: 114629482572990428}
   - component: {fileID: 114120980617023160}
-  - component: {fileID: 114889314374997566}
   - component: {fileID: 114331423806544824}
   - component: {fileID: 114517273565117716}
   - component: {fileID: 54852353232995102}
+  - component: {fileID: 114634304992718594}
   m_Layer: 0
   m_Name: Chair_G
   m_TagString: Untagged
@@ -252,7 +252,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114889314374997566}
+  grabAttachMechanicScript: {fileID: 114634304992718594}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48be19dc4721922468b5fcb70218e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114889314374997566
+--- !u!114 &114634304992718594
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1503800730886134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   precisionGrab: 0
@@ -306,5 +306,6 @@ MonoBehaviour:
   throwVelocityWithAttachDistance: 0
   throwMultiplier: 1
   onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity

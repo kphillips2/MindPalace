@@ -101,3 +101,11 @@ TO MAKE OBJECTS NOT MOVE WHEN COLLIDED WITH
 -------------------------------------------
 
 - On 'RigidBody' under the object, check 'Is Kinematic'
+
+----------------------------------------------------------------------------
+
+CHANGE DISTANCE USER CAN BE FROM OBJECT BEFORE OBJECT IS DROPPED
+----------------------------------------------------------------
+
+- Under the prefab, go to 'VRTK_TrackObjectGrab'
+- Under 'Track Options', change 'Detach Distance'
