@@ -202,10 +202,11 @@ public class Building : MonoBehaviour {
             component = Instantiate (
                 plusSign,
                 Vector3.zero,
-                Quaternion.Euler (0, plus.GetAngle (), 0)
+                Quaternion.Euler(0, 0, 0)
             ) as GameObject;
             centre = plus.GetCentre ();
             component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
+            component.transform.rotation = Quaternion.Euler (0, plus.GetAngle(), 0);
             component.SetActive (true);
         }
     }
