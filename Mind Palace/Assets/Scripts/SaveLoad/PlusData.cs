@@ -24,12 +24,12 @@ public class PlusData : IComparable<PlusData> {
         else
             Array.Copy (loc, centre, 3);
 
-        if (loc.Length != 3)
+        if (roomLoc.Length != 3)
             Debug.Log ("Error: new room centre array length must be 3");
         else
             Array.Copy (roomLoc, newRoom, 3);
 
-        if (loc.Length != 3)
+        if (corridorLoc.Length != 3)
             Debug.Log ("Error: new corridor centre array length must be 3");
         else
             Array.Copy (corridorLoc, newCorridor, 3);
@@ -68,5 +68,16 @@ public class PlusData : IComparable<PlusData> {
             (angle != dir) ? angle - dir :
             (centre [0] != chk [0]) ? centre [0] - chk [1] : 0;
         return (int)ans;
+    }
+
+    public int GetWallIndex()
+    {
+        switch ((int) angle)
+        {
+            case 0: return 0;
+            case 90: return 1;
+            case 180: return 2;
+            default: return 3;
+        }
     }
 }
