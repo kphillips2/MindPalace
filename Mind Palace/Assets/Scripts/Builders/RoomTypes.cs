@@ -71,6 +71,6 @@ public static class RoomTypes {
     /// <param name="angle"> the angle of the corridor </param>
     /// <returns> the corridor type </returns>
     public static string GetCorridorType(float angle){
-        return (angle % 180 == 0) ? "zCorridor" : "xCorridor";
+        return (angle % 180 == 0) ? "xCorridor" : "zCorridor";
     }
 }
