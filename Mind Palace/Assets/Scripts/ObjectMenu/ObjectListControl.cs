@@ -56,17 +56,17 @@ public class ObjectListControl : MonoBehaviour
         ObjectMenu.transform.position = new Vector3(0, -100, 0);
     }
 
-    
+    /*
     private int counter = 0;
     private int timeshappened = 0;
     void Update()
     {
         if(counter == 250 && timeshappened < 1)
         {
-            listButtonClicked(6);
+            listButtonClicked(1);
             timeshappened++;
             counter = 0;
         }
         counter++;
-    }
+    }*/
 }
