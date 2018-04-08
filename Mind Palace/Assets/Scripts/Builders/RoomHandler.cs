@@ -22,9 +22,9 @@ public class RoomHandler : MonoBehaviour {
     /// Initializes the attributes for this room.
     /// </summary>
     public void InitData(float width, float length){
-        doorsAndWindows = new List<Vector3>[4];
+        doorsAndWindows = new List<Vector3> [4];
         for (int k = 0; k < 4; k++)
-            doorsAndWindows[k] = new List<Vector3>();
+            doorsAndWindows [k] = new List<Vector3>();
         string[] mats = { "Wood Texture 06", "Wood Texture 15", "Wood Texture 12" };
 
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });

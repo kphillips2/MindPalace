@@ -98,7 +98,7 @@ public class SubMenuHandler : MonoBehaviour {
     //On-Click Methods:
     public void AddDoor()
     {
-
+        //TODO
     }
     public void AddPicture()
     {
@@ -150,6 +150,35 @@ public class SubMenuHandler : MonoBehaviour {
             newRoomHandler.AddDoor(1, 0);
         }
     }
+    public void AddCorridor()
+    {
+        this.CutDoorOnPlusSign();
+        int wallIndex = thisPlus.GetWallIndex();
+        if (wallIndex == 0)
+        {
+            GameObject newCorridor = building.AddZCorridor(ConvertToVector(thisPlus.GetNewCorridor()));
+            RoomHandler newCorridorHandler = newCorridor.GetComponent<RoomHandler>();
+            newCorridorHandler.AddDoor(2, 0);
+        }
+        else if (wallIndex == 1)
+        {
+            GameObject newCorridor = building.AddXCorridor(ConvertToVector(thisPlus.GetNewCorridor()));
+            RoomHandler newCorridorHandler = newCorridor.GetComponent<RoomHandler>();
+            newCorridorHandler.AddDoor(3, 0);
+        }
+        else if (wallIndex == 2)
+        {
+            GameObject newCorridor = building.AddZCorridor(ConvertToVector(thisPlus.GetNewCorridor()));
+            RoomHandler newCorridorHandler = newCorridor.GetComponent<RoomHandler>();
+            newCorridorHandler.AddDoor(0, 0);
+        }
+        else if (wallIndex == 3)
+        {
+            GameObject newCorridor = building.AddXCorridor(ConvertToVector(thisPlus.GetNewCorridor()));
+            RoomHandler newCorridorHandler = newCorridor.GetComponent<RoomHandler>();
+            newCorridorHandler.AddDoor(1, 0);
+        }
+    }
 
     //Collider Checkers:
     private bool CheckRoomPlacement(string type){
@@ -163,21 +192,22 @@ public class SubMenuHandler : MonoBehaviour {
     private void CutDoorOnPlusSign()
     {
         int wallIndex = thisPlus.GetWallIndex();
+        float[] roomCentre = roomHandler.GetData().GetCentre();
         if (wallIndex == 0)
         {
-            roomHandler.AddDoor(wallIndex, thisPlus.GetCentre()[0]);
+            roomHandler.AddDoor(wallIndex, thisPlus.GetCentre()[0]-roomCentre[0]);
         }
         else if (wallIndex == 1)
         {
-            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[2]);
+            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[2] - roomCentre[2]);
         }
         else if (wallIndex == 2)
         {
-            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[0]);
+            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[0] - roomCentre[0]);
         }
         else if (wallIndex == 3)
         {
-            roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[2]);
+            roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[2] - roomCentre[2]);
         }
         HideAll();
     }
