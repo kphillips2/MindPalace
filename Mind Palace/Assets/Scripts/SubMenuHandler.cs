@@ -93,7 +93,9 @@ public class SubMenuHandler : MonoBehaviour {
         RoomButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
         type = RoomTypes.GetCorridorType(thisPlus.GetAngle());
         CorridorButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
-        //Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) == null;
+        GameObject component = building.CheckDoorWindowPlacement(thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength());
+        print("Vector3 = " + component.GetComponent<RoomHandler>().GetData().GetCentre()[0] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[1] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[2]);
+        Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) != null;
     }
 
     //On-Click Methods:
