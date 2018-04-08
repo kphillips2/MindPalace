@@ -121,9 +121,7 @@ public class RoomHandler : MonoBehaviour {
         float wallLimit;
         for (int k = 0; k < 4; k++) {
             wallLimit = GetWallSize (k) / 2;
-            for (float loc = -4; loc > -wallLimit; loc -= 4)
-                AddPlusSign (k, loc);
-            for (float loc = 0; loc < wallLimit; loc += 4)
+            for (float loc = wallLimit - 2; loc > -wallLimit; loc -= 4)
                 AddPlusSign (k, loc);
         }
     }
