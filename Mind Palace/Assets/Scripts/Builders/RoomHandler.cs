@@ -150,7 +150,7 @@ public class RoomHandler : MonoBehaviour {
                     break;
             }
 
-            float dist = GetWallSize (wallIndex) / 2 - 0.3f;
+            float dist = GetWallSize ((wallIndex + 1) % 4) / 2 - 0.3f;
             Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
             Vector3 roomCentre = new Vector3 (floor.transform.position.x, 0, floor.transform.position.z);
 
@@ -182,11 +182,6 @@ public class RoomHandler : MonoBehaviour {
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
-    }
-
-    public int FindDoorIndex(int wallIndex, float location)
-    {
-        return 0;
     }
     /// <summary>
     /// Adds a picture to the saved information for this room.
