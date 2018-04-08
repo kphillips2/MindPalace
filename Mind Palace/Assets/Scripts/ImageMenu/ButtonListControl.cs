@@ -100,6 +100,7 @@ public class ButtonListControl : MonoBehaviour {
         if (currentFilePath == startFilePath)
         {
             ImageMenu.transform.position = new Vector3(0, -100, 0);
+            ButtonManager.GetComponent<ActivationManager>().NoActive();
         }
         else
         {

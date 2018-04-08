@@ -9043,7 +9043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 692741733}
-  plusSign: {fileID: 0}
+  plusSign: {fileID: 700516625}
 --- !u!4 &1175664225
 Transform:
   m_ObjectHideFlags: 0

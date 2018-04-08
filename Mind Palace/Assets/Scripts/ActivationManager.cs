@@ -30,5 +30,6 @@ public class ActivationManager : MonoBehaviour {
     public void NoActive()
     {
         Activated = false;
+        ActivatedObject.GetComponent<SubMenuHandler>().DefaultState();
     }
 }

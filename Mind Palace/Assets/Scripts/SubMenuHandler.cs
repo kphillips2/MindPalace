@@ -45,7 +45,7 @@ public class SubMenuHandler : MonoBehaviour {
         Picture.SetActive(true);
         DoorSubMenu.SetActive(true);
         Door.SetActive(false);
-        MenuActivationManager.ActivateMenu(this.gameObject);
+        MenuActivationManager.ActivateMenu(gameObject);
     }
     public void HideAll()
     {
@@ -93,6 +93,7 @@ public class SubMenuHandler : MonoBehaviour {
         RoomButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
         type = RoomTypes.GetCorridorType(thisPlus.GetAngle());
         CorridorButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
+        //Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) == null;
     }
 
     //On-Click Methods:
@@ -111,7 +112,7 @@ public class SubMenuHandler : MonoBehaviour {
         int wallIndex = thisPlus.GetWallIndex();
         if (wallIndex ==0)
         {
-            roomHandler.AddWindow(wallIndex, thisPlus.GetCentre()[0]);
+            roomHandler.AddWindow(wallIndex, (int)thisPlus.GetCentre()[0]);
         }
         else if(wallIndex==1)
         {
@@ -195,7 +196,7 @@ public class SubMenuHandler : MonoBehaviour {
         float[] roomCentre = roomHandler.GetData().GetCentre();
         if (wallIndex == 0)
         {
-            roomHandler.AddDoor(wallIndex, thisPlus.GetCentre()[0]-roomCentre[0]);
+            roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[0]-roomCentre[0]);
         }
         else if (wallIndex == 1)
         {

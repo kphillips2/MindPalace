@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MinimalMenu.unity
     guid: 6f930b2bacf1ac34f9ebdf54deb2dd60
+  - enabled: 1
+    path: Assets/Scenes/GreenDemo.unity
+    guid: 5f86487fc1de3044cb46c37fe5005e63
