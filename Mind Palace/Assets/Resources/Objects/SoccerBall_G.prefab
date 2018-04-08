@@ -40,10 +40,10 @@ GameObject:
   - component: {fileID: 64378034196866266}
   - component: {fileID: 114587842078369840}
   - component: {fileID: 114928204492611874}
-  - component: {fileID: 114781295092339022}
   - component: {fileID: 114887043428107734}
   - component: {fileID: 114754872220106622}
   - component: {fileID: 54733955264616892}
+  - component: {fileID: 114401718178005514}
   m_Layer: 0
   m_Name: SoccerBall_G
   m_TagString: Untagged
@@ -220,6 +220,26 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 77ac052cdde4bce4b9c521de187308df, type: 3}
+--- !u!114 &114401718178005514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283804674821926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1ebaa51525b734287157cb3f53f958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionGrab: 0
+  rightSnapHandle: {fileID: 4935378058344608}
+  leftSnapHandle: {fileID: 4330934666041344}
+  throwVelocityWithAttachDistance: 0
+  throwMultiplier: 1
+  onGrabCollisionDelay: 0
+  detachDistance: 3
+  velocityLimit: Infinity
+  angularVelocityLimit: Infinity
 --- !u!114 &114587842078369840
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,7 +261,7 @@ MonoBehaviour:
   validDrop: 1
   grabOverrideButton: 0
   allowedGrabControllers: 0
-  grabAttachMechanicScript: {fileID: 114781295092339022}
+  grabAttachMechanicScript: {fileID: 114401718178005514}
   secondaryGrabActionScript: {fileID: 0}
   isUsable: 1
   holdButtonToUse: 0
@@ -267,25 +287,6 @@ MonoBehaviour:
   customOutlineModels: []
   customOutlineModelPaths: []
   enableSubmeshHighlight: 0
---- !u!114 &114781295092339022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1283804674821926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa0b205791c9f4496bf2814aeac078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  precisionGrab: 0
-  rightSnapHandle: {fileID: 4935378058344608}
-  leftSnapHandle: {fileID: 4330934666041344}
-  throwVelocityWithAttachDistance: 0
-  throwMultiplier: 1
-  onGrabCollisionDelay: 0
-  destroyImmediatelyOnThrow: 1
-  breakForce: 1500
 --- !u!114 &114887043428107734
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 /// Responsible for handling and plus sign functionality.
 /// </summary>
 public class SubMenuHandler : MonoBehaviour {
-    public GameObject room;
     public GameObject level;
+    public GameObject room;
 
     public GameObject ClickedOn;
     public GameObject RoomButton;
@@ -131,6 +131,24 @@ public class SubMenuHandler : MonoBehaviour {
     {
         this.CutDoorOnPlusSign();
         GameObject newRoom = building.AddRoom(ConvertToVector(thisPlus.GetNewRoom()));
+        RoomHandler newRoomHandler = newRoom.GetComponent<RoomHandler>();
+        int wallIndex = thisPlus.GetWallIndex();
+        if (wallIndex == 0)
+        {
+            newRoomHandler.AddDoor(2, 0);
+        }
+        else if (wallIndex == 1)
+        {
+            newRoomHandler.AddDoor(3, 0);
+        }
+        else if (wallIndex == 2)
+        {
+            newRoomHandler.AddDoor(0, 0);
+        }
+        else if (wallIndex == 3)
+        {
+            newRoomHandler.AddDoor(1, 0);
+        }
     }
 
     //Collider Checkers:

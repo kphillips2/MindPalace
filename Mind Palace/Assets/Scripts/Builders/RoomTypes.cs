@@ -31,20 +31,20 @@ public static class RoomTypes {
     /// <param name="loc"> the vector for the centre of the plus sign </param>
     /// <param name="newType"> determines which room dimensions to use for the existing room </param>
     /// <returns> the vector for the centre of the new room </returns>
-    public static Vector3 GetNewRoomCentre(float width, float length, Vector3 centre, Vector3 loc, string type){
-        float[] dims = GetDimensions (type);
+    public static float[] GetNewRoomCentre(float width, float length, Vector3 centre, Vector3 loc, string type) {
+        float[] dims = GetDimensions(type);
         float distX = width / 2, distZ = length / 2;
         float moveX = dims [0] / 2, moveZ = dims [1] / 2;
 
-        Vector3 newLoc =
+        float[] newLoc =
             // loc lies on positive X wall
-            (loc.x > centre.x + distX - 0.5f) ? new Vector3 (centre.x + distX + moveX, centre.y, loc.z) :
+            (loc.x > centre.x + distX - 0.5f) ? new float[] { centre.x + distX + moveX, centre.y, loc.z } :
             // loc lies on negative Z wall
-            (loc.z < centre.z - distZ + 0.5f) ? new Vector3 (loc.x, centre.y, centre.z - distZ - moveZ) :
+            (loc.z < centre.z - distZ + 0.5f) ? new float[] { loc.x, centre.y, centre.z - distZ - moveZ } :
             // loc lies on negative X wall
-            (loc.x < centre.x - distX + 0.5f) ? new Vector3 (centre.x - distX - moveX, centre.y, loc.z) :
+            (loc.x < centre.x - distX + 0.5f) ? new float[] { centre.x - distX - moveX, centre.y, loc.z } :
             // loc must lie on positive Z wall
-            new Vector3 (loc.x, centre.y, centre.z + distZ + moveZ);
+            new float[] { loc.x, centre.y, centre.z + distZ + moveZ };
         return newLoc;
     }
     /// <summary>
