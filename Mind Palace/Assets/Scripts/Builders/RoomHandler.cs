@@ -131,26 +131,15 @@ public class RoomHandler : MonoBehaviour {
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
     private void AddPlusSign(int wallIndex, float plusLoc){
-        float angle = 0;
         if (wallIndex >= 0 && wallIndex <= 3) {
-            switch (wallIndex) {
-                case 1:
-                    angle = 90;
-                    break;
-                case 2:
-                    angle = 180;
-                    break;
-                case 3:
-                    angle = 270;
-                    break;
-                default:
-                    angle = 0;
-                    break;
-            }
+            float angle =
+                (wallIndex == 1) ? 90 :
+                (wallIndex == 2) ? 180 :
+                (wallIndex == 3) ? 270 : 0;
 
             float dist = GetWallSize ((wallIndex + 1) % 4) / 2 - 0.3f;
             Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
-            Vector3 roomCentre = new Vector3 (floor.transform.position.x, 0, floor.transform.position.z);
+            Vector3 roomCentre = floor.transform.position + new Vector3 (0, 0.125f, 0);
 
             GameObject component = Instantiate (
                 plusSign,
