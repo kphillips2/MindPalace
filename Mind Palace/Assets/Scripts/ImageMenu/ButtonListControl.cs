@@ -19,7 +19,7 @@ public class ButtonListControl : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        backButton.interactable= false; //Currently at top level, don't want to let user go back a folder
+        backButton.GetComponentInChildren<Text>().text = "Cancel"; //Currently at top level
         generateButtons();
     }
 
@@ -88,7 +88,7 @@ public class ButtonListControl : MonoBehaviour {
         else
         {
             currentFilePath = currentFilePath + "/" + textString;
-            backButton.interactable = true;
+            backButton.GetComponentInChildren<Text>().text = "Previous Folder";
             generateButtons();
         }
     }
@@ -96,13 +96,21 @@ public class ButtonListControl : MonoBehaviour {
     //Defines action when user wants to go back one folder
     public void backButtonClicked()
     {
-        //Remove last slash and everything after it from file path
-        int index = currentFilePath.LastIndexOf("/");
-        if (index > 0) currentFilePath = currentFilePath.Substring(0, index);
+        // If at top level, return to plus-sign if back button clicked
+        if (currentFilePath == startFilePath)
+        {
+            ImageMenu.transform.position = new Vector3(0, -100, 0);
+            ButtonManager.GetComponent<ActivationManager>().NoActive();
+        }
+        else
+        {
+            //Remove last slash and everything after it from file path
+            int index = currentFilePath.LastIndexOf("/");
+            if (index > 0) currentFilePath = currentFilePath.Substring(0, index);
 
-        //Don't allow user to go back further if they've hit the top level
-        if (currentFilePath == startFilePath) backButton.interactable = false;
-
-        generateButtons();
+            //Change text to "Back" if reach top level
+            if (currentFilePath == startFilePath) backButton.GetComponentInChildren<Text>().text = "Cancel";
+            generateButtons();
+        }
     }
 }

@@ -22,9 +22,9 @@ public class RoomHandler : MonoBehaviour {
     /// Initializes the attributes for this room.
     /// </summary>
     public void InitData(float width, float length){
-        doorsAndWindows = new List<Vector3>[4];
+        doorsAndWindows = new List<Vector3> [4];
         for (int k = 0; k < 4; k++)
-            doorsAndWindows[k] = new List<Vector3>();
+            doorsAndWindows [k] = new List<Vector3>();
         string[] mats = { "Wood Texture 06", "Wood Texture 15", "Wood Texture 12" };
 
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
@@ -121,9 +121,7 @@ public class RoomHandler : MonoBehaviour {
         float wallLimit;
         for (int k = 0; k < 4; k++) {
             wallLimit = GetWallSize (k) / 2;
-            for (float loc = -4; loc > -wallLimit; loc -= 4)
-                AddPlusSign (k, loc);
-            for (float loc = 0; loc < wallLimit; loc += 4)
+            for (float loc = wallLimit - 2; loc > -wallLimit; loc -= 4)
                 AddPlusSign (k, loc);
         }
     }
@@ -133,26 +131,15 @@ public class RoomHandler : MonoBehaviour {
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
     private void AddPlusSign(int wallIndex, float plusLoc){
-        float angle = 0;
         if (wallIndex >= 0 && wallIndex <= 3) {
-            switch (wallIndex) {
-                case 1:
-                    angle = 90;
-                    break;
-                case 2:
-                    angle = 180;
-                    break;
-                case 3:
-                    angle = 270;
-                    break;
-                default:
-                    angle = 0;
-                    break;
-            }
+            float angle =
+                (wallIndex == 1) ? 90 :
+                (wallIndex == 2) ? 180 :
+                (wallIndex == 3) ? 270 : 0;
 
-            float dist = GetWallSize (wallIndex) / 2 - 0.3f;
+            float dist = GetWallSize ((wallIndex + 1) % 4) / 2 - 0.3f;
             Vector3 centre = new Vector3 (plusLoc, 2.5f, dist);
-            Vector3 roomCentre = new Vector3 (floor.transform.position.x, 0, floor.transform.position.z);
+            Vector3 roomCentre = floor.transform.position + new Vector3 (0, 0.125f, 0);
 
             GameObject component = Instantiate (
                 plusSign,
@@ -182,11 +169,6 @@ public class RoomHandler : MonoBehaviour {
         }
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
-    }
-
-    public int FindDoorIndex(int wallIndex, float location)
-    {
-        return 0;
     }
     /// <summary>
     /// Adds a picture to the saved information for this room.

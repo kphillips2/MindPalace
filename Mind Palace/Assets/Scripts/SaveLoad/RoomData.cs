@@ -25,7 +25,7 @@ public class RoomData {
             Debug.Log ("Error: centre array length must be 3");
         else
             Array.Copy (loc, centre, 3);
-        pictures = new List<Picture>();
+        pictures = new List<Picture> ();
     }
     /// <summary>
     /// Sets the stored length and width of the room.

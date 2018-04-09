@@ -13,9 +13,9 @@ public class Building : MonoBehaviour {
 
 	// Use this for initialization
 	void Start (){
-        rooms = new List<GameObject>();
+        rooms = new List<GameObject> ();
         if (SaveFile.name == null)
-            AddRoom(new Vector3(0, 0, 0));
+            AddRoom (new Vector3 (0, 0, 0));
         else
             LoadRooms (SaveFile.currentLoci.getRooms ());
 	}
@@ -43,14 +43,24 @@ public class Building : MonoBehaviour {
             current = room.GetComponent<RoomHandler> ().GetData ();
             chk = current.GetCentre ();
 
-            distX = current.GetWidth () / 2 + dims [0] / 2;
-            distZ = current.GetLength () / 2 + dims [1] / 2;
+            float width = current.GetWidth();
+            float length = current.GetLength();
+            float margin = 0.0001f;
 
-            inX = centre.x > chk [0] - distX && centre.x < chk [0] + distX;
-            inZ = centre.z > chk [2] - distZ && centre.z < chk [2] + distZ;
+            distX = width / 2 + dims[0] / 2 - margin;
+            distZ = length / 2 + dims[1] / 2 - margin;
 
-            if (inX && inZ)
+            inX = centre.x > chk[0] - distX && centre.x < chk[0] + distX;
+            inZ = centre.z > chk[2] - distZ && centre.z < chk[2] + distZ;
+
+            if (inX && inZ) {
+                //string collideCentre = "<" + chk[0] + ", " + chk[1] + ", " + chk[2] + ">";
+                //Debug.Log (
+                //    "New room type : " + type + ", room collided with : " +
+                //    "[width : " + width + ", length : " + length + ", centre : " + collideCentre + "]."
+                //);
                 return false;
+            }
         }
         return true;
     }
@@ -58,36 +68,36 @@ public class Building : MonoBehaviour {
     /// Checks whether a potential new door or window goes into an existing room.
     /// </summary>
     /// <param name="centre"> the vector for the centre of the room </param>
-    /// <param name="loc"> the vector for the centre of the new door or window </param>
+    /// <param name="loc"> the vector for the centre of the plus sign </param>
     /// <param name="type"> determines which room dimensions to use </param>
     /// <returns> the room object that is adjacent to the new door or window </returns>
-    public GameObject CheckDoorWindowPlacement (Vector3 centre, Vector3 loc, string type){
+    public GameObject CheckDoorWindowPlacement (float[] centre, float[] loc, float width, float length){
         bool inX, inZ;
-        float[] chk, dims = RoomTypes.GetDimensions (type);
-        float distX = dims[0] / 2, distZ = dims [1] / 2;
+        float[] chk;
+        float distX = width / 2, distZ = length / 2;
 
-        Vector3 newLoc =
+        float[] newLoc =
             // loc lies on positive X wall
-            (loc.x > centre.x + distX - 0.5f) ? new Vector3 (centre.x + distX + 0.125f, loc.y, loc.z) :
+            (loc [0] > centre [0] + distX - 0.5f) ? new float[] { centre [0] + distX + 0.125f, loc [1], loc [2] } :
             // loc lies on negative Z wall
-            (loc.z > centre.z + distZ - 0.5f) ? new Vector3 (loc.x, loc.y, centre.z + distZ + 0.125f) :
+            (loc [2] > centre [2] + distZ - 0.5f) ? new float[] { loc [0], loc [1], centre [2] + distZ + 0.125f } :
             // loc lies on negative X wall
-            (loc.x < centre.x - distX + 0.5f) ? new Vector3 (centre.x - distX - 0.125f, loc.y, loc.z) :
+            (loc [0] < centre [0] - distX + 0.5f) ? new float[] { centre [0] - distX - 0.125f, loc [1], loc [2] } :
             // loc must lie on positive Z wall
-            new Vector3 (loc.x, loc.y, centre.z - distZ - 0.125f);
+            new float[] { loc[2], loc[1], centre[2] - distZ - 0.125f };
 
         RoomData current;
         foreach (GameObject room in rooms) {
             current = room.GetComponent<RoomHandler> ().GetData ();
             chk = current.GetCentre();
-            if(centre.x == chk [0] && centre.y == chk[1] && centre.z == chk[2])
+            if(centre [0] == chk [0] && centre [1] == chk [1] && centre [2] == chk [2])
                 continue; 
 
-            distX = current.GetWidth() / 2;
-            distZ = current.GetLength() / 2;
+            distX = current.GetWidth () / 2;
+            distZ = current.GetLength () / 2;
 
-            inX = newLoc.x >= chk [0] - distX && newLoc.x <= chk [0] + distX;
-            inZ = newLoc.z >= chk [2] - distZ && newLoc.z <= chk [2] + distZ;
+            inX = newLoc [0] >= chk [0] - distX && newLoc [0] <= chk [0] + distX;
+            inZ = newLoc [2] >= chk [2] - distZ && newLoc [2] <= chk [2] + distZ;
 
             if (inX && inZ)
                 return room;
@@ -183,9 +193,7 @@ public class Building : MonoBehaviour {
             Quaternion.Euler (0, 0, 0)
         ) as GameObject;
         component.SetActive (true);
-
-        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
-        roomScript.InitData (width, length);
+        component.GetComponent<RoomHandler> ().InitData (width, length);
 
         rooms.Add (component);
         return component;
@@ -202,11 +210,13 @@ public class Building : MonoBehaviour {
             component = Instantiate (
                 plusSign,
                 Vector3.zero,
-                Quaternion.Euler (0, plus.GetAngle (), 0)
+                Quaternion.Euler(0, 0, 0)
             ) as GameObject;
             centre = plus.GetCentre ();
             component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
+            component.transform.rotation = Quaternion.Euler (0, plus.GetAngle(), 0);
             component.SetActive (true);
+            component.GetComponent<SubMenuHandler> ().InitData (plus);
         }
     }
 }

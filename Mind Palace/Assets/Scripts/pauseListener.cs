@@ -32,16 +32,12 @@ public class pauseListener : MonoBehaviour
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        building = level.GetComponent<Building>();
-        
-
     }
 
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
         paused = (pauseMenu.transform.position.y > -50 || settingsMenu.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
-        print(paused);
         paused = !paused;
         if (paused)
         {
@@ -82,6 +78,7 @@ public class pauseListener : MonoBehaviour
 
     public void ToMainMenu()
     {
+        building = level.GetComponent<Building>();
         building.Save();
         SaveFile.Save();
         SceneManager.LoadScene("MinimalMenu");

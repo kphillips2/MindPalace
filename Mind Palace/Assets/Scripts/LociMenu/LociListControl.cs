@@ -31,7 +31,6 @@ public class LociListControl : MonoBehaviour
             }
             buttons.Clear();
         }
-
         int num = 0;
         foreach (string name in SaveFile.savedLocis.Keys)
         {
@@ -52,6 +51,6 @@ public class LociListControl : MonoBehaviour
 
     public void backButtonClicked()
     {
-        //Code for back button
+        SceneManager.LoadScene("GreenDemo");
     }
 }

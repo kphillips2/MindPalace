@@ -11,7 +11,7 @@ using System.IO;
 public static class SaveFile {
     public static string name = null;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
-    public static Dictionary<string, Loci> savedLocis = new Dictionary<string, Loci> (); //List of save files
+    public static Dictionary<string, Loci> savedLocis= new Dictionary<string, Loci> (); //List of save files
 
     /// <summary>
     /// Adds the current Loci to the list of saved Locis and saves the list to a file.
@@ -44,71 +44,71 @@ public static class SaveFile {
             float val;
             // Name of GameObject, only want to save ones with certain names
             switch (go.ToString ()) {
-                case "Bed(Clone) (UnityEngine.GameObject)":
+                case "Bed_G(Clone) (UnityEngine.GameObject)":
                     val = 0f;
                     break;
-                case "BookCase(Clone) (UnityEngine.GameObject)":
+                case "BookCase_G(Clone) (UnityEngine.GameObject)":
                     val = 1f;
                     break;
-                case "Chair(Clone) (UnityEngine.GameObject)":
+                case "Chair_G(Clone) (UnityEngine.GameObject)":
                     val = 2f;
                     break;
-                case "Chair2(Clone) (UnityEngine.GameObject)":
+                case "Chair2_G(Clone) (UnityEngine.GameObject)":
                     val = 3f;
                     break;
-                case "CoffeeTable(Clone) (UnityEngine.GameObject)":
+                case "CoffeeTable_G(Clone) (UnityEngine.GameObject)":
                     val = 4f;
                     break;
-                case "Couch(Clone) (UnityEngine.GameObject)":
+                case "Couch_G(Clone) (UnityEngine.GameObject)":
                     val = 5f;
                     break;
-                case "Counter(Clone) (UnityEngine.GameObject)":
+                case "Counter_G(Clone) (UnityEngine.GameObject)":
                     val = 6f;
                     break;
-                case "Fireplace(Clone) (UnityEngine.GameObject)":
+                case "Fireplace_G(Clone) (UnityEngine.GameObject)":
                     val = 7f;
                     break;
-                case "FlowerTable(Clone) (UnityEngine.GameObject)":
+                case "FlowerTable_G(Clone) (UnityEngine.GameObject)":
                     val = 8f;
                     break;
-                case "Fridge(Clone) (UnityEngine.GameObject)":
+                case "Fridge_G(Clone) (UnityEngine.GameObject)":
                     val = 9f;
                     break;
-                case "Guitar(Clone) (UnityEngine.GameObject)":
+                case "Guitar_G(Clone) (UnityEngine.GameObject)":
                     val = 10f;
                     break;
-                case "Headboard(Clone) (UnityEngine.GameObject)":
+                case "Headboard_G(Clone) (UnityEngine.GameObject)":
                     val = 11f;
                     break;
-                case "LionStatue(Clone) (UnityEngine.GameObject)":
+                case "LionStatue_G(Clone) (UnityEngine.GameObject)":
                     val = 12f;
                     break;
-                case "Oven(Clone) (UnityEngine.GameObject)":
+                case "Oven_G(Clone) (UnityEngine.GameObject)":
                     val = 13f;
                     break;
-                case "Plant(Clone) (UnityEngine.GameObject)":
+                case "Plant_G(Clone) (UnityEngine.GameObject)":
                     val = 14f;
                     break;
-                case "Sink(Clone) (UnityEngine.GameObject)":
+                case "Sink_G(Clone) (UnityEngine.GameObject)":
                     val = 15f;
                     break;
-                case "SoccerBall(Clone) (UnityEngine.GameObject)":
+                case "SoccerBall_G(Clone) (UnityEngine.GameObject)":
                     val = 16f;
                     break;
-                case "Table(Clone) (UnityEngine.GameObject)":
+                case "Table_G(Clone) (UnityEngine.GameObject)":
                     val = 17f;
                     break;
-                case "Toilet(Clone) (UnityEngine.GameObject)":
+                case "Toilet_G(Clone) (UnityEngine.GameObject)":
                     val = 18f;
                     break;
-                case "TV(Clone) (UnityEngine.GameObject)":
+                case "TV_G(Clone) (UnityEngine.GameObject)":
                     val = 19f;
                     break;
                 default:
                     continue; //Don't save object if it doesn't match any of the above names
             }
             
-            // SaveFile the object using its corresponding prefab value, x-coordinate, z-coordinate, and y-rotation
+            // Save the object using its corresponding prefab value, position coordinates (xyz), then rotation (xyz)
             float[] f = new float[] {
                 val, go.transform.position.x, go.transform.position.y, go.transform.position.z,
                 go.transform.eulerAngles.x, go.transform.eulerAngles.y, go.transform.eulerAngles.z

@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: 4323730144cd1af43aa88a7901931d37
 folderAsset: yes
+<<<<<<< HEAD:Mind Palace/Assets/Grass And Flowers Pack 1.meta
 timeCreated: 1520281559
+=======
+timeCreated: 1523220508
+>>>>>>> 0508ace50f73a9ffc5f5bebfe0c7169b8d07ba90:Mind Palace/Assets/UnityTestTools/Examples/IntegrationTestsFrameworkExamples/AngryBotsTests.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
