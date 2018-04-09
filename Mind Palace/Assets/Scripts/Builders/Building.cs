@@ -214,7 +214,7 @@ public class Building : MonoBehaviour {
             ) as GameObject;
             centre = plus.GetCentre ();
             component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
-            component.transform.rotation = Quaternion.Euler (0, plus.GetAngle(), 0);
+            component.transform.rotation = Quaternion.Euler (0, plus.GetAngle (), 0);
             component.SetActive (true);
             component.GetComponent<SubMenuHandler> ().InitData (plus);
         }
