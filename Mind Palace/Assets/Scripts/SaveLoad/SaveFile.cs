@@ -11,7 +11,7 @@ using System.IO;
 public static class SaveFile {
     public static string name = null;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
-    public static Dictionary<string, Loci> savedLocis = new Dictionary<string, Loci> (); //List of save files
+    public static Dictionary<string, Loci> savedLocis= new Dictionary<string, Loci> (); //List of save files
 
     /// <summary>
     /// Adds the current Loci to the list of saved Locis and saves the list to a file.

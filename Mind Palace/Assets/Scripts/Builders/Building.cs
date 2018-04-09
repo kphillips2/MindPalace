@@ -43,14 +43,24 @@ public class Building : MonoBehaviour {
             current = room.GetComponent<RoomHandler> ().GetData ();
             chk = current.GetCentre ();
 
-            distX = current.GetWidth () / 2 + dims [0] / 2;
-            distZ = current.GetLength () / 2 + dims [1] / 2;
+            float width = current.GetWidth();
+            float length = current.GetLength();
+            float margin = 0.0001f;
 
-            inX = centre.x > chk [0] - distX && centre.x < chk [0] + distX;
-            inZ = centre.z > chk [2] - distZ && centre.z < chk [2] + distZ;
+            distX = width / 2 + dims[0] / 2 - margin;
+            distZ = length / 2 + dims[1] / 2 - margin;
 
-            if (inX && inZ)
+            inX = centre.x > chk[0] - distX && centre.x < chk[0] + distX;
+            inZ = centre.z > chk[2] - distZ && centre.z < chk[2] + distZ;
+
+            if (inX && inZ) {
+                //string collideCentre = "<" + chk[0] + ", " + chk[1] + ", " + chk[2] + ">";
+                //Debug.Log (
+                //    "New room type : " + type + ", room collided with : " +
+                //    "[width : " + width + ", length : " + length + ", centre : " + collideCentre + "]."
+                //);
                 return false;
+            }
         }
         return true;
     }

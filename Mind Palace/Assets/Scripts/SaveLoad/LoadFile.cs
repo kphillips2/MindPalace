@@ -16,6 +16,7 @@ public static class LoadFile {
             BinaryFormatter bf = new BinaryFormatter ();
             FileStream file = File.Open ("Assets/SaveFile/saveFile.gd", FileMode.Open);
             SaveFile.savedLocis = (Dictionary<string, Loci>)bf.Deserialize (file);
+            Debug.Log(SaveFile.savedLocis.Count);
             file.Close ();
             MonoBehaviour.print ("File successfully loaded.");
         } else
