@@ -12,7 +12,7 @@ public class settingsMenu : MonoBehaviour {
 
     public void gotoSettings()
     {
-        mainCanvas.SetActive(false);
+        mainCanvas.SetActive(true);
         settingsCanvas.SetActive(true);
     }
 }
