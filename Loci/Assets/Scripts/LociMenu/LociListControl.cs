@@ -12,6 +12,7 @@ public class LociListControl : MonoBehaviour
     private Button backButton;
     private List<GameObject> buttons = new List<GameObject>();
     public GameObject LociMenu;
+    public GameObject StartingMenu;
 
     // Use this for initialization
     void Start()
@@ -51,6 +52,7 @@ public class LociListControl : MonoBehaviour
 
     public void backButtonClicked()
     {
-        SceneManager.LoadScene("GreenDemo");
+        StartingMenu.transform.position = LociMenu.transform.position;
+        LociMenu.transform.position = new Vector3(0, -100, 0);
     }
 }
