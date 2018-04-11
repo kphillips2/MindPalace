@@ -121,7 +121,6 @@ public class SubMenuHandler : MonoBehaviour {
     }
     public void AddPicture()
     {
-        // this doesn't look right. do you mean gameObject.transform.position
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();

@@ -63,7 +63,7 @@ public static class WallCutter {
 		}
 
 		// far face
-		for (int k = triangles.Count-1; k > 0; k-=3) {
+		for (int k = triangles.Count-1; k > 0; k -= 3) {
 			triangles.Add (triangles [k] - 1);
 			triangles.Add (triangles [k - 1] - 1);
 			triangles.Add (triangles [k - 2] - 1);
