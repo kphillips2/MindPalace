@@ -173,9 +173,7 @@ public class RoomHandler : MonoBehaviour {
     /// Adds a picture to the saved information for this room.
     /// </summary>
     /// <param name="picture"> a picture object to be added to the room information </param>
-    public void AddPicture(Picture picture){
-        thisRoom.AddPicture (picture);
-    }
+    public void AddPicture(Picture picture) { thisRoom.AddPicture (picture); }
     /// <summary>
     /// Adds a door to a given wall.
     /// </summary>
