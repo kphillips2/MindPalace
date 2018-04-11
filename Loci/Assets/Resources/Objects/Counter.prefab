@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4737190199963184}
+  - component: {fileID: 64812721006677968}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   - component: {fileID: 4992815419806360}
   - component: {fileID: 33423851392073642}
   - component: {fileID: 23604848978307286}
+  - component: {fileID: 64310302593069086}
   m_Layer: 0
   m_Name: Counter_1_1 (1)
   m_TagString: Untagged
@@ -111,3 +113,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344430043544396}
   m_Mesh: {fileID: 4300000, guid: aaeedb2a45100ea4091935025fdd110d, type: 3}
+--- !u!64 &64310302593069086
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1344430043544396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: aaeedb2a45100ea4091935025fdd110d, type: 3}
+--- !u!64 &64812721006677968
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1204718272296664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}

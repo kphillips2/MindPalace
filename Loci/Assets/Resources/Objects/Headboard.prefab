@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4826929849410170}
+  - component: {fileID: 64519531108181856}
   m_Layer: 0
   m_Name: Headboard
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   - component: {fileID: 4309463079896068}
   - component: {fileID: 33586615299285328}
   - component: {fileID: 23954346971039604}
+  - component: {fileID: 64371075771598252}
   m_Layer: 0
   m_Name: Headboard_1_2
   m_TagString: Untagged
@@ -111,3 +113,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821326245340016}
   m_Mesh: {fileID: 4300000, guid: 22594f653b29cb2488a78553895e4d36, type: 3}
+--- !u!64 &64371075771598252
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821326245340016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 22594f653b29cb2488a78553895e4d36, type: 3}
+--- !u!64 &64519531108181856
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104898268214908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}

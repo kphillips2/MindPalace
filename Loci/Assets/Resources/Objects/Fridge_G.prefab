@@ -284,12 +284,12 @@ MonoBehaviour:
   grabOverrideButton: 0
   allowedGrabControllers: 0
   grabAttachMechanicScript: {fileID: 114297486547067942}
-  secondaryGrabActionScript: {fileID: 0}
+  secondaryGrabActionScript: {fileID: 114217610742607272}
   isUsable: 1
   holdButtonToUse: 0
   useOnlyIfGrabbed: 1
   pointerActivatesUseAction: 0
-  useOverrideButton: 3
+  useOverrideButton: 14
   allowedUseControllers: 0
   usingState: 0
 --- !u!114 &114947096254381844
