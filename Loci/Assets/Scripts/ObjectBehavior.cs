@@ -18,6 +18,11 @@ public class ObjectBehavior : MonoBehaviour {
 
         isBeingGrabbed = true;
         rbody = transform.GetComponent<Rigidbody>();
+
+        //Use precision grab after first grab
+        transform.GetComponent<VRTK_InteractableObject>().grabAttachMechanicScript.precisionGrab = true;
+        transform.GetComponent<VRTK_InteractableObject>().grabAttachMechanicScript.leftSnapHandle = null;
+        transform.GetComponent<VRTK_InteractableObject>().grabAttachMechanicScript.rightSnapHandle = null;
     }
  
     // Update is called once per frame

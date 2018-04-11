@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4573518067149048}
+  - component: {fileID: 64853205308027492}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -51,6 +52,7 @@ GameObject:
   - component: {fileID: 4940031337865092}
   - component: {fileID: 33651616009091710}
   - component: {fileID: 23347913242056968}
+  - component: {fileID: 64374404273563936}
   m_Layer: 0
   m_Name: Matress_1
   m_TagString: Untagged
@@ -68,6 +70,7 @@ GameObject:
   - component: {fileID: 4462846687224758}
   - component: {fileID: 33210053502118368}
   - component: {fileID: 23448576768680052}
+  - component: {fileID: 64273520090401268}
   m_Layer: 0
   m_Name: Bed_1
   m_TagString: Untagged
@@ -356,3 +359,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512339399437254}
   m_Mesh: {fileID: 4300000, guid: bcca84a2658e08241be17e9ed78e7453, type: 3}
+--- !u!64 &64273520090401268
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1535971233715850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: bcca84a2658e08241be17e9ed78e7453, type: 3}
+--- !u!64 &64374404273563936
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512339399437254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: bcca84a2658e08241be17e9ed78e7453, type: 3}
+--- !u!64 &64853205308027492
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129895562201096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
