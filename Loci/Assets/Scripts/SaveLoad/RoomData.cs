@@ -62,9 +62,7 @@ public class RoomData {
     /// Adds a given plus sign to the room.
     /// </summary>
     /// <param name="plusData"> the plus sign object being added </param>
-    public void AddPlusSign(PlusData plusData){
-        plusSigns.Add (plusData);
-    }
+    public void AddPlusSign(PlusData plusData) { plusSigns.Add (plusData); }
     /// <summary>
     /// Adds a given picture to the room.
     /// </summary>
@@ -110,7 +108,7 @@ public class RoomData {
     /// </summary>
     public void ClearWallData(){
         for (int k = 0; k < 4; k++)
-            doorsAndWindows[k] = new List<float[]> ();
+            doorsAndWindows [k] = new List<float[]> ();
     }
     /// <summary>
     /// Removes all plus signs currently stored in the room.

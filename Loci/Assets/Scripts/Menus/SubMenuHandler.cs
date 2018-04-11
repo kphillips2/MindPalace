@@ -36,75 +36,92 @@ public class SubMenuHandler : MonoBehaviour {
         thisPlus = plus;
     }
     //Menu Manipulators:
-    public void ShowMoreOptions()
-    {
-        ClickedOn.SetActive(false);
-        RoomButton.SetActive(false);
-        CorridorButton.SetActive(false);
-        Window.SetActive(true);
-        Picture.SetActive(true);
-        DoorSubMenu.SetActive(true);
-        Door.SetActive(false);
-        MenuActivationManager.ActivateMenu(gameObject);
+    public void ShowMoreOptions(){
+        ClickedOn.SetActive (false);
+        RoomButton.SetActive (false);
+        CorridorButton.SetActive (false);
+        Window.SetActive (true);
+        Picture.SetActive (true);
+        DoorSubMenu.SetActive (true);
+        Door.SetActive (false);
+
+        MenuActivationManager.ActivateMenu (gameObject);
     }
-    public void HideAll()
-    {
-        ClickedOn.SetActive(false);
-        RoomButton.SetActive(false);
-        Window.SetActive(false);
-        Picture.SetActive(false);
-        CorridorButton.SetActive(false);
-        DoorSubMenu.SetActive(false);
-        Door.SetActive(false);
-        MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
-        MenuActivationManager.NoActive();
-        this.transform.position = new Vector3(0, -100, 0);
+    public void HideAll(){
+        ClickedOn.SetActive (false);
+        RoomButton.SetActive (false);
+        Window.SetActive (false);
+        Picture.SetActive (false);
+        CorridorButton.SetActive (false);
+        DoorSubMenu.SetActive (false);
+        Door.SetActive (false);
+
+        MenuActivationManager = SingularActivation.GetComponent<ActivationManager> ();
+        MenuActivationManager.NoActive ();
+        this.transform.position = new Vector3 (0, -100, 0);
     }
-    public void HideAllStillActive()
-    {
-        ClickedOn.SetActive(false);
-        RoomButton.SetActive(false);
-        Window.SetActive(false);
-        Picture.SetActive(false);
-        CorridorButton.SetActive(false);
-        DoorSubMenu.SetActive(false);
-        Door.SetActive(false);
+    public void HideAllStillActive(){
+        ClickedOn.SetActive (false);
+        RoomButton.SetActive (false);
+        Window.SetActive (false);
+        Picture.SetActive (false);
+        CorridorButton.SetActive (false);
+        DoorSubMenu.SetActive (false);
+        Door.SetActive (false);
     }
-    public void DefaultState()
-    {
-        ClickedOn.SetActive(true);
-        RoomButton.SetActive(false);
-        Window.SetActive(false);
-        Picture.SetActive(false);
-        CorridorButton.SetActive(false);
-        DoorSubMenu.SetActive(false);
-        Door.SetActive(false);
+    public void DefaultState(){
+        ClickedOn.SetActive (true);
+        RoomButton.SetActive (false);
+        Window.SetActive (false);
+        Picture.SetActive (false);
+        CorridorButton.SetActive (false);
+        DoorSubMenu.SetActive (false);
+        Door.SetActive (false);
     }
-    public void OpenDoorSubMenu()
-    {
-        ClickedOn.SetActive(false);
-        RoomButton.SetActive(true);
-        Window.SetActive(false);
-        Picture.SetActive(false);
-        CorridorButton.SetActive(true);
-        DoorSubMenu.SetActive(false);
-        Door.SetActive(true);
+    public void OpenDoorSubMenu(){
+        ClickedOn.SetActive (false);
+        RoomButton.SetActive (true);
+        Window.SetActive (false);
+        Picture.SetActive (false);
+        CorridorButton.SetActive (true);
+        DoorSubMenu.SetActive (false);
+        Door.SetActive (true);
+
         string type = "room";
-        RoomButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
-        type = RoomTypes.GetCorridorType(thisPlus.GetAngle());
-        CorridorButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
-        GameObject component = building.CheckDoorWindowPlacement(thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength());
-        //print("Vector3 = " + component.GetComponent<RoomHandler>().GetData().GetCentre()[0] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[1] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[2]);
-        Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) != null;
+        RoomButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
+        type = RoomTypes.GetCorridorType (thisPlus.GetAngle ());
+        CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
+
+        RoomData thisRoom = roomHandler.GetData ();
+        Door.GetComponent<Button> ().interactable = building.CheckDoorWindowPlacement (
+            thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
+        ) != null;
     }
 
     //On-Click Methods:
-    public void AddDoor()
-    {
-        //TODO
+    public void AddDoor() {
+        CutDoorOnPlusSign ();
+        RoomData thisRoom = roomHandler.GetData ();
+        GameObject collidingRoom = building.CheckDoorWindowPlacement (
+            thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
+        );
+        if (collidingRoom != null) {
+            int wallIndex = thisPlus.GetWallIndex ();
+            float[] plusLoc = thisPlus.GetCentre ();
+            float[] roomLoc = thisRoom.GetCentre ();
+            float[] colliderLoc = collidingRoom.GetComponent<RoomHandler> ().GetData ().GetCentre ();
+
+            float doorLoc = (wallIndex % 2 == 0) ?
+                plusLoc [0] + roomLoc [0] - colliderLoc [0]:
+                plusLoc [2] + roomLoc [2] - colliderLoc [2];
+            int oppositeWall = (wallIndex + 2) % 4;
+
+            collidingRoom.GetComponent<RoomHandler> ().AddDoor (oppositeWall, doorLoc);
+        }
     }
     public void AddPicture()
     {
+        // this doesn't look right. do you mean gameObject.transform.position
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();

@@ -39,8 +39,8 @@ public class RoomHandler : MonoBehaviour {
     /// <summary>
     /// Changes the dimensions of a room without scaling it.
     /// </summary>
-    /// <param name="width"> the new width of the room </param>
-    /// <param name="length"> the new length of the room </param>
+    /// <param name="width"> determines the size of the room along the X axis </param>
+    /// <param name="length"> determines the size of the room along the Z axis </param>
     public void SetRoomSize(float width, float length){
         Vector3 dimensions = new Vector3 (width, 0.25f, length);
         FloorResizer.resize (floor, dimensions);
@@ -153,14 +153,13 @@ public class RoomHandler : MonoBehaviour {
             centre = component.transform.position;
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
-                thisRoom.GetWidth (), thisRoom.GetLength (),
-                roomCentre, centre, "room"
+                roomCentre, centre,
+                thisRoom.GetWidth (), thisRoom.GetLength (), "room"
             );
             float[] newCorridor = RoomTypes.GetNewRoomCentre (
-                thisRoom.GetWidth (), thisRoom.GetLength (),
-                roomCentre, centre, RoomTypes.GetCorridorType (angle)
+                roomCentre, centre,
+                thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType (angle)
             );
-
             float[] plusCentre = { centre.x, centre.y, centre.z };
 
             PlusData thisPlus = new PlusData (plusCentre, newRoom, newCorridor, angle);
@@ -174,9 +173,7 @@ public class RoomHandler : MonoBehaviour {
     /// Adds a picture to the saved information for this room.
     /// </summary>
     /// <param name="picture"> a picture object to be added to the room information </param>
-    public void AddPicture(Picture picture){
-        thisRoom.AddPicture (picture);
-    }
+    public void AddPicture(Picture picture) { thisRoom.AddPicture (picture); }
     /// <summary>
     /// Adds a door to a given wall.
     /// </summary>
@@ -272,7 +269,7 @@ public class RoomHandler : MonoBehaviour {
     private void AdjustForWindow(GameObject input, int wallIndex, float windowLoc){
         AdjustWall (
             input, wallIndex, windowLoc, 1.5f, 3,
-            "The Window at {" + windowLoc + "} is close to or outside the end of the wall."
+            "The window at {" + windowLoc + "} is close to or outside the end of the wall."
         );
     }
     /// <summary>
