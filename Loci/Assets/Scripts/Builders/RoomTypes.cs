@@ -33,11 +33,11 @@ public static class RoomTypes {
     /// <param name="type"> determines which room dimensions to use for the new room </param>
     /// <returns></returns>
     public static float[] GetNewRoomCentre(Vector3 centre, Vector3 loc, float width, float length, string type) {
-        float[] dims = GetDimensions(type);
+        float[] dims = GetDimensions (type);
         float distX = width / 2, distZ = length / 2;
         float moveX = dims [0] / 2, moveZ = dims [1] / 2;
 
-        float[] newLoc =
+        return
             // loc lies on positive X wall
             (loc.x > centre.x + distX - 0.5f) ? new float[] { centre.x + distX + moveX, centre.y, loc.z } :
             // loc lies on negative Z wall
@@ -46,7 +46,6 @@ public static class RoomTypes {
             (loc.x < centre.x - distX + 0.5f) ? new float[] { centre.x - distX - moveX, centre.y, loc.z } :
             // loc must lie on positive Z wall
             new float[] { loc.x, centre.y, centre.z + distZ + moveZ };
-        return newLoc;
     }
     /// <summary>
     /// Finds the correct centre of a potential new room based on its type.

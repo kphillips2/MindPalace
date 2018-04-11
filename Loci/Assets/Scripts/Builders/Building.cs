@@ -90,7 +90,7 @@ public class Building : MonoBehaviour {
         RoomData current;
         foreach (GameObject room in rooms) {
             current = room.GetComponent<RoomHandler> ().GetData ();
-            chk = current.GetCentre();
+            chk = current.GetCentre ();
             if(centre [0] == chk [0] && centre [1] == chk [1] && centre [2] == chk [2])
                 continue; 
 
