@@ -43,15 +43,15 @@ public class Building : MonoBehaviour {
             current = room.GetComponent<RoomHandler> ().GetData ();
             chk = current.GetCentre ();
 
-            float width = current.GetWidth();
-            float length = current.GetLength();
+            float width = current.GetWidth ();
+            float length = current.GetLength ();
             float margin = 0.0001f;
 
-            distX = width / 2 + dims[0] / 2 - margin;
-            distZ = length / 2 + dims[1] / 2 - margin;
+            distX = width / 2 + dims [0] / 2 - margin;
+            distZ = length / 2 + dims [1] / 2 - margin;
 
-            inX = centre.x > chk[0] - distX && centre.x < chk[0] + distX;
-            inZ = centre.z > chk[2] - distZ && centre.z < chk[2] + distZ;
+            inX = centre.x > chk [0] - distX && centre.x < chk [0] + distX;
+            inZ = centre.z > chk [2] - distZ && centre.z < chk [2] + distZ;
 
             if (inX && inZ) {
                 //string collideCentre = "<" + chk[0] + ", " + chk[1] + ", " + chk[2] + ">";
@@ -69,7 +69,8 @@ public class Building : MonoBehaviour {
     /// </summary>
     /// <param name="centre"> the vector for the centre of the room </param>
     /// <param name="loc"> the vector for the centre of the plus sign </param>
-    /// <param name="type"> determines which room dimensions to use </param>
+    /// <param name="width"> determines the size of the room along the X axis </param>
+    /// <param name="length"> determines the size of the room along the Z axis </param>
     /// <returns> the room object that is adjacent to the new door or window </returns>
     public GameObject CheckDoorWindowPlacement (float[] centre, float[] loc, float width, float length){
         bool inX, inZ;
@@ -80,11 +81,11 @@ public class Building : MonoBehaviour {
             // loc lies on positive X wall
             (loc [0] > centre [0] + distX - 0.5f) ? new float[] { centre [0] + distX + 0.125f, loc [1], loc [2] } :
             // loc lies on negative Z wall
-            (loc [2] > centre [2] + distZ - 0.5f) ? new float[] { loc [0], loc [1], centre [2] + distZ + 0.125f } :
+            (loc [2] < centre [2] - distZ + 0.5f) ? new float[] { loc [0], loc [1], centre [2] - distZ - 0.125f } :
             // loc lies on negative X wall
             (loc [0] < centre [0] - distX + 0.5f) ? new float[] { centre [0] - distX - 0.125f, loc [1], loc [2] } :
             // loc must lie on positive Z wall
-            new float[] { loc[2], loc[1], centre[2] - distZ - 0.125f };
+            new float[] { loc[2], loc[1], centre[2] + distZ + 0.125f };
 
         RoomData current;
         foreach (GameObject room in rooms) {
@@ -210,7 +211,7 @@ public class Building : MonoBehaviour {
             component = Instantiate (
                 plusSign,
                 Vector3.zero,
-                Quaternion.Euler(0, 0, 0)
+                Quaternion.Euler (0, 0, 0)
             ) as GameObject;
             centre = plus.GetCentre ();
             component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));

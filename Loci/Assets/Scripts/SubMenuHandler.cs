@@ -89,13 +89,19 @@ public class SubMenuHandler : MonoBehaviour {
         CorridorButton.SetActive(true);
         DoorSubMenu.SetActive(false);
         Door.SetActive(true);
+
         string type = "room";
-        RoomButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
-        type = RoomTypes.GetCorridorType(thisPlus.GetAngle());
-        CorridorButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
-        GameObject component = building.CheckDoorWindowPlacement(thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength());
-        //print("Vector3 = " + component.GetComponent<RoomHandler>().GetData().GetCentre()[0] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[1] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[2]);
-        Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) != null;
+        RoomButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
+        type = RoomTypes.GetCorridorType (thisPlus.GetAngle ());
+        CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
+
+        RoomData thisRoom = roomHandler.GetData ();
+        GameObject component = building.CheckDoorWindowPlacement (
+            thisPlus.GetCentre (), thisRoom.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
+        );
+        Door.GetComponent<Button> ().interactable = building.CheckDoorWindowPlacement (
+            thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
+        ) != null;
     }
 
     //On-Click Methods:
@@ -105,6 +111,7 @@ public class SubMenuHandler : MonoBehaviour {
     }
     public void AddPicture()
     {
+        // this doesn't look right. do you mean gameObject.transform.position
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();
