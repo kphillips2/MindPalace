@@ -95,13 +95,31 @@ public class SubMenuHandler : MonoBehaviour {
         CorridorButton.GetComponent<Button>().interactable = CheckRoomPlacement(type);
         GameObject component = building.CheckDoorWindowPlacement(thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength());
         //print("Vector3 = " + component.GetComponent<RoomHandler>().GetData().GetCentre()[0] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[1] + ", " + component.GetComponent<RoomHandler>().GetData().GetCentre()[2]);
-        Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) != null;
+        //Door.GetComponent<Button>().interactable = building.CheckDoorWindowPlacement( thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength()) != null;
     }
 
     //On-Click Methods:
     public void AddDoor()
     {
-        //TODO
+        CutDoorOnPlusSign();
+        GameObject CollidingRoom = building.CheckDoorWindowPlacement(thisPlus.GetCentre(), roomHandler.GetData().GetCentre(), roomHandler.GetData().GetWidth(), roomHandler.GetData().GetLength());
+        if (CollidingRoom != null){
+            float doorLocation = -1;
+            int wallIndex = thisPlus.GetWallIndex();
+            float[] plusLoc = thisPlus.GetCentre();
+            float[] roomLoc = roomHandler.GetData().GetCentre();
+            float[] colliderLoc = CollidingRoom.GetComponent<RoomHandler>().GetData().GetCentre();
+            if (wallIndex % 2 == 0)
+            {
+                doorLocation = plusLoc[0] + roomLoc[0] - colliderLoc[0];
+            }
+            else
+            {
+                doorLocation = plusLoc[2] + roomLoc[2] - colliderLoc[2];
+            }
+            int newDoorWall = (wallIndex + 2) % 4;
+            CollidingRoom.GetComponent<RoomHandler>().AddDoor(newDoorWall, doorLocation);
+        }
     }
     public void AddPicture()
     {

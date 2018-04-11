@@ -33,4 +33,10 @@ public static class LoadFile {
         } else
             Debug.LogError ("The Loci was not found.");
     }
+
+    public static void ClearLoci()
+    {
+        SaveFile.currentLoci = new Loci();
+        SaveFile.name = null;
+    }
 }
