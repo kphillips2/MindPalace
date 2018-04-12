@@ -93,9 +93,8 @@ public class SubMenuHandler : MonoBehaviour {
         CorridorButton.GetComponent<Button> ().interactable = CheckRoomPlacement (type);
 
         RoomData thisRoom = roomHandler.GetData ();
-        Door.GetComponent<Button> ().interactable = building.CheckDoorWindowPlacement (
-            thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
-        ) != null;
+        //This line disables doors to the outside:
+        //Door.GetComponent<Button> ().interactable = building.CheckDoorWindowPlacement (thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()) != null;
     }
 
     //On-Click Methods:
@@ -116,7 +115,14 @@ public class SubMenuHandler : MonoBehaviour {
                 plusLoc [2] + roomLoc [2] - colliderLoc [2];
             int oppositeWall = (wallIndex + 2) % 4;
 
-            collidingRoom.GetComponent<RoomHandler> ().AddDoor (oppositeWall, doorLoc);
+            if (wallIndex < 2)
+            {
+                collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, doorLoc);
+            }
+            else
+            {
+                collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, -doorLoc);
+            }
         }
     }
     public void AddPicture()

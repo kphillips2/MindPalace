@@ -32,4 +32,9 @@ public class ActivationManager : MonoBehaviour {
         Activated = false;
         ActivatedObject.GetComponent<SubMenuHandler>().DefaultState();
     }
+
+    public GameObject GetActive()
+    {
+        return ActivatedObject;
+    }
 }
