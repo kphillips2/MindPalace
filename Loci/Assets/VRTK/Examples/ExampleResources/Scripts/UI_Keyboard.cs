@@ -20,9 +20,12 @@
             }
         }
 
+        //Function called when Enter key is pressed
         public void Enter()
         {
-            VRTK_Logger.Info("You've typed [" + input.text + "]");
+            //Code for loading scene and storing entered loci name
+            //Entered loci name is 'input.text'
+            Debug.Log("You've typed [" + input.text + "]");
             input.text = "";
         }
 
