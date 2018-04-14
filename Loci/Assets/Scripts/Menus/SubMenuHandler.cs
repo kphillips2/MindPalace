@@ -111,7 +111,7 @@ public class SubMenuHandler : MonoBehaviour {
             float[] colliderLoc = collidingRoom.GetComponent<RoomHandler> ().GetData ().GetCentre ();
 
             float doorLoc = (wallIndex % 2 == 0) ?
-                plusLoc [0] + roomLoc [0] - colliderLoc [0]:
+                -(plusLoc [0] + roomLoc [0] - colliderLoc [0]):
                 plusLoc [2] + roomLoc [2] - colliderLoc [2];
             int oppositeWall = (wallIndex + 2) % 4;
 
@@ -127,7 +127,6 @@ public class SubMenuHandler : MonoBehaviour {
     }
     public void AddPicture()
     {
-        // this doesn't look right. do you mean gameObject.transform.position
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();

@@ -109,3 +109,12 @@ CHANGE DISTANCE USER CAN BE FROM OBJECT BEFORE OBJECT IS DROPPED
 
 - Under the prefab, go to 'VRTK_TrackObjectGrab'
 - Under 'Track Options', change 'Detach Distance'
+
+--------------------------------------------------------------------------------
+
+IF CAN'T SWITCH HAND THAT IS HOLDING OBJECT
+-------------------------------------------
+
+- Under the prefab, go to 'VRTK_InteractableObject'
+- Under 'Grab Options', check that 'Secondary Grab Action' is not none. If it is,
+drag VRTK_SwapControllerGrab script that is attached to prefab onto it

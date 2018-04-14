@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4954990375956896}
   - component: {fileID: 33913207910611708}
   - component: {fileID: 23905060142798838}
+  - component: {fileID: 64516754694738818}
   m_Layer: 0
   m_Name: CoffeTable_3
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4974973206664752}
+  - component: {fileID: 64919258711345184}
   m_Layer: 0
   m_Name: CoffeeTable
   m_TagString: Untagged
@@ -49,7 +51,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480685042280598}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_LocalRotation: {x: -0.7069834, y: -0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 140, y: 75.000015, z: 1.7000005}
   m_Children: []
@@ -111,3 +113,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480685042280598}
   m_Mesh: {fileID: 4300000, guid: 45276210d7d92ae439d4f9ba0fd6f6ba, type: 3}
+--- !u!64 &64516754694738818
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1480685042280598}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 45276210d7d92ae439d4f9ba0fd6f6ba, type: 3}
+--- !u!64 &64919258711345184
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1659241550633766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}

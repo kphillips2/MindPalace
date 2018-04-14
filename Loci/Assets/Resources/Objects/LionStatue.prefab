@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4791709056822888}
   - component: {fileID: 33871862715953454}
   - component: {fileID: 23599864290231886}
+  - component: {fileID: 64625227205239668}
   m_Layer: 0
   m_Name: lion_statue
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4081231532703024}
+  - component: {fileID: 64216560894993278}
   m_Layer: 0
   m_Name: LionStatue
   m_TagString: Untagged
@@ -110,4 +112,32 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396501181980070}
+  m_Mesh: {fileID: 4300000, guid: 09d7480794017b24bb74b50fc337a3e7, type: 3}
+--- !u!64 &64216560894993278
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567303359759266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &64625227205239668
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396501181980070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 09d7480794017b24bb74b50fc337a3e7, type: 3}

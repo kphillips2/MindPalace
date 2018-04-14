@@ -114,6 +114,7 @@ public class RoomData {
     /// Removes all plus signs currently stored in the room.
     /// </summary>
     public void ClearPlusSigns() { plusSigns = new List<PlusData> (); }
+    public void DeletePlus(int index) { plusSigns.RemoveAt (index); }
     /// <summary>
     /// Removes all pictures currently stored in the room.
     /// </summary>

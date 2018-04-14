@@ -291,6 +291,8 @@ public class RoomHandler : MonoBehaviour {
             doorsAndWindows [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
             if (WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength))
                 doorsAndWindows [wallIndex].Remove (cutCentre);
+            else
+                RemovePlus (wallIndex, loc);
         }
         else
             Debug.LogError (errMsg);
@@ -304,4 +306,30 @@ public class RoomHandler : MonoBehaviour {
         float wallLength = GetWallSize (wallIndex);
         WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength);
 	}
+    private void RemovePlus (int wallIndex, float loc){
+        float angle =
+            (wallIndex == 1) ? 90 :
+            (wallIndex == 2) ? 180 :
+            (wallIndex == 3) ? 270 : 0;
+        float[] centre;
+        float[] roomCentre = thisRoom.GetCentre ();
+
+        List<PlusData> plusSigns = thisRoom.GetPlusData ();
+        Vector3 plusCentre;
+
+        for (int k = plusSigns.Count-1; k >= 0 ; k--) {
+            if(plusSigns [k].GetAngle () == angle) {
+                centre = plusSigns [k].GetCentre ();
+                centre [0] -= roomCentre [0];
+                centre [1] -= roomCentre [1];
+                centre [2] -= roomCentre [2];
+
+                plusCentre = 
+                    Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
+
+                if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4)
+                    thisRoom.DeletePlus (k);
+            }
+        }
+    }
 }

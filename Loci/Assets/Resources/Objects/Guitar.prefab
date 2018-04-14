@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4943010474660806}
+  - component: {fileID: 64644216454989612}
   m_Layer: 0
   m_Name: Guitar
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   - component: {fileID: 4942966153446796}
   - component: {fileID: 33219069723831768}
   - component: {fileID: 23142912938199010}
+  - component: {fileID: 64221912536255992}
   m_Layer: 0
   m_Name: GuitarA
   m_TagString: Untagged
@@ -63,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728333572446914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13198602, y: 0, z: -2.4519112}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942966153446796}
@@ -111,3 +113,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978234430786630}
   m_Mesh: {fileID: 4300000, guid: 8808cc2ab63070742bfab08784d69afa, type: 3}
+--- !u!64 &64221912536255992
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978234430786630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 8808cc2ab63070742bfab08784d69afa, type: 3}
+--- !u!64 &64644216454989612
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1728333572446914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}

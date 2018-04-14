@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4611145029362092}
+  - component: {fileID: 64351096361534684}
   m_Layer: 0
   m_Name: TV
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   - component: {fileID: 4031535611017428}
   - component: {fileID: 33030913680858380}
   - component: {fileID: 23651810530287832}
+  - component: {fileID: 64305435287519938}
   m_Layer: 0
   m_Name: CoffeTable_4
   m_TagString: Untagged
@@ -69,6 +71,7 @@ GameObject:
   - component: {fileID: 33493146577505860}
   - component: {fileID: 23226654080164442}
   - component: {fileID: 95249698649237494}
+  - component: {fileID: 64728422314924446}
   m_Layer: 0
   m_Name: FlatScreenTV
   m_TagString: Untagged
@@ -212,6 +215,48 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1769516264064744}
+  m_Mesh: {fileID: 4300000, guid: ad6611d95a9ac7d45bc4da137220780c, type: 3}
+--- !u!64 &64305435287519938
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504714608499348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 8b77ab8a65e9c9e4ba013ba2868ef6b8, type: 3}
+--- !u!64 &64351096361534684
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093565673195124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &64728422314924446
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769516264064744}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: ad6611d95a9ac7d45bc4da137220780c, type: 3}
 --- !u!95 &95249698649237494
 Animator:
