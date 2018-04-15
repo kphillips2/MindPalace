@@ -9,9 +9,9 @@ using System;
 [System.Serializable]
 public class PlusData : IComparable<PlusData> {
     private float angle;
-    private float[] centre = new float [3];
-    private float[] newRoom = new float [3];
-    private float[] newCorridor = new float [3];
+    private float[] centre;
+    private float[] newRoom;
+    private float[] newCorridor;
 
     /// <summary>
     /// Constructs a save object for a plus sign at the given centre and angle.
@@ -19,6 +19,10 @@ public class PlusData : IComparable<PlusData> {
     /// <param name="loc"> a float array for the centre vector of the plus sign </param>
     /// <param name="dir"> an angle that determines which wall to display the plus sign on </param>
     public PlusData(float[] loc, float[] roomLoc, float[] corridorLoc, float dir){
+        centre = new float [3];
+        newRoom = new float [3];
+        newCorridor = new float [3];
+
         if (loc.Length != 3)
             Debug.Log ("Error: plus sign centre array length must be 3");
         else
@@ -64,9 +68,18 @@ public class PlusData : IComparable<PlusData> {
     public int CompareTo(PlusData other){
         float dir = other.GetAngle ();
         float[] chk = other.GetCentre ();
-        float ans = (centre [1] != chk [1]) ? centre [1] - chk [1] :
+
+        float margin = 0.0001f;
+        float diffX = centre [0] - chk [0];
+        float diffY = centre [1] - chk [1];
+        float diffZ = centre [2] - chk [2];
+        
+
+        float ans = (diffY > margin) ? diffY :
             (angle != dir) ? angle - dir :
-            (centre [0] != chk [0]) ? centre [0] - chk [1] : 0;
+            (angle % 180 == 0) ?
+                (diffX > margin) ? diffX : 0 :
+                (diffZ > margin) ? diffZ : 0;
         return (int)ans;
     }
 

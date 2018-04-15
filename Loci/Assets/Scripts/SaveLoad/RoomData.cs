@@ -10,10 +10,10 @@ using System;
 public class RoomData {
     private float width;
     private float length;
-    private float[] centre = new float [3];
-    private List<float[]>[] doorsAndWindows = new List<float[]> [4];
-    private List<PlusData> plusSigns = new List<PlusData> ();
-    private string[] materials = new string [3];
+    private float[] centre;
+    private List<float[]>[] doorsAndWindows;
+    private List<PlusData> plusSigns;
+    private string[] materials;
     private List<Picture> pictures;
 
     /// <summary>
@@ -21,11 +21,18 @@ public class RoomData {
     /// </summary>
     /// <param name="loc"> a float array for the centre vector of the room </param>
     public RoomData(float[] loc){
-        if (loc.Length != 3)
+        centre = new float [3];
+        doorsAndWindows = new List<float[]> [4];
+        for (int k = 0; k < 4; k++)
+            doorsAndWindows[k] = new List<float[]> ();
+        plusSigns = new List<PlusData> ();
+        materials = new string [3];
+        pictures = new List<Picture> ();
+
+            if (loc.Length != 3)
             Debug.Log ("Error: centre array length must be 3");
         else
             Array.Copy (loc, centre, 3);
-        pictures = new List<Picture> ();
     }
     /// <summary>
     /// Sets the stored length and width of the room.
@@ -114,6 +121,10 @@ public class RoomData {
     /// Removes all plus signs currently stored in the room.
     /// </summary>
     public void ClearPlusSigns() { plusSigns = new List<PlusData> (); }
+    /// <summary>
+    /// Removes a plus sign at the currently stored index.
+    /// </summary>
+    /// <param name="index"> the index of the plus sign being removed </param>
     public void DeletePlus(int index) { plusSigns.RemoveAt (index); }
     /// <summary>
     /// Removes all pictures currently stored in the room.
