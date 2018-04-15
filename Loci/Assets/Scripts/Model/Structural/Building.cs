@@ -15,7 +15,7 @@ public class Building : MonoBehaviour {
 	// Use this for initialization
 	void Start (){
         rooms = new List<GameObject> ();
-        if (SaveFile.isNewLoci)
+        if (SaveFile.isNewLoci || SaveFile.name == null)
             AddRoom (new Vector3 (0, 0, 0));
         else { 
             LoadRooms (SaveFile.currentLoci.getRooms ());
