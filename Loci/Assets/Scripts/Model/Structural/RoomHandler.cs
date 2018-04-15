@@ -151,7 +151,7 @@ public class RoomHandler : MonoBehaviour {
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            component.transform.SetParent(this.transform);
+            component.transform.SetParent (this.transform);
             centre = component.transform.position;
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
@@ -331,7 +331,7 @@ public class RoomHandler : MonoBehaviour {
 
                 if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4) {
                     thisRoom.DeletePlus (k);
-                    foreach (Transform plus in this.transform)
+                    foreach (GameObject plus in this.GetComponentsInChildren<GameObject> ())
                         if (plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]) == 0)
                             Object.Destroy (plus);
                 }

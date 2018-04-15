@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 /// <summary>
 /// Responsible for handling and plus sign functionality.
