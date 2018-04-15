@@ -150,6 +150,8 @@ public class RoomHandler : MonoBehaviour {
             component.transform.rotation = Quaternion.Euler (0, angle, 0);
             component.transform.Translate (centre);
             component.SetActive (true);
+
+            component.transform.SetParent(this.transform);
             centre = component.transform.position;
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
@@ -327,8 +329,12 @@ public class RoomHandler : MonoBehaviour {
                 plusCentre = 
                     Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
-                if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4)
+                if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4) {
                     thisRoom.DeletePlus (k);
+                    foreach (Transform plus in this.transform)
+                        if (plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]) == 0)
+                            Object.Destroy (plus);
+                }
             }
         }
     }
