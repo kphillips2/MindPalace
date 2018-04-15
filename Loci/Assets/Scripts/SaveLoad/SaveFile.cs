@@ -9,6 +9,7 @@ using System.IO;
 /// Responsible for storing all saved information in a file.
 /// </summary>
 public static class SaveFile {
+    public static bool isNewLoci = false;
     public static string name = null;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
     public static Dictionary<string, Loci> savedLocis= new Dictionary<string, Loci> (); //List of save files
@@ -20,8 +21,11 @@ public static class SaveFile {
     public static void Save(){
         SaveObjects ();
         if (name == null) {
-            name = DateTime.Now.ToLongDateString () + ", " + DateTime.Now.ToLongTimeString ();
-            savedLocis.Add (name, currentLoci);
+            name = DateTime.Now.ToLongDateString() + ", " + DateTime.Now.ToLongTimeString();
+            savedLocis.Add(name, currentLoci);
+        }
+        else if (isNewLoci) {
+            savedLocis.Add(name, currentLoci);
         } else
             savedLocis[name] = currentLoci;
 

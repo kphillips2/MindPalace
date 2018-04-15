@@ -47,6 +47,7 @@ public class LociListControl : MonoBehaviour
     public void listButtonClicked(string lociName)
     {
         LoadFile.LoadLoci(lociName);
+        SaveFile.isNewLoci = false;
         SceneManager.LoadScene("GreenDemo");
     }
 

@@ -8,13 +8,14 @@ public class StartingMenuHandler : MonoBehaviour {
     public GameObject LociMenu;
     public GameObject StartingMenu;
     public GameObject SettingsMenu;
+    public GameObject Keyboard;
 
-	void Start () {}
+	void Start () { NewLoci(); }
 
     public void NewLoci()
     {
-        LoadFile.ClearLoci();
-        SceneManager.LoadScene("GreenDemo");
+        Keyboard.transform.position = StartingMenu.transform.position + new Vector3(0f, 1f, 0f);
+        StartingMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void DisplayLoadMenu()
