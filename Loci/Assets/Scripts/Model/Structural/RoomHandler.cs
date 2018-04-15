@@ -151,7 +151,7 @@ public class RoomHandler : MonoBehaviour {
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            component.transform.SetParent(this.transform);
+            component.transform.SetParent (this.transform);
             centre = component.transform.position;
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
@@ -308,6 +308,11 @@ public class RoomHandler : MonoBehaviour {
         float wallLength = GetWallSize (wallIndex);
         WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength);
 	}
+    /// <summary>
+    /// Removes a plus sign from the save data of a room and from the scene.
+    /// </summary>
+    /// <param name="wallIndex"> the index of the wall holding the plus sign </param>
+    /// <param name="loc"> the location of the door or window along the wall </param>
     private void RemovePlus (int wallIndex, float loc){
         float angle =
             (wallIndex == 1) ? 90 :
@@ -331,7 +336,7 @@ public class RoomHandler : MonoBehaviour {
 
                 if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4) {
                     thisRoom.DeletePlus (k);
-                    foreach (Transform plus in this.transform)
+                    foreach (GameObject plus in this.GetComponentsInChildren<GameObject> ())
                         if (plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]) == 0)
                             Object.Destroy (plus);
                 }
