@@ -16,9 +16,13 @@ public class Building : MonoBehaviour {
         rooms = new List<GameObject> ();
         if (SaveFile.name == null)
             AddRoom (new Vector3 (0, 0, 0));
-        else
+        else { 
             LoadRooms (SaveFile.currentLoci.getRooms ());
-	}
+            ObjectPlacer op = new ObjectPlacer();
+            foreach (float[] o in SaveFile.currentLoci.getObjects())
+                op.createPrefab((int) o[0], new Vector3(o[1], o[2], o[3]), new Vector3(o[4], o[5], o[6]), true);
+        }
+    }
     /// <summary>
     /// Saves all the rooms and corridors to the currently open Loci.
     /// </summary>
