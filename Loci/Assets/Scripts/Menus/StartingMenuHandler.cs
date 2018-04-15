@@ -10,7 +10,7 @@ public class StartingMenuHandler : MonoBehaviour {
     public GameObject SettingsMenu;
     public GameObject Keyboard;
 
-	void Start () { NewLoci(); }
+	void Start () { }
 
     public void NewLoci()
     {
