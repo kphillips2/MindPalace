@@ -79,6 +79,8 @@ public class SubMenuHandler : MonoBehaviour {
         Door.SetActive (false);
     }
     public void OpenDoorSubMenu(){
+        print("ButtonCenter Initial:" + thisPlus.GetCentre()[0] + ',' + thisPlus.GetCentre()[2]);
+        print("Transform: " + this.transform.position);
         ClickedOn.SetActive (false);
         RoomButton.SetActive (true);
         Window.SetActive (false);
@@ -99,11 +101,13 @@ public class SubMenuHandler : MonoBehaviour {
 
     //On-Click Methods:
     public void AddDoor() {
-        CutDoorOnPlusSign ();
+        CutDoorOnPlusSignLocalCoords ();
+        CutDoorOnPlusSign();
         RoomData thisRoom = roomHandler.GetData ();
         GameObject collidingRoom = building.CheckDoorWindowPlacement (
             thisRoom.GetCentre (), thisPlus.GetCentre (), thisRoom.GetWidth (), thisRoom.GetLength ()
         );
+        print(collidingRoom != null);
         if (collidingRoom != null) {
             int wallIndex = thisPlus.GetWallIndex ();
             float[] plusLoc = thisPlus.GetCentre ();
@@ -154,7 +158,7 @@ public class SubMenuHandler : MonoBehaviour {
     }
     public void AddRoom()
     {
-        this.CutDoorOnPlusSign();
+        CutDoorOnPlusSign();
         GameObject newRoom = building.AddRoom(ConvertToVector(thisPlus.GetNewRoom()));
         RoomHandler newRoomHandler = newRoom.GetComponent<RoomHandler>();
         int wallIndex = thisPlus.GetWallIndex();
@@ -218,21 +222,48 @@ public class SubMenuHandler : MonoBehaviour {
     {
         int wallIndex = thisPlus.GetWallIndex();
         float[] roomCentre = roomHandler.GetData().GetCentre();
+        print("RoomCenter:" + roomCentre[0]+','+ roomCentre[2] );
+        print("ButtonCenter:" + thisPlus.GetCentre()[0]+ ','+ thisPlus.GetCentre()[2]);
         if (wallIndex == 0)
         {
             roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[0]-roomCentre[0]);
         }
         else if (wallIndex == 1)
         {
-            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[2] - roomCentre[2]);
+            roomHandler.AddDoor(wallIndex, -((int)thisPlus.GetCentre()[2] - roomCentre[2]));
         }
         else if (wallIndex == 2)
         {
-            roomHandler.AddDoor(wallIndex, -(int)thisPlus.GetCentre()[0] - roomCentre[0]);
+            roomHandler.AddDoor(wallIndex, -((int)thisPlus.GetCentre()[0] - roomCentre[0]));
         }
         else if (wallIndex == 3)
         {
             roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[2] - roomCentre[2]);
+        }
+        HideAll();
+    }
+
+    private void CutDoorOnPlusSignLocalCoords()
+    {
+        int wallIndex = thisPlus.GetWallIndex();
+        float[] roomCentre = roomHandler.GetData().GetCentre();
+        print("RoomCenter(Local):" + roomCentre[0] + ',' + roomCentre[2]);
+        print("ButtonCenter(Local):" + thisPlus.GetCentre()[0] + ',' + thisPlus.GetCentre()[2]);
+        if (wallIndex == 0)
+        {
+            roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[0] );
+        }
+        else if (wallIndex == 1)
+        {
+            roomHandler.AddDoor(wallIndex, -((int)thisPlus.GetCentre()[2] ));
+        }
+        else if (wallIndex == 2)
+        {
+            roomHandler.AddDoor(wallIndex, -((int)thisPlus.GetCentre()[0] ));
+        }
+        else if (wallIndex == 3)
+        {
+            roomHandler.AddDoor(wallIndex, (int)thisPlus.GetCentre()[2] );
         }
         HideAll();
     }
