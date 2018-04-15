@@ -2,10 +2,13 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
+    using UnityEngine.SceneManagement;
 
     public class UI_Keyboard : MonoBehaviour
     {
         private InputField input;
+        public GameObject Keyboard;
+        public GameObject StartingMenu;
 
         public void ClickKey(string character)
         {
@@ -23,10 +26,18 @@
         //Function called when Enter key is pressed
         public void Enter()
         {
-            //Code for loading scene and storing entered loci name
-            //Entered loci name is 'input.text'
-            Debug.Log("You've typed [" + input.text + "]");
+            LoadFile.ClearLoci();
+            SaveFile.name = input.text;
+            SaveFile.isNewLoci = true;
             input.text = "";
+            SceneManager.LoadScene("GreenDemo");
+        }
+
+        public void Cancel()
+        {
+            input.text = "";
+            StartingMenu.transform.position = Keyboard.transform.position - new Vector3(0f,1f,0f);
+            Keyboard.transform.position = new Vector3(0f, -100f, 0f);
         }
 
         private void Start()
