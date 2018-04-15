@@ -199,7 +199,7 @@ public class SubMenuHandler : MonoBehaviour {
         }
     }
 
-    //Collider Checkers:
+    // Collider Checkers:
     private bool CheckRoomPlacement(string type){
         Vector3 newCentre = ConvertToVector (RoomTypes.GetNewRoomCentre (thisPlus, type));
         return building.CheckRoomPlacement (newCentre, type);
@@ -207,6 +207,7 @@ public class SubMenuHandler : MonoBehaviour {
     private Vector3 ConvertToVector(float[] data){
         return new Vector3 (data [0], data [1], data [2]);
     }
+    public PlusData GetData() { return thisPlus; }
 
     private void CutDoorOnPlusSign()
     {

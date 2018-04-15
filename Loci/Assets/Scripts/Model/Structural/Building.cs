@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Resonsible for loading any room objects. Also tracks all rooms.
@@ -80,22 +81,29 @@ public class Building : MonoBehaviour {
         bool inX, inZ;
         float[] chk;
         float distX = width / 2, distZ = length / 2;
+        float margin, diffX, diffY, diffZ;
 
         float[] newLoc =
             // loc lies on positive X wall
-            (loc [0] > centre [0] + distX - 0.5f) ? new float[] { centre [0] + distX + 0.125f, loc [1], loc [2] } :
+            (loc [0] > centre [0] + distX - 0.5f) ? new float[] { centre [0] + distX + 0.3f, loc [1], loc [2] } :
             // loc lies on negative Z wall
-            (loc [2] < centre [2] - distZ + 0.5f) ? new float[] { loc [0], loc [1], centre [2] - distZ - 0.125f } :
+            (loc [2] < centre [2] - distZ + 0.5f) ? new float[] { loc [0], loc [1], centre [2] - distZ - 0.3f } :
             // loc lies on negative X wall
-            (loc [0] < centre [0] - distX + 0.5f) ? new float[] { centre [0] - distX - 0.125f, loc [1], loc [2] } :
+            (loc [0] < centre [0] - distX + 0.5f) ? new float[] { centre [0] - distX - 0.3f, loc [1], loc [2] } :
             // loc must lie on positive Z wall
-            new float[] { loc[2], loc[1], centre[2] + distZ + 0.125f };
+            new float[] { loc [0], loc [1], centre [2] + distZ + 0.3f };
 
         RoomData current;
         foreach (GameObject room in rooms) {
             current = room.GetComponent<RoomHandler> ().GetData ();
             chk = current.GetCentre ();
-            if(centre [0] == chk [0] && centre [1] == chk [1] && centre [2] == chk [2])
+
+            margin = 0.0001f;
+            diffX = centre [0] - chk [0];
+            diffY = centre [1] - chk [1];
+            diffZ = centre [2] - chk [2];
+
+            if (Math.Abs (diffX) < margin && Math.Abs (diffY) < margin && Math.Abs (diffZ) < margin)
                 continue; 
 
             distX = current.GetWidth () / 2;
