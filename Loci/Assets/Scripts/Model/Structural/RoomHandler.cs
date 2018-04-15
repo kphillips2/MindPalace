@@ -336,9 +336,10 @@ public class RoomHandler : MonoBehaviour {
 
                 if (plusCentre.x > loc - 4 && plusCentre.x < loc + 4) {
                     thisRoom.DeletePlus (k);
-                    foreach (GameObject plus in this.GetComponentsInChildren<GameObject> ())
-                        if (plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]) == 0)
-                            Object.Destroy (plus);
+                    foreach (Canvas plus in this.GetComponentsInChildren<Canvas> ())
+                        if (plus.tag == "PlusSign")
+                            if (plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]) == 0)
+                                Destroy (plus);
                 }
             }
         }
