@@ -184,7 +184,7 @@ public class Building : MonoBehaviour {
             width = data.GetWidth ();
             length = data.GetLength ();
             component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
-            LoadPlusSigns (data.GetPlusData ());
+            LoadPlusSigns (data.GetPlusData (), component);
 
             mats = data.GetMaterials ();
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
@@ -215,7 +215,7 @@ public class Building : MonoBehaviour {
     /// Loads all the plus signs from the list provided.
     /// </summary>
     /// <param name="data"> a list of plus sign information </param>
-    private void LoadPlusSigns(List<PlusData> data){
+    private void LoadPlusSigns(List<PlusData> data, GameObject parent){
         float[] centre;
         GameObject component;
 
@@ -229,6 +229,8 @@ public class Building : MonoBehaviour {
             component.transform.Translate (new Vector3 (centre [0], centre [1], centre [2]));
             component.transform.rotation = Quaternion.Euler (0, plus.GetAngle (), 0);
             component.SetActive (true);
+
+            component.transform.SetParent (parent.transform);
             component.GetComponent<SubMenuHandler> ().InitData (plus);
         }
     }
