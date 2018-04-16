@@ -78,7 +78,8 @@ public class ButtonListControl : MonoBehaviour {
             float roty = transform.eulerAngles.y + 90f;
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-            pc.placePicture(picFilePath, roty, location);
+            GameObject image = pc.placePicture(picFilePath, roty, location);
+            ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().PlaceXOverImage(image);
             ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().HideAll();
             ButtonManager.GetComponent<ActivationManager>().NoActive();
             ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it

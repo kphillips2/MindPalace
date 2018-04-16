@@ -14,7 +14,7 @@ public class ActivationManager : MonoBehaviour {
 
     public void ActivateMenu(GameObject NewActivation)
     {
-        if (Activated == false)
+        if (Activated == false || ActivatedObject == null)
         {
             ActivatedObject = NewActivation;
             Activated = true;

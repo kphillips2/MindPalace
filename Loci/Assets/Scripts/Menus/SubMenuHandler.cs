@@ -19,6 +19,7 @@ public class SubMenuHandler : MonoBehaviour {
     public GameObject Door;
     public GameObject SingularActivation;
     public GameObject ImageMenu;
+    public GameObject XButton;
 
     private Building building;
     private RoomHandler roomHandler;
@@ -104,7 +105,7 @@ public class SubMenuHandler : MonoBehaviour {
         float[] plusLoc ={ this.transform.position.x, this.transform.position.y, this.transform.position.z };
         float[] plusLocRoss = thisPlus.GetCentre();
         GameObject collidingRoom = building.CheckDoorWindowPlacement (
-            thisRoom.GetCentre (), plusLocRoss, thisRoom.GetWidth (), thisRoom.GetLength ()
+            thisRoom.GetCentre (), plusLoc, thisRoom.GetWidth (), thisRoom.GetLength ()
         );
         print(collidingRoom != null);
         if (collidingRoom != null) {
@@ -120,8 +121,8 @@ public class SubMenuHandler : MonoBehaviour {
             print("--------------------------");
 
             float doorLoc = (wallIndex % 2 == 0) ?
-                -(plusLocRoss [0] + roomLoc [0] - colliderLoc [0]):
-                plusLocRoss [2] + roomLoc [2] - colliderLoc [2];
+                -(this.transform.position.x - roomLoc [0] - colliderLoc [0]):
+                this.transform.position.z - roomLoc [2] - colliderLoc [2];
             int oppositeWall = (wallIndex + 2) % 4;
 
             if (wallIndex < 2)
@@ -143,23 +144,46 @@ public class SubMenuHandler : MonoBehaviour {
     public void AddWindow()
     {
         int wallIndex = thisPlus.GetWallIndex();
+        float windowLoc;
+        //X Button start:
+        GameObject component = Instantiate(
+               XButton,
+               Vector3.zero,
+               Quaternion.Euler(0, 0, 0)
+           ) as GameObject;
+        component.transform.position = this.transform.position;
+        component.transform.rotation = this.transform.rotation;
+        component.SetActive(true);
+        XData thisX = component.GetComponent<XData>();
+        thisX.PlusSignThisReplaces = thisPlus;
+        thisX.offset = new Vector3(0, 0, 0);
+        thisX.wallIndex = wallIndex;
+        thisX.AssignedToWindow = true;
+        //X End
         if (wallIndex ==0)
         {
-            roomHandler.AddWindow(wallIndex, (int)thisPlus.GetCentre()[0]);
+            windowLoc = this.transform.position.x - roomHandler.GetData().GetCentre()[0];
+            thisX.wallLoc = windowLoc;
+            roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if(wallIndex==1)
         {
-            roomHandler.AddWindow(wallIndex, -(int)thisPlus.GetCentre()[2]);
+            windowLoc = -(this.transform.position.z - roomHandler.GetData().GetCentre()[2]);
+            thisX.wallLoc = windowLoc;
+            roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if (wallIndex == 2)
         {
-            roomHandler.AddWindow(wallIndex, -(int)thisPlus.GetCentre()[0]);
+            windowLoc = -(this.transform.position.x - roomHandler.GetData().GetCentre()[0]);
+            thisX.wallLoc = windowLoc;
+            roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if (wallIndex == 3)
         {
-            roomHandler.AddWindow(wallIndex, (int)thisPlus.GetCentre()[2]);
+            windowLoc = this.transform.position.z - roomHandler.GetData().GetCentre()[2];
+            thisX.wallLoc = windowLoc;
+            roomHandler.AddWindow(wallIndex, windowLoc);
         }
-        HideAll();
     }
     public void AddRoom()
     {
@@ -244,6 +268,40 @@ public class SubMenuHandler : MonoBehaviour {
         {
             roomHandler.AddDoor(wallIndex, this.transform.position.z - roomCentre[2]);
         }
-        HideAll();
+        //HideAll();
+    }
+
+    public void PlaceXOverImage(GameObject image)
+    {
+        GameObject component = Instantiate(
+               XButton,
+               Vector3.zero,
+               Quaternion.Euler(0, 0, 0)
+           ) as GameObject;
+        Vector3 OffsetFromWall ;
+        switch (thisPlus.GetWallIndex())
+        {
+            case 0:
+                OffsetFromWall = new Vector3(0, 0, -0.3f);
+                break;
+            case 1:
+                OffsetFromWall = new Vector3(-0.3f, 0, 0);
+                break;
+            case 2:
+                OffsetFromWall = new Vector3(0, 0, 0.3f);
+                break;
+            default:
+                OffsetFromWall = new Vector3(0.3f, 0, 0);
+                break;
+        }
+        component.transform.position = this.transform.position+OffsetFromWall;
+        component.transform.rotation = this.transform.rotation;
+        component.SetActive(true);
+        XData thisX = component.GetComponent<XData>();
+        thisX.PlusSignThisReplaces = thisPlus;
+        thisX.offset = OffsetFromWall;
+        thisX.wallIndex = thisPlus.GetWallIndex();
+        thisX.AssignedToWindow = false;
+        thisX.ImagePlacedOver = image;
     }
 }

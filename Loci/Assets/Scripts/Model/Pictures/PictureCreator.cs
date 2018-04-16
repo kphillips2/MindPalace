@@ -12,11 +12,11 @@ public class PictureCreator : MonoBehaviour {
 
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
-    public void placePicture(string filePath, float roty, Vector3 pos)
+    public GameObject placePicture(string filePath, float roty, Vector3 pos)
     {
         //Loads image, returns if image cannot be found
         Texture2D img = LoadImg(filePath);
-        if (img == null) return;
+        if (img == null) return null;
 
         //Creates a cube and places it at the given position. Rotates it around the y-axis.
         GameObject pic = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -54,7 +54,8 @@ public class PictureCreator : MonoBehaviour {
  
         pic.transform.localScale = new Vector3(0.05f, scale * h, scale * w); //Scales the cube
         pic.GetComponent<Renderer>().material.mainTexture = img; //Textures cube with the image
-        framePicture(roty, pos, scale * w, scale * h);
+        //framePicture(roty, pos, scale * w, scale * h);
+        return pic;
     }
 
     //Places a frame around a picture that is positioned at pos and rotated around the y-axis by roty.
