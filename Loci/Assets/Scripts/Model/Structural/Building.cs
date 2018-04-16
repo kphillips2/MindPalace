@@ -59,7 +59,7 @@ public class Building : MonoBehaviour {
             inZ = centre.z > chk [2] - distZ && centre.z < chk [2] + distZ;
 
             if (inX && inZ) {
-                //string collideCentre = "<" + chk[0] + ", " + chk[1] + ", " + chk[2] + ">";
+                //string collideCentre = "<" + chk [0] + ", " + chk [1] + ", " + chk [2] + ">";
                 //Debug.Log (
                 //    "New room type : " + type + ", room collided with : " +
                 //    "[width : " + width + ", length : " + length + ", centre : " + collideCentre + "]."

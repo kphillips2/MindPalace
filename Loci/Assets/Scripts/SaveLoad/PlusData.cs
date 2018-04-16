@@ -75,11 +75,11 @@ public class PlusData : IComparable<PlusData> {
         float diffZ = centre [2] - chk [2];
         
 
-        float ans = (Math.Abs (diffY) > margin) ? diffY :
+        float ans = (Math.Abs (diffY) > margin) ? 1000 * diffY :
             (angle != dir) ? angle - dir :
             (angle % 180 == 0) ?
-                (Math.Abs (diffX) > margin) ? diffX : 0 :
-                (Math.Abs (diffZ) > margin) ? diffZ : 0;
+                (Math.Abs (diffX) > margin) ? 1000 * diffX : 0 :
+                (Math.Abs (diffZ) > margin) ? 1000 * diffZ : 0;
         return (int)ans;
     }
 
