@@ -335,18 +335,21 @@ public class RoomHandler : MonoBehaviour {
                     Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
                 if (plusCentre.x > loc - 3.5f && plusCentre.x < loc + 3.5f) {
-                    print("The centre of the plus being deleted after being rotated back to the positive z wall: " + plusCentre + ", the location of the door or window is: " + loc);
+                    print ("RemovePlus called on Room at: " +"<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
+                    print ("    Plus centre after rotated to the positive z wall: " + plusCentre + ", the location of the door or window is: " + loc);
 
-                    thisRoom.DeletePlus (k);
                     foreach (Canvas plus in this.GetComponentsInChildren<Canvas> ())
                         if (plus.tag == "PlusSign") {
-                            int comp = plus.GetComponent<SubMenuHandler>().GetData().CompareTo(plusSigns[k]);
-                            print("CompareTo returns: " + comp);
+                            int comp = plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]);
                             if (comp == 0) {
+                                float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
+                                print("    Call Destroy on plus at:" + new Vector3 (cp [0], cp [1], cp [2]));
                                 Destroy (plus.gameObject);
                                 break;
                             }
                         }
+                    print ("    Call DeletePlus on index:" + k);
+                    thisRoom.DeletePlus (k);
                     break;
                 }
             }
