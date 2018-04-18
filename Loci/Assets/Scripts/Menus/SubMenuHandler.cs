@@ -271,7 +271,7 @@ public class SubMenuHandler : MonoBehaviour {
         //HideAll();
     }
 
-    public void PlaceXOverImage(GameObject image)
+    public void PlaceXOverImage(List<GameObject> image)
     {
         GameObject component = Instantiate(
                XButton,
@@ -282,16 +282,16 @@ public class SubMenuHandler : MonoBehaviour {
         switch (thisPlus.GetWallIndex())
         {
             case 0:
-                OffsetFromWall = new Vector3(0, 0, -0.3f);
+                OffsetFromWall = new Vector3(0, 0, -0.1f);
                 break;
             case 1:
-                OffsetFromWall = new Vector3(-0.3f, 0, 0);
+                OffsetFromWall = new Vector3(-0.1f, 0, 0);
                 break;
             case 2:
-                OffsetFromWall = new Vector3(0, 0, 0.3f);
+                OffsetFromWall = new Vector3(0, 0, 0.1f);
                 break;
             default:
-                OffsetFromWall = new Vector3(0.3f, 0, 0);
+                OffsetFromWall = new Vector3(0.1f, 0, 0);
                 break;
         }
         component.transform.position = this.transform.position+OffsetFromWall;
