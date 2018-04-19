@@ -54,7 +54,7 @@ public class PictureCreator : MonoBehaviour {
  
         pic.transform.localScale = new Vector3(0.05f, scale * h, scale * w); //Scales the cube
         pic.GetComponent<Renderer>().material.mainTexture = img; //Textures cube with the image
-        //framePicture(roty, pos, scale * w, scale * h);
+        framePicture(pic, roty, pos, scale * w, scale * h);
         return pic;
     }
 
@@ -62,17 +62,17 @@ public class PictureCreator : MonoBehaviour {
     //The picture has a width of w and a height of h.
     //Frame code is meant for pictures on walls at 90 degree angles, so will return without making 
     //frames if the picture is rotated at an odd angle
-    private static void framePicture(float roty, Vector3 pos, float w, float h)
+    private static void framePicture(GameObject picture, float roty, Vector3 pos, float w, float h)
     {
         if (roty % 90 != 0) return;
-        createSideFrames(roty, pos, w, h);
-        createTopBottomFrames(roty, pos, w, h);
+        createSideFrames(picture, roty, pos, w, h);
+        createTopBottomFrames(picture, roty, pos, w, h);
     }
 
     //Places a scaled cube both above and below an image so as to form half of a picture
     //frame. The image is at position pos, rotated around the y-axis by roty, with width
     //w and height h.
-    private static void createTopBottomFrames(float roty, Vector3 pos, float w, float h)
+    private static void createTopBottomFrames(GameObject picture, float roty, Vector3 pos, float w, float h)
     {
         //Create two cubes
         GameObject topFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -90,12 +90,15 @@ public class PictureCreator : MonoBehaviour {
         topFrame.transform.localScale = new Vector3(0.05f, 0.05f, w + 0.1f);
         bottomFrame.transform.Rotate(0f, roty, 0f);
         bottomFrame.transform.localScale = new Vector3(0.05f, 0.05f, w + 0.1f);
+
+        topFrame.transform.parent = picture.transform;
+        bottomFrame.transform.parent = picture.transform;
     }
 
     //Places two scaled cubes on either side of an image so as to form half of a picture
     //frame. The image is at position pos, rotated around the y-axis by roty, with width
     //w and height h.
-    private static void createSideFrames(float roty, Vector3 pos, float w, float h)
+    private static void createSideFrames(GameObject picture, float roty, Vector3 pos, float w, float h)
     {
         //Create two cubes to be placed on sides of picture
         GameObject sideFrame1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -122,6 +125,9 @@ public class PictureCreator : MonoBehaviour {
         sideFrame1.transform.localScale = new Vector3(0.05f, h, 0.05f); 
         sideFrame2.transform.Rotate(0f, roty, 0f);
         sideFrame2.transform.localScale = new Vector3(0.05f, h, 0.05f);
+
+        sideFrame1.transform.parent = picture.transform;
+        sideFrame2.transform.parent = picture.transform;
     }
 
     //Creates a Texture2D object and loads the image at the given file path into it
