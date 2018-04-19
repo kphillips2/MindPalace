@@ -100,6 +100,16 @@ public class RoomHandler : MonoBehaviour {
         AdjustWall (negXWall, 3);
     }
     /// <summary>
+    /// Adds all pictures to room and to roomdata
+    /// </summary>
+    /// <param name="pictures"> a list of pictures in the room </param>
+    public void SetPictures(List<Picture> pictures){
+        PictureCreator pc = new PictureCreator();
+        foreach (Picture p in pictures)
+            pc.placePicture(p.getFilePath(), p.getRoty(), p.getLocation());
+        thisRoom.SetPictures(pictures);
+    }
+    /// <summary>
     /// Saves this room and all its information to the currently open Loci.
     /// </summary>
     public void Save(){

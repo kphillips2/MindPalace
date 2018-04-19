@@ -137,6 +137,7 @@ public class SubMenuHandler : MonoBehaviour {
     }
     public void AddPicture()
     {
+        ImageMenu.GetComponentInChildren<ButtonListControl>().currentRoom = room;
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();

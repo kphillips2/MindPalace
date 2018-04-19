@@ -140,6 +140,18 @@ public class PictureCreator : MonoBehaviour {
         return texture;
     }
 
+    //Get byte array version of image data
+    public static byte[] GetImageData(string filePath)
+    {
+        byte[] fileData = null;
+
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+        }
+        return fileData;
+    }
+
     // Creates a Sprite version of picture to be used in menus. Can be jpg or png
     public static Sprite LoadNewSprite(string filePath)
     {
