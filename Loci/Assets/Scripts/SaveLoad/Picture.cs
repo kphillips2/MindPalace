@@ -26,10 +26,8 @@ public class Picture {
     // Getters
     public string getFilePath() { return String.Copy(filePath); }
     public float getRoty() { return roty; }
-    public float[] getLocation()
+    public Vector3 getLocation()
     {
-        float[] nLocation = new float[location.Length];
-        Array.Copy(location, nLocation, location.Length);
-        return nLocation;
+        return new Vector3(location[0],location[1],location[2]);
     }
 }

@@ -66,6 +66,14 @@ public class RoomData {
         }
     }
     /// <summary>
+    /// Sets pictures data
+    /// </summary>
+    /// <param name="pictures"> a list of pictures in the room </param>
+    public void SetPictures(List<Picture> pictures)
+    {
+        this.pictures = pictures;
+    }
+    /// <summary>
     /// Adds a given plus sign to the room.
     /// </summary>
     /// <param name="plusData"> the plus sign object being added </param>

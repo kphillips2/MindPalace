@@ -177,6 +177,7 @@ public class Building : MonoBehaviour {
         float[] centre;
         string[] mats;
         List<float[]>[] wallData;
+        List<Picture> pictures;
         GameObject component;
 
         foreach (RoomData data in savedRooms) {
@@ -190,6 +191,9 @@ public class Building : MonoBehaviour {
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
             wallData = data.GetWallData ();
             component.GetComponent<RoomHandler> ().SetWallData (wallData);
+
+            pictures = data.GetPictures();
+            component.GetComponent<RoomHandler>().SetPictures(pictures);
         }
     }
     /// <summary>
