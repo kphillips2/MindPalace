@@ -50,6 +50,7 @@ public class ObjectListControl : MonoBehaviour
         ObjectPlacer op = new ObjectPlacer();
         op.createPrefabInHand(objectNum);
         ObjectMenu.transform.position = new Vector3(0, -100, 0);
+        ActivationManager.isHoldingObject = true;
     }
 
     public void backButtonClicked()

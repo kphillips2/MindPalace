@@ -28,12 +28,10 @@ public class subMenuButtons : MonoBehaviour {
     private Vector3 newRoomCentre;
 	private RoomHandler roomHandler;
     private Building building;
-    private ActivationManager MenuActivationManager;
 
     void Start () {
 		roomHandler = room.GetComponent<RoomHandler> ();
         building = level.GetComponent<Building> ();
-        MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
     }
     //Menu Manipulators:
     public void ShowMoreOptions()
@@ -43,7 +41,7 @@ public class subMenuButtons : MonoBehaviour {
         CorridorButton.SetActive(true);
         Window.SetActive(true);
         Picture.SetActive(true);
-        MenuActivationManager.ActivateMenu(this.gameObject);
+        ActivationManager.ActivateMenu(this.gameObject);
         RoomButton.GetComponent<Button>().interactable= CheckRoomPlacement();
         CorridorButton.GetComponent<Button>().interactable = CheckCorridorPlacement();
     }
@@ -54,8 +52,7 @@ public class subMenuButtons : MonoBehaviour {
         Window.SetActive(false);
         Picture.SetActive(false);
         CorridorButton.SetActive(false);
-        MenuActivationManager = SingularActivation.GetComponent<ActivationManager>();
-        MenuActivationManager.NoActive();
+        ActivationManager.NoActive();
         this.transform.position = new Vector3(0, -100, 0);
     }
     public void HideAllStillActive()

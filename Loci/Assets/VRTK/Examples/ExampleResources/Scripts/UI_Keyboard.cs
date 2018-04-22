@@ -28,11 +28,14 @@
         //Function called when Enter key is pressed
         public void Enter()
         {
-            LoadFile.ClearLoci();
-            SaveFile.name = input.text;
-            SaveFile.isNewLoci = true;
-            input.text = "";
-            SceneManager.LoadScene("GreenDemo");
+            if(input.text.Length > 0)
+            {
+                LoadFile.ClearLoci();
+                SaveFile.name = input.text;
+                SaveFile.isNewLoci = true;
+                input.text = "";
+                SceneManager.LoadScene("GreenDemo");
+            }  
         }
 
         public void SaveAs()
@@ -83,6 +86,11 @@
                 {
                     t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
                     t.GetComponent<Text>().fontSize = fontSize * 14 / 150;
+                }
+                else if (t.name == "InputText")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize * 24 / 150;
                 }
             }
         }

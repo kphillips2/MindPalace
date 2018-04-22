@@ -40,6 +40,7 @@ public class ObjectBehavior : MonoBehaviour {
     {
         isBeingGrabbed = true;
         transform.GetComponent<Rigidbody>().isKinematic = false;
+        ActivationManager.isHoldingObject = true;
     }
 
     //Called when user lets go of object
@@ -47,6 +48,7 @@ public class ObjectBehavior : MonoBehaviour {
     {
         isBeingGrabbed = false;
         transform.GetComponent<Rigidbody>().isKinematic = false;
+        ActivationManager.isHoldingObject = false;
     }
 
     //Called when object is used
