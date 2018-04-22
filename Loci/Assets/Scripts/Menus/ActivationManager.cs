@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivationManager : MonoBehaviour {
+public static class ActivationManager {
 
-    private bool Activated = false;
-    private GameObject ActivatedObject = null;
-    public GameObject ImageMenu;
+    private static bool Activated = false;
+    private static GameObject ActivatedObject = null;
+    public static GameObject ImageMenu;
+    public static bool isHoldingObject = false;
 
-	void Start () {
-		
-	}
-
-    public void ActivateMenu(GameObject NewActivation)
+    public static void ActivateMenu(GameObject NewActivation)
     {
         if (Activated == false || ActivatedObject == null)
         {
@@ -27,13 +24,13 @@ public class ActivationManager : MonoBehaviour {
         }
     }
 
-    public void NoActive()
+    public static void NoActive()
     {
         Activated = false;
         ActivatedObject.GetComponent<SubMenuHandler>().DefaultState();
     }
 
-    public GameObject GetActive()
+    public static GameObject GetActive()
     {
         return ActivatedObject;
     }
