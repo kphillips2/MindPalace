@@ -109,6 +109,28 @@ public class SubMenuHandler : MonoBehaviour {
         );
         print(collidingRoom != null);
         if (collidingRoom != null) {
+            int wallIndex = thisPlus.GetWallIndex();
+            float[] doorLoc = building.GetNewDoorLoc(thisRoom.GetCentre(), plusLoc, thisRoom.GetWidth(), thisRoom.GetLength());
+            print("X:"+doorLoc[0]+", Y:"+ doorLoc[1]+ ", Z:"+ doorLoc[2]);
+            float[] colliderLoc = collidingRoom.GetComponent<RoomHandler>().GetData().GetCentre();
+            float doorCordinate;
+            switch (wallIndex)
+            {
+                case 0:
+                    doorCordinate = -(doorLoc[0] - colliderLoc[0]);
+                    break;
+                case 1:
+                    doorCordinate = doorLoc[2] - colliderLoc[2];
+                    break;
+                case 2:
+                    doorCordinate = doorLoc[0] - colliderLoc[0];
+                    break;
+                default://case:3
+                    doorCordinate = -(doorLoc[2] - colliderLoc[2]);
+                    break;
+            }
+            collidingRoom.GetComponent<RoomHandler>().AddDoor((wallIndex+2)%4, doorCordinate);
+            /*
             int wallIndex = thisPlus.GetWallIndex ();
             float[] roomLoc = thisRoom.GetCentre ();
             float[] colliderLoc = collidingRoom.GetComponent<RoomHandler> ().GetData ().GetCentre ();
@@ -133,6 +155,7 @@ public class SubMenuHandler : MonoBehaviour {
             {
                 collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, -doorLoc);
             }
+            */
         }
     }
     public void AddPicture()
