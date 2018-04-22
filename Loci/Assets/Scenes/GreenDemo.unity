@@ -11179,7 +11179,7 @@ Prefab:
     - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00036621094
+      value: -0.00015258789
       objectReference: {fileID: 0}
     - target: {fileID: 224666161614091206, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
@@ -14103,7 +14103,7 @@ MonoBehaviour:
   wallLoc: 0
   AssignedToWindow: 0
   PlusSign: {fileID: 700516625}
-  ImagePlacedOver: {fileID: 0}
+  ImagePlacedOver: []
   offset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1874173567
 Prefab:

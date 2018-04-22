@@ -79,7 +79,7 @@ public class ButtonListControl : MonoBehaviour {
             float roty = transform.eulerAngles.y + 90f;
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-            GameObject image = pc.placePicture(picFilePath, roty, location);
+            List<GameObject> image = pc.placePicture(picFilePath, roty, location);
             ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().PlaceXOverImage(image);
             ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().HideAll();
             ButtonManager.GetComponent<ActivationManager>().NoActive();
