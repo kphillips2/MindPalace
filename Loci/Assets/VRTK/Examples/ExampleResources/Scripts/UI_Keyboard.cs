@@ -43,6 +43,35 @@
         private void Start()
         {
             input = GetComponentInChildren<InputField>();
+            //ChangeFont("BebasNeue", 180);
+        }
+
+        //Font on keyboard keys will be changed to given font and font size
+        public void ChangeFont(string fontName, int fontSize)
+        {
+            foreach (Transform t in transform.GetComponentsInChildren<Transform>())
+            {
+                if (t.name == "Text")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize;
+                }
+                else if(t.name == "TopText")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize * 25/150;
+                }
+                else if (t.name == "CancelText")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize * 95 / 150;
+                }
+                else if (t.name == "Placeholder")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize * 14 / 150;
+                }
+            }
         }
     }
 }
