@@ -9,6 +9,8 @@ public class PictureCreator : MonoBehaviour {
     private float scale = 1.8f; //Increasing this value will make the pictures larger
     private float maxWidth = 3.55f; //Maximum width that a picture can be
     private float maxHeight = 4f; //Maximum height that a picture can be
+    public static Material frameMaterial = Resources.Load("Materials/Wood Texture 15", typeof(Material)) as Material; //Material to use for picture frames
+
 
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
@@ -77,8 +79,10 @@ public class PictureCreator : MonoBehaviour {
         //Create two cubes
         GameObject topFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(topFrame.GetComponent<Rigidbody>());
+        topFrame.GetComponent<MeshRenderer>().material = frameMaterial;
         GameObject bottomFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(bottomFrame.GetComponent<Rigidbody>());
+        bottomFrame.GetComponent<MeshRenderer>().material = frameMaterial;
 
         //Move frames along y-axis to get proper positioning
         topFrame.transform.position = pos + new Vector3(0f, h / 2 + 0.025f, 0f);
@@ -103,8 +107,10 @@ public class PictureCreator : MonoBehaviour {
         //Create two cubes to be placed on sides of picture
         GameObject sideFrame1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(sideFrame1.GetComponent<Rigidbody>());
+        sideFrame1.GetComponent<MeshRenderer>().material = frameMaterial;
         GameObject sideFrame2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(sideFrame2.GetComponent<Rigidbody>());
+        sideFrame2.GetComponent<MeshRenderer>().material = frameMaterial;
 
         //If image is rotated 0 or 180 degrees around y-axis, the frames will need to be 
         //moved along the z-axis to have the proper positioning. If image is rotated 90 or
