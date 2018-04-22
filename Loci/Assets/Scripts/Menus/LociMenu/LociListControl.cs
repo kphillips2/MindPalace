@@ -13,6 +13,7 @@ public class LociListControl : MonoBehaviour
     private List<GameObject> buttons = new List<GameObject>();
     public GameObject LociMenu;
     public GameObject StartingMenu;
+    public bool EditMode;
 
     // Use this for initialization
     void Start()

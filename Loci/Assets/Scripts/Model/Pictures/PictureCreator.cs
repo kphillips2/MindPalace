@@ -11,7 +11,6 @@ public class PictureCreator : MonoBehaviour {
     private float maxHeight = 4f; //Maximum height that a picture can be
     public static Material frameMaterial = Resources.Load("Materials/Wood Texture 15", typeof(Material)) as Material; //Material to use for picture frames
 
-
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
     public List<GameObject> placePicture(string filePath, float roty, Vector3 pos)
@@ -19,7 +18,23 @@ public class PictureCreator : MonoBehaviour {
         //Loads image, returns if image cannot be found
         Texture2D img = LoadImg(filePath);
         if (img == null) return null;
+        return createPicture(img, roty, pos);
+    }
 
+    //Loads a jpg or png image from the given byte array and places it at position indicated by pos.
+    //roty specifies the value by which to rotate the image around the y-axis.
+    public List<GameObject> placePicture(byte[] imgData, float roty, Vector3 pos)
+    {
+        //Loads image, returns if image cannot be found
+        Texture2D img = LoadImg(imgData);
+        if (img == null) return null;
+        return createPicture(img, roty, pos);
+    }
+
+    //Creates a picture with the given Texture2D and places it at position indicated by pos.
+    //roty specifies the value by which to rotate the image around the y-axis.
+    private List<GameObject> createPicture(Texture2D img, float roty, Vector3 pos)
+    {
         //Creates a cube and places it at the given position. Rotates it around the y-axis.
         GameObject pic = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(pic.GetComponent<Rigidbody>());
@@ -159,6 +174,16 @@ public class PictureCreator : MonoBehaviour {
             texture = new Texture2D(2, 2);
             texture.LoadImage(fileData);
         }
+        return texture;
+    }
+
+    //Creates a Texture2D object and loads the byte array into it
+    //Returns the texture object
+    public static Texture2D LoadImg(byte[] fileData)
+    {
+        Texture2D texture = null;
+        texture = new Texture2D(2, 2);
+        texture.LoadImage(fileData);
         return texture;
     }
 

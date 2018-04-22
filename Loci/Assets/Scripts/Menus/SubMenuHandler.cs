@@ -23,7 +23,6 @@ public class SubMenuHandler : MonoBehaviour {
 
     private Building building;
     private RoomHandler roomHandler;
-    private ActivationManager MenuActivationManager;
     private PlusData thisPlus;
 
     /// <summary>
@@ -33,7 +32,6 @@ public class SubMenuHandler : MonoBehaviour {
     public void InitData(PlusData plus){
         roomHandler = room.GetComponent<RoomHandler> ();
         building = level.GetComponent<Building> ();
-        MenuActivationManager = SingularActivation.GetComponent<ActivationManager> ();
         thisPlus = plus;
     }
     //Menu Manipulators:
@@ -46,7 +44,7 @@ public class SubMenuHandler : MonoBehaviour {
         DoorSubMenu.SetActive (true);
         Door.SetActive (false);
 
-        MenuActivationManager.ActivateMenu (gameObject);
+        ActivationManager.ActivateMenu (gameObject);
     }
     public void HideAll(){
         ClickedOn.SetActive (false);
@@ -56,9 +54,7 @@ public class SubMenuHandler : MonoBehaviour {
         CorridorButton.SetActive (false);
         DoorSubMenu.SetActive (false);
         Door.SetActive (false);
-
-        MenuActivationManager = SingularActivation.GetComponent<ActivationManager> ();
-        MenuActivationManager.NoActive ();
+        ActivationManager.NoActive ();
         this.transform.position = new Vector3 (0, -100, 0);
     }
     public void HideAllStillActive(){
