@@ -71,6 +71,11 @@
                     t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
                     t.GetComponent<Text>().fontSize = fontSize * 14 / 150;
                 }
+                else if (t.name == "InputText")
+                {
+                    t.GetComponent<Text>().font = Resources.Load("Fonts/" + fontName, typeof(Font)) as Font;
+                    t.GetComponent<Text>().fontSize = fontSize * 24 / 150;
+                }
             }
         }
     }
