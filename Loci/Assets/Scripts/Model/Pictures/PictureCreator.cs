@@ -9,10 +9,12 @@ public class PictureCreator : MonoBehaviour {
     private float scale = 1.8f; //Increasing this value will make the pictures larger
     private float maxWidth = 3.55f; //Maximum width that a picture can be
     private float maxHeight = 4f; //Maximum height that a picture can be
+    public static Material frameMaterial = Resources.Load("Materials/Wood Texture 15", typeof(Material)) as Material; //Material to use for picture frames
+
 
     //Loads a jpg or png image from the given file path and places it at position indicated by pos.
     //roty specifies the value by which to rotate the image around the y-axis.
-    public GameObject placePicture(string filePath, float roty, Vector3 pos)
+    public List<GameObject> placePicture(string filePath, float roty, Vector3 pos)
     {
         //Loads image, returns if image cannot be found
         Texture2D img = LoadImg(filePath);
@@ -54,31 +56,37 @@ public class PictureCreator : MonoBehaviour {
  
         pic.transform.localScale = new Vector3(0.05f, scale * h, scale * w); //Scales the cube
         pic.GetComponent<Renderer>().material.mainTexture = img; //Textures cube with the image
-        //framePicture(roty, pos, scale * w, scale * h);
-        return pic;
+        List<GameObject> Frames = framePicture(pic, roty, pos, scale * w, scale * h);
+        Frames.Add(pic);
+        return Frames;
     }
 
     //Places a frame around a picture that is positioned at pos and rotated around the y-axis by roty.
     //The picture has a width of w and a height of h.
     //Frame code is meant for pictures on walls at 90 degree angles, so will return without making 
     //frames if the picture is rotated at an odd angle
-    private static void framePicture(float roty, Vector3 pos, float w, float h)
+    private static List<GameObject> framePicture(GameObject picture,float roty, Vector3 pos, float w, float h)
     {
-        if (roty % 90 != 0) return;
-        createSideFrames(roty, pos, w, h);
-        createTopBottomFrames(roty, pos, w, h);
+        if (roty % 90 != 0) return null;
+        List<GameObject> Frames = new List<GameObject>();
+        Frames.AddRange(createSideFrames(picture, roty, pos, w, h));
+        Frames.AddRange(createTopBottomFrames(picture, roty, pos, w, h));
+        return Frames;
     }
 
     //Places a scaled cube both above and below an image so as to form half of a picture
     //frame. The image is at position pos, rotated around the y-axis by roty, with width
     //w and height h.
-    private static void createTopBottomFrames(float roty, Vector3 pos, float w, float h)
+
+    private static List<GameObject> createTopBottomFrames(GameObject picture, float roty, Vector3 pos, float w, float h)
     {
         //Create two cubes
         GameObject topFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(topFrame.GetComponent<Rigidbody>());
+        topFrame.GetComponent<MeshRenderer>().material = frameMaterial;
         GameObject bottomFrame = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(bottomFrame.GetComponent<Rigidbody>());
+        bottomFrame.GetComponent<MeshRenderer>().material = frameMaterial;
 
         //Move frames along y-axis to get proper positioning
         topFrame.transform.position = pos + new Vector3(0f, h / 2 + 0.025f, 0f);
@@ -90,18 +98,26 @@ public class PictureCreator : MonoBehaviour {
         topFrame.transform.localScale = new Vector3(0.05f, 0.05f, w + 0.1f);
         bottomFrame.transform.Rotate(0f, roty, 0f);
         bottomFrame.transform.localScale = new Vector3(0.05f, 0.05f, w + 0.1f);
+        topFrame.transform.parent = picture.transform;
+        bottomFrame.transform.parent = picture.transform;
+        List<GameObject> Frames = new List<GameObject>();
+        Frames.Add(topFrame);
+        Frames.Add(bottomFrame);
+        return Frames;
     }
 
     //Places two scaled cubes on either side of an image so as to form half of a picture
     //frame. The image is at position pos, rotated around the y-axis by roty, with width
     //w and height h.
-    private static void createSideFrames(float roty, Vector3 pos, float w, float h)
+    private static List<GameObject> createSideFrames(GameObject picture, float roty, Vector3 pos, float w, float h)
     {
         //Create two cubes to be placed on sides of picture
         GameObject sideFrame1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(sideFrame1.GetComponent<Rigidbody>());
+        sideFrame1.GetComponent<MeshRenderer>().material = frameMaterial;
         GameObject sideFrame2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
         Destroy(sideFrame2.GetComponent<Rigidbody>());
+        sideFrame2.GetComponent<MeshRenderer>().material = frameMaterial;
 
         //If image is rotated 0 or 180 degrees around y-axis, the frames will need to be 
         //moved along the z-axis to have the proper positioning. If image is rotated 90 or
@@ -122,6 +138,12 @@ public class PictureCreator : MonoBehaviour {
         sideFrame1.transform.localScale = new Vector3(0.05f, h, 0.05f); 
         sideFrame2.transform.Rotate(0f, roty, 0f);
         sideFrame2.transform.localScale = new Vector3(0.05f, h, 0.05f);
+        sideFrame1.transform.parent = picture.transform;
+        sideFrame2.transform.parent = picture.transform;
+        List<GameObject> Frames = new List<GameObject>();
+        Frames.Add(sideFrame1);
+        Frames.Add(sideFrame2);
+        return Frames;
     }
 
     //Creates a Texture2D object and loads the image at the given file path into it
@@ -138,6 +160,18 @@ public class PictureCreator : MonoBehaviour {
             texture.LoadImage(fileData);
         }
         return texture;
+    }
+
+    //Get byte array version of image data
+    public static byte[] GetImageData(string filePath)
+    {
+        byte[] fileData = null;
+
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+        }
+        return fileData;
     }
 
     // Creates a Sprite version of picture to be used in menus. Can be jpg or png

@@ -6,17 +6,18 @@ using System;
 /// <summary>
 /// Responsible for handling and room functionality.
 /// </summary>
-public class RoomHandler : MonoBehaviour {
+public class RoomHandler : MonoBehaviour
+{
     public GameObject plusSign;
     public GameObject floor;
-	public GameObject roof;
+    public GameObject roof;
 
-	public GameObject posZWall;
-	public GameObject posXWall;
-	public GameObject negZWall;
-	public GameObject negXWall;
-    
-	private List<Vector3>[] doorsAndWindows;
+    public GameObject posZWall;
+    public GameObject posXWall;
+    public GameObject negZWall;
+    public GameObject negXWall;
+
+    private List<Vector3>[] doorsAndWindows;
     private RoomData thisRoom;
 
     /// <summary>
@@ -25,7 +26,7 @@ public class RoomHandler : MonoBehaviour {
     public void InitData(float width, float length){
         doorsAndWindows = new List<Vector3> [4];
         for (int k = 0; k < 4; k++)
-            doorsAndWindows [k] = new List<Vector3>();
+            doorsAndWindows [k] = new List<Vector3> ();
         string[] mats = { "Wood Texture 06", "Wood Texture 15", "Wood Texture 12" };
 
         thisRoom = new RoomData (new float[] { floor.transform.position.x, 0, floor.transform.position.z });
@@ -47,10 +48,10 @@ public class RoomHandler : MonoBehaviour {
         FloorResizer.resize (floor, dimensions);
         FloorResizer.resize (roof, dimensions);
 
-		posZWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
-		posXWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
-		negZWall.transform.localPosition = new Vector3 (0, 2.5f, length/2-0.125f);
-		negXWall.transform.localPosition = new Vector3 (0, 2.5f, width/2-0.125f);
+        posZWall.transform.localPosition = new Vector3 (0, 2.5f, length / 2 - 0.125f);
+        posXWall.transform.localPosition = new Vector3 (0, 2.5f, width / 2 - 0.125f);
+        negZWall.transform.localPosition = new Vector3 (0, 2.5f, length / 2 - 0.125f);
+        negXWall.transform.localPosition = new Vector3 (0, 2.5f, width / 2 - 0.125f);
 
         thisRoom.SetRoomSize(width, length);
 
@@ -58,7 +59,7 @@ public class RoomHandler : MonoBehaviour {
         AdjustWall (posXWall, 1);
         AdjustWall (negZWall, 2);
         AdjustWall (negXWall, 3);
-	}
+    }
     /// <summary>
     /// Changes the materials of a room.
     /// </summary>
@@ -66,24 +67,24 @@ public class RoomHandler : MonoBehaviour {
     /// <param name="roofName"> the name of the material to be attached to the roof </param>
     /// <param name="wallName"> the name of the material to be attached to the walls </param>
     public void SetMaterials(string floorName, string roofName, string wallName){
-		Material floorMat = Resources.Load ("Materials/"+floorName, typeof(Material)) as Material;
-		Material roofMat = Resources.Load ("Materials/"+roofName, typeof(Material)) as Material;
-		Material wallMat = Resources.Load ("Materials/"+wallName, typeof(Material)) as Material;
+        Material floorMat = Resources.Load ("Materials/" + floorName, typeof(Material)) as Material;
+        Material roofMat = Resources.Load ("Materials/" + roofName, typeof(Material)) as Material;
+        Material wallMat = Resources.Load ("Materials/" + wallName, typeof(Material)) as Material;
 
-		floorMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		roofMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
-		wallMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        floorMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        roofMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
+        wallMat.mainTexture.wrapMode = TextureWrapMode.Repeat;
 
-		floor.GetComponent<Renderer> ().material = floorMat;
-		roof.GetComponent<Renderer> ().material = roofMat;
+        floor.GetComponent<Renderer> ().material = floorMat;
+        roof.GetComponent<Renderer> ().material = roofMat;
 
-		posZWall.GetComponent<Renderer> ().material = wallMat;
-		posXWall.GetComponent<Renderer> ().material = wallMat;
-		negZWall.GetComponent<Renderer> ().material = wallMat;
-		negXWall.GetComponent<Renderer> ().material = wallMat;
+        posZWall.GetComponent<Renderer> ().material = wallMat;
+        posXWall.GetComponent<Renderer> ().material = wallMat;
+        negZWall.GetComponent<Renderer> ().material = wallMat;
+        negXWall.GetComponent<Renderer> ().material = wallMat;
 
         thisRoom.SetMaterials (floorName, roofName, wallName);
-	}
+    }
     /// <summary>
     /// Sets all the doors and windows of a room at once.
     /// </summary>
@@ -101,6 +102,16 @@ public class RoomHandler : MonoBehaviour {
         AdjustWall (negXWall, 3);
     }
     /// <summary>
+    /// Adds all pictures to room and to roomdata
+    /// </summary>
+    /// <param name="pictures"> a list of pictures in the room </param>
+    public void SetPictures(List<Picture> pictures){
+        PictureCreator pc = new PictureCreator ();
+        foreach (Picture p in pictures)
+            pc.placePicture(p.getFilePath (), p.getRoty (), p.getLocation ());
+        thisRoom.SetPictures (pictures);
+    }
+    /// <summary>
     /// Saves this room and all its information to the currently open Loci.
     /// </summary>
     public void Save(){
@@ -109,7 +120,7 @@ public class RoomHandler : MonoBehaviour {
         for (int k = 0; k < 4; k++) {
             wallData [k] = new List<float[]> ();
             foreach (Vector3 loc in doorsAndWindows [k])
-                wallData [k].Add (new float[] { loc.x, loc.y, loc.z });
+                wallData [k].Add(new float[] { loc.x, loc.y, loc.z });
         }
 
         thisRoom.SetWallData (wallData);
@@ -161,7 +172,7 @@ public class RoomHandler : MonoBehaviour {
             );
             float[] newCorridor = RoomTypes.GetNewRoomCentre (
                 roomCentre, centre,
-                thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType (angle)
+                thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType(angle)
             );
             float[] plusCentre = { centre.x, centre.y, centre.z };
 
@@ -182,17 +193,17 @@ public class RoomHandler : MonoBehaviour {
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="doorLoc"> the location of the door with 0 representing the centre of the wall </param>
-	public void AddDoor(int wallIndex, float doorLoc){
-		// wall numbers correspond with indices of doorStates
-		//   ----0----
-		//  |         |
-		//  |         |
-		//  3         1
-		//  |         |
-		//  |         |
-		//   ----2----
+	public void AddDoor(int wallIndex, float doorLoc) {
+        // wall numbers correspond with indices of doorStates
+        //   ----0----
+        //  |         |
+        //  |         |
+        //  3         1
+        //  |         |
+        //  |         |
+        //   ----2----
 
-		if (wallIndex >= 0 && wallIndex <= 3)
+        if (wallIndex >= 0 && wallIndex <= 3)
             switch (wallIndex) {
                 case 1:
                     AdjustForDoor (posXWall, 1, doorLoc);
@@ -207,15 +218,16 @@ public class RoomHandler : MonoBehaviour {
                     AdjustForDoor (posZWall, 0, doorLoc);
                     break;
             }
-		else
-			Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
-	}
+        else
+            Debug.LogError("A wall with index of {" + wallIndex + "} doesn't exist.");
+    }
     /// <summary>
     /// Adds a window to a given wall.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="windowLoc"> the location of the window with 0 representing the centre of the wall </param>
-    public void AddWindow(int wallIndex, float windowLoc){
+    public void AddWindow(int wallIndex, float windowLoc)
+    {
         // wall numbers correspond with indices of doorStates
         //   ----0----
         //  |         |
@@ -262,7 +274,7 @@ public class RoomHandler : MonoBehaviour {
             input, wallIndex, doorLoc, 0, 2,
             "The door at {" + doorLoc + "} is close to or outside the end of the wall."
         );
-	}
+    }
     /// <summary>
     /// Cuts all doors and windows in a wall after adding a new window.
     /// </summary>
@@ -309,7 +321,7 @@ public class RoomHandler : MonoBehaviour {
     private void AdjustWall(GameObject input, int wallIndex){
         float wallLength = GetWallSize (wallIndex);
         WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength);
-	}
+    }
     /// <summary>
     /// Removes a plus sign from the save data of a room and from the scene.
     /// </summary>
@@ -326,23 +338,23 @@ public class RoomHandler : MonoBehaviour {
         List<PlusData> plusSigns = thisRoom.GetPlusData ();
         Vector3 plusCentre;
 
-        for (int k = plusSigns.Count-1; k >= 0 ; k--) {
-            if(plusSigns [k].GetAngle () == angle) {
+        for (int k = plusSigns.Count-1; k >= 0; k--) {
+            if (plusSigns [k].GetAngle () == angle) {
                 centre = plusSigns [k].GetCentre ();
                 centre [0] -= roomCentre [0];
                 centre [1] -= roomCentre [1];
                 centre [2] -= roomCentre [2];
 
-                plusCentre = 
-                    Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
+                plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
                 if (plusCentre.x > loc - 3.5f && plusCentre.x < loc + 3.5f) {
-                    print ("RemovePlus called on Room at: " +"<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
+                    print ("RemovePlus called on Room at: " + "<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
                     print ("    Plus centre after rotated to the positive z wall: " + plusCentre + ", the location of the door or window is: " + loc);
 
                     foreach (Canvas plus in this.GetComponentsInChildren<Canvas> ())
                         if (plus.tag == "PlusSign") {
                             int comp = plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]);
+
                             if (comp == 0) {
                                 float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
                                 print("    Call Destroy on plus at: " + new Vector3 (cp [0], cp [1], cp [2]));
@@ -350,6 +362,7 @@ public class RoomHandler : MonoBehaviour {
                                 break;
                             }
                         }
+
                     print ("    Call DeletePlus on index: " + k);
                     thisRoom.DeletePlus (k);
                     break;
@@ -369,5 +382,12 @@ public class RoomHandler : MonoBehaviour {
                 break;
             }
         }
+    }
+    /// <summary>
+    /// Removes a picture from the save data
+    /// </summary>
+    /// <param name="location"> the location of the picture to be removed </param>
+    public void RemovePicture(Vector3 location){
+        thisRoom.DeletePicture(location);
     }
 }

@@ -9,7 +9,7 @@ public class XData : MonoBehaviour {
     public float wallLoc;
     public bool AssignedToWindow;  //True if on window, false for picture
     public GameObject PlusSign;
-    public GameObject ImagePlacedOver;
+    public List<GameObject> ImagePlacedOver;
     public Vector3 offset;
 
     public void OnDeleteClick()
@@ -29,7 +29,11 @@ public class XData : MonoBehaviour {
 
     private void DeletePicture()
     {
-        Destroy(ImagePlacedOver);
+        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().RemovePicture(ImagePlacedOver[0].transform.position);
+        foreach (GameObject obj in ImagePlacedOver)
+        {
+            Destroy(obj);
+        }
         RestorePlusSign();
     }
 

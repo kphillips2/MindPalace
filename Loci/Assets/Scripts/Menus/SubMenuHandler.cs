@@ -109,6 +109,28 @@ public class SubMenuHandler : MonoBehaviour {
         );
         print(collidingRoom != null);
         if (collidingRoom != null) {
+            int wallIndex = thisPlus.GetWallIndex();
+            float[] doorLoc = building.GetNewDoorLoc(thisRoom.GetCentre(), plusLoc, thisRoom.GetWidth(), thisRoom.GetLength());
+            print("X:"+doorLoc[0]+", Y:"+ doorLoc[1]+ ", Z:"+ doorLoc[2]);
+            float[] colliderLoc = collidingRoom.GetComponent<RoomHandler>().GetData().GetCentre();
+            float doorCordinate;
+            switch (wallIndex)
+            {
+                case 0:
+                    doorCordinate = -(doorLoc[0] - colliderLoc[0]);
+                    break;
+                case 1:
+                    doorCordinate = doorLoc[2] - colliderLoc[2];
+                    break;
+                case 2:
+                    doorCordinate = doorLoc[0] - colliderLoc[0];
+                    break;
+                default://case:3
+                    doorCordinate = -(doorLoc[2] - colliderLoc[2]);
+                    break;
+            }
+            collidingRoom.GetComponent<RoomHandler>().AddDoor((wallIndex+2)%4, doorCordinate);
+            /*
             int wallIndex = thisPlus.GetWallIndex ();
             float[] roomLoc = thisRoom.GetCentre ();
             float[] colliderLoc = collidingRoom.GetComponent<RoomHandler> ().GetData ().GetCentre ();
@@ -133,10 +155,12 @@ public class SubMenuHandler : MonoBehaviour {
             {
                 collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, -doorLoc);
             }
+            */
         }
     }
     public void AddPicture()
     {
+        ImageMenu.GetComponentInChildren<ButtonListControl>().currentRoom = room;
         ImageMenu.transform.position = this.transform.position;
         ImageMenu.transform.rotation = this.transform.rotation;
         HideAllStillActive();
@@ -271,7 +295,7 @@ public class SubMenuHandler : MonoBehaviour {
         //HideAll();
     }
 
-    public void PlaceXOverImage(GameObject image)
+    public void PlaceXOverImage(List<GameObject> image)
     {
         GameObject component = Instantiate(
                XButton,
@@ -282,16 +306,16 @@ public class SubMenuHandler : MonoBehaviour {
         switch (thisPlus.GetWallIndex())
         {
             case 0:
-                OffsetFromWall = new Vector3(0, 0, -0.3f);
+                OffsetFromWall = new Vector3(0, 0, -0.1f);
                 break;
             case 1:
-                OffsetFromWall = new Vector3(-0.3f, 0, 0);
+                OffsetFromWall = new Vector3(-0.1f, 0, 0);
                 break;
             case 2:
-                OffsetFromWall = new Vector3(0, 0, 0.3f);
+                OffsetFromWall = new Vector3(0, 0, 0.1f);
                 break;
             default:
-                OffsetFromWall = new Vector3(0.3f, 0, 0);
+                OffsetFromWall = new Vector3(0.1f, 0, 0);
                 break;
         }
         component.transform.position = this.transform.position+OffsetFromWall;

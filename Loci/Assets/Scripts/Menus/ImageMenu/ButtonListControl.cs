@@ -15,6 +15,7 @@ public class ButtonListControl : MonoBehaviour {
 
     public GameObject ImageMenu;
     public GameObject ButtonManager;
+    public GameObject currentRoom; //Room that menu is being displayed in
 
     // Use this for initialization
     void Start ()
@@ -78,13 +79,14 @@ public class ButtonListControl : MonoBehaviour {
             float roty = transform.eulerAngles.y + 90f;
             Vector3 location = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-            GameObject image = pc.placePicture(picFilePath, roty, location);
+            List<GameObject> image = pc.placePicture(picFilePath, roty, location);
             ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().PlaceXOverImage(image);
             ButtonManager.GetComponent<ActivationManager>().GetActive().GetComponent<SubMenuHandler>().HideAll();
             ButtonManager.GetComponent<ActivationManager>().NoActive();
             ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
-            //SaveFile.currentLoci.addPicture(new Picture(picFilePath, roty, location));
+            Picture p = new Picture(picFilePath, roty, location);
+            currentRoom.GetComponent<RoomHandler>().AddPicture(p);
         }
         // If directory, navigate to that directory
         else
