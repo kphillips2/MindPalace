@@ -29,11 +29,11 @@ public class XData : MonoBehaviour {
 
     private void DeletePicture()
     {
+        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().RemovePicture(ImagePlacedOver[0].transform.position);
         foreach (GameObject obj in ImagePlacedOver)
         {
             Destroy(obj);
         }
-        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().RemovePicture(ImagePlacedOver[0].transform.position);
         RestorePlusSign();
     }
 

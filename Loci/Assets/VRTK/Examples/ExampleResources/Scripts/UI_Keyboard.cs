@@ -43,7 +43,7 @@
         private void Start()
         {
             input = GetComponentInChildren<InputField>();
-            //ChangeFont("BebasNeue", 180);
+            ChangeFont("BebasNeue", 180);
         }
 
         //Font on keyboard keys will be changed to given font and font size

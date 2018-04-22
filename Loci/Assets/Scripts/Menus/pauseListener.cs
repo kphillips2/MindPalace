@@ -15,7 +15,7 @@ public class pauseListener : MonoBehaviour
 {
 
     public GameObject pauseMenu; //pause canvas
-    public GameObject settingsMenu; //settings canvas
+    public GameObject keyboard; //settings canvas
     public GameObject objectsMenu;
     public Transform cameraRigTransform; //camera rig
     public GameObject level;
@@ -37,7 +37,7 @@ public class pauseListener : MonoBehaviour
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
-        paused = (pauseMenu.transform.position.y > -50 || settingsMenu.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
+        paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
         paused = !paused;
         if (paused)
         {
@@ -50,24 +50,24 @@ public class pauseListener : MonoBehaviour
         else
         {
             pauseMenu.transform.position = new Vector3(0, -100, 0);
-            settingsMenu.transform.position = new Vector3(0, -100, 0);
+            keyboard.transform.position = new Vector3(0, -100, 0);
             objectsMenu.transform.position = new Vector3(0, -100, 0);
         }
     }
 
     //Moves and rotates the settings canvas
-    public void GoToSettings()
+    public void GoToKeyboard()
     {
-        settingsMenu.transform.position = pauseMenu.transform.position;
-        settingsMenu.transform.rotation = pauseMenu.transform.rotation;
+        keyboard.transform.position = pauseMenu.transform.position;
+        keyboard.transform.rotation = pauseMenu.transform.rotation;
         pauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void LeaveSettings()
     {
-        pauseMenu.transform.position = settingsMenu.transform.position;
-        pauseMenu.transform.rotation = settingsMenu.transform.rotation;
-        settingsMenu.transform.position = new Vector3(0, -100, 0);
+        pauseMenu.transform.position = keyboard.transform.position;
+        pauseMenu.transform.rotation = keyboard.transform.rotation;
+        keyboard.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ResumeGame()
@@ -82,6 +82,11 @@ public class pauseListener : MonoBehaviour
         building.Save();
         SaveFile.Save();
         SceneManager.LoadScene("StartingScreen");
+    }
+
+    public void SaveAs(string fileName)
+    {
+        //TODO
     }
 
     public void ViewObjectMenu()

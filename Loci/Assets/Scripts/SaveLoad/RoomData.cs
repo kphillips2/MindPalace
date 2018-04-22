@@ -138,10 +138,11 @@ public class RoomData {
     public void DeletePicture(Vector3 location){
         foreach(Picture pic in pictures)
         {
-            if(Math.Abs(pic.getLocation().x - location.x) < .2f &&
-                Math.Abs(pic.getLocation().z - location.z) < .2f)
+            if(Math.Abs(pic.getLocation().x - location.x) < 2f &&
+                Math.Abs(pic.getLocation().z - location.z) < 2f)
             {
                 pictures.Remove(pic);
+                break;
             }
         }
     }
