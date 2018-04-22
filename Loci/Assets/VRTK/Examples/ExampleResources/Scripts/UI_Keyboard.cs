@@ -9,6 +9,8 @@
         private InputField input;
         public GameObject Keyboard;
         public GameObject StartingMenu;
+        public GameObject level;
+        private Building building;
 
         public void ClickKey(string character)
         {
@@ -31,6 +33,17 @@
             SaveFile.isNewLoci = true;
             input.text = "";
             SceneManager.LoadScene("GreenDemo");
+        }
+
+        public void SaveAs()
+        {
+            building = level.GetComponent<Building>();
+            building.Save();
+            SaveFile.name = input.text;
+            SaveFile.Save();
+            input.text = "";
+            SceneManager.LoadScene("StartingScreen");
+            //Sounds Good, Doesn't Work
         }
 
         public void Cancel()

@@ -49,7 +49,7 @@ public class ObjectListControl : MonoBehaviour
     {
         ObjectPlacer op = new ObjectPlacer();
         op.createPrefabInHand(objectNum);
-        this.transform.position = new Vector3(0, -100, 0);
+        ObjectMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void backButtonClicked()

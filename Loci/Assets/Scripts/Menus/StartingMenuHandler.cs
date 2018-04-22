@@ -9,6 +9,7 @@ public class StartingMenuHandler : MonoBehaviour {
     public GameObject StartingMenu;
     public GameObject SettingsMenu;
     public GameObject Keyboard;
+    public GameObject LociButtons;
 
 	void Start () { }
 
@@ -18,10 +19,18 @@ public class StartingMenuHandler : MonoBehaviour {
         StartingMenu.transform.position = new Vector3(0, -100, 0);
     }
 
-    public void DisplayLoadMenu()
+    public void DisplayLoadMenuEdit()
     {
         LociMenu.transform.position = StartingMenu.transform.position;
         StartingMenu.transform.position = new Vector3(0, -100, 0);
+        LociButtons.GetComponent<LociListControl>().EditMode = true;
+    }
+
+    public void DisplayLoadMenuView()
+    {
+        LociMenu.transform.position = StartingMenu.transform.position;
+        StartingMenu.transform.position = new Vector3(0, -100, 0);
+        LociButtons.GetComponent<LociListControl>().EditMode = false;
     }
 
     public void DisplaySettingsMenu()
