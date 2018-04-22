@@ -33,6 +33,7 @@ public class XData : MonoBehaviour {
         {
             Destroy(obj);
         }
+        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().RemovePicture(ImagePlacedOver[0].transform.position);
         RestorePlusSign();
     }
 

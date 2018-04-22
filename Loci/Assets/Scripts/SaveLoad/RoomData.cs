@@ -69,10 +69,7 @@ public class RoomData {
     /// Sets pictures data
     /// </summary>
     /// <param name="pictures"> a list of pictures in the room </param>
-    public void SetPictures(List<Picture> pictures)
-    {
-        this.pictures = pictures;
-    }
+    public void SetPictures(List<Picture> pictures){ this.pictures = pictures; }
     /// <summary>
     /// Adds a given plus sign to the room.
     /// </summary>
@@ -134,6 +131,20 @@ public class RoomData {
     /// </summary>
     /// <param name="index"> the index of the plus sign being removed </param>
     public void DeletePlus(int index) { plusSigns.RemoveAt (index); }
+    /// <summary>
+    /// Removes a picture at the given location
+    /// </summary>
+    /// <param name="location"> the location of the picture being removed </param>
+    public void DeletePicture(Vector3 location){
+        foreach(Picture pic in pictures)
+        {
+            if(Math.Abs(pic.getLocation().x - location.x) < .2f &&
+                Math.Abs(pic.getLocation().z - location.z) < .2f)
+            {
+                pictures.Remove(pic);
+            }
+        }
+    }
     /// <summary>
     /// Removes all pictures currently stored in the room.
     /// </summary>
