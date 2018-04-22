@@ -19,9 +19,9 @@ public class Building : MonoBehaviour {
             AddRoom (new Vector3 (0, 0, 0));
         else { 
             LoadRooms (SaveFile.currentLoci.getRooms ());
-            ObjectPlacer op = new ObjectPlacer();
-            foreach (float[] o in SaveFile.currentLoci.getObjects())
-                op.createPrefab((int) o[0], new Vector3(o[1], o[2], o[3]), new Vector3(o[4], o[5], o[6]), true);
+            ObjectPlacer op = new ObjectPlacer ();
+            foreach (float[] o in SaveFile.currentLoci.getObjects ())
+                op.createPrefab ((int) o [0], new Vector3 (o [1], o [2], o [3]), new Vector3 (o [4], o [5], o [6]), true);
         }
     }
     /// <summary>
@@ -99,11 +99,11 @@ public class Building : MonoBehaviour {
             chk = current.GetCentre ();
 
             margin = 0.0001f;
-            diffX = centre [0] - chk [0];
-            diffY = centre [1] - chk [1];
-            diffZ = centre [2] - chk [2];
+            diffX = Math.Abs (centre [0] - chk [0]);
+            diffY = Math.Abs (centre [1] - chk [1]);
+            diffZ = Math.Abs (centre [2] - chk [2]);
 
-            if (Math.Abs (diffX) < margin && Math.Abs (diffY) < margin && Math.Abs (diffZ) < margin)
+            if (diffX < margin && diffY < margin && diffZ < margin)
                 continue; 
 
             distX = current.GetWidth () / 2;

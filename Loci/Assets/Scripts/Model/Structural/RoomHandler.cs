@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Responsible for handling and room functionality.
@@ -286,8 +287,9 @@ public class RoomHandler : MonoBehaviour {
     private void AdjustWall(GameObject input, int wallIndex, float loc, float height, float width, string errMsg){
         float wallLength = GetWallSize (wallIndex);
         float limit = wallLength / 2 - (width / 2 + 0.5f);
+        float margin = 0.0001f;
 
-        if (loc >= -limit && loc <= limit) {
+        if (loc >= -limit-margin && loc <= limit+margin) {
             Vector3 cutCentre = new Vector3 (loc, height, 0);
             doorsAndWindows [wallIndex].Add (cutCentre);
             doorsAndWindows [wallIndex].Sort ((a, b) => a.x.CompareTo (b.x));
@@ -313,7 +315,7 @@ public class RoomHandler : MonoBehaviour {
     /// </summary>
     /// <param name="wallIndex"> the index of the wall holding the plus sign </param>
     /// <param name="loc"> the location of the door or window along the wall </param>
-    private void RemovePlus (int wallIndex, float loc){
+    private void RemovePlus(int wallIndex, float loc){
         float angle =
             (wallIndex == 1) ? 90 :
             (wallIndex == 2) ? 180 :
@@ -343,15 +345,28 @@ public class RoomHandler : MonoBehaviour {
                             int comp = plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]);
                             if (comp == 0) {
                                 float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
-                                print("    Call Destroy on plus at:" + new Vector3 (cp [0], cp [1], cp [2]));
+                                print("    Call Destroy on plus at: " + new Vector3 (cp [0], cp [1], cp [2]));
                                 Destroy (plus.gameObject);
                                 break;
                             }
                         }
-                    print ("    Call DeletePlus on index:" + k);
+                    print ("    Call DeletePlus on index: " + k);
                     thisRoom.DeletePlus (k);
                     break;
                 }
+            }
+        }
+    }
+    public void RemoveDoorOrWindow(int wallIndex, float loc){
+        float diffX, margin = 0.0001f;
+        Vector3 chk;
+
+        for (int k = doorsAndWindows [wallIndex].Count-1; k >= 0; k--) {
+            chk = doorsAndWindows [wallIndex] [k];
+            diffX = Math.Abs (loc - chk [0]);
+            if (diffX < margin) {
+                doorsAndWindows [wallIndex].Remove (chk);
+                break;
             }
         }
     }
