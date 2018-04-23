@@ -182,25 +182,25 @@ public class SubMenuHandler : MonoBehaviour {
         //X End
         if (wallIndex ==0)
         {
-            windowLoc = this.transform.position.x - roomHandler.GetData().GetCentre()[0];
+            windowLoc = this.transform.localPosition.x;
             thisX.wallLoc = windowLoc;
             roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if(wallIndex==1)
         {
-            windowLoc = -(this.transform.position.z - roomHandler.GetData().GetCentre()[2]);
+            windowLoc = -this.transform.localPosition.z;
             thisX.wallLoc = windowLoc;
             roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if (wallIndex == 2)
         {
-            windowLoc = -(this.transform.position.x - roomHandler.GetData().GetCentre()[0]);
+            windowLoc = -this.transform.localPosition.x;
             thisX.wallLoc = windowLoc;
             roomHandler.AddWindow(wallIndex, windowLoc);
         }
         else if (wallIndex == 3)
         {
-            windowLoc = this.transform.position.z - roomHandler.GetData().GetCentre()[2];
+            windowLoc = this.transform.localPosition.z;
             thisX.wallLoc = windowLoc;
             roomHandler.AddWindow(wallIndex, windowLoc);
         }

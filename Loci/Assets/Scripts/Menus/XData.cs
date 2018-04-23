@@ -24,6 +24,8 @@ public class XData : MonoBehaviour {
 
     private void DeleteWindow()
     {
+        print(wallLoc);
+        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().RemoveDoorOrWindow(wallIndex,wallLoc);
         RestorePlusSign();
     }
 
@@ -47,6 +49,7 @@ public class XData : MonoBehaviour {
         component.transform.position = this.transform.position-offset;
         component.transform.rotation = this.transform.rotation;
         component.SetActive(true);
+        component.transform.SetParent(PlusSign.GetComponent<SubMenuHandler>().room.transform);
         component.GetComponent<SubMenuHandler>().InitData(PlusSignThisReplaces);
         Destroy(this.gameObject);
     }

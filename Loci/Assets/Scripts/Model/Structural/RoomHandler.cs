@@ -371,17 +371,34 @@ public class RoomHandler : MonoBehaviour
         }
     }
     public void RemoveDoorOrWindow(int wallIndex, float loc){
-        float diffX, margin = 0.0001f;
-        Vector3 chk;
+        if (wallIndex >= 0 && wallIndex <= 3) {
+            float diffX, margin = 0.0001f;
+            Vector3 chk;
 
-        for (int k = doorsAndWindows [wallIndex].Count-1; k >= 0; k--) {
-            chk = doorsAndWindows [wallIndex] [k];
-            diffX = Math.Abs (loc - chk [0]);
-            if (diffX < margin) {
-                doorsAndWindows [wallIndex].Remove (chk);
-                break;
+            for (int k = doorsAndWindows [wallIndex].Count-1; k >= 0; k--) {
+                chk = doorsAndWindows [wallIndex] [k];
+                diffX = Math.Abs (loc - chk [0]);
+                if (diffX < margin) {
+                    doorsAndWindows [wallIndex].Remove (chk);
+                    break;
+                }
             }
-        }
+            switch (wallIndex) {
+                case 1:
+                    AdjustWall (posXWall, 1);
+                    break;
+                case 2:
+                    AdjustWall (negZWall, 2);
+                    break;
+                case 3:
+                    AdjustWall (negXWall, 3);
+                    break;
+                default:
+                    AdjustWall (posZWall, 0);
+                    break;
+            }
+        } else
+            Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
     }
     /// <summary>
     /// Removes a picture from the save data

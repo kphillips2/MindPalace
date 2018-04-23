@@ -37,21 +37,25 @@ public class pauseListener : MonoBehaviour
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
-        paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
-        paused = !paused;
-        if (paused)
+        print(ActivationManager.isHoldingObject);
+        if (!ActivationManager.isHoldingObject)
         {
-            viewDir = SteamVR_Render.Top().GetRay().direction;
-            viewDir = new Vector3(viewDir.x, 0, viewDir.z);
-            viewDir = viewDir.normalized;
-            pauseMenu.transform.position = new Vector3(cameraRigTransform.position.x + (viewDir.x * 3), 2, cameraRigTransform.position.z + (viewDir.z * 3));
-            pauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
-        }
-        else
-        {
-            pauseMenu.transform.position = new Vector3(0, -100, 0);
-            keyboard.transform.position = new Vector3(0, -100, 0);
-            objectsMenu.transform.position = new Vector3(0, -100, 0);
+            paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
+            paused = !paused;
+            if (paused)
+            {
+                viewDir = SteamVR_Render.Top().GetRay().direction;
+                viewDir = new Vector3(viewDir.x, 0, viewDir.z);
+                viewDir = viewDir.normalized;
+                pauseMenu.transform.position = new Vector3(cameraRigTransform.position.x + (viewDir.x * 3), 2, cameraRigTransform.position.z + (viewDir.z * 3));
+                pauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
+            }
+            else
+            {
+                pauseMenu.transform.position = new Vector3(0, -100, 0);
+                keyboard.transform.position = new Vector3(0, -100, 0);
+                objectsMenu.transform.position = new Vector3(0, -100, 0);
+            }
         }
     }
 
