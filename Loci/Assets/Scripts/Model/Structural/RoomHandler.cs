@@ -108,7 +108,7 @@ public class RoomHandler : MonoBehaviour
     public void SetPictures(List<Picture> pictures){
         PictureCreator pc = new PictureCreator ();
         foreach (Picture p in pictures)
-            pc.placePicture(p.getFilePath (), p.getRoty (), p.getLocation ());
+            pc.placePicture(p.getImgData (), p.getRoty (), p.getLocation ());
         thisRoom.SetPictures (pictures);
     }
     /// <summary>
