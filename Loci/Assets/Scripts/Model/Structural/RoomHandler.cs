@@ -142,7 +142,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
-    private void AddPlusSign(int wallIndex, float plusLoc){
+    public void AddPlusSign(int wallIndex, float plusLoc){
         if (wallIndex >= 0 && wallIndex <= 3) {
             float angle =
                 (wallIndex == 1) ? 90 :

@@ -30,6 +30,11 @@ public static class ActivationManager {
         ActivatedObject.GetComponent<SubMenuHandler>().DefaultState();
     }
 
+    public static void GiveImageMenu(GameObject ImageMenuParam)
+    {
+        ImageMenu = ImageMenuParam;
+    }
+
     public static GameObject GetActive()
     {
         return ActivatedObject;
