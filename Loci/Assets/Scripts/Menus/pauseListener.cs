@@ -37,7 +37,6 @@ public class pauseListener : MonoBehaviour
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
-        print(ActivationManager.isHoldingObject);
         if (!ActivationManager.isHoldingObject)
         {
             paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
@@ -57,6 +56,7 @@ public class pauseListener : MonoBehaviour
                 objectsMenu.transform.position = new Vector3(0, -100, 0);
             }
         }
+        ActivationManager.isHoldingObject = false;
     }
 
     //Moves and rotates the settings canvas

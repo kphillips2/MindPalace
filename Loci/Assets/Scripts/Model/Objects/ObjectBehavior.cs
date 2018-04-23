@@ -64,5 +64,6 @@ public class ObjectBehavior : MonoBehaviour {
         VRTK_InteractGrab myGrab2 = controllerGameObj2.GetComponent<VRTK_InteractGrab>();
         myGrab.ForceRelease();
         myGrab2.ForceRelease();
+        ActivationManager.isHoldingObject = true;
     }
 }
