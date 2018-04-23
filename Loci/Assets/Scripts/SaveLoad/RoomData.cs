@@ -20,7 +20,7 @@ public class RoomData {
     /// Contructs a save object for a room at the given centre.
     /// </summary>
     /// <param name="loc"> a float array for the centre vector of the room </param>
-    public RoomData(float[] loc){
+    public RoomData(float[] loc) {
         centre = new float [3];
         doorsAndWindows = new List<float[]> [4];
         for (int k = 0; k < 4; k++)
@@ -39,7 +39,7 @@ public class RoomData {
     /// </summary>
     /// <param name="wid"> the width of the room along the X axis </param>
     /// <param name="len"> the length of the room along the Z axis </param>
-    public void SetRoomSize(float wid, float len){
+    public void SetRoomSize(float wid, float len) {
         width = wid;
         length = len;
     }
@@ -49,7 +49,7 @@ public class RoomData {
     /// <param name="floor"> the material name for the floor </param>
     /// <param name="roof"> the material name for the roof </param>
     /// <param name="wall"> the material name for the walls </param>
-    public void SetMaterials(string floor, string roof, string wall){
+    public void SetMaterials(string floor, string roof, string wall) {
         materials [0] = floor;
         materials [1] = roof;
         materials [2] = wall;
@@ -58,7 +58,7 @@ public class RoomData {
     /// Sets the stored door and window locations.
     /// </summary>
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
-    public void SetWallData(List<float[]>[] wallData){
+    public void SetWallData(List<float[]>[] wallData) {
         for (int k = 0; k < 4; k++) {
             doorsAndWindows [k] = new List<float[]> ();
             foreach (float[] loc in wallData [k])
@@ -69,7 +69,7 @@ public class RoomData {
     /// Sets pictures data
     /// </summary>
     /// <param name="pictures"> a list of pictures in the room </param>
-    public void SetPictures(List<Picture> pictures){ this.pictures = pictures; }
+    public void SetPictures(List<Picture> pictures) { this.pictures = pictures; }
     /// <summary>
     /// Adds a given plus sign to the room.
     /// </summary>
@@ -118,7 +118,7 @@ public class RoomData {
     /// <summary>
     /// Removes all doors and windows currently stored in the room.
     /// </summary>
-    public void ClearWallData(){
+    public void ClearWallData() {
         for (int k = 0; k < 4; k++)
             doorsAndWindows [k] = new List<float[]> ();
     }
@@ -135,7 +135,7 @@ public class RoomData {
     /// Removes a picture at the given location
     /// </summary>
     /// <param name="location"> the location of the picture being removed </param>
-    public void DeletePicture(Vector3 location){
+    public void DeletePicture(Vector3 location) {
         foreach(Picture pic in pictures)
         {
             if(Math.Abs(pic.getLocation().x - location.x) < 2f &&

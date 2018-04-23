@@ -18,7 +18,7 @@ public class PlusData : IComparable<PlusData> {
     /// </summary>
     /// <param name="loc"> a float array for the centre vector of the plus sign </param>
     /// <param name="dir"> an angle that determines which wall to display the plus sign on </param>
-    public PlusData(float[] loc, float[] roomLoc, float[] corridorLoc, float dir){
+    public PlusData(float[] loc, float[] roomLoc, float[] corridorLoc, float dir) {
         centre = new float [3];
         newRoom = new float [3];
         newCorridor = new float [3];
@@ -65,7 +65,7 @@ public class PlusData : IComparable<PlusData> {
     /// </summary>
     /// <param name="other"> the plus sign compared to this one </param>
     /// <returns> 0 if they are equal and negative if this precedes other </returns>
-    public int CompareTo(PlusData other){
+    public int CompareTo(PlusData other) {
         float dir = other.GetAngle ();
         float[] chk = other.GetCentre ();
 

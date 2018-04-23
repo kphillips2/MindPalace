@@ -16,7 +16,7 @@ public static class WallCutter {
     /// <param name="cutLocs"> the locations of all doors and windows </param>
     /// <param name="size"> the length of the wall </param>
     /// <returns></returns>
-	public static bool cutDoorsAndWindows(GameObject input, Vector3[] cutLocs, float size){
+	public static bool cutDoorsAndWindows(GameObject input, Vector3[] cutLocs, float size) {
 		doesNewestOverlap = false;
 		foreach (Collider collider in input.GetComponentsInChildren<Collider> ())
 			Object.Destroy (collider);
@@ -49,7 +49,7 @@ public static class WallCutter {
     /// </summary>
     /// <param name="triangles"> all the tiangles of the wall </param>
     /// <param name="vertices"> all the vertices of the wall </param>
-	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
+	private static void compileTriangles(List<int> triangles, List<Vector3> vertices) {
 		if (doorWindowCount > 0)
 			addFrontFace (triangles, vertices);
 		else {
@@ -190,8 +190,7 @@ public static class WallCutter {
     /// </summary>
     /// <param name="triangles"> all the triangles of the wall </param>
     /// <param name="vertices"> all the vertices of the wall </param>
-    private static void addFrontFace(List<int> triangles, List<Vector3> vertices)
-    {
+    private static void addFrontFace(List<int> triangles, List<Vector3> vertices) {
         // close face
         int[] previous = { 3, 5 };
         int mark;
@@ -226,7 +225,7 @@ public static class WallCutter {
     /// <param name="triangles"> all the triangles of the wall </param>
     /// <param name="mark"> the index within vertices that the door starts at </param>
     /// <param name="previous"> the indices that connect to this door </param>
-	private static void addDoorFace(List<int> triangles, int mark, int[] previous){
+	private static void addDoorFace(List<int> triangles, int mark, int[] previous) {
 		triangles.Add (mark + 3);
 		triangles.Add (mark + 1);
 		triangles.Add (previous [1]);
@@ -245,7 +244,7 @@ public static class WallCutter {
     /// <param name="vertices"> all the vertices of the wall </param>
     /// <param name="mark"> the index within vertices that the window starts at </param>
     /// <param name="previous"> the indices that connect to this window </param>
-    private static void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous){
+    private static void addWindowFace(List<int> triangles, List<Vector3> vertices, int mark, int[] previous) {
         triangles.Add (mark + 3);
         triangles.Add (mark + 1);
         triangles.Add (previous [1]);
@@ -274,7 +273,7 @@ public static class WallCutter {
     /// </summary>
     /// <param name="triangles"> all the triangles of the wall </param>
     /// <param name="mark"> the index at the end of the four indices to be used </param>
-    private static void addSquareFace(List<int> triangles, int mark){
+    private static void addSquareFace(List<int> triangles, int mark) {
 		mark -= 4;
 
 		triangles.Add (mark);
@@ -292,7 +291,7 @@ public static class WallCutter {
     /// <param name="cutLocs"> the locations of all doors and windows </param>
     /// <param name="wallSize"> the length of the wall </param>
     /// <returns> the list of compiled vertices </returns>
-    private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3[] cutLocs, float wallSize){
+    private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3[] cutLocs, float wallSize) {
 		List<Vector3> ans = new List<Vector3> ();
 		List<Vector3> existingLocs = new List<Vector3> ();
         doorWindowCount = 0;
@@ -343,7 +342,7 @@ public static class WallCutter {
     /// <param name="verts"> all the veritices of the wall </param>
     /// <param name="centre"> the vector for the centre of the door or window </param>
     /// <param name="size"> the width of the door or window </param>
-    private static void addCutVertices(List<Vector3> verts, Vector3 centre, float size){
+    private static void addCutVertices(List<Vector3> verts, Vector3 centre, float size) {
         int mark = verts.Count;
 
         verts.Add (centre + new Vector3(-size / 2, 0, 0));// index: mark
@@ -363,7 +362,7 @@ public static class WallCutter {
     /// <param name="existingLocs"> the locations of all doors and windows already added to the wall </param>
     /// <param name="size"> half the width of the door or window </param>
     /// <returns></returns>
-    private static bool checkPlacement(Vector3 newLoc, List<Vector3> existingLocs, float size){
+    private static bool checkPlacement(Vector3 newLoc, List<Vector3> existingLocs, float size) {
         float dist, minDist;
         foreach (Vector3 existingLoc in existingLocs) {
 			dist = Mathf.Abs (Vector3.Distance (
@@ -384,7 +383,7 @@ public static class WallCutter {
     /// <param name="scale"> the scale to be removed </param>
     /// <param name="translation"> the translation to be removed </param>
     /// <returns> an array of the resulting vertices </returns>
-    private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+    private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation) {
 		Vector3[] ans = new Vector3 [vertices.Count];
 		Vector3 s = new Vector3(1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;

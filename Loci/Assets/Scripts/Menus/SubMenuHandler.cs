@@ -29,13 +29,13 @@ public class SubMenuHandler : MonoBehaviour {
     /// Initializes the attributes for this plus sign.
     /// </summary>
     /// <param name="plus"></param>
-    public void InitData(PlusData plus){
+    public void InitData(PlusData plus) {
         roomHandler = room.GetComponent<RoomHandler> ();
         building = level.GetComponent<Building> ();
         thisPlus = plus;
     }
     //Menu Manipulators:
-    public void ShowMoreOptions(){
+    public void ShowMoreOptions() {
         ClickedOn.SetActive (false);
         RoomButton.SetActive (false);
         CorridorButton.SetActive (false);
@@ -46,7 +46,7 @@ public class SubMenuHandler : MonoBehaviour {
 
         ActivationManager.ActivateMenu (gameObject);
     }
-    public void HideAll(){
+    public void HideAll() {
         ClickedOn.SetActive (false);
         RoomButton.SetActive (false);
         Window.SetActive (false);
@@ -57,7 +57,7 @@ public class SubMenuHandler : MonoBehaviour {
         ActivationManager.NoActive ();
         this.transform.position = new Vector3 (0, -100, 0);
     }
-    public void HideAllStillActive(){
+    public void HideAllStillActive() {
         ClickedOn.SetActive (false);
         RoomButton.SetActive (false);
         Window.SetActive (false);
@@ -66,7 +66,7 @@ public class SubMenuHandler : MonoBehaviour {
         DoorSubMenu.SetActive (false);
         Door.SetActive (false);
     }
-    public void DefaultState(){
+    public void DefaultState() {
         ClickedOn.SetActive (true);
         RoomButton.SetActive (false);
         Window.SetActive (false);
@@ -75,7 +75,7 @@ public class SubMenuHandler : MonoBehaviour {
         DoorSubMenu.SetActive (false);
         Door.SetActive (false);
     }
-    public void OpenDoorSubMenu(){
+    public void OpenDoorSubMenu() {
         ClickedOn.SetActive (false);
         RoomButton.SetActive (true);
         Window.SetActive (false);
@@ -259,11 +259,11 @@ public class SubMenuHandler : MonoBehaviour {
     }
 
     // Collider Checkers:
-    private bool CheckRoomPlacement(string type){
+    private bool CheckRoomPlacement(string type) {
         Vector3 newCentre = ConvertToVector (RoomTypes.GetNewRoomCentre (thisPlus, type));
         return building.CheckRoomPlacement (newCentre, type);
     }
-    private Vector3 ConvertToVector(float[] data){
+    private Vector3 ConvertToVector(float[] data) {
         return new Vector3 (data [0], data [1], data [2]);
     }
     public PlusData GetData() { return thisPlus; }

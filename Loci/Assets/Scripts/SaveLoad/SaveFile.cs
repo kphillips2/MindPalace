@@ -18,7 +18,7 @@ public static class SaveFile {
     /// Adds the current Loci to the list of saved Locis and saves the list to a file.
     /// All new information about the Loci (except object info) has been added to the currentLoci attribute.
     /// </summary>
-    public static void Save(){
+    public static void Save() {
         SaveObjects ();
         if (name == null) {
             name = DateTime.Now.ToLongDateString() + ", " + DateTime.Now.ToLongTimeString();
@@ -38,7 +38,7 @@ public static class SaveFile {
     /// <summary>
     /// Saves all of the prefab objects in the scene to the currently open Loci.
     /// </summary>
-    private static void SaveObjects(){
+    private static void SaveObjects() {
         // Reset the list of objects for the Loci
         currentLoci.clearObjects ();
 

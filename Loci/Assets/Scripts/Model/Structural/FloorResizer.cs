@@ -11,7 +11,7 @@ public static class FloorResizer {
     /// </summary>
     /// <param name="input"> the floor or roof object being changed </param>
     /// <param name="dimensions"> the new dimensions for the floor or roof </param>
-	public static void resize(GameObject input, Vector3 dimensions){
+	public static void resize(GameObject input, Vector3 dimensions) {
 		foreach (Collider collider in input.GetComponentsInChildren<Collider> ())
 			Object.Destroy (collider);
 		// get new vertices after scaling
@@ -41,7 +41,7 @@ public static class FloorResizer {
     /// </summary>
     /// <param name="triangles"> all the triangles of the floor or roof </param>
     /// <param name="vertices"> all the vertices of the floor or roof </param>
-	private static void compileTriangles(List<int> triangles, List<Vector3> vertices){
+	private static void compileTriangles(List<int> triangles, List<Vector3> vertices) {
 		// top face
 		triangles.Add (0);
 		triangles.Add (1);
@@ -108,7 +108,7 @@ public static class FloorResizer {
     /// <param name="wallLoc"> the vector for the centre of the wall </param>
     /// <param name="dims"> the new dimensions for the floor or roof </param>
     /// <returns> the list of compiled vertices </returns>
-    private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims){
+    private static List<Vector3> compileVertices(Vector3 wallLoc, Vector3 dims) {
 		List<Vector3> ans = new List<Vector3> ();
 
 		ans.Add (wallLoc + new Vector3 (dims.x / 2, dims.y / 2, dims.z / 2));// index: 0
@@ -130,7 +130,7 @@ public static class FloorResizer {
     /// <param name="scale"> the scale to be removed </param>
     /// <param name="translation"> the translation to be removed </param>
     /// <returns> an array of the resulting vertices </returns>
-	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation){
+	private static Vector3[] resizeVectors(List<Vector3> vertices, Vector3 scale, Vector3 translation) {
 		Vector3[] ans = new Vector3 [vertices.Count];
 		Vector3 s = new Vector3 (1 / scale.x, 1 / scale.y, 1 / scale.z);
 		Vector3 v;

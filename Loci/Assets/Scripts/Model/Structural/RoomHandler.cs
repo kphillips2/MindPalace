@@ -23,7 +23,7 @@ public class RoomHandler : MonoBehaviour
     /// <summary>
     /// Initializes the attributes for this room.
     /// </summary>
-    public void InitData(float width, float length){
+    public void InitData(float width, float length) {
         doorsAndWindows = new List<Vector3> [4];
         for (int k = 0; k < 4; k++)
             doorsAndWindows [k] = new List<Vector3> ();
@@ -43,7 +43,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="width"> determines the size of the room along the X axis </param>
     /// <param name="length"> determines the size of the room along the Z axis </param>
-    public void SetRoomSize(float width, float length){
+    public void SetRoomSize(float width, float length) {
         Vector3 dimensions = new Vector3 (width, 0.25f, length);
         FloorResizer.resize (floor, dimensions);
         FloorResizer.resize (roof, dimensions);
@@ -66,7 +66,7 @@ public class RoomHandler : MonoBehaviour
     /// <param name="floorName"> the name of the material to be attached to the floor </param>
     /// <param name="roofName"> the name of the material to be attached to the roof </param>
     /// <param name="wallName"> the name of the material to be attached to the walls </param>
-    public void SetMaterials(string floorName, string roofName, string wallName){
+    public void SetMaterials(string floorName, string roofName, string wallName) {
         Material floorMat = Resources.Load ("Materials/" + floorName, typeof(Material)) as Material;
         Material roofMat = Resources.Load ("Materials/" + roofName, typeof(Material)) as Material;
         Material wallMat = Resources.Load ("Materials/" + wallName, typeof(Material)) as Material;
@@ -89,7 +89,7 @@ public class RoomHandler : MonoBehaviour
     /// Sets all the doors and windows of a room at once.
     /// </summary>
     /// <param name="wallData"> a list per wall and a float array for each door or window vector </param>
-    public void SetWallData(List<float[]>[] wallData){
+    public void SetWallData(List<float[]>[] wallData) {
         for (int k = 0; k < 4; k++) {
             doorsAndWindows [k] = new List<Vector3> ();
             foreach (float[] loc in wallData [k])
@@ -105,7 +105,7 @@ public class RoomHandler : MonoBehaviour
     /// Adds all pictures to room and to roomdata
     /// </summary>
     /// <param name="pictures"> a list of pictures in the room </param>
-    public void SetPictures(List<Picture> pictures){
+    public void SetPictures(List<Picture> pictures) {
         PictureCreator pc = new PictureCreator ();
         foreach (Picture p in pictures)
             pc.placePicture(p.getImgData (), p.getRoty (), p.getLocation ());
@@ -114,7 +114,7 @@ public class RoomHandler : MonoBehaviour
     /// <summary>
     /// Saves this room and all its information to the currently open Loci.
     /// </summary>
-    public void Save(){
+    public void Save() {
         List<float[]>[] wallData = new List<float[]> [4];
 
         for (int k = 0; k < 4; k++) {
@@ -142,7 +142,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="plusLoc"> the location of the menu with 0 representing the centre of the wall </param>
-    private void AddPlusSign(int wallIndex, float plusLoc){
+    public void AddPlusSign(int wallIndex, float plusLoc) {
         if (wallIndex >= 0 && wallIndex <= 3) {
             float angle =
                 (wallIndex == 1) ? 90 :
@@ -203,21 +203,9 @@ public class RoomHandler : MonoBehaviour
         //  |         |
         //   ----2----
 
-        if (wallIndex >= 0 && wallIndex <= 3)
-            switch (wallIndex) {
-                case 1:
-                    AdjustForDoor (posXWall, 1, doorLoc);
-                    break;
-                case 2:
-                    AdjustForDoor (negZWall, 2, doorLoc);
-                    break;
-                case 3:
-                    AdjustForDoor (negXWall, 3, doorLoc);
-                    break;
-                default:
-                    AdjustForDoor (posZWall, 0, doorLoc);
-                    break;
-            }
+        GameObject component;
+        if ((component = GetWallObject (wallIndex)) != null)
+            AdjustForDoor (component, wallIndex, doorLoc);
         else
             Debug.LogError("A wall with index of {" + wallIndex + "} doesn't exist.");
     }
@@ -226,8 +214,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="windowLoc"> the location of the window with 0 representing the centre of the wall </param>
-    public void AddWindow(int wallIndex, float windowLoc)
-    {
+    public void AddWindow(int wallIndex, float windowLoc) {
         // wall numbers correspond with indices of doorStates
         //   ----0----
         //  |         |
@@ -237,31 +224,31 @@ public class RoomHandler : MonoBehaviour
         //  |         |
         //   ----2----
 
-        if (wallIndex >= 0 && wallIndex <= 3)
-            switch (wallIndex) {
-                case 1:
-                    AdjustForWindow (posXWall, 1, windowLoc);
-                    break;
-                case 2:
-                    AdjustForWindow (negZWall, 2, windowLoc);
-                    break;
-                case 3:
-                    AdjustForWindow (negXWall, 3, windowLoc);
-                    break;
-                default:
-                    AdjustForWindow (posZWall, 0, windowLoc);
-                    break;
-            }
+        GameObject component;
+        if ((component = GetWallObject (wallIndex)) != null)
+            AdjustForWindow (component, wallIndex, windowLoc);
         else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
     }
     /// <summary>
-    /// Gets the length of a wall given its index;
+    /// Gets the length of a wall given its index.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall being checked </param>
-    /// <returns> the length of the given wall </returns>
-    private float GetWallSize(int wallIndex){
+    /// <returns> the length of the wall </returns>
+    private float GetWallSize(int wallIndex) {
         return (wallIndex % 2 == 0) ? thisRoom.GetWidth () : thisRoom.GetLength ();
+    }
+    /// <summary>
+    /// Gets the wall object given its index.
+    /// </summary>
+    /// <param name="wallIndex"> the index of the wall being checked </param>
+    /// <returns> the wall object </returns>
+    private GameObject GetWallObject(int wallIndex) {
+        return
+            (wallIndex == 1) ? posXWall :
+            (wallIndex == 2) ? negZWall :
+            (wallIndex == 3) ? negXWall :
+            (wallIndex == 0) ? posZWall : null;
     }
     /// <summary>
     /// Cuts all doors and windows in a wall after adding a new door.
@@ -269,7 +256,7 @@ public class RoomHandler : MonoBehaviour
     /// <param name="input"> the wall object being changed </param>
     /// <param name="wallIndex"> the index of the wall being checked </param>
     /// <param name="doorLoc"> the location of the door with 0 representing the centre of the wall </param>
-    private void AdjustForDoor(GameObject input, int wallIndex, float doorLoc){
+    private void AdjustForDoor(GameObject input, int wallIndex, float doorLoc) {
         AdjustWall (
             input, wallIndex, doorLoc, 0, 2,
             "The door at {" + doorLoc + "} is close to or outside the end of the wall."
@@ -281,7 +268,7 @@ public class RoomHandler : MonoBehaviour
     /// <param name="input"> the wall object being changed </param>
     /// <param name="wallIndex"> the index of the wall being changed </param>
     /// <param name="windowLoc"> the location of the window with 0 representing the centre of the wall </param>
-    private void AdjustForWindow(GameObject input, int wallIndex, float windowLoc){
+    private void AdjustForWindow(GameObject input, int wallIndex, float windowLoc) {
         AdjustWall (
             input, wallIndex, windowLoc, 1.5f, 3,
             "The window at {" + windowLoc + "} is close to or outside the end of the wall."
@@ -296,7 +283,7 @@ public class RoomHandler : MonoBehaviour
     /// <param name="height"> the distance between the floor and the bottom of the new door or window </param>
     /// <param name="width"> the width of the door or window </param>
     /// <param name="errMsg"> the message thrown if the door or window is not within the wall </param>
-    private void AdjustWall(GameObject input, int wallIndex, float loc, float height, float width, string errMsg){
+    private void AdjustWall(GameObject input, int wallIndex, float loc, float height, float width, string errMsg) {
         float wallLength = GetWallSize (wallIndex);
         float limit = wallLength / 2 - (width / 2 + 0.5f);
         float margin = 0.0001f;
@@ -318,16 +305,16 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="input"> the wall object being changed </param>
     /// <param name="wallIndex"> the index of the wall being changed </param>
-    private void AdjustWall(GameObject input, int wallIndex){
+    private void AdjustWall(GameObject input, int wallIndex) {
         float wallLength = GetWallSize (wallIndex);
         WallCutter.cutDoorsAndWindows (input, doorsAndWindows [wallIndex].ToArray (), wallLength);
     }
     /// <summary>
-    /// Removes a plus sign from the save data of a room and from the scene.
+    /// Removes a plus sign from the save data and from the scene.
     /// </summary>
     /// <param name="wallIndex"> the index of the wall holding the plus sign </param>
-    /// <param name="loc"> the location of the door or window along the wall </param>
-    private void RemovePlus(int wallIndex, float loc){
+    /// <param name="loc"> the location of the plus sign along the wall </param>
+    private void RemovePlus(int wallIndex, float loc) {
         float angle =
             (wallIndex == 1) ? 90 :
             (wallIndex == 2) ? 180 :
@@ -370,8 +357,14 @@ public class RoomHandler : MonoBehaviour
             }
         }
     }
-    public void RemoveDoorOrWindow(int wallIndex, float loc){
-        if (wallIndex >= 0 && wallIndex <= 3) {
+    /// <summary>
+    /// Removes a door or window from the save data and from the scene.
+    /// </summary>
+    /// <param name="wallIndex"> the index of the wall holding the door or window </param>
+    /// <param name="loc"> the location of the door or window along the wall </param>
+    public void RemoveDoorOrWindow(int wallIndex, float loc) {
+        GameObject component;
+        if ((component = GetWallObject (wallIndex)) != null) {
             float diffX, margin = 0.0001f;
             Vector3 chk;
 
@@ -383,28 +376,16 @@ public class RoomHandler : MonoBehaviour
                     break;
                 }
             }
-            switch (wallIndex) {
-                case 1:
-                    AdjustWall (posXWall, 1);
-                    break;
-                case 2:
-                    AdjustWall (negZWall, 2);
-                    break;
-                case 3:
-                    AdjustWall (negXWall, 3);
-                    break;
-                default:
-                    AdjustWall (posZWall, 0);
-                    break;
-            }
+
+            AdjustWall (component, wallIndex);
         } else
             Debug.LogError ("A wall with index of {" + wallIndex + "} doesn't exist.");
     }
     /// <summary>
-    /// Removes a picture from the save data
+    /// Removes a picture from the save data.
     /// </summary>
     /// <param name="location"> the location of the picture to be removed </param>
-    public void RemovePicture(Vector3 location){
-        thisRoom.DeletePicture(location);
+    public void RemovePicture (Vector3 location) {
+        thisRoom.DeletePicture (location);
     }
 }

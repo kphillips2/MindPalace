@@ -10,7 +10,7 @@ public class Loci {
     private List<RoomData> rooms;
 
     // Constructor, all lists initialized to be empty
-    public Loci(){
+    public Loci() {
         objects = new List<float[]> ();
         rooms = new List<RoomData> ();
     }
@@ -20,7 +20,7 @@ public class Loci {
     public List<RoomData> getRooms() { return rooms; }
 
     // Add to Lists
-    public void addObject(float[] obj){
+    public void addObject(float[] obj) {
         if (obj.Length != 7)
             Debug.Log ("Error: Added objects must be represented by an array of length 7");
         else
