@@ -299,19 +299,24 @@ public class SubMenuHandler : MonoBehaviour {
                Quaternion.Euler(0, 0, 0)
            ) as GameObject;
         Vector3 OffsetFromWall ;
+        float wallLoc;
         switch (thisPlus.GetWallIndex())
         {
             case 0:
                 OffsetFromWall = new Vector3(0, 0, -0.1f);
+                wallLoc = this.transform.localPosition.x;
                 break;
             case 1:
                 OffsetFromWall = new Vector3(-0.1f, 0, 0);
+                wallLoc = -this.transform.localPosition.z;
                 break;
             case 2:
                 OffsetFromWall = new Vector3(0, 0, 0.1f);
+                wallLoc = -this.transform.localPosition.x;
                 break;
             default:
                 OffsetFromWall = new Vector3(0.1f, 0, 0);
+                wallLoc = this.transform.localPosition.z;
                 break;
         }
         component.transform.position = this.transform.position+OffsetFromWall;
@@ -319,6 +324,7 @@ public class SubMenuHandler : MonoBehaviour {
         component.SetActive(true);
         XData thisX = component.GetComponent<XData>();
         thisX.PlusSignThisReplaces = thisPlus;
+        thisX.wallLoc = wallLoc;
         thisX.offset = OffsetFromWall;
         thisX.wallIndex = thisPlus.GetWallIndex();
         thisX.AssignedToWindow = false;

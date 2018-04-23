@@ -21,6 +21,7 @@ public class ButtonListControl : MonoBehaviour {
     {
         backButton.GetComponentInChildren<Text>().text = "Cancel"; //Currently at top level
         generateButtons();
+        ActivationManager.GiveImageMenu(ImageMenu);
     }
 
     // Generate the buttons in the list

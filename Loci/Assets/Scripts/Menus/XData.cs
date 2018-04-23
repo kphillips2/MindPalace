@@ -41,16 +41,8 @@ public class XData : MonoBehaviour {
 
     private void RestorePlusSign()
     {
-        GameObject component = Instantiate(
-              PlusSign,
-              Vector3.zero,
-              Quaternion.Euler(0, 0, 0)
-          ) as GameObject;
-        component.transform.position = this.transform.position-offset;
-        component.transform.rotation = this.transform.rotation;
-        component.SetActive(true);
-        component.transform.SetParent(PlusSign.GetComponent<SubMenuHandler>().room.transform);
-        component.GetComponent<SubMenuHandler>().InitData(PlusSignThisReplaces);
+        print("reAdd at Wall:"+wallIndex+" Location:"+wallLoc);
+        PlusSign.GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>().AddPlusSign(wallIndex, wallLoc);
         Destroy(this.gameObject);
     }
 }
