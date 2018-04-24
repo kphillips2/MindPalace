@@ -81,7 +81,7 @@ public class ButtonListControl : MonoBehaviour {
 
             List<GameObject> image = pc.placePicture(picFilePath, roty, location);
             ActivationManager.GetActive().GetComponent<SubMenuHandler>().PlaceXOverImage(image);
-            ActivationManager.GetActive().GetComponent<SubMenuHandler>().HideAll();
+            DeleteActivePlusSign();
             ActivationManager.NoActive();
             ImageMenu.transform.position= new Vector3(0,-100,0); //Like Deactivating, but deactivating breaks it
 
@@ -95,6 +95,15 @@ public class ButtonListControl : MonoBehaviour {
             backButton.GetComponentInChildren<Text>().text = "Previous Folder";
             generateButtons();
         }
+    }
+
+    private void DeleteActivePlusSign()
+    {
+
+        RoomHandler useToDelete= ActivationManager.GetActive().GetComponent<SubMenuHandler>().room.GetComponent<RoomHandler>();
+        int wallIndex = ActivationManager.GetActive().GetComponent<SubMenuHandler>().GetWallIndex();
+        float plusLoc = ActivationManager.GetActive().GetComponent<SubMenuHandler>().GetLocationOnWall(); ;
+        useToDelete.RemovePlus(wallIndex,plusLoc);
     }
 
     //Defines action when user wants to go back one folder

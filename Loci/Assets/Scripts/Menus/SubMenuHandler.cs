@@ -55,7 +55,7 @@ public class SubMenuHandler : MonoBehaviour {
         DoorSubMenu.SetActive (false);
         Door.SetActive (false);
         ActivationManager.NoActive ();
-        this.transform.position = new Vector3 (0, -100, 0);
+        this.transform.position = new Vector3 (0, 0, 0);
     }
     public void HideAllStillActive() {
         ClickedOn.SetActive (false);
@@ -126,32 +126,6 @@ public class SubMenuHandler : MonoBehaviour {
                     break;
             }
             collidingRoom.GetComponent<RoomHandler>().AddDoor((wallIndex+2)%4, doorCordinate);
-            /*
-            int wallIndex = thisPlus.GetWallIndex ();
-            float[] roomLoc = thisRoom.GetCentre ();
-            float[] colliderLoc = collidingRoom.GetComponent<RoomHandler> ().GetData ().GetCentre ();
-
-            print("--------------------------");
-            print("PlusLoc:" + this.transform.position.x + ',' + this.transform.position.z);
-            print("RossPlusLoc" + plusLocRoss[0]+','+ plusLocRoss[2]);
-            print("RoomLoc:" + roomLoc[0] + ',' + roomLoc[2]);
-            print("ColliderLoc:" + colliderLoc[0] + ',' + colliderLoc[2]);
-            print("--------------------------");
-
-            float doorLoc = (wallIndex % 2 == 0) ?
-                -(this.transform.position.x - roomLoc [0] - colliderLoc [0]):
-                this.transform.position.z - roomLoc [2] - colliderLoc [2];
-            int oppositeWall = (wallIndex + 2) % 4;
-
-            if (wallIndex < 2)
-            {
-                collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, doorLoc);
-            }
-            else
-            {
-                collidingRoom.GetComponent<RoomHandler>().AddDoor(oppositeWall, -doorLoc);
-            }
-            */
         }
     }
     public void AddPicture()
@@ -329,5 +303,25 @@ public class SubMenuHandler : MonoBehaviour {
         thisX.wallIndex = thisPlus.GetWallIndex();
         thisX.AssignedToWindow = false;
         thisX.ImagePlacedOver = image;
+    }
+
+    public int GetWallIndex()
+    {
+        return thisPlus.GetWallIndex();
+    }
+
+    public float GetLocationOnWall()
+    {
+        switch (thisPlus.GetWallIndex())
+        {
+            case 0:
+                return this.transform.localPosition.x;
+            case 1:
+                return -this.transform.localPosition.z;
+            case 2:
+                return -this.transform.localPosition.x;
+            default:
+                return this.transform.localPosition.z;
+        }
     }
 }

@@ -12494,7 +12494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585fefff52e720041b4808b46115750c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImageMenu: {fileID: 1652401521}
 --- !u!4 &945534894
 Transform:
   m_ObjectHideFlags: 0
@@ -12672,7 +12671,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1386898358}
-        m_MethodName: Enter
+        m_MethodName: SaveAs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19079,7 +19078,7 @@ Prefab:
     - target: {fileID: 224466701024330962, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000579834
+      value: -0.00039672852
       objectReference: {fileID: 0}
     - target: {fileID: 224666161614091206, guid: 33544cfbe3ff26c44bdcbbbf60b28bb1,
         type: 2}

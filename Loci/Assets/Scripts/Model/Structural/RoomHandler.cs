@@ -314,7 +314,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="wallIndex"> the index of the wall holding the plus sign </param>
     /// <param name="loc"> the location of the plus sign along the wall </param>
-    private void RemovePlus(int wallIndex, float loc) {
+    public void RemovePlus(int wallIndex, float loc) {
         float angle =
             (wallIndex == 1) ? 90 :
             (wallIndex == 2) ? 180 :

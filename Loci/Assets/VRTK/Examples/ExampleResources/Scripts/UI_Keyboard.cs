@@ -46,7 +46,6 @@
             SaveFile.Save();
             input.text = "";
             SceneManager.LoadScene("StartingScreen");
-            //Sounds Good, Doesn't Work
         }
 
         public void Cancel()
