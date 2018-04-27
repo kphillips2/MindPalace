@@ -201,5 +201,16 @@ public class ObjectPlacer : MonoBehaviour {
         myGrab.interactTouch.ForceStopTouching();
         myGrab.interactTouch.ForceTouch(gameObj.gameObject);
         myGrab.AttemptGrab();
+
+        if (ActivationManager.objectHeld1 == null)
+        {
+            ActivationManager.objectHeld1 = gameObj.transform.root.gameObject;
+            gameObj.GetComponent<ObjectBehavior>().isObjectHeld1 = true;
+        }
+        else
+        {
+            ActivationManager.objectHeld2 = gameObj.transform.root.gameObject;
+            gameObj.GetComponent<ObjectBehavior>().isObjectHeld1 = false;
+        }
     }
 }

@@ -37,7 +37,7 @@ public class pauseListener : MonoBehaviour
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
-        if (!ActivationManager.isHoldingObject)
+        if (ActivationManager.objectHeld1 == null && ActivationManager.objectHeld2 == null)
         {
             paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
             paused = !paused;
@@ -56,7 +56,23 @@ public class pauseListener : MonoBehaviour
                 objectsMenu.transform.position = new Vector3(0, -100, 0);
             }
         }
-        ActivationManager.isHoldingObject = false;
+        else
+        {
+            //Delete objects
+            if(ActivationManager.objectHeld1 != null) Destroy(ActivationManager.objectHeld1);
+            if(ActivationManager.objectHeld2 != null) Destroy(ActivationManager.objectHeld2);
+
+            //Tell controllers that an object is no longer being held
+            GameObject controllerGameObj = VRTK_DeviceFinder.GetControllerLeftHand();
+            GameObject controllerGameObj2 = VRTK_DeviceFinder.GetControllerRightHand();
+            VRTK_InteractGrab myGrab = controllerGameObj.GetComponent<VRTK_InteractGrab>();
+            VRTK_InteractGrab myGrab2 = controllerGameObj2.GetComponent<VRTK_InteractGrab>();
+            myGrab.ForceRelease();
+            myGrab2.ForceRelease();
+
+            ActivationManager.objectHeld1 = null;
+            ActivationManager.objectHeld2 = null;
+        }
     }
 
     //Moves and rotates the settings canvas
