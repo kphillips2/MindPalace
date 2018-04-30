@@ -38,6 +38,7 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <returns> the save object that contains the room information </returns>
     public RoomData GetData() { return thisRoom; }
+    public void SetData(RoomData data) { thisRoom = data; }
     /// <summary>
     /// Changes the dimensions of a room without scaling it.
     /// </summary>

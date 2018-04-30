@@ -221,7 +221,7 @@ public class Building : MonoBehaviour
             width = data.GetWidth ();
             length = data.GetLength ();
 
-            component = LoadRoom(new Vector3(centre[0], centre[1], centre[2]), width, length);
+            component = LoadRoom(new Vector3(centre[0], centre[1], centre[2]), width, length, data);
             if(SaveFile.EditMode)
                 LoadPlusSigns (data.GetPlusData (), component);
 
@@ -241,14 +241,16 @@ public class Building : MonoBehaviour
     /// <param name="width"> determines the size of the room along the X axis </param>
     /// <param name="length"> determines the size of the room along the Z axis </param>
     /// <returns> the new room object that has been created </returns>
-    private GameObject LoadRoom(Vector3 roomCentre, float width, float length) {
+    private GameObject LoadRoom(Vector3 roomCentre, float width, float length, RoomData data) {
         GameObject component = Instantiate (
             room,
             roomCentre,
             Quaternion.Euler(0, 0, 0)
         ) as GameObject;
         component.SetActive (true);
-        component.GetComponent<RoomHandler> ().InitData (width, length);
+        RoomHandler roomScript = component.GetComponent<RoomHandler> ();
+        roomScript.InitData (width, length);
+        roomScript.SetData (data);
 
         rooms.Add (component);
         return component;
