@@ -130,7 +130,7 @@ public class RoomData {
     /// Removes a plus sign at the currently stored index.
     /// </summary>
     /// <param name="index"> the index of the plus sign being removed </param>
-    public void DeletePlus(int index) { plusSigns.RemoveAt (index); }
+    public void DeletePlus(PlusData plus) { plusSigns.Remove (plus); }
     /// <summary>
     /// Removes a picture at the given location
     /// </summary>

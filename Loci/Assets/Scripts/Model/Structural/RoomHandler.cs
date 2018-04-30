@@ -351,7 +351,7 @@ public class RoomHandler : MonoBehaviour
                         }
 
                     print ("    Call DeletePlus on index: " + k);
-                    thisRoom.DeletePlus (k);
+                    thisRoom.DeletePlus (plusSigns[k]);
                     break;
                 }
             }

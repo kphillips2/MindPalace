@@ -41,11 +41,11 @@ public class Building : MonoBehaviour
 
     private void ShowEditModeUI(bool mode)
     {
-        GameObject[] PlusSigns = GameObject.FindGameObjectsWithTag("PlusSign");
-        foreach( GameObject plusSign in PlusSigns){
-            print(plusSign.name);
-            plusSign.SetActive(mode);
-        }
+        //GameObject[] PlusSigns = GameObject.FindGameObjectsWithTag("PlusSign");
+        //foreach( GameObject plusSign in PlusSigns){
+        //    print(plusSign.name);
+        //    plusSign.SetActive(mode);
+        //}
         GameObject[] EditUI = GameObject.FindGameObjectsWithTag("EditMode");
         foreach (GameObject canvas in EditUI)
         {
@@ -221,8 +221,9 @@ public class Building : MonoBehaviour
             width = data.GetWidth ();
             length = data.GetLength ();
 
-            component = LoadRoom (new Vector3 (centre [0], centre [1], centre [2]), width, length);
-            LoadPlusSigns (data.GetPlusData (), component);
+            component = LoadRoom(new Vector3(centre[0], centre[1], centre[2]), width, length);
+            if(SaveFile.EditMode)
+                LoadPlusSigns (data.GetPlusData (), component);
 
             mats = data.GetMaterials ();
             component.GetComponent<RoomHandler> ().SetMaterials (mats [0], mats [1], mats [2]);
