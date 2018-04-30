@@ -85,7 +85,7 @@ public class pauseListener : MonoBehaviour
         building = level.GetComponent<Building>();
         building.Save();
         SaveFile.Save();
-        SceneManager.LoadScene("StartingScreen");
+        SceneManager.LoadScene(0);
     }
 
     public void ViewObjectMenu()
