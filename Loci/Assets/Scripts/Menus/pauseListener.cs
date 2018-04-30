@@ -13,13 +13,14 @@ using UnityEngine.SceneManagement;
 
 public class pauseListener : MonoBehaviour
 {
-
-    public GameObject pauseMenu; //pause canvas
+    public GameObject ViewModePause;
+    public GameObject EditModePause;
     public GameObject keyboard; //settings canvas
     public GameObject objectsMenu;
     public Transform cameraRigTransform; //camera rig
     public GameObject level;
 
+    public GameObject ActivePauseMenu; //pause canvas
     private SteamVR_TrackedController controller;
     private Vector3 viewDir;
     private float height = 1.5f;
@@ -32,6 +33,14 @@ public class pauseListener : MonoBehaviour
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
+        if (SaveFile.EditMode)
+        {
+            ActivePauseMenu = EditModePause;
+        }
+        else
+        {
+            ActivePauseMenu = ViewModePause;
+        }
     }
 
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
@@ -39,19 +48,19 @@ public class pauseListener : MonoBehaviour
     {
         if (ActivationManager.objectHeld1 == null && ActivationManager.objectHeld2 == null)
         {
-            paused = (pauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
+            paused = (ActivePauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
             paused = !paused;
             if (paused)
             {
                 viewDir = SteamVR_Render.Top().GetRay().direction;
                 viewDir = new Vector3(viewDir.x, 0, viewDir.z);
                 viewDir = viewDir.normalized;
-                pauseMenu.transform.position = new Vector3(cameraRigTransform.position.x + (viewDir.x * 3), 2, cameraRigTransform.position.z + (viewDir.z * 3));
-                pauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
+                ActivePauseMenu.transform.position = new Vector3(cameraRigTransform.position.x + (viewDir.x * 3), 2, cameraRigTransform.position.z + (viewDir.z * 3));
+                ActivePauseMenu.transform.rotation = Quaternion.LookRotation(new Vector3(viewDir.x, 0, viewDir.z));
             }
             else
             {
-                pauseMenu.transform.position = new Vector3(0, -100, 0);
+                ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
                 keyboard.transform.position = new Vector3(0, -100, 0);
                 objectsMenu.transform.position = new Vector3(0, -100, 0);
             }
@@ -78,22 +87,22 @@ public class pauseListener : MonoBehaviour
     //Moves and rotates the settings canvas
     public void GoToKeyboard()
     {
-        keyboard.transform.position = pauseMenu.transform.position;
-        keyboard.transform.rotation = pauseMenu.transform.rotation;
-        pauseMenu.transform.position = new Vector3(0, -100, 0);
+        keyboard.transform.position = ActivePauseMenu.transform.position;
+        keyboard.transform.rotation = ActivePauseMenu.transform.rotation;
+        ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void LeaveSettings()
     {
-        pauseMenu.transform.position = keyboard.transform.position;
-        pauseMenu.transform.rotation = keyboard.transform.rotation;
+        ActivePauseMenu.transform.position = keyboard.transform.position;
+        ActivePauseMenu.transform.rotation = keyboard.transform.rotation;
         keyboard.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ResumeGame()
     {
         paused = false;
-        pauseMenu.transform.position = new Vector3(0, -100, 0);
+        ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ToMainMenu()
@@ -101,14 +110,14 @@ public class pauseListener : MonoBehaviour
         building = level.GetComponent<Building>();
         building.Save();
         SaveFile.Save();
-        SceneManager.LoadScene("StartingScreen");
+        SceneManager.LoadScene(0);
     }
 
     public void ViewObjectMenu()
     {
-        objectsMenu.transform.position = pauseMenu.transform.position;
-        objectsMenu.transform.rotation = pauseMenu.transform.rotation;
-        pauseMenu.transform.position = new Vector3(0, -100, 0);
+        objectsMenu.transform.position = ActivePauseMenu.transform.position;
+        objectsMenu.transform.rotation = ActivePauseMenu.transform.rotation;
+        ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void toStart()

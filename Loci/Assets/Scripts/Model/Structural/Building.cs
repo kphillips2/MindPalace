@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using VRTK;
 
 /// <summary>
 /// Resonsible for loading any room objects. Also tracks all rooms.
@@ -12,6 +13,7 @@ public class Building : MonoBehaviour
     public GameObject plusSign;
 
     private List<GameObject> rooms;
+    private bool EditMode;
 
     // Use this for initialization
     void Start()
@@ -24,8 +26,40 @@ public class Building : MonoBehaviour
             ObjectPlacer op = new ObjectPlacer ();
             foreach (float[] o in SaveFile.currentLoci.getObjects ())
                 op.createPrefab ((int) o [0], new Vector3 (o [1], o [2], o [3]), new Vector3 (o [4], o [5], o [6]), true);
+            if (SaveFile.EditMode)
+            {
+                ShowEditModeUI(true);
+                TogglePointer(true);
+            }
+            else
+            {
+                ShowEditModeUI(false);
+                TogglePointer(false);
+            }
         }
     }
+
+    private void ShowEditModeUI(bool mode)
+    {
+        GameObject[] PlusSigns = GameObject.FindGameObjectsWithTag("PlusSign");
+        foreach( GameObject plusSign in PlusSigns){
+            print(plusSign.name);
+            plusSign.SetActive(mode);
+        }
+        GameObject[] EditUI = GameObject.FindGameObjectsWithTag("EditMode");
+        foreach (GameObject canvas in EditUI)
+        {
+            canvas.SetActive(mode);
+        }
+    }
+
+    private void TogglePointer(bool state)
+    {
+        VRTK_StraightPointerRenderer[] PointerController = GameObject.FindObjectsOfType<VRTK_StraightPointerRenderer>();
+        print(PointerController[0]);
+        PointerController[0].enabled=state;
+    }
+
     /// <summary>
     /// Saves all the rooms and corridors to the currently open Loci.
     /// </summary>

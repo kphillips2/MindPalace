@@ -45,7 +45,7 @@
             SaveFile.name = input.text;
             SaveFile.Save();
             input.text = "";
-            SceneManager.LoadScene("StartingScreen");
+            SceneManager.LoadScene(0);
         }
 
         public void Cancel()

@@ -26,9 +26,10 @@ public static class LoadFile {
     /// Sets the currently open Loci to the Loci with the given name.
     /// </summary>
     /// <param name="name"> the name of the Loci to be opened </param>
-    public static void LoadLoci(string name){
+    public static void LoadLoci(string name, bool editMode){
         if (SaveFile.savedLocis.TryGetValue (name, out SaveFile.currentLoci)) {
             SaveFile.name = name;
+            SaveFile.EditMode = editMode;
             MonoBehaviour.print ("Loci successfully loaded.");
         } else
             Debug.LogError ("The Loci was not found.");
