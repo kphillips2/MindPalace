@@ -11,6 +11,7 @@ using System.IO;
 public static class SaveFile {
     public static bool isNewLoci = false;
     public static string name = null;
+    public static bool EditMode;
     public static Loci currentLoci= new Loci (); //The current save file being loaded/edited/viewed
     public static Dictionary<string, Loci> savedLocis= new Dictionary<string, Loci> (); //List of save files
     public static string fileSaveLocation = "Assets/Resources/SaveFile/";
