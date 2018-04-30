@@ -7,7 +7,8 @@ public static class ActivationManager {
     private static bool Activated = false;
     private static GameObject ActivatedObject = null;
     public static GameObject ImageMenu;
-    public static bool isHoldingObject = false;
+    public static GameObject objectHeld1 = null;
+    public static GameObject objectHeld2 = null;
 
     public static void ActivateMenu(GameObject NewActivation)
     {

@@ -12,9 +12,9 @@ public static class LoadFile {
     /// Fills the savedLocis dictionary with the Loci objects that were saved in the file.
     /// </summary>
     public static void Load(){
-        if (File.Exists ("Assets/SaveFile/saveFile.gd")) {
+        if (File.Exists (SaveFile.fileSaveLocation + "saveFile.gd")) {
             BinaryFormatter bf = new BinaryFormatter ();
-            FileStream file = File.Open ("Assets/SaveFile/saveFile.gd", FileMode.Open);
+            FileStream file = File.Open (SaveFile.fileSaveLocation + "saveFile.gd", FileMode.Open);
             SaveFile.savedLocis = (Dictionary<string, Loci>)bf.Deserialize (file);
             Debug.Log(SaveFile.savedLocis.Count);
             file.Close ();

@@ -10,8 +10,8 @@ public class ButtonListControl : MonoBehaviour {
     [SerializeField]
     private Button backButton;
     private List<GameObject> buttons = new List<GameObject>();
-    private string startFilePath = "Assets/TestImages"; //Top level where pictures are stored
-    private string currentFilePath = "Assets/TestImages"; //Current folder being looked at
+    private string startFilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures); //Top level where pictures are stored
+    private string currentFilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures); //Current folder being looked at
 
     public GameObject ImageMenu;
     public GameObject currentRoom; //Room that menu is being displayed in

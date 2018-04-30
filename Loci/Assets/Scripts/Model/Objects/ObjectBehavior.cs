@@ -8,6 +8,7 @@ using VRTK;
 public class ObjectBehavior : MonoBehaviour {
     private bool isBeingGrabbed; //True if object is being grabbed
     private Rigidbody rbody; //The object's rigidbody
+    public bool isObjectHeld1; //When object is being grabbed, if it is stored in first or second activation manager attribute
 
     void Start()
     {
@@ -40,7 +41,17 @@ public class ObjectBehavior : MonoBehaviour {
     {
         isBeingGrabbed = true;
         transform.GetComponent<Rigidbody>().isKinematic = false;
-        ActivationManager.isHoldingObject = true;
+        if (ActivationManager.objectHeld1 == null)
+        {
+            ActivationManager.objectHeld1 = transform.root.gameObject;
+            isObjectHeld1 = true;
+        }
+        else
+        {
+            ActivationManager.objectHeld2 = transform.root.gameObject;
+            isObjectHeld1 = false;
+        }
+        
     }
 
     //Called when user lets go of object
@@ -48,12 +59,14 @@ public class ObjectBehavior : MonoBehaviour {
     {
         isBeingGrabbed = false;
         transform.GetComponent<Rigidbody>().isKinematic = false;
-        ActivationManager.isHoldingObject = false;
+        if (isObjectHeld1) ActivationManager.objectHeld1 = null;
+        else ActivationManager.objectHeld2 = null;
     }
 
     //Called when object is used
     private void ObjectUsed(object sender, InteractableObjectEventArgs e)
     {
+        /*
         //Delete object
         Destroy(transform.root.gameObject);
 
@@ -63,7 +76,6 @@ public class ObjectBehavior : MonoBehaviour {
         VRTK_InteractGrab myGrab = controllerGameObj.GetComponent<VRTK_InteractGrab>();
         VRTK_InteractGrab myGrab2 = controllerGameObj2.GetComponent<VRTK_InteractGrab>();
         myGrab.ForceRelease();
-        myGrab2.ForceRelease();
-        ActivationManager.isHoldingObject = true;
+        myGrab2.ForceRelease();*/
     }
 }
