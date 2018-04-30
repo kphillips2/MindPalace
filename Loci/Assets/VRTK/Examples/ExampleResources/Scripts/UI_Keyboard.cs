@@ -34,6 +34,7 @@
                 SaveFile.name = input.text;
                 SaveFile.isNewLoci = true;
                 input.text = "";
+                SaveFile.EditMode = true;
                 SceneManager.LoadScene("GreenDemo");
             }  
         }

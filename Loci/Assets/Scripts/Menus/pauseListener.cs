@@ -33,7 +33,13 @@ public class pauseListener : MonoBehaviour
     {
         controller = GetComponent<SteamVR_TrackedController>();
         controller.MenuButtonClicked += MenuPress;
-        if (SaveFile.EditMode)
+        CheckMenuState();
+    }
+
+    private void CheckMenuState()
+    {
+        print(SaveFile.EditMode);
+        if (SaveFile.EditMode || SaveFile.EditMode == null)
         {
             ActivePauseMenu = EditModePause;
         }
@@ -46,6 +52,7 @@ public class pauseListener : MonoBehaviour
     //reveals or hides menu and move it to infront of the user, plus rotates it to face the user
     private void MenuPress(object sender, ClickedEventArgs e)
     {
+        CheckMenuState();
         if (ActivationManager.objectHeld1 == null && ActivationManager.objectHeld2 == null)
         {
             paused = (ActivePauseMenu.transform.position.y > -50 || keyboard.transform.position.y > -50 || objectsMenu.transform.position.y > -50);
@@ -87,6 +94,7 @@ public class pauseListener : MonoBehaviour
     //Moves and rotates the settings canvas
     public void GoToKeyboard()
     {
+        CheckMenuState();
         keyboard.transform.position = ActivePauseMenu.transform.position;
         keyboard.transform.rotation = ActivePauseMenu.transform.rotation;
         ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
@@ -94,6 +102,7 @@ public class pauseListener : MonoBehaviour
 
     public void LeaveSettings()
     {
+        CheckMenuState();
         ActivePauseMenu.transform.position = keyboard.transform.position;
         ActivePauseMenu.transform.rotation = keyboard.transform.rotation;
         keyboard.transform.position = new Vector3(0, -100, 0);
@@ -101,20 +110,28 @@ public class pauseListener : MonoBehaviour
 
     public void ResumeGame()
     {
+        CheckMenuState();
         paused = false;
         ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
     }
 
     public void ToMainMenu()
     {
+        CheckMenuState();
         building = level.GetComponent<Building>();
         building.Save();
         SaveFile.Save();
         SceneManager.LoadScene(0);
     }
 
+    public void Quit()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void ViewObjectMenu()
     {
+        CheckMenuState();
         objectsMenu.transform.position = ActivePauseMenu.transform.position;
         objectsMenu.transform.rotation = ActivePauseMenu.transform.rotation;
         ActivePauseMenu.transform.position = new Vector3(0, -100, 0);
