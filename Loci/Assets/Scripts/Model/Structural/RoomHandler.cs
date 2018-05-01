@@ -37,7 +37,7 @@ public class RoomHandler : MonoBehaviour
     /// Retrieves all the information that will apear in the save file for this room.
     /// </summary>
     /// <returns> the save object that contains the room information </returns>
-    public RoomData GetData() { return thisRoom; }
+    public RoomData GetData() { print(thisRoom == null);  return thisRoom; }
     public void SetData(RoomData data) { thisRoom = data; }
     /// <summary>
     /// Changes the dimensions of a room without scaling it.
@@ -84,6 +84,7 @@ public class RoomHandler : MonoBehaviour
         negZWall.GetComponent<Renderer> ().material = wallMat;
         negXWall.GetComponent<Renderer> ().material = wallMat;
 
+        print(thisRoom == null);
         thisRoom.SetMaterials (floorName, roofName, wallName);
     }
     /// <summary>
