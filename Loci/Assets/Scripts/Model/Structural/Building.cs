@@ -275,7 +275,7 @@ public class Building : MonoBehaviour
             component.SetActive (true);
 
             component.transform.SetParent (parent.transform);
-            component.GetComponent<SubMenuHandler> ().InitData (plus);
+            component.GetComponent<SubMenuHandler> ().InitData (plus, parent);
         }
     }
 

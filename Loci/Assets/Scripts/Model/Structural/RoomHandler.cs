@@ -37,7 +37,7 @@ public class RoomHandler : MonoBehaviour
     /// Retrieves all the information that will apear in the save file for this room.
     /// </summary>
     /// <returns> the save object that contains the room information </returns>
-    public RoomData GetData() { print(thisRoom == null);  return thisRoom; }
+    public RoomData GetData() { return thisRoom; }
     public void SetData(RoomData data) { thisRoom = data; }
     /// <summary>
     /// Changes the dimensions of a room without scaling it.
@@ -179,7 +179,7 @@ public class RoomHandler : MonoBehaviour
             float[] plusCentre = { centre.x, centre.y, centre.z };
 
             PlusData thisPlus = new PlusData (plusCentre, newRoom, newCorridor, angle);
-            component.GetComponent<SubMenuHandler> ().InitData (thisPlus);
+            component.GetComponent<SubMenuHandler> ().InitData (thisPlus, gameObject);
             thisRoom.AddPlusSign (thisPlus);
         }
         else

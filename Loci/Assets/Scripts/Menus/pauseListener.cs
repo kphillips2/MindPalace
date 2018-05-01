@@ -38,7 +38,6 @@ public class pauseListener : MonoBehaviour
 
     private void CheckMenuState()
     {
-        print(SaveFile.EditMode);
         if (SaveFile.EditMode || SaveFile.EditMode == null)
         {
             ActivePauseMenu = EditModePause;
