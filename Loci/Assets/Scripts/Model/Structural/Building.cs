@@ -25,7 +25,7 @@ public class Building : MonoBehaviour
             LoadRooms (SaveFile.currentLoci.getRooms ());
             ObjectPlacer op = new ObjectPlacer ();
             foreach (float[] o in SaveFile.currentLoci.getObjects ())
-                op.createPrefab ((int) o [0], new Vector3 (o [1], o [2], o [3]), new Vector3 (o [4], o [5], o [6]), true);
+                op.createPrefab ((int) o [0], new Vector3 (o [1], o [2], o [3]), new Vector3 (o [4], o [5], o [6]), SaveFile.EditMode);
             if (SaveFile.EditMode)
             {
                 ShowEditModeUI(true);
