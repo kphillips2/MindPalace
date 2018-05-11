@@ -1,0 +1,56 @@
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <0, 0, 0>
+    Plus centre relative: <0, 2, -6>
+    Plus centre world: <0, 2, -6>
+    Call Destroy on plus at: <0, 2, -6>
+    Number of PlusSigns checked: 8
+    Call DeletePlus on index: 7
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <0, 0, -12>
+    Plus centre relative: <0, 2, 6>
+    Plus centre world: <0, 2, 6>
+    Call Destroy on plus at: <0, 2, 6>
+    Number of PlusSigns checked: 2
+    Call DeletePlus on index: 1
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <0, 0, 0>
+    Plus centre relative: <-6, 2, 4>
+    Plus centre world: <-6, 2, 4>
+    Call Destroy on plus at: <-6, 2, 4>
+    Number of PlusSigns checked: 9
+    Call DeletePlus on index: 8
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <-12, 0, 4>
+    Plus centre relative: <6, 2, 0>
+    Plus centre world: <6, 2, 0>
+    Call Destroy on plus at: <-6, 2, 0>
+    Number of PlusSigns checked: 4
+    Call DeletePlus on index: 4
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <-12, 0, 4>
+    Plus centre relative: <4, 2, 6>
+    Plus centre world: <4, 2, 6>
+    Call Destroy on plus at: <4, 2, 6>
+    Number of PlusSigns checked: 1
+    Call DeletePlus on index: 0
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <-8, 0, 16>
+    Plus centre relative: <0, 2, -6>
+    Plus centre world: <0, 2, -6>
+    Call Destroy on plus at: <0, 2, -6>
+    Number of PlusSigns checked: 8
+    Call DeletePlus on index: 7
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+RemovePlus called on Room at: <0, 0, 0>
+    Plus centre relative: <-4, 2, 6>
+    Plus centre world: <-4, 2, 6>
+    Call Destroy on plus at: <-4, 2, 6>
+    Number of PlusSigns checked: 3
+    Call DeletePlus on index: 2
+--------------------------------------------------------------------------------

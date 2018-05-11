@@ -333,74 +333,70 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     /// <param name="wallIndex"> the index of the wall holding the plus sign </param>
     /// <param name="loc"> the location of the plus sign along the wall </param>
-    public void RemovePlus(int wallIndex, float loc) {
-        float angle =
-            (wallIndex == 1) ? 90 :
-            (wallIndex == 2) ? 180 :
-            (wallIndex == 3) ? 270 : 0;
-        float wall;
-        string helper;
-        float[] centre;
-        float[] roomCentre = thisRoom.GetCentre ();
-        bool collided;
-
-        List<PlusData> plusSigns = thisRoom.GetPlusData ();
-        Vector3 plusCentre;
-        StreamWriter writer;
-
-        for (int k = plusSigns.Count-1; k >= 0; k--) {
-            if (plusSigns [k].GetAngle () == angle) {
-                writer = new StreamWriter (fileLoc + "plusDeletion.txt", true);
-                helper = "";
-                centre = plusSigns [k].GetCentre ();
-                centre [0] -= roomCentre [0];
-                centre [1] -= roomCentre [1];
-                centre [2] -= roomCentre [2];
-
-                plusCentre = new Vector3 (centre[0], centre[1], centre[2]);
-                wall = plusSigns [k].GetWallIndex ();
-                collided = (wall == 1 || wall == 3) ?
-                    plusCentre.z > loc - 2f && plusCentre.z < loc + 2f :
-                    plusCentre.x > loc - 2f && plusCentre.x < loc + 2f;
-
-                //plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
-
-                if (collided) {
-                    helper += "--------------------------------------------------------------------------------\n";
-                    centre = plusSigns[k].GetCentre();
-                    helper += "RemovePlus called on Room at: <" + 
-                        Mathf.Round (10*roomCentre [0]/10) + ", " + Mathf.Round (10*roomCentre [1]/10) + ", " + Mathf.Round (10*roomCentre[2]/10) + ">\n";
-                    helper += "    Plus centre relative: <" + 
-                        Mathf.Round (10*plusCentre.x/10) + ", " + Mathf.Round (10*plusCentre.y/10) + ", " + Mathf.Round (10*plusCentre.z/10) + ">\n";
-                    helper += "    Plus centre world: <" + 
-                        Mathf.Round (10*centre [0]/10) + ", " + Mathf.Round (10*centre [1]/10) + ", " + Mathf.Round (10*centre [2]/10) + ">\n";
-
-                    wall = 0;
-                    foreach (Canvas plus in this.GetComponentsInChildren<Canvas>()) {
-                        if (plus.tag == "PlusSign") {
-                            int comp = plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]);
-                            wall++;
-                            if (comp == 0) {
-                                float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
-                                helper += "    Call Destroy on plus at: <" + 
-                                    Mathf.Round (10*cp [0]/10) + ", " + Mathf.Round (10*cp [1]/10) + ", " + Mathf.Round (10*cp [2]/10) + ">\n";
-                                Destroy (plus.gameObject);
-                                break;
-                            }
-                        }
-                    }
-                    helper += "    Number of PlusSigns checked: " + wall + "\n";
-
-                    helper += "    Call DeletePlus on index: " + k + "\n";
-                    helper += "--------------------------------------------------------------------------------";
-                    writer.WriteLine(helper);
-                    writer.Close();
-
-                    thisRoom.DeletePlus (plusSigns[k]);
-                    break;
-                } else writer.Close ();
+    public void RemovePlus(int wallIndex, float loc)
+    {
+        Canvas[] canvases = this.GetComponentsInChildren<Canvas>();
+        List<Canvas> PlusSigns = new List<Canvas>();
+        foreach (Canvas menu in canvases)
+        {
+            if (menu.tag == "PlusSign")
+            {
+                PlusSigns.Add(menu);
             }
         }
+        switch (wallIndex)
+        {
+            case 0:
+                foreach (Canvas plus in PlusSigns)
+                {
+                    if (MostlyEqual(plus.transform.eulerAngles.y, 0) &&
+                       MostlyEqual(plus.transform.localPosition.x, loc))
+                    {
+                        thisRoom.DeletePlus(plus.GetComponent<SubMenuHandler>().GetData()); Destroy(plus.gameObject); 
+                    }
+                }
+                break;
+            case 1:
+                foreach (Canvas plus in PlusSigns)
+                {
+                    if (MostlyEqual(plus.transform.eulerAngles.y, 90) &&
+                       MostlyEqual(plus.transform.localPosition.z, -loc))
+                    {
+                        thisRoom.DeletePlus(plus.GetComponent<SubMenuHandler>().GetData()); Destroy(plus.gameObject);
+                    }
+                }
+                break;
+            case 2:
+                foreach (Canvas plus in PlusSigns)
+                {
+                    if (MostlyEqual(plus.transform.eulerAngles.y, 180) &&
+                       MostlyEqual(plus.transform.localPosition.x, -loc))
+                    {
+                        thisRoom.DeletePlus(plus.GetComponent<SubMenuHandler>().GetData()); Destroy(plus.gameObject);
+                    }
+                }
+                break;
+            case 3:
+                foreach (Canvas plus in PlusSigns)
+                {
+                    if (MostlyEqual(plus.transform.eulerAngles.y, 270) &&
+                       MostlyEqual(plus.transform.localPosition.z, loc))
+                    {
+                        thisRoom.DeletePlus(plus.GetComponent<SubMenuHandler>().GetData());
+                        Destroy(plus.gameObject);
+                    }
+                }
+                break;
+        }
+    }
+
+    private Boolean MostlyEqual(float val1, float val2)
+    {
+        if (Math.Abs(val1 - val2) <= 0.1)
+        {
+            return true;
+        }
+        return false;
     }
     /// <summary>
     /// Removes a door or window from the save data and from the scene.
