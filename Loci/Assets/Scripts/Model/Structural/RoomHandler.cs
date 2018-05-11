@@ -335,8 +335,8 @@ public class RoomHandler : MonoBehaviour
                 centre [1] -= roomCentre [1];
                 centre [2] -= roomCentre [2];
 
-                plusCentre = new Vector3(centre[0], centre[1], centre[2]);
-                wall = plusSigns[k].GetWallIndex ();
+                plusCentre = new Vector3 (centre[0], centre[1], centre[2]);
+                wall = plusSigns [k].GetWallIndex ();
                 collided = (wall == 1 || wall == 3) ?
                     plusCentre.z > loc - 2f && plusCentre.z < loc + 2f :
                     plusCentre.x > loc - 2f && plusCentre.x < loc + 2f;
@@ -344,13 +344,17 @@ public class RoomHandler : MonoBehaviour
                 //plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
                 if (collided) {
+                    print ("------------------------------------------------------------------------------------------------");
                     print ("RemovePlus called on Room at: " + "<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
-                    print ("    Plus centre: " + plusCentre + ", the location of the door or window is: " + loc);
+                    centre = plusSigns [k].GetCentre ();
+                    print ("    Plus centre relative: " + plusCentre + ", the location of the door or window is: " + loc);
+                    print ("    Plus centre world: " + "<" + centre [0] + ", " + centre [1] + ", " + centre [2] + ">");
 
-                    foreach (Canvas plus in this.GetComponentsInChildren<Canvas> ())
+                    wall = 0;
+                    foreach (Canvas plus in this.GetComponentsInChildren<Canvas>()) {
                         if (plus.tag == "PlusSign") {
                             int comp = plus.GetComponent<SubMenuHandler> ().GetData ().CompareTo (plusSigns [k]);
-
+                            wall++;
                             if (comp == 0) {
                                 float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
                                 print("    Call Destroy on plus at: " + new Vector3 (cp [0], cp [1], cp [2]));
@@ -358,8 +362,11 @@ public class RoomHandler : MonoBehaviour
                                 break;
                             }
                         }
+                    }
+                    print ("    Number of PlusSigns checked: " + wall);
 
                     print ("    Call DeletePlus on index: " + k);
+                    print ("------------------------------------------------------------------------------------------------");
                     thisRoom.DeletePlus (plusSigns[k]);
                     break;
                 }
