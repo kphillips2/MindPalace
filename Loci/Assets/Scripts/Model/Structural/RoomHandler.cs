@@ -84,7 +84,6 @@ public class RoomHandler : MonoBehaviour
         negZWall.GetComponent<Renderer> ().material = wallMat;
         negXWall.GetComponent<Renderer> ().material = wallMat;
 
-        print(thisRoom == null);
         thisRoom.SetMaterials (floorName, roofName, wallName);
     }
     /// <summary>
