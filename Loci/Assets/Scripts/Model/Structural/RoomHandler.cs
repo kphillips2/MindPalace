@@ -177,8 +177,8 @@ public class RoomHandler : MonoBehaviour
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            component.transform.SetParent (this.transform);
             centre = component.transform.position;
+            component.transform.SetParent (this.transform);
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
                 roomCentre, centre,
@@ -188,7 +188,7 @@ public class RoomHandler : MonoBehaviour
                 roomCentre, centre,
                 thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType (angle)
             );
-            float[] plusCentre = { centre.x, centre.y, centre.z };
+            float[] plusCentre = new float[]{ centre.x, centre.y, centre.z };
 
             StreamWriter writer = new StreamWriter (fileLoc + "pluslocs.txt", true);
             writer.WriteLine("<" + plusCentre [0] + ", " + plusCentre [1] + ", " + plusCentre [2] + ">");
