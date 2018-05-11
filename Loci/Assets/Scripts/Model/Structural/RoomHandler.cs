@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 
 /// <summary>
 /// Responsible for handling and room functionality.
@@ -19,6 +20,7 @@ public class RoomHandler : MonoBehaviour
 
     private List<Vector3>[] doorsAndWindows;
     private RoomData thisRoom;
+    public string fileLoc = "Assets/Resources/";
 
     /// <summary>
     /// Initializes the attributes for this room.
@@ -132,6 +134,8 @@ public class RoomHandler : MonoBehaviour
     /// </summary>
     public void AddPlusSigns(){
         float wallLimit;
+        FileStream file = File.Create (fileLoc + "pluslocs.txt");
+        file.Close ();
         for (int k = 0; k < 4; k++) {
             wallLimit = GetWallSize (k) / 2;
             for (float loc = wallLimit - 2; loc > -wallLimit; loc -= 4)
@@ -173,9 +177,13 @@ public class RoomHandler : MonoBehaviour
             );
             float[] newCorridor = RoomTypes.GetNewRoomCentre (
                 roomCentre, centre,
-                thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType(angle)
+                thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType (angle)
             );
             float[] plusCentre = { centre.x, centre.y, centre.z };
+
+            StreamWriter writer = new StreamWriter (fileLoc + "pluslocs.txt", true);
+            writer.WriteLine("<" + plusCentre [0] + ", " + plusCentre [1] + ", " + plusCentre [2] + ">");
+            writer.Close ();
 
             PlusData thisPlus = new PlusData (plusCentre, newRoom, newCorridor, angle);
             component.GetComponent<SubMenuHandler> ().InitData (thisPlus, gameObject);
@@ -321,6 +329,7 @@ public class RoomHandler : MonoBehaviour
             (wallIndex == 2) ? 180 :
             (wallIndex == 3) ? 270 : 0;
         float wall;
+        string helper;
         float[] centre;
         float[] roomCentre = thisRoom.GetCentre ();
         bool collided;
@@ -328,8 +337,13 @@ public class RoomHandler : MonoBehaviour
         List<PlusData> plusSigns = thisRoom.GetPlusData ();
         Vector3 plusCentre;
 
+        FileStream file = File.Create (fileLoc + "plusDeletion.txt");
+        file.Close();
+
         for (int k = plusSigns.Count-1; k >= 0; k--) {
             if (plusSigns [k].GetAngle () == angle) {
+                StreamWriter writer = new StreamWriter(fileLoc + "plusDeletion.txt", true);
+                helper = "";
                 centre = plusSigns [k].GetCentre ();
                 centre [0] -= roomCentre [0];
                 centre [1] -= roomCentre [1];
@@ -344,11 +358,11 @@ public class RoomHandler : MonoBehaviour
                 //plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
                 if (collided) {
-                    print ("------------------------------------------------------------------------------------------------");
-                    print ("RemovePlus called on Room at: " + "<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
-                    centre = plusSigns [k].GetCentre ();
-                    print ("    Plus centre relative: " + plusCentre + ", the location of the door or window is: " + loc);
-                    print ("    Plus centre world: " + "<" + centre [0] + ", " + centre [1] + ", " + centre [2] + ">");
+                    helper += "------------------------------------------------------------------------------------------------\n";
+                    centre = plusSigns[k].GetCentre();
+                    helper += "RemovePlus called on Room at: <" + roomCentre[0] + ", " + roomCentre[1] + ", " + roomCentre[2] + ">\n";
+                    helper += "    Plus centre relative: <" + plusCentre.x + ", " + plusCentre.y + ", " + plusCentre.z + ">\n";
+                    helper += "    Plus centre world: <" + centre [0] + ", " + centre [1] + ", " + centre [2] + ">\n";
 
                     wall = 0;
                     foreach (Canvas plus in this.GetComponentsInChildren<Canvas>()) {
@@ -357,19 +371,21 @@ public class RoomHandler : MonoBehaviour
                             wall++;
                             if (comp == 0) {
                                 float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
-                                print("    Call Destroy on plus at: " + new Vector3 (cp [0], cp [1], cp [2]));
+                                helper += "    Call Destroy on plus at: <" + cp [0] + ", " + cp [1] + ", " + cp [2] + ">\n";
                                 Destroy (plus.gameObject);
                                 break;
                             }
                         }
                     }
-                    print ("    Number of PlusSigns checked: " + wall);
+                    helper += "    Number of PlusSigns checked: " + wall + "\n";
 
-                    print ("    Call DeletePlus on index: " + k);
-                    print ("------------------------------------------------------------------------------------------------");
+                    helper += "    Call DeletePlus on index: " + k + "\n";
+                    helper += "------------------------------------------------------------------------------------------------";
                     thisRoom.DeletePlus (plusSigns[k]);
                     break;
                 }
+                writer.WriteLine (helper);
+                writer.Close ();
             }
         }
     }
