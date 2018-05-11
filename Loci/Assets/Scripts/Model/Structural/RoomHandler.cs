@@ -321,8 +321,10 @@ public class RoomHandler : MonoBehaviour
             (wallIndex == 1) ? 90 :
             (wallIndex == 2) ? 180 :
             (wallIndex == 3) ? 270 : 0;
+        float wall;
         float[] centre;
         float[] roomCentre = thisRoom.GetCentre ();
+        bool collided;
 
         List<PlusData> plusSigns = thisRoom.GetPlusData ();
         Vector3 plusCentre;
@@ -334,11 +336,17 @@ public class RoomHandler : MonoBehaviour
                 centre [1] -= roomCentre [1];
                 centre [2] -= roomCentre [2];
 
-                plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
+                plusCentre = new Vector3(centre[0], centre[1], centre[2]);
+                wall = plusSigns[k].GetWallIndex ();
+                collided = (wall == 1 || wall == 3) ?
+                    plusCentre.z > loc - 2f && plusCentre.z < loc + 2f :
+                    plusCentre.x > loc - 2f && plusCentre.x < loc + 2f;
 
-                if (plusCentre.x > loc - 3.5f && plusCentre.x < loc + 3.5f) {
+                //plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
+
+                if (collided) {
                     print ("RemovePlus called on Room at: " + "<" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
-                    print ("    Plus centre after rotated to the positive z wall: " + plusCentre + ", the location of the door or window is: " + loc);
+                    print ("    Plus centre: " + plusCentre + ", the location of the door or window is: " + loc);
 
                     foreach (Canvas plus in this.GetComponentsInChildren<Canvas> ())
                         if (plus.tag == "PlusSign") {
