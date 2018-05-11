@@ -133,14 +133,22 @@ public class RoomHandler : MonoBehaviour
     /// Adds plus signs to all locations on the walls.
     /// </summary>
     public void AddPlusSigns(){
+        StreamWriter writer = new StreamWriter(fileLoc + "pluslocs.txt", true);
+        writer.WriteLine("--------------------------------------------------------------------------------");
+        Vector3 roomCentre = floor.transform.position + new Vector3 (0, 0.125f, 0);
+        writer.WriteLine ("Room at : <" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
+        writer.Close();
+
         float wallLimit;
-        FileStream file = File.Create (fileLoc + "pluslocs.txt");
-        file.Close ();
         for (int k = 0; k < 4; k++) {
             wallLimit = GetWallSize (k) / 2;
             for (float loc = wallLimit - 2; loc > -wallLimit; loc -= 4)
                 AddPlusSign (k, loc);
         }
+
+        writer = new StreamWriter(fileLoc + "pluslocs.txt", true);
+        writer.WriteLine("--------------------------------------------------------------------------------");
+        writer.Close();
     }
     /// <summary>
     /// Adds a plus sign to a given wall. Also saves the new plus sign to the room information.
@@ -168,8 +176,8 @@ public class RoomHandler : MonoBehaviour
             component.transform.Translate (centre);
             component.SetActive (true);
 
-            component.transform.SetParent (this.transform);
             centre = component.transform.position;
+            component.transform.SetParent (this.transform);
 
             float[] newRoom = RoomTypes.GetNewRoomCentre (
                 roomCentre, centre,
@@ -179,7 +187,7 @@ public class RoomHandler : MonoBehaviour
                 roomCentre, centre,
                 thisRoom.GetWidth (), thisRoom.GetLength (), RoomTypes.GetCorridorType (angle)
             );
-            float[] plusCentre = { centre.x, centre.y, centre.z };
+            float[] plusCentre = new float[]{ centre.x, centre.y, centre.z };
 
             StreamWriter writer = new StreamWriter (fileLoc + "pluslocs.txt", true);
             writer.WriteLine("<" + plusCentre [0] + ", " + plusCentre [1] + ", " + plusCentre [2] + ">");
@@ -336,13 +344,11 @@ public class RoomHandler : MonoBehaviour
 
         List<PlusData> plusSigns = thisRoom.GetPlusData ();
         Vector3 plusCentre;
-
-        FileStream file = File.Create (fileLoc + "plusDeletion.txt");
-        file.Close();
+        StreamWriter writer;
 
         for (int k = plusSigns.Count-1; k >= 0; k--) {
             if (plusSigns [k].GetAngle () == angle) {
-                StreamWriter writer = new StreamWriter(fileLoc + "plusDeletion.txt", true);
+                writer = new StreamWriter (fileLoc + "plusDeletion.txt", true);
                 helper = "";
                 centre = plusSigns [k].GetCentre ();
                 centre [0] -= roomCentre [0];
@@ -358,7 +364,7 @@ public class RoomHandler : MonoBehaviour
                 //plusCentre = Quaternion.Euler (0, -angle, 0) * new Vector3 (centre [0], centre [1], centre [2]);
 
                 if (collided) {
-                    helper += "------------------------------------------------------------------------------------------------\n";
+                    helper += "--------------------------------------------------------------------------------\n";
                     centre = plusSigns[k].GetCentre();
                     helper += "RemovePlus called on Room at: <" + roomCentre[0] + ", " + roomCentre[1] + ", " + roomCentre[2] + ">\n";
                     helper += "    Plus centre relative: <" + plusCentre.x + ", " + plusCentre.y + ", " + plusCentre.z + ">\n";
@@ -380,12 +386,13 @@ public class RoomHandler : MonoBehaviour
                     helper += "    Number of PlusSigns checked: " + wall + "\n";
 
                     helper += "    Call DeletePlus on index: " + k + "\n";
-                    helper += "------------------------------------------------------------------------------------------------";
+                    helper += "--------------------------------------------------------------------------------";
+                    writer.WriteLine (helper);
+                    writer.Close ();
+
                     thisRoom.DeletePlus (plusSigns[k]);
                     break;
                 }
-                writer.WriteLine (helper);
-                writer.Close ();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using VRTK;
+using System.IO;
 
 /// <summary>
 /// Resonsible for loading any room objects. Also tracks all rooms.
@@ -18,6 +19,11 @@ public class Building : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        FileStream file = File.Create ("Assets/Resources/pluslocs.txt");
+        file.Close();
+        file = File.Create ("Assets/Resources/plusDeletion.txt");
+        file.Close();
+
         rooms = new List<GameObject> ();
         if (SaveFile.isNewLoci || SaveFile.name == null)
             AddRoom (new Vector3 (0, 0, 0));
