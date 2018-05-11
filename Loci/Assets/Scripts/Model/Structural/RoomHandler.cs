@@ -20,7 +20,7 @@ public class RoomHandler : MonoBehaviour
 
     private List<Vector3>[] doorsAndWindows;
     private RoomData thisRoom;
-    public string fileLoc = "Assets/Resources/";
+    public string fileLoc = "Assets/Resources/SaveFile/";
 
     /// <summary>
     /// Initializes the attributes for this room.
@@ -136,7 +136,8 @@ public class RoomHandler : MonoBehaviour
         StreamWriter writer = new StreamWriter(fileLoc + "pluslocs.txt", true);
         writer.WriteLine("--------------------------------------------------------------------------------");
         Vector3 roomCentre = floor.transform.position + new Vector3 (0, 0.125f, 0);
-        writer.WriteLine ("Room at : <" + roomCentre [0] + ", " + roomCentre [1] + ", " + roomCentre [2] + ">");
+        writer.WriteLine (
+            "Room at : <" + Mathf.Round (10*roomCentre [0]/10) + ", " + Mathf.Round (10*roomCentre [1]/10) + ", " + Mathf.Round(10*roomCentre [2]/10) + ">");
         writer.Close();
 
         float wallLimit;
@@ -190,7 +191,8 @@ public class RoomHandler : MonoBehaviour
             float[] plusCentre = new float[]{ centre.x, centre.y, centre.z };
 
             StreamWriter writer = new StreamWriter (fileLoc + "pluslocs.txt", true);
-            writer.WriteLine("<" + plusCentre [0] + ", " + plusCentre [1] + ", " + plusCentre [2] + ">");
+            writer.WriteLine(
+                "<" + Mathf.Round (10*plusCentre [0]/10) + ", " + Mathf.Round (10*plusCentre [1]/10) + ", " + Mathf.Round (10*plusCentre [2]/10) + ">");
             writer.Close ();
 
             PlusData thisPlus = new PlusData (plusCentre, newRoom, newCorridor, angle);
@@ -366,9 +368,12 @@ public class RoomHandler : MonoBehaviour
                 if (collided) {
                     helper += "--------------------------------------------------------------------------------\n";
                     centre = plusSigns[k].GetCentre();
-                    helper += "RemovePlus called on Room at: <" + roomCentre[0] + ", " + roomCentre[1] + ", " + roomCentre[2] + ">\n";
-                    helper += "    Plus centre relative: <" + plusCentre.x + ", " + plusCentre.y + ", " + plusCentre.z + ">\n";
-                    helper += "    Plus centre world: <" + centre [0] + ", " + centre [1] + ", " + centre [2] + ">\n";
+                    helper += "RemovePlus called on Room at: <" + 
+                        Mathf.Round (10*roomCentre [0]/10) + ", " + Mathf.Round (10*roomCentre [1]/10) + ", " + Mathf.Round (10*roomCentre[2]/10) + ">\n";
+                    helper += "    Plus centre relative: <" + 
+                        Mathf.Round (10*plusCentre.x/10) + ", " + Mathf.Round (10*plusCentre.y/10) + ", " + Mathf.Round (10*plusCentre.z/10) + ">\n";
+                    helper += "    Plus centre world: <" + 
+                        Mathf.Round (10*centre [0]/10) + ", " + Mathf.Round (10*centre [1]/10) + ", " + Mathf.Round (10*centre [2]/10) + ">\n";
 
                     wall = 0;
                     foreach (Canvas plus in this.GetComponentsInChildren<Canvas>()) {
@@ -377,7 +382,8 @@ public class RoomHandler : MonoBehaviour
                             wall++;
                             if (comp == 0) {
                                 float[] cp = plus.GetComponent<SubMenuHandler> ().GetData ().GetCentre ();
-                                helper += "    Call Destroy on plus at: <" + cp [0] + ", " + cp [1] + ", " + cp [2] + ">\n";
+                                helper += "    Call Destroy on plus at: <" + 
+                                    Mathf.Round (10*cp [0]/10) + ", " + Mathf.Round (10*cp [1]/10) + ", " + Mathf.Round (10*cp [2]/10) + ">\n";
                                 Destroy (plus.gameObject);
                                 break;
                             }

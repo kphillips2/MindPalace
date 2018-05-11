@@ -19,9 +19,9 @@ public class Building : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        FileStream file = File.Create ("Assets/Resources/pluslocs.txt");
+        FileStream file = File.Create ("Assets/Resources/SaveFile/pluslocs.txt");
         file.Close();
-        file = File.Create ("Assets/Resources/plusDeletion.txt");
+        file = File.Create ("Assets/Resources/SaveFile/plusDeletion.txt");
         file.Close();
 
         rooms = new List<GameObject> ();
