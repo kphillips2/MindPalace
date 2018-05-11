@@ -388,12 +388,12 @@ public class RoomHandler : MonoBehaviour
 
                     helper += "    Call DeletePlus on index: " + k + "\n";
                     helper += "--------------------------------------------------------------------------------";
-                    writer.WriteLine (helper);
-                    writer.Close ();
+                    writer.WriteLine(helper);
+                    writer.Close();
 
                     thisRoom.DeletePlus (plusSigns[k]);
                     break;
-                }
+                } else writer.Close ();
             }
         }
     }
